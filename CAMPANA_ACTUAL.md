@@ -36,6 +36,8 @@ Fuentes: documento maestro (contexto al 26/10/2026) e indicaciones de Gianluca d
 | `negra_frente_playa.jpg` | Negra, frente (detalle logo), arena | 1200×1600 |
 | `blanca_negra_espalda_playa.jpg` | Ambas, espalda, arena | 1200×1600 |
 | `blanca_negra_espalda_playa_2.jpg` | Ambas, espalda, arena: otra toma de la misma sesión (cambian ángulo y posición), más resolución. Recibida el 26/10/2026 | 1932×2576 |
+| `negra_frente_playa_2.jpg` | Negra, frente (detalle del logo del pecho), arena: otra toma casi igual a `negra_frente_playa.jpg` (encuadre corrido). Recibida el 26/10/2026 | 1200×1600 |
+| `blanca_espalda_rocas_espuma.jpg` | Blanca de espaldas sobre una roca con espuma de mar; estampado completo y nítido. Mismo lugar que `clip_a592f367` y `clip_a2c1cbe8`. Recibida el 26/10/2026 | 1932×2576 |
 
 ## Tomas (`ORIGINALES/`, todas 30 fps)
 Hojas de fotogramas de cada toma en `ORIGINALES/analisis/` (`scripts/catalogar.sh`). Las tomas de iPhone traen ubicación GPS en los metadatos (playa, zona de Mar del Plata, 11–12/10/2026); las exportaciones no deben llevarla (`verificar.sh` lo controla).
@@ -49,6 +51,9 @@ Gianluca: "videos reales que generalmente usamos para el final de los videos". E
 | `IMG_7996.mov` | HEVC 4K vertical, iPhone 15 | 5.5 s | Playa con mar de fondo: alguien camina con la **blanca** en la mano y la tira a la arena (≈ 2.3–3.0 s); la cámara baja hasta la espalda arrugada. "Founders Privée" queda en parte tapado por pliegues y por la sombra de quien filma. Sin voz. |
 | `IMG_7999.mov` | HEVC 4K vertical, iPhone 15 | 5.4 s | Misma escena: la **blanca** cae de frente (≈ 2.0 s) y la cámara se acerca al estampado del pecho. Desde ≈ 3.5 s la sombra de quien filma tapa parte del estampado y "ROCCÉ" puede leerse incompleto: no usarlo como plano de logo. Sin voz. |
 | `IMG_4675.mov` | HEVC 1080p vertical, **HDR (HLG, 10 bits)**, iPhone 13, 30 fps variable | 11.9 s | **Detrás de escena:** una chica con campera de cuero negra fotografía con el celular las dos remeras sobre la arena (sesión de la foto de producto); desde ≈ 9.5 s se levanta y camina sonriendo hacia cámara. Exclamación breve a los 11.3 s. **Aparece una persona identificable (no es Gianluca): confirmar permiso antes de publicarla.** Convertir HDR→SDR antes de mezclar. |
+| `IMG_4641.mov` | HEVC 1080p vertical, **HDR (HLG)**, iPhone 13, **29,97 fps** | 4.0 s | **Blanca** de frente apoyada sobre una roca grande; atrás rompen las olas. Plano fijo con cielo arriba: buena base para placa con texto. El estampado del pecho se ve chico. Las olas suben el audio a ≈ −17 dBFS (2.0–2.5 s). Convertir HDR→SDR; al mezclar con tomas de 30 fps, conformar a 30 sin duplicar cuadros visibles. |
+| `clip_a2c1cbe8.mov` | H.264 576×1024 efectivo (baja resolución) | 3.7 s | Arranca en el mar con cielo, baja entre rocas con espuma y revela la **blanca** de espaldas sobre una roca; se acerca al estampado. Completo ≈ 1.5–2.0 s; desde 2.5 s "Privée" queda cortado. Mismo lugar que `clip_a592f367`. Se verá blando a 1080×1920. Sin voz. |
+| `IMG_7947.mov` | HEVC 4K vertical, iPhone 15 | 3.9 s | **Detrás de escena:** un chico sin remera acomoda la **blanca** sobre las rocas entre la espuma y sale de cuadro (≈ 3.0 s); la remera queda chica en el plano. Si no es Gianluca, confirmar permiso antes de publicarlo. Sin voz. |
 
 ### Tomas anteriores
 | Archivo | Formato | Dur. | Contenido / notas |
