@@ -63,11 +63,21 @@ Editor de videos de Roccé. Entregables: archivos MP4 terminados, con estética 
 | `clip_f2a34e51.mov` | H.264 1024×576, vertical | 7.9 s | Paneo playa → arena → **negra y blanca** de espaldas en la arena, termina en la blanca. Baja resolución. |
 
 ### `LOGO/`
-- Todavía no hay archivo de logo aparte. Hasta tenerlo, el logo solo aparece tal como está en las prendas; no se recrea ni se tipea como gráfico.
+- `rocce_logo.png` — **logo oficial**: "1" negro estilizado con "ROCCÉ" en blanco, inclinado, dentro del trazo. PNG 1254×1254, RGB sin transparencia, fondo casi blanco #FEFEFE.
+- Usarlo tal cual: solo escalar/posicionar. No recolorear, no invertir, no recortar el trazo, no quitar el fondo sin pedir permiso. Para placas, usar fondo #FEFEFE para que el borde del PNG no se note.
 
 ### Audio
-- Ningún audio musical indicado aún. Los clips solo tienen sonido ambiente (viento/olas).
+- **Sin música** (indicación del usuario). Usar solo el sonido ambiente de las tomas (viento/olas), nivelado entre cortes.
 
-## Primera prueba (pendiente: indicar audio)
+## Encuadre vertical
+- El estampado tiene que verse completo y legible en todo momento.
+- Tomas horizontales (p. ej. `IMG_7859`): no recortar a 9:16 a pantalla completa si corta la prenda. Usar una ventana más ancha y rellenar arriba y abajo con el mar de la misma toma, ampliado y desenfocado (no repetir la persona desenfocada: queda una "cabeza fantasma").
+- `IMG_7793`: estampado completo solo entre 2.4 s y 4.8 s; antes y después la cámara se acerca y corta "Privée".
+
+## Historial de exportaciones
+- `ROCCE_reel_founders_v01.mp4` — descartada: estampado cortado al final de la toma negra y fondo desenfocado con cabeza duplicada.
+- `ROCCE_reel_founders_v02.mp4` — 11.0 s, 30 fps. IMG_7793 2.4–4.8 s → IMG_7859 2.0–8.0 s → placa con logo + texto (2.6 s). Script: `scripts/reel_v02.sh`.
+
+## Primera prueba
 Reel vertical 10–15 s, dos tomas reales de la prenda, audio indicado por el usuario. Cierre con el texto exacto:
 `1/11 — DROP FOUNDERS PRIVÉE` (raya —, É con tilde).
