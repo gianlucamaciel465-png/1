@@ -1,0 +1,25 @@
+# /tmp/claude-0/-home-user-1/bd43937f-7b34-55cc-a48c-8ac864032e15/scratchpad/ref12/ref12.mp4
+# idioma detectado: es (p=1.00); duración audio 54.89s; VAD=sí
+[  0.00 →   4.78] p_sin_voz=0.00 logprob=-0.11 | Reemplaza los huesos de tus piernas con un marco de titanio y atornilla un enorme resorte
+      palabras: Reemplaza@0.00 los@0.50 huesos@0.66 de@0.94 tus@1.08 piernas@1.22 con@1.66 un@1.84 marco@2.00 de@2.46 titanio@2.58 y@3.06 atornilla@3.16 un@3.64 enorme@3.76 resorte@4.04
+[  4.78 →   9.84] p_sin_voz=0.00 logprob=-0.11 | de torción en tu cadera. Mientras te agachas, los resortes se retuercen más, guardando la
+      palabras: de@4.78 torción@4.98 en@5.36 tu@5.54 cadera.@5.64 Mientras@6.30 te@6.52 agachas,@6.74 los@7.44 resortes@7.56 se@8.06 retuercen@8.18 más,@8.62 guardando@9.30 la@9.70
+[  9.84 →  14.20] p_sin_voz=0.00 logprob=-0.11 | energía en lugar de dejarla escapar. En las rodillas instala este tipo de sistema,
+      palabras: energía@9.84 en@10.22 lugar@10.38 de@10.68 dejarla@10.88 escapar.@11.44 En@12.20 las@12.32 rodillas@12.40 instala@12.78 este@13.14 tipo@13.34 de@13.60 sistema,@13.72
+[ 14.40 →  19.08] p_sin_voz=0.00 logprob=-0.11 | extendiendo tu pierna más lejos de lo normal. En los pies, monta una hoja de fibra de carbono
+      palabras: extendiendo@14.40 tu@14.84 pierna@14.96 más@15.30 lejos@15.62 de@15.96 lo@16.12 normal.@16.22 En@16.96 los@17.06 pies,@17.18 monta@17.62 una@17.82 hoja@17.96 de@18.14 fibra@18.28 de@18.60 carbono@18.72
+[ 19.08 →  24.00] p_sin_voz=0.00 logprob=-0.11 | para aferrarte al suelo y transferir la fuerza. Agrega pestillos de alta resistencia para
+      palabras: para@19.08 aferrarte@19.36 al@19.86 suelo@19.98 y@20.30 transferir@20.46 la@20.92 fuerza.@21.10 Agrega@21.90 pestillos@22.20 de@22.60 alta@22.80 resistencia@22.94 para@23.76
+[ 24.00 →  27.82] p_sin_voz=0.00 logprob=-0.11 | sostener todo en su lugar, para que la energía permanezca atrapada mientras
+      palabras: sostener@24.00 todo@24.40 en@24.70 su@24.92 lugar,@25.04 para@25.60 que@25.76 la@25.88 energía@25.98 permanezca@26.42 atrapada@27.04 mientras@27.58
+[ 27.82 →  33.80] p_sin_voz=0.33 logprob=-0.17 | la acumulas. Cuanto te impulses, los pestillos van a liberar toda la fuerza de un solo golpe,
+      palabras: la@27.82 acumulas.@28.14 Cuanto@29.22 te@29.42 impulses,@29.56 los@30.34 pestillos@30.48 van@30.92 a@31.24 liberar@31.38 toda@31.84 la@32.10 fuerza@32.34 de@32.70 un@32.92 solo@33.06 golpe,@33.32
+[ 34.10 →  39.26] p_sin_voz=0.33 logprob=-0.17 | liberando la energía acumulada contra el suelo y lanzándote lo suficientemente alto para llegar
+      palabras: liberando@34.10 la@34.62 energía@34.78 acumulada@35.16 contra@35.84 el@36.16 suelo@36.32 y@36.72 lanzándote@36.94 lo@37.46 suficientemente@37.56 alto@38.32 para@38.80 llegar@39.06
+[ 39.26 →  44.82] p_sin_voz=0.33 logprob=-0.17 | a macro bodega de materiales, donde vas a encontrar los mejores materiales para tu obra en San Luis
+      palabras: a@39.26 macro@39.44 bodega@39.78 de@40.22 materiales,@40.36 donde@41.40 vas@41.56 a@41.78 encontrar@41.86 los@42.26 mejores@42.58 materiales@42.92 para@43.68 tu@43.84 obra@44.08 en@44.32 San@44.44 Luis@44.60
+[ 44.82 →  51.68] p_sin_voz=0.33 logprob=-0.17 | Potosí, cemento, varilla, cal, blog, herramienta, todo en un solo pedido, macro bodega de materiales,
+      palabras: Potosí,@44.82 cemento,@45.60 varilla,@46.12 cal,@46.66 blog,@47.12 herramienta,@47.62 todo@48.62 en@48.74 un@48.92 solo@49.02 pedido,@49.22 macro@50.00 bodega@50.24 de@50.72 materiales,@50.86
+[ 52.12 →  53.96] p_sin_voz=0.33 logprob=-0.17 | el aliado de tus proyectos.
+      palabras: el@52.12 aliado@52.28 de@52.68 tus@52.92 proyectos.@53.08
+# tiempo de proceso: 20.4s

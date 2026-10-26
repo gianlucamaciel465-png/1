@@ -94,6 +94,8 @@ Punto de partida para piezas nuevas; el encargo concreto manda. Detalle con tiem
 - Música: solo la indicada en el encargo. Sonido real del mar y "Legacy" se usaron en piezas concretas; no son obligatorios.
 - Si un enlace de audio no se puede recuperar, decirlo; nunca sustituir la canción y afirmar que es la indicada.
 - No afirmar haber escuchado: decir si se midió con niveles, forma de onda o transcripción.
+- **Voces de terceros:** no clonar ni sintetizar la voz de un narrador, locutor o creador ajeno sin el consentimiento del dueño de esa voz (haría parecer que esa persona promociona Roccé). Se puede cortar su audio original en una pausa natural; para frases nuevas hace falta una grabación propia o una voz con permiso. Decirlo antes de usar otra voz.
+- `alimiter` de FFmpeg nivela solo por defecto: usar siempre `level=false` (si no, sube toda la pista).
 
 ## Carpetas
 - `ORIGINALES/` (nunca se modifican; hojas de fotogramas en `ORIGINALES/analisis/`) · `PRODUCTO/` · `LOGO/` · `AUDIO/` · `DOCUMENTO_MAESTRO/`
@@ -160,6 +162,9 @@ F. **Revisión**: evaluar el export, corregir defectos y re-verificar lo modific
 - Entorno: contenedor en la nube; el material llega por adjuntos del chat o por el repo de GitHub. Lo guardado se conserva en git (rama `claude/rocce-video-editor-uqf6fc`).
 - FFmpeg / ffprobe 6.1.1: libx264, AAC; decodifica HEVC/H.264/ProRes; drawtext (Inter), libass, xfade, loudnorm/ebur128, lut3d, zscale, colorkey. Python 3 + Pillow.
 - **Transcripción**: faster-whisper 1.2.1 con el modelo `small` probado el 26/10/2026 (español bien; confunde marcas: "Founders Privée" → "foundo es privé", "tela de jean" → "tela de chin"). Corregir siempre con contexto o subtítulos. **No persiste entre sesiones:** reinstalar con `scripts/instalar_transcripcion.sh` (~5–10 min, ~470 MB + modelo ~460 MB). Hugging Face es accesible desde el entorno.
+- **Descarga de referencias:** `yt-dlp` (en un entorno aislado, `pip install yt-dlp`) bajó reels públicos de Instagram el 26/10/2026. Guardar el original en `REFERENCIAS/` con su `info.json`.
+- **Separación voz/música:** `demucs` 4.1 + torch CPU (`pip install torch torchaudio --index-url https://download.pytorch.org/whl/cpu` y `pip install demucs soundfile`, ~1,1 GB, ~10 min). `python -m demucs --two-stems=vocals -n htdemucs archivo.wav` separa 55 s en ~30 s. No persiste entre sesiones.
+- **Fuentes:** `scripts/fuentes/Montserrat-Bold.ttf` (OFL), igual a los subtítulos de muchos reels de referencia. Inter/Inter Display instaladas en el sistema.
 - **Música y tempo**: `scripts/ritmo.py` estima BPM y compara cortes con el golpe; es aproximado, no reemplaza escuchar.
 - **Sin reproducción ni escucha**: video revisado por fotogramas; audio por niveles, sonoridad, tempo estimado y transcripción.
 - Sin acceso verificado a Instagram/TikTok, Google Flow, CapCut ni herramientas de generación/eliminación de objetos.

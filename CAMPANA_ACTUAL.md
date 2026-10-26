@@ -134,3 +134,15 @@ Referencia: Instagram `De9bn1GqBYQ` (cuenta **toparadi**, otra marca de ropa), d
 | `ROCCE_hook_puente_v02.mp4` | Descartada | Planos corregidos; texto sobre espuma blanca con poco contraste. |
 | `ROCCE_hook_puente_v03.mp4` | **Más reciente (entregada, sin aprobación aún)** | 10,4 s / 312 cuadros, 1080×1920, 30 fps, −14,1 LUFS (audio original completo de la referencia). Hook original 0–3,667 s (cuadros 0–109, sin cambios). Cortes en los mismos tiempos que la referencia: 3,667 `IMG_4530` blanca sostenida (HDR→SDR) · 4,267 `IMG_7824` negra sostenida (desde 5,6 s) · 5,433 `IMG_3375` macro frente blanca (HDR) · 5,900 `IMG_3453` dedos sobre estampado negra (HDR) · 7,300 `IMG_7857` blanca puesta frente al mar · 8,300 `IMG_7793` negra puesta balcón · 9,200 `IMG_7894` ambas en rocas; "1/11 — DROP FOUNDERS PRIVÉE" desde 9,4 s (Inter Display Bold 64 px, degradé oscuro suave arriba). Script: `scripts/hook_puente_v03.sh`. |
 
+
+
+### Encargo "salto" (26/10/2026): explicación de R12 + anuncio Roccé en lugar de Macrobodega
+Referencia: Instagram `DdRfmrgDLIk` (cuenta **macrobodega**, publicidad de materiales de construcción) → `REFERENCIAS/REF_12_macrobodega_salto_DdRfmrgDLIk.mp4` (54,9 s).
+- Primera mención de la marca: subtítulo "llegar a Macro" a los 39,0 s y voz "macro" a los 39,44 s. La voz original se corta en la pausa natural de 39,45 s ("…para llegar a").
+- **Voz:** no se clonó ni sintetizó la voz del narrador (sin consentimiento del dueño de la voz). La continuación hablada queda pendiente de una grabación con permiso (ver guion en el informe de entrega).
+- Base musical sin voz separada con demucs → `AUDIO/R12_base_sin_voz_demucs.flac`.
+| Versión | Estado | Detalle |
+|---|---|---|
+| `ROCCE_salto_v01.mp4` | Descartada | `alimiter` subió 2 dB toda la pista (pico +0,1 dBFS); refuerzo de base sobre el golpe de transición; restos difusos de "Macro"; plano de baranda con "ROCCÉ" doblado. |
+| `ROCCE_salto_v02.mp4` | Descartada | Audio corregido; primer plano de Roccé (IMG_8002) con "ROCCÉ" doblado detrás del tronco. |
+| `ROCCE_salto_v03.mp4` | **Más reciente (entregada, sin aprobación aún)** | 45,6 s / 1369 cuadros, 1080×1920, 30 fps, −14,2 LUFS, pico −1,5 dBFS. 0–39,45 s original intacto (imagen, voz, música, subtítulos; audio igual al original: −14,0 vs −13,9 LUFS). 39,0 s subtítulo "llegar a" sobre la explosión de píxeles (sin "Macro"). 39,17–39,47 transición de píxeles → `IMG_4530` blanca sostenida + subtítulo "Roccé." · 39,97 `IMG_4627` blanca en roca con ola · 41,73 `IMG_3453` dedos sobre estampado negra · 42,83 `IMG_7793` negra puesta · 43,97 `IMG_7894` ambas en rocas; "1/11 — DROP FOUNDERS PRIVÉE" desde 44,53 s en el estilo de subtítulo del original (Montserrat Bold). Cortes en los golpes de la base (≈ 107 BPM). Script `scripts/salto_rocce_v03.sh`. |

@@ -177,3 +177,10 @@ Gianluca: "videos que subimos". **Mejor resultado: R7 (la lata), ~2.000 vistas e
 - 3,667 s: **corte seco en pleno salto** a una remera negra en una percha (estudio oscuro); una mano con guante blanco sale de cuadro. El audio cae casi a silencio entre 3,75 y 4,0 s y la música vuelve fuerte a los 4,2 s.
 - 4,267–10,4 s: detalles con guante (logo, etiqueta del cuello, textura, gestos), cortes cada 0,5–1,4 s al ritmo (≈ 128 BPM; cortes en 4,267 · 5,433 · 5,9 · 7,3 · 7,8 · 8,3 · 9,2 · 9,9). Sin placa final.
 - Material de terceros (imagen y música): riesgo de reclamo de derechos al publicar.
+
+
+# R12 — referencia externa del encargo "salto" (no es pieza de Roccé)
+`REF_12_macrobodega_salto_DdRfmrgDLIk.mp4` (Instagram `DdRfmrgDLIk`, cuenta macrobodega, 54,9 s, 30 fps). Transcripción en `analisis/R12_transcripcion_whisper.txt`.
+- 0–39 s: explicación en 3D ("Reemplaza los huesos de tus piernas con un marco de titanio…") con voz masculina continua, música de fondo (~107 BPM, ≈ −30 dBFS bajo la voz) y subtítulos de 1–3 palabras: Montserrat Bold blanca, sombra oscura, sobre franja translúcida desenfocada a ~77 % de la altura.
+- 38,9–39,5 s: transición de **explosión de píxeles** con golpe sonoro → 39,5–50 s local y productos de Macrobodega → 50–54,9 s logo y "COTIZA TU PEDIDO".
+- Gancho narrativo reutilizable: la explicación termina en "…lanzándote lo suficientemente alto para llegar a [marca]".
