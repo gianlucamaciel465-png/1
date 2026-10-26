@@ -96,7 +96,7 @@ Gianluca: "videos reales que generalmente usamos para el final de los videos". E
 | R4 | Bala por tubo curvo (27 s) | Gancho 3D de curiosidad → remate "se va directa… al 1/11" → voz en off de venta con subtítulos → placa |
 
 - **Placa de la casa para este drop:** `ORIGINALES/IMG_7894.mov` (ambas remeras sobre las rocas frente al mar; confirmado por comparación con R1 y R4). Variantes: `IMG_7895` (ola que salpica), `IMG_7896` (acercamiento lento), `IMG_4631` (HDR, ola fuerte).
-- **Ingreso de material terminado (26/10/2026: "este es el último").** Hay 30 tomas en `ORIGINALES/` y 15 fotos en `PRODUCTO/`. Planos de las referencias que no llegaron:
+- **Ingreso de material terminado (26/10/2026: "este es el último").** Hay 29 tomas en `ORIGINALES/` y 15 fotos en `PRODUCTO/`. Planos de las referencias que no llegaron:
   - chico caminando con la blanca en el jardín;
   - mano que sostiene la negra **de frente** (sí está de espaldas: `IMG_7824`);
   - negra vista desde arriba sobre rocas con olas;
