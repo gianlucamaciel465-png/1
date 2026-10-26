@@ -35,8 +35,22 @@ Fuentes: documento maestro (contexto al 26/10/2026) e indicaciones de Gianluca d
 | `negra_espalda_estudio.jpg` | Negra, espalda, piso blanco | 1170×2036 |
 | `negra_frente_playa.jpg` | Negra, frente (detalle logo), arena | 1200×1600 |
 | `blanca_negra_espalda_playa.jpg` | Ambas, espalda, arena | 1200×1600 |
+| `blanca_negra_espalda_playa_2.jpg` | Ambas, espalda, arena: otra toma de la misma sesión (cambian ángulo y posición), más resolución. Recibida el 26/10/2026 | 1932×2576 |
 
 ## Tomas (`ORIGINALES/`, todas 30 fps)
+Hojas de fotogramas de cada toma en `ORIGINALES/analisis/` (`scripts/catalogar.sh`). Las tomas de iPhone traen ubicación GPS en los metadatos (playa, zona de Mar del Plata, 11–12/10/2026); las exportaciones no deben llevarla (`verificar.sh` lo controla).
+
+### Material de final y cierre (recibido el 26/10/2026)
+Gianluca: "videos reales que generalmente usamos para el final de los videos". Es decir, la parte de producto real después del gancho y el cierre. Llegan más por tandas: catalogarlas igual.
+| Archivo | Formato | Dur. | Contenido / tramos útiles / riesgos |
+|---|---|---|---|
+| `IMG_8002.mov` | HEVC 4K vertical, iPhone 15 | 3.6 s | **Blanca** colgada de espaldas en una baranda de troncos frente a un médano, cielo azul. 0–0.5 s: plano general con cielo limpio arriba, base ideal para placa con texto. Acercamiento rápido; 1.5–2.5 s el estampado queda cortado; 3.0–3.6 s espalda completa y legible. Sin voz. |
+| `IMG_8004.mov` | HEVC 4K vertical, iPhone 15 | 5.4 s | Misma baranda: desplazamiento lateral desde el médano (desenfocado) hasta revelar la espalda de la **blanca**. Estampado completo ≈ 2.5–3.5 s; al final se corta a la derecha. Sin voz. |
+| `IMG_7996.mov` | HEVC 4K vertical, iPhone 15 | 5.5 s | Playa con mar de fondo: alguien camina con la **blanca** en la mano y la tira a la arena (≈ 2.3–3.0 s); la cámara baja hasta la espalda arrugada. "Founders Privée" queda en parte tapado por pliegues y por la sombra de quien filma. Sin voz. |
+| `IMG_7999.mov` | HEVC 4K vertical, iPhone 15 | 5.4 s | Misma escena: la **blanca** cae de frente (≈ 2.0 s) y la cámara se acerca al estampado del pecho. Desde ≈ 3.5 s la sombra de quien filma tapa parte del estampado y "ROCCÉ" puede leerse incompleto: no usarlo como plano de logo. Sin voz. |
+| `IMG_4675.mov` | HEVC 1080p vertical, **HDR (HLG, 10 bits)**, iPhone 13, 30 fps variable | 11.9 s | **Detrás de escena:** una chica con campera de cuero negra fotografía con el celular las dos remeras sobre la arena (sesión de la foto de producto); desde ≈ 9.5 s se levanta y camina sonriendo hacia cámara. Exclamación breve a los 11.3 s. **Aparece una persona identificable (no es Gianluca): confirmar permiso antes de publicarla.** Convertir HDR→SDR antes de mezclar. |
+
+### Tomas anteriores
 | Archivo | Formato | Dur. | Contenido / notas |
 |---|---|---|---|
 | `IMG_7793.mov` | HEVC 4K, vertical (rotación −90) | 5.3 s | 0–1.2 s paneo playa/ciudad; luego chico de espaldas con la **negra** en balcón, cielo nublado. Estampado completo solo 2.4–4.8 s. Audio ambiente muy bajo (≈ −37 LUFS). Usada en R1, R2 y R4. |
@@ -53,7 +67,7 @@ Fuentes: documento maestro (contexto al 26/10/2026) e indicaciones de Gianluca d
 | R3 | Escalera (17 s) | Animación propia: escalera EMPEZÁ → APRENDÉ → so f★cking close. → CONSTRUÍ → TU META → placa de marca azul marino |
 | R4 | Bala por tubo curvo (27 s) | Gancho 3D de curiosidad → remate "se va directa… al 1/11" → voz en off de venta con subtítulos → placa |
 
-- **Placa de la casa para este drop:** foto de las dos remeras de espaldas sobre rocas frente al mar, con el texto en el tercio superior. **No tengo esa foto ni el video original:** pedirlo antes de replicar el cierre.
+- **Placa de la casa para este drop:** foto de las dos remeras de espaldas sobre rocas frente al mar, con el texto en el tercio superior. **Todavía no tengo esa foto ni su video original:** pedirlo antes de replicar ese cierre exacto. Alternativas reales ya disponibles: `IMG_8002.mov` (0–0.5 s, cielo limpio arriba) y `blanca_negra_espalda_playa_2.jpg` (arena arriba).
 - **Material de producto que aparece en las referencias y no tengo:**
   - blanca de frente sobre rocas con espuma;
   - negra cenital sobre rocas con olas;

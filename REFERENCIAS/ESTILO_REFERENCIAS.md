@@ -116,6 +116,14 @@ Transcripción (faster-whisper small, corregida con los subtítulos quemados; en
 | Chico de espaldas con la blanca frente al mar | — | `ORIGINALES/IMG_7859.mov` (sin usar en las referencias) |
 | Paneo playa → ambas en arena | — | `ORIGINALES/clip_f2a34e51.mov` (sin usar) |
 
+Material real de final y cierre recibido después (26/10/2026), que no aparece en R1–R4:
+- blanca colgada en la baranda de troncos (`IMG_8002`, `IMG_8004`);
+- blanca tirada a la arena, de espaldas y de frente (`IMG_7996`, `IMG_7999`);
+- detrás de escena de la foto de producto (`IMG_4675`, HDR);
+- foto `PRODUCTO/blanca_negra_espalda_playa_2.jpg`.
+
+Detalle y tramos útiles en `CAMPANA_ACTUAL.md`.
+
 ## Diferencias con mi reel de prueba v02
 - No tiene gancho: abre con un plano tranquilo y audio bajo (≈ −29 dBFS). Las referencias abren con acción y texto.
 - Suena más bajo: −19,2 LUFS contra −13,5 a −16,1.

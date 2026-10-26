@@ -94,14 +94,23 @@ Punto de partida para piezas nuevas; el encargo concreto manda. Detalle con tiem
 - No afirmar haber escuchado: decir si se midió con niveles, forma de onda o transcripción.
 
 ## Carpetas
-- `ORIGINALES/` (nunca se modifican) · `PRODUCTO/` · `LOGO/` · `AUDIO/` · `DOCUMENTO_MAESTRO/`
+- `ORIGINALES/` (nunca se modifican; hojas de fotogramas en `ORIGINALES/analisis/`) · `PRODUCTO/` · `LOGO/` · `AUDIO/` · `DOCUMENTO_MAESTRO/`
 - `REFERENCIAS/` — piezas de referencia (nunca se modifican), `ESTILO_REFERENCIAS.md` y `analisis/` (hojas de fotogramas y transcripciones).
 - `TRABAJO/` — copias e intermedios (fuera de git).
 - `EXPORTACIONES/` — entregas numeradas `ROCCE_nombre_vNN.mp4`; nunca sobrescribir; conservar versiones aprobadas.
 - `scripts/`:
-  - análisis: `fotogramas.sh`, `niveles.py` (nivel por tramo), `ritmo.py` (tempo y cortes vs. golpe), `transcribir.py` (transcripción con marcas de tiempo), `instalar_transcripcion.sh`;
+  - análisis: `catalogar.sh` (ficha técnica + hoja de fotogramas de material nuevo), `fotogramas.sh`, `niveles.py` (nivel por tramo), `ritmo.py` (tempo y cortes vs. golpe), `transcribir.py` (transcripción con marcas de tiempo), `instalar_transcripcion.sh`;
   - control: `verificar.sh`;
   - edición: `reel.sh` (plantilla) y `reel_vNN.sh` (receta exacta de cada versión).
+
+## Ingreso de material nuevo
+Gianluca manda material por tandas ("tenelos para siempre"). Con cada tanda:
+1. Copiar con el nombre original: videos a `ORIGINALES/`, fotos a `PRODUCTO/`, piezas terminadas de la marca a `REFERENCIAS/`. Nunca pisar un archivo existente: si el nombre coincide, comparar contenido y, si es distinto, agregar sufijo `_2`.
+2. `scripts/catalogar.sh` → ficha técnica (resolución, fps, rotación, HDR, rango, audio, GPS) y hoja de fotogramas en `ORIGINALES/analisis/`.
+3. Revisar las hojas: contenido, mejores tramos (estampado completo y legible), riesgos (sombras o pliegues que tapan el logo, prenda cortada, personas identificables).
+4. Audio: niveles (`scripts/niveles.py`) y voz (`scripts/transcribir.py` si está instalado).
+5. Registrar en `CAMPANA_ACTUAL.md` si es del drop, o en un catálogo permanente si no lo es. Commit y push.
+- Si aparece una persona identificable que no es Gianluca, avisar y confirmar permiso antes de publicarla.
 
 ## Procedimiento de edición
 A. **Inventario**: acceso a originales, referencias, logo, audio y versión aprobada; duración, resolución, fps, pistas, rotación; herramientas disponibles. Si falta una herramienta, explicar el paso concreto para instalarla.
@@ -115,6 +124,8 @@ F. **Revisión**: evaluar el export, corregir defectos y re-verificar lo modific
 - MP4, H.264 (`libx264`, High, `yuv420p`, `+faststart`, BT.709), AAC 48 kHz estéreo cuando haya audio, 1080 × 1920.
 - fps coherente con los originales (23.976/25/29.97/30); si difieren, la más común; nunca subir fps artificialmente.
 - No estirar la imagen ni prometer detalle que la fuente no tiene.
+- **Tomas HDR** (HLG/PQ, BT.2020, p. ej. `IMG_4675`): convertir a SDR BT.709 antes de mezclarlas con `zscale=t=linear:npl=203,format=gbrpf32le,zscale=p=bt709,tonemap=tonemap=mobius:desat=0,zscale=t=bt709:m=bt709:r=tv,format=yuv420p` (probado el 26/10/2026). Sin convertir salen lavadas; con `hable` la remera blanca se enfría. Comparar el blanco con `PRODUCTO/`.
+- Las exportaciones no deben llevar la ubicación GPS de las tomas (`verificar.sh` lo controla).
 
 ## Encuadre vertical
 - Estampado completo y legible; la prenda no queda cortada salvo que el plano original sea un detalle.
