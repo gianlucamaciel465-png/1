@@ -1,0 +1,15 @@
+# REFERENCIAS/REF_04_bala_tubo_curvo.mov
+# idioma detectado: es (p=1.00); duración audio 27.48s; VAD=sí
+[  0.08 →   7.14] p_sin_voz=0.17 logprob=-0.20 | Si disparas una bala por un tubo curvo que apunta hacia ti, casi todo el mundo cree que te acabaría dando a ti, pero no.
+      palabras: Si@0.08 disparas@0.58 una@1.02 bala@1.18 por@1.48 un@1.68 tubo@1.80 curvo@2.08 que@2.46 apunta@2.66 hacia@3.00 ti,@3.28 casi@3.82 todo@4.00 el@4.36 mundo@4.56 cree@4.78 que@5.12 te@5.30 acabaría@5.42 dando@5.88 a@6.14 ti,@6.28 pero@6.56 no.@6.94
+[  7.50 →  11.12] p_sin_voz=0.17 logprob=-0.20 | Lo que sucede es que la bala durante el recorrido sale y se va directa...
+      palabras: Lo@7.50 que@7.68 sucede@7.78 es@8.14 que@8.40 la@8.54 bala@8.66 durante@8.92 el@9.14 recorrido@9.38 sale@9.88 y@10.26 se@10.60 va@10.76 directa...@10.90
+[ 11.62 →  15.54] p_sin_voz=0.17 logprob=-0.20 | Al 1 de noviembre que sale el drop foundo es privé. ¿Querés verte mejor que los demás?
+      palabras: Al@11.62 1@12.02 de@12.22 noviembre@12.36 que@12.80 sale@12.96 el@13.12 drop@13.28 foundo@13.42 es@13.84 privé.@13.86 ¿Querés@14.36 verte@14.54 mejor@14.70 que@15.04 los@15.16 demás?@15.28
+[ 15.78 →  20.62] p_sin_voz=0.17 logprob=-0.20 | Nuestra primera tiene un corte en B que te hace más estético, agrandándote la espalda y reduciéndote la cintura.
+      palabras: Nuestra@15.78 primera@15.98 tiene@16.20 un@16.46 corte@16.58 en@16.90 B@16.92 que@17.04 te@17.20 hace@17.32 más@17.44 estético,@17.66 agrandándote@18.30 la@18.74 espalda@18.86 y@19.28 reduciéndote@19.50 la@20.02 cintura.@20.16
+[ 20.82 →  24.70] p_sin_voz=0.17 logprob=-0.20 | Ni hablar de que pesa 305 gramos y tiene bordados en tela de chin.
+      palabras: Ni@20.82 hablar@21.00 de@21.22 que@21.42 pesa@21.54 305@21.82 gramos@22.54 y@23.04 tiene@23.22 bordados@23.48 en@23.94 tela@24.16 de@24.36 chin.@24.48
+[ 24.98 →  27.16] p_sin_voz=0.17 logprob=-0.20 | No dudes más, que tenemos envío gratis y entra ya.
+      palabras: No@24.98 dudes@25.04 más,@25.18 que@25.64 tenemos@25.70 envío@25.96 gratis@26.28 y@26.62 entra@26.70 ya.@26.86
+# tiempo de proceso: 12.1s

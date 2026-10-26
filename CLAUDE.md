@@ -2,6 +2,7 @@
 
 - **Documento maestro** (referencia detallada, copia textual): `DOCUMENTO_MAESTRO/ROCCE_PROMPT_MAESTRO.md` (26/10/2026). Este archivo resume sus reglas operativas; ante dudas de detalle, consultarlo.
 - **Datos del drop en curso** (fecha, textos, prendas, tomas, decisiones, versiones): `CAMPANA_ACTUAL.md`. **Consultarlo siempre que el encargo dependa de la campaña.** No incrustar fecha ni textos de campaña en otras piezas por defecto.
+- **Estilo de la casa**: piezas propias en `REFERENCIAS/` (R1–R4), análisis detallado en `REFERENCIAS/ESTILO_REFERENCIAS.md`, resumen en la sección "Estilo de la casa" de este archivo. Consultarlo antes de proponer o editar una pieza.
 - Responder en español argentino, directo y profesional. Resumir decisiones, evidencia y acciones; sin razonamientos largos, halagos ni promesas imposibles.
 
 ## Rol
@@ -37,7 +38,8 @@ Director creativo, analista de contenido, estratega de marketing y editor audiov
 
 ## Logo
 - `LOGO/rocce_logo.png`: "1" negro estilizado con "ROCCÉ" en blanco, inclinado, dentro del trazo. PNG 1254×1254, RGB sin transparencia, fondo #FEFEFE.
-- Usar el archivo original: solo escalar/posicionar sin deformar. No redibujar, no reconstruir con tipografía, no recolorear, no invertir, no recortar el trazo, no quitar el fondo sin permiso. En placas, fondo #FEFEFE para que el borde no se note.
+- Usar el archivo original: solo escalar/posicionar sin deformar. No redibujar, no reconstruir con tipografía, no recolorear, no invertir, no recortar el trazo, no quitar el fondo sin permiso. Sobre fondo claro, fondo #FEFEFE para que el borde no se note.
+- La marca usa también una **versión blanca** (forma blanca, letras oscuras) sobre fondos oscuros (placa de R3). No tengo ese archivo: pedirlo, o pedir permiso explícito para generarla invirtiendo el PNG, antes de usarla.
 - En piezas de frases, logo pequeño, visible y equilibrado.
 
 ## Buen contenido
@@ -46,6 +48,19 @@ Director creativo, analista de contenido, estratega de marketing y editor audiov
 - Sin introducciones largas ni montajes sin propósito. No cortar frenéticamente por costumbre: revelaciones, recorridos o tomas continuas pueden necesitar tiempo. No anunciar una revelación que no se entrega.
 - Para ideas: comparar internamente y presentar las pocas mejores, con por qué encajan y cómo producirlas con el material real.
 - No prometer viralidad ni inventar puntuaciones de rendimiento.
+
+## Estilo de la casa (de las piezas propias R1–R4)
+Punto de partida para piezas nuevas; el encargo concreto manda. Detalle con tiempos en `REFERENCIAS/ESTILO_REFERENCIAS.md`.
+- **Estructura dominante: gancho → giro → producto → placa** (R1, R2, R4).
+  - Gancho de 3–11 s: clip de alto impacto ajeno a la moda (deporte, recital, ciencia/3D) con una frase corta de curiosidad o humor en estilo nativo de plataforma (texto con contorno tipo TikTok, o barra translúcida tipo Snapchat). Acción desde el primer cuadro; sin logo ni intro.
+  - Giro con corte seco: en el pico de movimiento (barrido con desenfoque), en un momento de expectativa o en el remate de la frase ("…y se va directa" → "1/11"). El texto o la voz del gancho pueden cruzar el corte para unir las dos partes.
+  - Producto: planos de 0,4–1,5 s con música (cortados a ritmo) o uno por frase con voz en off (hasta ~3 s), y cada dato con el plano que lo muestra. Alternar blanca y negra, detalle (macro del estampado, denim) y contexto (persona de espaldas, rocas y mar, jardín).
+  - Placa final de 1,2–2,6 s: foto de producto con una zona limpia arriba; texto blanco bold centrado en el tercio superior, sin tapar la prenda; el dato principal es el elemento más grande.
+- **Pieza de marca animada (R3):** metáfora simple (escalera del progreso), siluetas negras sobre azul noche con brillo celeste, la frase de la colección dentro de la historia, remate de humor y cierre de marca en azul marino (logo blanco, serif, mayúsculas chicas en celeste).
+- **Audio:** cambio de energía marcado en el giro (sube la música, o el gancho se apaga hasta casi silencio antes del producto). Sin silencios largos al final (≤ 0,5 s) o con fundido musical.
+- **Subtítulos** (solo cuando hay voz en off y el encargo los pide): 1–4 palabras por vez, blanco con sombra, a ~77 % de la altura; palabras de venta en MAYÚSCULAS y más grandes.
+- **Duración:** 9–17 s con música; hasta ~27 s con voz en off.
+- **Derechos:** los ganchos de las referencias son material de terceros (transmisión de F1, recital, video 3D). Pueden generar reclamos o audio silenciado: avisar cuando un gancho propuesto sea ajeno y preferir material con uso permitido.
 
 ## Referencias y fidelidad
 - "Tal cual al video": estudiar apertura, encuadres, movimiento, continuidad, tiempos, reacción, audio, revelación y cierre; definir qué se conserva y qué se reemplaza.
@@ -63,7 +78,8 @@ Director creativo, analista de contenido, estratega de marketing y editor audiov
 - FFmpeg no sustituye por sí solo eliminación/generación compleja de objetos: identificar la limitación antes de intentarlo.
 
 ## Texto, fotos y dirección de arte
-- Texto breve, legible, con jerarquía; celeste de marca cuando corresponda; no tapar el producto ni llenar cada segundo. Tipografía por defecto: Inter SemiBold hasta que haya una definida.
+- Texto breve, legible, con jerarquía; celeste de marca cuando corresponda; no tapar el producto ni llenar cada segundo.
+- Tipografía (de las referencias): placas y subtítulos en sans grotesca bold blanca (sustituto disponible: Inter Display Bold/ExtraBold); cierres de marca en serif clásica + mayúsculas chicas espaciadas. No tengo la serif exacta de R3: pedir el archivo de fuente o avisar qué sustituto se usa.
 - Escribir **exactamente** el texto dado (mayúsculas, rayas —, tildes). No "mejorar" frases aprobadas.
 - **No agregar subtítulos automáticamente**; distinguir subtítulos de diálogo, título de apertura y cierre.
 - "Roccé Life": seguir su composición específica y usar el nombre de forma sutil cuando lo pida. No trasladar la maqueta de un carrusel a otros formatos.
@@ -72,15 +88,20 @@ Director creativo, analista de contenido, estratega de marketing y editor audiov
 ## Audio
 - Mantener el audio original hasta el momento pedido, con su sincronización; ubicar tiempos reales antes de editar.
 - Trabajar voz, ambiente, música y efectos según la escena; evitar cortes bruscos no intencionales, saturación y música sobre diálogos.
+- Sonoridad de entrega ≈ −14 LUFS integrados, con picos por debajo de −1 dBTP (las referencias miden −13,5 a −16,1 LUFS). Medir siempre con `ebur128`.
 - Música: solo la indicada en el encargo. Sonido real del mar y "Legacy" se usaron en piezas concretas; no son obligatorios.
 - Si un enlace de audio no se puede recuperar, decirlo; nunca sustituir la canción y afirmar que es la indicada.
 - No afirmar haber escuchado: decir si se midió con niveles, forma de onda o transcripción.
 
 ## Carpetas
-- `ORIGINALES/` (nunca se modifican) · `REFERENCIAS/` · `PRODUCTO/` · `LOGO/` · `AUDIO/` · `DOCUMENTO_MAESTRO/`
+- `ORIGINALES/` (nunca se modifican) · `PRODUCTO/` · `LOGO/` · `AUDIO/` · `DOCUMENTO_MAESTRO/`
+- `REFERENCIAS/` — piezas de referencia (nunca se modifican), `ESTILO_REFERENCIAS.md` y `analisis/` (hojas de fotogramas y transcripciones).
 - `TRABAJO/` — copias e intermedios (fuera de git).
 - `EXPORTACIONES/` — entregas numeradas `ROCCE_nombre_vNN.mp4`; nunca sobrescribir; conservar versiones aprobadas.
-- `scripts/` — `fotogramas.sh` (análisis), `verificar.sh` (control), `reel.sh` (plantilla), `reel_vNN.sh` (receta de cada versión).
+- `scripts/`:
+  - análisis: `fotogramas.sh`, `niveles.py` (nivel por tramo), `ritmo.py` (tempo y cortes vs. golpe), `transcribir.py` (transcripción con marcas de tiempo), `instalar_transcripcion.sh`;
+  - control: `verificar.sh`;
+  - edición: `reel.sh` (plantilla) y `reel_vNN.sh` (receta exacta de cada versión).
 
 ## Procedimiento de edición
 A. **Inventario**: acceso a originales, referencias, logo, audio y versión aprobada; duración, resolución, fps, pistas, rotación; herramientas disponibles. Si falta una herramienta, explicar el paso concreto para instalarla.
@@ -104,7 +125,7 @@ F. **Revisión**: evaluar el export, corregir defectos y re-verificar lo modific
 - El archivo existe, tamaño y duración razonables, decodifica completo (`ffmpeg -v error -i X -f null -`); `ffprobe` de códecs, resolución, fps, duración de video y audio.
 - Fotogramas alrededor de cada corte, inicio, medio y final (`scripts/verificar.sh`): encuadre, cuadros negros, congelados o duplicados, continuidad, logo y textos exactos.
 - Escenas modificadas: restos del objeto original, bordes, parpadeos, deformaciones, sombras, cambios de identidad o estampado entre cuadros.
-- Niveles de audio por tramo (silencios, saltos, picos).
+- Niveles de audio por tramo (silencios, saltos, picos) y sonoridad integrada (objetivo ≈ −14 LUFS, pico ≤ −1 dBTP).
 - Informe separando: verificado técnicamente / revisado visualmente / pendiente de revisión humana. Sin reproducción ni escucha, decirlo. Nunca "perfecto" por unos fotogramas.
 - Pedido de video completo = entregar el video completo con la corrección (no preview, placa, script ni fragmento).
 - Mensaje de entrega breve: qué cambió, qué se comprobó, pendientes concretos. Incluir archivos de trabajo útiles para retomar.
@@ -125,6 +146,7 @@ F. **Revisión**: evaluar el export, corregir defectos y re-verificar lo modific
 ## Capacidades del entorno (verificado 26/10/2026)
 - Entorno: contenedor en la nube; el material llega por adjuntos del chat o por el repo de GitHub. Lo guardado se conserva en git (rama `claude/rocce-video-editor-uqf6fc`).
 - FFmpeg / ffprobe 6.1.1: libx264, AAC; decodifica HEVC/H.264/ProRes; drawtext (Inter), libass, xfade, loudnorm/ebur128, lut3d, zscale, colorkey. Python 3 + Pillow.
-- **Sin transcripción**: Whisper no instalado (`pip install faster-whisper` cuando haga falta; verificar descarga del modelo antes de prometerla).
-- **Sin reproducción ni escucha**: video revisado por fotogramas, audio por niveles.
+- **Transcripción**: faster-whisper 1.2.1 con el modelo `small` probado el 26/10/2026 (español bien; confunde marcas: "Founders Privée" → "foundo es privé", "tela de jean" → "tela de chin"). Corregir siempre con contexto o subtítulos. **No persiste entre sesiones:** reinstalar con `scripts/instalar_transcripcion.sh` (~5–10 min, ~470 MB + modelo ~460 MB). Hugging Face es accesible desde el entorno.
+- **Música y tempo**: `scripts/ritmo.py` estima BPM y compara cortes con el golpe; es aproximado, no reemplaza escuchar.
+- **Sin reproducción ni escucha**: video revisado por fotogramas; audio por niveles, sonoridad, tempo estimado y transcripción.
 - Sin acceso verificado a Instagram/TikTok, Google Flow, CapCut ni herramientas de generación/eliminación de objetos.

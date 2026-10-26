@@ -1,0 +1,10 @@
+# REFERENCIAS/REF_03_escalera_animacion.mov
+# idioma detectado: en (p=0.63); duración audio 17.41s; VAD=sí
+[  0.00 →   0.30] p_sin_voz=0.87 logprob=-0.90 | You
+      palabras: You@0.00
+# tiempo de proceso: 4.4s
+# REFERENCIAS/REF_03_escalera_animacion.mov
+# idioma detectado: en (p=0.50); duración audio 17.41s; VAD=no
+[  0.00 →  16.66] p_sin_voz=0.47 logprob=-1.53 | Ha, ha ha, ha, ha, ha!
+      palabras: Ha,@0.00 ha@0.46 ha,@3.60 ha,@4.18 ha,@4.88 ha!@5.24
+# tiempo de proceso: 41.5s

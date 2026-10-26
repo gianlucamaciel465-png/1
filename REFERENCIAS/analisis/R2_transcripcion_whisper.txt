@@ -1,0 +1,10 @@
+# REFERENCIAS/REF_02_plata_facil.mov
+# idioma detectado: en (p=0.35); duración audio 9.15s; VAD=sí
+# tiempo de proceso: 2.9s
+# REFERENCIAS/REF_02_plata_facil.mov
+# idioma detectado: en (p=0.45); duración audio 9.15s; VAD=no
+[  0.00 →   1.30] p_sin_voz=0.54 logprob=-0.67 | I don't know what happened to me!
+      palabras: I@0.00 don't@0.06 know@0.34 what@0.68 happened@0.72 to@0.98 me!@1.14
+[  1.52 →   4.08] p_sin_voz=0.54 logprob=-0.67 | I don't know what happened to me!
+      palabras: I@1.52 don't@1.86 know@2.22 what@2.40 happened@2.64 to@2.72 me!@4.04
+# tiempo de proceso: 4.7s
