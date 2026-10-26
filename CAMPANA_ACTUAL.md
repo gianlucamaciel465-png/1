@@ -125,3 +125,12 @@ Gianluca: "videos reales que generalmente usamos para el final de los videos". E
 | `ROCCE_reel_founders_v01.mp4` | Descartada | Estampado cortado al final de la toma negra; fondo desenfocado con cabeza duplicada. `scripts/reel_v01.sh`. |
 | `ROCCE_reel_founders_v02.mp4` | **Más reciente** (prueba, sin aprobación explícita) | 11.0 s, 1080×1920, 30 fps. IMG_7793 2.4–4.8 s → IMG_7859 2.0–8.0 s (ventana 52 % + mar desenfocado) → placa logo + texto 2.6 s. Audio: balcón +12 dB, olas sin cambio, silencio en los últimos 1.9 s; −19.2 LUFS. `scripts/reel_v02.sh`. Comparada con el estilo de la casa: sin gancho, más baja que las referencias (−13.5 a −16.1 LUFS), cierre distinto y silencio final largo. |
 | Próxima | — | `ROCCE_reel_founders_v03.mp4` |
+
+### Encargo "hook puente" (26/10/2026): hook de una referencia ajena + montaje Roccé
+Referencia: Instagram `De9bn1GqBYQ` (cuenta **toparadi**, otra marca de ropa), descargada con yt-dlp → `REFERENCIAS/REF_11_toparadi_hook_puente_De9bn1GqBYQ.mp4` (10,4 s, 30 fps, −14,1 LUFS, música sin voz ≈ 128 BPM).
+| Versión | Estado | Detalle |
+|---|---|---|
+| `ROCCE_hook_puente_v01.mp4` | Descartada | Negra sostenida entraba corrida (la "R" de "ROCCÉ" en el borde), macro de la negra arrancaba en tela y texto final a 56 px chico. |
+| `ROCCE_hook_puente_v02.mp4` | Descartada | Planos corregidos; texto sobre espuma blanca con poco contraste. |
+| `ROCCE_hook_puente_v03.mp4` | **Más reciente (entregada, sin aprobación aún)** | 10,4 s / 312 cuadros, 1080×1920, 30 fps, −14,1 LUFS (audio original completo de la referencia). Hook original 0–3,667 s (cuadros 0–109, sin cambios). Cortes en los mismos tiempos que la referencia: 3,667 `IMG_4530` blanca sostenida (HDR→SDR) · 4,267 `IMG_7824` negra sostenida (desde 5,6 s) · 5,433 `IMG_3375` macro frente blanca (HDR) · 5,900 `IMG_3453` dedos sobre estampado negra (HDR) · 7,300 `IMG_7857` blanca puesta frente al mar · 8,300 `IMG_7793` negra puesta balcón · 9,200 `IMG_7894` ambas en rocas; "1/11 — DROP FOUNDERS PRIVÉE" desde 9,4 s (Inter Display Bold 64 px, degradé oscuro suave arriba). Script: `scripts/hook_puente_v03.sh`. |
+

@@ -167,3 +167,13 @@ Gianluca: "videos que subimos". **Mejor resultado: R7 (la lata), ~2.000 vistas e
 - **Derechos:** R9 abre con una escena de una serie de TV (material de terceros con diálogo).
 - **Producto:** R6 muestra otras prendas (shorts y jeans) que no son del drop; en R10 la versión "sin identidad" quita los estampados (es el concepto, pero implica edición de la prenda).
 - R9 dice "1/11 DISPONIBLE" y R8 promete una "lista privada": confirmar que eso está vigente antes de repetirlo.
+
+
+---
+
+# R11 — referencia externa del encargo "hook puente" (no es pieza de Roccé)
+`REF_11_toparadi_hook_puente_De9bn1GqBYQ.mp4` (Instagram `De9bn1GqBYQ`, cuenta toparadi, 10,4 s).
+- 0–3,667 s: toma en primera persona (gran angular) con piernas que saltan sobre una estructura metálica encima del agua, a pleno sol.
+- 3,667 s: **corte seco en pleno salto** a una remera negra en una percha (estudio oscuro); una mano con guante blanco sale de cuadro. El audio cae casi a silencio entre 3,75 y 4,0 s y la música vuelve fuerte a los 4,2 s.
+- 4,267–10,4 s: detalles con guante (logo, etiqueta del cuello, textura, gestos), cortes cada 0,5–1,4 s al ritmo (≈ 128 BPM; cortes en 4,267 · 5,433 · 5,9 · 7,3 · 7,8 · 8,3 · 9,2 · 9,9). Sin placa final.
+- Material de terceros (imagen y música): riesgo de reclamo de derechos al publicar.
