@@ -1,0 +1,5 @@
+# REFERENCIAS/REF_06_176cdbef.mov
+# idioma detectado: en (p=0.79); duración audio 8.00s; VAD=sí
+[  0.62 →   3.08] p_sin_voz=0.57 logprob=-0.62 | It's sunny because you're feeling a lot
+      palabras: It's@0.62 sunny@1.18 because@1.42 you're@1.86 feeling@2.26 a@2.62 lot@2.98
+# tiempo de proceso: 4.9s

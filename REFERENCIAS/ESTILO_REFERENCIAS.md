@@ -129,3 +129,41 @@ Detalle y tramos útiles en `CAMPANA_ACTUAL.md`.
 - Suena más bajo: −19,2 LUFS contra −13,5 a −16,1.
 - El cierre (placa blanca, logo negro, texto chico gris) no es el de la casa: foto de las remeras con texto blanco bold, o placa de marca azul marino.
 - Termina con 1,9 s de silencio; R1 tiene 0,5 s.
+
+---
+
+# Segunda tanda de piezas publicadas (R5–R10, recibidas el 26/10/2026)
+Gianluca: "videos que subimos". **Mejor resultado: R7 (la lata), ~2.000 vistas en TikTok e Instagram** (dato informado por Gianluca; no tengo acceso a las métricas ni a las vistas de las otras piezas). Es un solo dato: sirve como pista, no como regla.
+
+| Ref | Archivo (nombre original) | Dur. | Formato | Sonoridad | Fórmula |
+|---|---|---|---|---|---|
+| R5 | `REF_05_5a53c8e6.mov` (`5a53c8e6ebc34016b0687d576457c209.mov`, 24/10) | 17,8 s | 1080×1920, ~30 fps | −13,8 LUFS | Globo 3D celeste con el estampado del pecho y una aguja que baja; contador "FRAMES TO IMPACT" 195 → 001; corte justo antes del pinchazo → montaje de producto → placa azul marino |
+| R6 | `REF_06_176cdbef.mov` (23/10) | 8,0 s | **540×960** | −19,1 LUFS | Cenital: chico acostado en una alfombra; un brazo mecánico pasa y cambia el outfit (negra/blanca); "1/11" fijo arriba |
+| **R7** | `REF_07_c9e02636.mov` (23/10) | 9,5 s | **720×1280** | −17,8 LUFS | **La lata (mejor resultado).** Fondo crema; lata 3D con el estampado del pecho; una bala se acerca y un contador baja 162 → 001 (cambia de negro a rojo cerca del final); la bala se frena a milímetros sin tocarla; cierre "ROCCÉ / Founders Privée / 1/11" en serif |
+| R8 | `REF_08_13d13282.mov` (23/10) | 23,7 s | **540×960** | −13,9 LUFS | Voz en off + textos grandes sobre montaje de producto ("TE DICEN CASI…"); cierre blanco con CTA "ESCRIBINOS FOUNDERS" |
+| R9 | `REF_09_1-11_sin_logo_final.mov` (`ROCCE_1-11_Sin_Logo_Final.mov`, 26/10, FFmpeg) | 12,2 s | **720×1280** | −13,7 LUFS | Blanco y negro: abre con clip ajeno de una serie (personaje fumando, diálogo en inglés) → tomas de las remeras en las rocas con "so f★cking close." encima (serif, estrella azul) → "1/11 DISPONIBLE" |
+| R10 | `REF_10_color_identidad.mov` (`ROCCE_COLOR_IDENTIDAD.mov`, 26/10, FFmpeg) | 7,1 s | 1080×1920, 30 fps | −20,6 LUFS | Dos interruptores tipo iPhone, "COLOR" e "IDENTIDAD": arranca en blanco y negro con las remeras lisas; al activar COLOR entra el color; al activar IDENTIDAD aparecen los estampados. Material: `IMG_7884/7887` |
+
+## R7 — la lata (detalle)
+- 0,0–8,0 s: plano fijo, fondo crema limpio, la lata se acerca/agranda, la bala avanza en línea recta desde la izquierda. Contador grande debajo (162 → 001) que se desacelera: los números bajan cada vez más lento → **tensión creciente**. Desde ~022 el número pasa a rojo.
+- ~8,0 s: la bala queda a milímetros de la lata; **no hay impacto** = "so f★cking close." hecho imagen. Aparece "ROCCÉ / Founders Privée / 1/11" en serif negra, abajo.
+- Audio: música sin voz clara (Whisper no detecta letra confiable); sube de ≈ −21 a −15 dBFS hacia el final y baja en el último segundo.
+- Producto: no aparece la remera; aparece el **estampado del pecho** en la lata. Ojo: la lata es un objeto generado; el arte del estampado debe respetarse exacto.
+
+## R8 — voz en off (transcripción corregida con los textos en pantalla; entre corchetes lo dudoso)
+"Te dicen casi, como si fuera tu nombre. Casi quedás, casi ganás, casi te sale. Y todo lo que hiciste parece no contar. Pero vos sabés lo que te costó llegar hasta ahí. [Con el lema so f★cking close] llevás la historia puesta, la de quienes estuvieron cerca y siguen. Que un resultado no te ponga nombre: dáselo vos. Founders Privée. Primero de noviembre. Escribí FOUNDERS y sumate a la lista privada."
+- Textos en pantalla: condensada bold en mayúsculas, blanco con palabras clave en rojo o amarillo, arriba a la izquierda ("TE DICEN / CASI.", "¿ESO TE DEFINE?", "ESA HISTORIA. / PUESTA.", "TU HISTORIA. / TU NOMBRE.").
+- Cierre: fondo blanco, "ROCCÉ so f★cking close." + "FOUNDERS PRIVÉE" + "01.11" en rojo, video en recuadro, "ESCRIBINOS / FOUNDERS / Y SUMATE A LA LISTA PRIVADA."
+
+## Lo que aportan R5–R10 al estilo
+1. **Concepto "casi impacto" (R5 globo, R7 lata):** la frase de la colección convertida en imagen — algo que está a punto de pasar y no pasa. Contador descendente como motor de retención (obliga a mirar hasta el final). Es la fórmula del mejor resultado.
+2. **Producto como objeto gráfico** (estampado sobre una lata o un globo) además de la prenda real.
+3. **Interruptores / interfaz** (R10) y **brazo que cambia el outfit** (R6): transformaciones visuales simples y legibles.
+4. **Narrativa "casi"** (R8): la historia de estar cerca, con voz y texto; CTA a escribir "FOUNDERS".
+5. Tipografías vistas: serif para "ROCCÉ / Founders Privée" (R7, R9); condensada bold para textos de impacto (R8); números grandes celestes en placas azul marino (R5: "01 / 11").
+
+## Riesgos detectados
+- **Calidad:** R6, R8 (540×960) y R7, R9 (720×1280) están por debajo de 1080×1920; R6, R7 y R10 suenan bajo (−17,8 a −20,6 LUFS).
+- **Derechos:** R9 abre con una escena de una serie de TV (material de terceros con diálogo).
+- **Producto:** R6 muestra otras prendas (shorts y jeans) que no son del drop; en R10 la versión "sin identidad" quita los estampados (es el concepto, pero implica edición de la prenda).
+- R9 dice "1/11 DISPONIBLE" y R8 promete una "lista privada": confirmar que eso está vigente antes de repetirlo.

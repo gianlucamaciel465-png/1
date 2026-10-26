@@ -1,0 +1,15 @@
+# REFERENCIAS/REF_05_5a53c8e6.mov
+# idioma detectado: en (p=0.78); duración audio 17.81s; VAD=sí
+[  7.41 →   7.93] p_sin_voz=0.61 logprob=-0.35 | Yeah
+      palabras: Yeah@7.41
+[  8.63 →  10.21] p_sin_voz=0.61 logprob=-0.35 | Ducked a lot of spiteful moves
+      palabras: Ducked@8.63 a@9.15 lot@9.15 of@9.29 spiteful@9.39 moves@9.85
+[ 10.21 →  12.79] p_sin_voz=0.61 logprob=-0.35 | I was the angry you while I was writing views
+      palabras: I@10.21 was@10.85 the@11.03 angry@11.15 you@11.43 while@11.69 I@11.91 was@12.05 writing@12.15 views@12.43
+[ 13.25 →  13.51] p_sin_voz=0.61 logprob=-0.35 | Yeah
+      palabras: Yeah@13.25
+[ 14.21 →  15.89] p_sin_voz=0.61 logprob=-0.35 | Ducked a lot of spiteful moves
+      palabras: Ducked@14.21 a@14.73 lot@14.77 of@14.89 spiteful@14.99 moves@15.45
+[ 16.19 →  17.79] p_sin_voz=0.61 logprob=-0.35 | I was the angry you while I was...
+      palabras: I@16.19 was@16.45 the@16.63 angry@16.77 you@17.03 while@17.31 I@17.51 was...@17.65
+# tiempo de proceso: 7.5s

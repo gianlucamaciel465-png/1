@@ -94,6 +94,15 @@ Gianluca: "videos reales que generalmente usamos para el final de los videos". E
 | R2 | Como hacer plata fácil (9 s) | Gancho de recital con caption de humor → silencio → montaje → placa |
 | R3 | Escalera (17 s) | Animación propia: escalera EMPEZÁ → APRENDÉ → so f★cking close. → CONSTRUÍ → TU META → placa de marca azul marino |
 | R4 | Bala por tubo curvo (27 s) | Gancho 3D de curiosidad → remate "se va directa… al 1/11" → voz en off de venta con subtítulos → placa |
+| R5 | Globo y aguja (18 s) | Contador "FRAMES TO IMPACT" → corte antes del pinchazo → montaje → placa azul marino "01 / 11" |
+| R6 | Brazo cambia outfits (8 s) | Cenital, cambios de outfit, "1/11" fijo |
+| **R7** | **La lata (9,5 s) — mejor resultado: ~2.000 vistas TikTok + IG** | Bala hacia una lata con el estampado, contador 162 → 001, se frena sin tocarla → "ROCCÉ / Founders Privée / 1/11" |
+| R8 | "Te dicen casi" (24 s) | Voz en off + textos de impacto → CTA "ESCRIBINOS FOUNDERS y sumate a la lista privada" |
+| R9 | 1/11 sin logo (12 s) | Blanco y negro, clip de serie → "so f★cking close." → "1/11 DISPONIBLE" |
+| R10 | Color / Identidad (7 s) | Interruptores que encienden color y estampados |
+
+- **Rendimiento:** solo hay un dato: R7 fue la que mejor funcionó (~2.000 vistas en TikTok e Instagram, según Gianluca). Falta el número de las demás para comparar.
+- **CTA usado en R8:** "Escribí FOUNDERS y sumate a la lista privada". Confirmar si la lista sigue activa antes de reutilizarlo.
 
 - **Placa de la casa para este drop:** `ORIGINALES/IMG_7894.mov` (ambas remeras sobre las rocas frente al mar; confirmado por comparación con R1 y R4). Variantes: `IMG_7895` (ola que salpica), `IMG_7896` (acercamiento lento), `IMG_4631` (HDR, ola fuerte).
 - **Ingreso de material terminado (26/10/2026: "este es el último").** Hay 29 tomas en `ORIGINALES/` y 15 fotos en `PRODUCTO/`. Planos de las referencias que no llegaron:

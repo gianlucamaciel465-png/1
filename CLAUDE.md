@@ -2,7 +2,7 @@
 
 - **Documento maestro** (referencia detallada, copia textual): `DOCUMENTO_MAESTRO/ROCCE_PROMPT_MAESTRO.md` (26/10/2026). Este archivo resume sus reglas operativas; ante dudas de detalle, consultarlo.
 - **Datos del drop en curso** (fecha, textos, prendas, tomas, decisiones, versiones): `CAMPANA_ACTUAL.md`. **Consultarlo siempre que el encargo dependa de la campaña.** No incrustar fecha ni textos de campaña en otras piezas por defecto.
-- **Estilo de la casa**: piezas propias en `REFERENCIAS/` (R1–R4), análisis detallado en `REFERENCIAS/ESTILO_REFERENCIAS.md`, resumen en la sección "Estilo de la casa" de este archivo. Consultarlo antes de proponer o editar una pieza.
+- **Estilo de la casa**: piezas propias en `REFERENCIAS/` (R1–R10), análisis detallado en `REFERENCIAS/ESTILO_REFERENCIAS.md`, resumen en la sección "Estilo de la casa" de este archivo. Consultarlo antes de proponer o editar una pieza.
 - Responder en español argentino, directo y profesional. Resumir decisiones, evidencia y acciones; sin razonamientos largos, halagos ni promesas imposibles.
 
 ## Rol
@@ -49,13 +49,15 @@ Director creativo, analista de contenido, estratega de marketing y editor audiov
 - Para ideas: comparar internamente y presentar las pocas mejores, con por qué encajan y cómo producirlas con el material real.
 - No prometer viralidad ni inventar puntuaciones de rendimiento.
 
-## Estilo de la casa (de las piezas propias R1–R4)
-Punto de partida para piezas nuevas; el encargo concreto manda. Detalle con tiempos en `REFERENCIAS/ESTILO_REFERENCIAS.md`.
+## Estilo de la casa (de las piezas propias R1–R10)
+Punto de partida para piezas nuevas; el encargo concreto manda. Detalle con tiempos en `REFERENCIAS/ESTILO_REFERENCIAS.md` (R1–R10).
 - **Estructura dominante: gancho → giro → producto → placa** (R1, R2, R4).
   - Gancho de 3–11 s: clip de alto impacto ajeno a la moda (deporte, recital, ciencia/3D) con una frase corta de curiosidad o humor en estilo nativo de plataforma (texto con contorno tipo TikTok, o barra translúcida tipo Snapchat). Acción desde el primer cuadro; sin logo ni intro.
   - Giro con corte seco: en el pico de movimiento (barrido con desenfoque), en un momento de expectativa o en el remate de la frase ("…y se va directa" → "1/11"). El texto o la voz del gancho pueden cruzar el corte para unir las dos partes.
   - Producto: planos de 0,4–1,5 s con música (cortados a ritmo) o uno por frase con voz en off (hasta ~3 s), y cada dato con el plano que lo muestra. Alternar blanca y negra, detalle (macro del estampado, denim) y contexto (persona de espaldas, rocas y mar, jardín).
   - Placa final de 1,2–2,6 s: foto de producto con una zona limpia arriba; texto blanco bold centrado en el tercio superior, sin tapar la prenda; el dato principal es el elemento más grande.
+- **Concepto "casi impacto" (R5 globo, R7 lata — R7 es la de mejor resultado conocido, ~2.000 vistas):** objeto con el estampado, algo que se acerca, contador descendente que se desacelera y frena a milímetros. Es la frase "so f★cking close." hecha imagen; retiene hasta el final. Un solo dato de rendimiento: usarlo como hipótesis a probar, no como regla.
+- **Narrativa "casi" con voz (R8)** y **transformaciones de interfaz** (R10, interruptores COLOR/IDENTIDAD): alternativas propias al gancho prestado.
 - **Pieza de marca animada (R3):** metáfora simple (escalera del progreso), siluetas negras sobre azul noche con brillo celeste, la frase de la colección dentro de la historia, remate de humor y cierre de marca en azul marino (logo blanco, serif, mayúsculas chicas en celeste).
 - **Audio:** cambio de energía marcado en el giro (sube la música, o el gancho se apaga hasta casi silencio antes del producto). Sin silencios largos al final (≤ 0,5 s) o con fundido musical.
 - **Subtítulos** (solo cuando hay voz en off y el encargo los pide): 1–4 palabras por vez, blanco con sombra, a ~77 % de la altura; palabras de venta en MAYÚSCULAS y más grandes.

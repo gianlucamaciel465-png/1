@@ -1,0 +1,7 @@
+# REFERENCIAS/REF_09_1-11_sin_logo_final.mov
+# idioma detectado: en (p=0.47); duración audio 12.21s; VAD=sí
+[  0.00 →   1.22] p_sin_voz=0.11 logprob=-0.99 | Son of a f***ing god.
+      palabras: Son@0.00 of@0.44 a@0.60 f***ing@0.68 god.@0.90
+[  3.62 →   4.06] p_sin_voz=0.11 logprob=-0.99 | I'm a god.
+      palabras: I'm@3.62 a@3.76 god.@3.84
+# tiempo de proceso: 4.2s

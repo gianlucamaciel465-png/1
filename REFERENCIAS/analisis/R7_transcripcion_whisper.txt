@@ -1,0 +1,5 @@
+# REFERENCIAS/REF_07_c9e02636.mov
+# idioma detectado: en (p=0.93); duración audio 9.51s; VAD=sí
+[  0.43 →   9.31] p_sin_voz=0.57 logprob=-0.45 | You just watched
+      palabras: You@0.43 just@8.77 watched@8.99
+# tiempo de proceso: 4.8s

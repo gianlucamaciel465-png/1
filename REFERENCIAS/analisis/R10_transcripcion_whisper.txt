@@ -1,0 +1,3 @@
+# REFERENCIAS/REF_10_color_identidad.mov
+# idioma detectado: en (p=0.35); duración audio 7.06s; VAD=sí
+# tiempo de proceso: 2.9s
