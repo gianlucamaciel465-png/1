@@ -83,6 +83,8 @@ Punto de partida para piezas nuevas; el encargo concreto manda. Detalle con tiem
 - Texto breve, legible, con jerarquía; celeste de marca cuando corresponda; no tapar el producto ni llenar cada segundo.
 - Tipografía (de las referencias): placas y subtítulos en sans grotesca bold blanca (sustituto disponible: Inter Display Bold/ExtraBold); cierres de marca en serif clásica + mayúsculas chicas espaciadas. No tengo la serif exacta de R3: pedir el archivo de fuente o avisar qué sustituto se usa.
 - Escribir **exactamente** el texto dado (mayúsculas, rayas —, tildes). No "mejorar" frases aprobadas.
+- Traducir rótulos de una animación: medir la zona libre en **todos** los cuadros (unión de píxeles con contenido) antes de agrandar o correr el texto; tapar las letras originales con el color de fondo medido; imitar fuente, espaciado y halo, y seguir el fundido del original. Comprobar que el resto de la imagen quede igual al original.
+- Texto sobre fondo claro (espuma, cielo): el celeste pierde contraste; usar blanco con degradé oscuro suave detrás y dejar el celeste a la prenda.
 - **No agregar subtítulos automáticamente**; distinguir subtítulos de diálogo, título de apertura y cierre.
 - "Roccé Life": seguir su composición específica y usar el nombre de forma sutil cuando lo pida. No trasladar la maqueta de un carrusel a otros formatos.
 - Fotos: conservar original y apariencia natural salvo pedido. Carruseles: imágenes separadas, misma resolución y proporción del encargo; no asumir 9:16 para fotos.
@@ -96,6 +98,7 @@ Punto de partida para piezas nuevas; el encargo concreto manda. Detalle con tiem
 - No afirmar haber escuchado: decir si se midió con niveles, forma de onda o transcripción.
 - **Voces de terceros:** no clonar ni sintetizar la voz de un narrador, locutor o creador ajeno sin el consentimiento del dueño de esa voz (haría parecer que esa persona promociona Roccé). Se puede cortar su audio original en una pausa natural; para frases nuevas hace falta una grabación propia o una voz con permiso. Decirlo antes de usar otra voz.
 - `alimiter` de FFmpeg nivela solo por defecto: usar siempre `level=false` (si no, sube toda la pista).
+- Continuar la música de una referencia más allá de su final: medir golpe y compases (`ritmo.py`, batería separada con demucs) y retomar un tramo de la misma canción alineado a esa grilla, nunca acelerado. Si la frase queda cortada, puente breve (eco de la última sílaba). Cortes de imagen sobre la grilla, con 1 cuadro de adelanto como máximo.
 
 ## Carpetas
 - `ORIGINALES/` (nunca se modifican; hojas de fotogramas en `ORIGINALES/analisis/`) · `PRODUCTO/` · `LOGO/` · `AUDIO/` · `DOCUMENTO_MAESTRO/`
@@ -106,7 +109,8 @@ Punto de partida para piezas nuevas; el encargo concreto manda. Detalle con tiem
   - análisis: `catalogar.sh` (ficha técnica + hoja de fotogramas de material nuevo), `fotogramas.sh`, `niveles.py` (nivel por tramo), `ritmo.py` (tempo y cortes vs. golpe), `transcribir.py` (transcripción con marcas de tiempo), `instalar_transcripcion.sh`;
   - control: `verificar.sh`;
   - edición: `reel.sh` (plantilla) y `reel_vNN.sh` (receta exacta de cada versión);
-  - doblaje: `instalar_doblaje.sh`, `voz_chatterbox.py`, `lipsync_musetalk.py`, `doblaje_r13_vNN.sh` (receta).
+  - doblaje: `instalar_doblaje.sh`, `voz_chatterbox.py`, `lipsync_musetalk.py`, `doblaje_r13_vNN.sh` (receta);
+  - textos: `texto_png.py` (placa en Inter Display Bold, tramos de distinto color, sombra), `rotulos_r14.py` (rótulos cuadrados estilo animación; `TEXTO=...` para texto libre).
 
 ## Ingreso de material nuevo
 Gianluca manda material por tandas ("tenelos para siempre"). Con cada tanda:
@@ -165,7 +169,7 @@ F. **Revisión**: evaluar el export, corregir defectos y re-verificar lo modific
 - **Transcripción**: faster-whisper 1.2.1 con el modelo `small` probado el 26/10/2026 (español bien; confunde marcas: "Founders Privée" → "foundo es privé", "tela de jean" → "tela de chin"). Corregir siempre con contexto o subtítulos. **No persiste entre sesiones:** reinstalar con `scripts/instalar_transcripcion.sh` (~5–10 min, ~470 MB + modelo ~460 MB). Hugging Face es accesible desde el entorno.
 - **Descarga de referencias:** `yt-dlp` (en un entorno aislado, `pip install yt-dlp`) bajó reels públicos de Instagram el 26/10/2026. Guardar el original en `REFERENCIAS/` con su `info.json`.
 - **Separación voz/música:** `demucs` 4.1 + torch CPU (`pip install torch torchaudio --index-url https://download.pytorch.org/whl/cpu` y `pip install demucs soundfile`, ~1,1 GB, ~10 min). `python -m demucs --two-stems=vocals -n htdemucs archivo.wav` separa 55 s en ~30 s. No persiste entre sesiones.
-- **Fuentes:** `scripts/fuentes/Montserrat-Bold.ttf` (OFL), igual a los subtítulos de muchos reels de referencia. Inter/Inter Display instaladas en el sistema.
+- **Fuentes:** `scripts/fuentes/Montserrat-Bold.ttf` (OFL), igual a los subtítulos de muchos reels de referencia; `scripts/fuentes/Orbitron-Variable.ttf` (OFL), base de los rótulos cuadrados. Inter/Inter Display instaladas en el sistema. Google Fonts (GitHub `google/fonts`) es accesible para bajar otras con licencia OFL.
 - **Música y tempo**: `scripts/ritmo.py` estima BPM y compara cortes con el golpe; es aproximado, no reemplaza escuchar.
 - **Sin reproducción ni escucha**: video revisado por fotogramas; audio por niveles, sonoridad, tempo estimado y transcripción.
 - **Doblaje con sincronización labial en CPU: posible con calidad limitada** (probado 26/10/2026, `ROCCE_doblaje_v02`). No hay GPU (4 CPU, 15 GB RAM).
