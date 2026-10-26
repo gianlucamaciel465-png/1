@@ -105,7 +105,8 @@ Punto de partida para piezas nuevas; el encargo concreto manda. Detalle con tiem
 - `scripts/`:
   - análisis: `catalogar.sh` (ficha técnica + hoja de fotogramas de material nuevo), `fotogramas.sh`, `niveles.py` (nivel por tramo), `ritmo.py` (tempo y cortes vs. golpe), `transcribir.py` (transcripción con marcas de tiempo), `instalar_transcripcion.sh`;
   - control: `verificar.sh`;
-  - edición: `reel.sh` (plantilla) y `reel_vNN.sh` (receta exacta de cada versión).
+  - edición: `reel.sh` (plantilla) y `reel_vNN.sh` (receta exacta de cada versión);
+  - doblaje: `instalar_doblaje.sh`, `voz_chatterbox.py`, `lipsync_musetalk.py`, `doblaje_r13_vNN.sh` (receta).
 
 ## Ingreso de material nuevo
 Gianluca manda material por tandas ("tenelos para siempre"). Con cada tanda:
@@ -167,6 +168,10 @@ F. **Revisión**: evaluar el export, corregir defectos y re-verificar lo modific
 - **Fuentes:** `scripts/fuentes/Montserrat-Bold.ttf` (OFL), igual a los subtítulos de muchos reels de referencia. Inter/Inter Display instaladas en el sistema.
 - **Música y tempo**: `scripts/ritmo.py` estima BPM y compara cortes con el golpe; es aproximado, no reemplaza escuchar.
 - **Sin reproducción ni escucha**: video revisado por fotogramas; audio por niveles, sonoridad, tempo estimado y transcripción.
-- **Sin doblaje con sincronización labial** (verificado 26/10/2026): no hay GPU (4 CPU, 15 GB RAM). Wav2Lip (pip) genera boca de 96 px y es de uso no comercial; LatentSync/MuseTalk necesitan GPU y dependencias pesadas; F5-TTS/XTTS (clonación de voz) tienen pesos no comerciales; Chatterbox (MIT) existe pero sin acento rioplatense garantizado. Para doblar un personaje hace falta un servicio de lip-sync con licencia comercial o una máquina con GPU, y una voz grabada o con permiso.
+- **Doblaje con sincronización labial en CPU: posible con calidad limitada** (probado 26/10/2026, `ROCCE_doblaje_v02`). No hay GPU (4 CPU, 15 GB RAM).
+  - Boca: `scripts/lipsync_musetalk.py` (MuseTalk 1.5, MIT), ~6,5 s por cuadro. Recorte y elipses a mano sobre un cuadro de referencia, seguimiento por plantilla: sirve para caras casi quietas. Boca a 256 px: labios más blandos que el original. Empalmar donde el personaje empieza a hablar en el original (no en medio de una sonrisa) y con entrada gradual de 3 cuadros.
+  - Voz: `scripts/voz_chatterbox.py` (Chatterbox Multilingual, MIT), español con timbre de una referencia. Acento rioplatense no garantizado. Escribir fonético lo que no es español ("Privé" para Privée). Elegir tomas transcribiendo con Whisper: a veces agrega ruido inventado al final.
+  - Instalación: `scripts/instalar_doblaje.sh` (~25 min, ~6 GB con modelos); no persiste entre sesiones. Wav2Lip es no comercial; F5-TTS/XTTS tienen pesos no comerciales.
+  - Calidad de entrega real: servicio de lip-sync con licencia comercial o GPU, y voz grabada o con permiso (ver "Voces de terceros").
 - `yt-dlp` puede chocar con el límite anónimo de Instagram: reintentar una vez con `/reel/` en lugar de `/reels/`; si sigue, pedir el archivo.
 - Sin acceso verificado a Instagram/TikTok, Google Flow, CapCut ni herramientas de generación/eliminación de objetos.
