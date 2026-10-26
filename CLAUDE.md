@@ -1,7 +1,11 @@
-# Roccé — reglas de edición de video
+# Roccé — reglas permanentes de marca, edición y revisión
+
+Este archivo guarda solo reglas que valen para cualquier encargo.
+- **Datos del drop en curso** (textos, prendas, tomas, decisiones, versiones): ver `CAMPANA_ACTUAL.md`. **Consultarlo siempre que el encargo dependa de la campaña** (un reel del drop, textos de cierre, qué tomas usar, versión siguiente).
+- **Documento maestro** (referencia detallada de marca): va en `DOCUMENTO_MAESTRO/`, sin modificar. **Pendiente: todavía no se recibió.** Cuando llegue: leerlo completo, guardar el original ahí e integrar sus reglas acá y sus datos de campaña en `CAMPANA_ACTUAL.md`. Si contradice algo, gana la decisión más reciente del usuario; anotar el cambio.
 
 ## Rol
-Editor de videos de Roccé. Entregables: archivos MP4 terminados, con estética guiada por las referencias del usuario.
+Editor de videos de Roccé. Entregables: archivos MP4 terminados, con estética guiada por las referencias del usuario (`REFERENCIAS/`). Si no hay referencias, decirlo y explicar las decisiones estéticas propias.
 
 ## Carpetas
 - `ORIGINALES/` — tomas de video originales. **Nunca se modifican.**
@@ -9,75 +13,49 @@ Editor de videos de Roccé. Entregables: archivos MP4 terminados, con estética 
 - `PRODUCTO/` — fotos de producto (fuente de verdad de la prenda).
 - `LOGO/` — logo oficial (fuente de verdad de la marca).
 - `AUDIO/` — pistas de audio indicadas por el usuario.
+- `DOCUMENTO_MAESTRO/` — documento maestro de marca, tal como lo entregó el usuario.
 - `TRABAJO/` — copias e intermedios (no se versiona en git).
 - `EXPORTACIONES/` — resultados finales con versión numerada.
+- `scripts/` — `fotogramas.sh` (análisis), `verificar.sh` (control de exportación), `reel.sh` (plantilla), `reel_vNN.sh` (receta exacta de cada versión).
 
-## Reglas de fuente de verdad
-- Usar las fotos de producto y el logo del usuario tal cual. Conservar los detalles de la remera (estampado, color, costuras, etiquetas).
-- **No redibujar el logo, no inventar estampados**, no generar ni alterar la prenda con IA. Solo se permite escalar/posicionar el logo sin deformarlo.
+## Marca
+- Nombre: **ROCCÉ** (con É). Nunca "Rocce" ni "ROCCE" en textos.
+- Logo oficial: `LOGO/rocce_logo.png` — "1" negro estilizado con "ROCCÉ" en blanco, inclinado, dentro del trazo. PNG 1254×1254, RGB sin transparencia, fondo casi blanco #FEFEFE.
+  - Usarlo tal cual: solo escalar/posicionar, sin deformar. No redibujar, no recolorear, no invertir, no recortar el trazo, no quitar el fondo sin pedir permiso.
+  - En placas, fondo #FEFEFE para que el borde del PNG no se note.
+- Las prendas y estampados reales son fuente de verdad: conservar estampado, color, costuras y etiquetas. **No inventar estampados**, no generar ni alterar prendas con IA.
 - Corrección de color permitida solo si no cambia el color real de la prenda (comparar contra `PRODUCTO/`).
+- Textos en pantalla: copiar exacto lo que indica el usuario (mayúsculas, rayas —, tildes). Tipografía por defecto: Inter SemiBold (hasta que el documento maestro o las referencias digan otra).
 
-## Flujo obligatorio
-1. Revisar carpetas y comprobar `ffmpeg` / `ffprobe`. Si falta una herramienta, explicar cómo instalarla.
-2. Analizar originales y referencias **antes** de editar: `ffprobe` (duración, fps, resolución, rotación, audio) y fotogramas extraídos con su marca de tiempo (`scripts/fotogramas.sh`).
-3. Si el diálogo importa: transcripción con marcas de tiempo e informe de qué se pudo verificar del audio.
-4. Trabajar siempre sobre copias en `TRABAJO/`.
-5. Exportar a `EXPORTACIONES/` con nombre `NOMBRE_vNN.mp4` (v01, v02…); nunca sobrescribir una versión anterior.
-6. Si una transformación requiere una herramienta que no está disponible, identificar la limitación **antes** de intentar resolverla.
+## Flujo de edición obligatorio
+1. Revisar carpetas y comprobar `ffmpeg` / `ffprobe`. Si falta una herramienta, explicar el paso concreto para instalarla.
+2. Leer `CAMPANA_ACTUAL.md` si el encargo es del drop.
+3. Analizar originales y referencias **antes** de editar: `ffprobe` (duración, fps, resolución, rotación, audio) y fotogramas con marca de tiempo (`scripts/fotogramas.sh`).
+4. Si el diálogo importa: transcripción con marcas de tiempo e informe de qué se pudo verificar del audio.
+5. Trabajar siempre sobre copias en `TRABAJO/`.
+6. Exportar a `EXPORTACIONES/` como `NOMBRE_vNN.mp4` (v01, v02…); nunca sobrescribir una versión anterior. Guardar la receta en `scripts/reel_vNN.sh` y anotar la versión en `CAMPANA_ACTUAL.md`.
+7. Si una transformación requiere una herramienta no disponible, identificar la limitación **antes** de intentar resolverla.
+8. Música: solo la que indique el usuario. Sin indicación, preguntar; si dice "sin música", usar el sonido ambiente de las tomas, nivelado entre cortes.
 
 ## Especificación de exportación (reels)
-- MP4, video H.264 (`libx264`, `yuv420p`, `+faststart`), audio AAC (48 kHz, estéreo).
+- MP4, video H.264 (`libx264`, High, `yuv420p`, `+faststart`, BT.709), audio AAC (48 kHz, estéreo).
 - 1080 × 1920 vertical.
 - Frecuencia de cuadros adecuada al material: mantener la de los originales (p. ej. 23.976/25/29.97/30). Si las tomas difieren, usar la más común sin inventar cuadros; no subir fps artificialmente.
 
-## Verificación después de exportar
-- Decodificar el archivo completo sin errores (`ffmpeg -v error -i X -f null -`).
-- Comprobar con `ffprobe`: códecs, resolución, fps, duración de video y audio.
-- Extraer y revisar fotogramas, especialmente alrededor de cada corte, y el texto final.
-- Verificar textos exactos, encuadre (que la prenda no quede cortada) y duración.
-- Informar cualquier parte del audio o del movimiento que no se haya podido comprobar (solo se ven fotogramas sueltos; el audio se mide con niveles/transcripción, no se "escucha").
-
-## Material guardado (fuente de verdad permanente — no borrar ni modificar)
-
-### Prendas
-- **Remera blanca**: frente con logo chico "ROCCÉ / so f★cking close." a la altura del pecho izquierdo, en gris. Etiqueta en el cuello "ROCCÉ" con monograma. Espalda: "ROCCÉ" en letras universitarias negras con borde y pespunte gris + "Founders Privée" en cursiva celeste con subrayado de trazo.
-- **Remera negra**: frente "ROCCÉ / so f★cking close." en gris claro. Espalda: "ROCCÉ" universitario negro sobre negro (tono sobre tono, apenas visible) + "Founders Privée" en cursiva gris. Cuello alto acanalado.
-- Las grafías exactas son "ROCCÉ" (con É) y "Founders Privée". La estrella en "f★cking" es parte del estampado.
-
-### `PRODUCTO/` (fotos)
-| Archivo | Contenido |
-|---|---|
-| `blanca_frente_estudio.jpg` | Blanca, frente, sobre piso blanco (1170×1988) |
-| `blanca_espalda_estudio.jpg` | Blanca, espalda, piso blanco (1170×2036) |
-| `negra_espalda_estudio.jpg` | Negra, espalda, piso blanco (1170×1613) |
-| `negra_frente_playa.jpg` | Negra, frente (detalle logo), en arena (1200×1600) |
-| `blanca_negra_espalda_playa.jpg` | Ambas, espalda, en arena (1200×1600) |
-
-### `ORIGINALES/` (videos, todos 30 fps)
-| Archivo | Formato | Dur. | Contenido |
-|---|---|---|---|
-| `IMG_7793.mov` | HEVC 4K, vertical (rotación −90) | 5.3 s | 0–1.2 s paneo desde la playa/ciudad; desde ~1.5 s chico de espaldas con la **negra** en balcón frente a la playa, cielo nublado. Audio mono, bajo (ambiente). |
-| `IMG_7859.mov` | HEVC 4K, **horizontal** 16:9 | 8.3 s | Chico de espaldas con la **blanca**, mar picado y rocas. Para 9:16 hay que recortar al centro (la persona está centrada). Audio mono fuerte (olas, pico −0.6 dB). |
-| `IMG_8008.mov` | HEVC 4K, vertical | 2.2 s | Primer plano de la espalda de la **blanca** sostenida y apoyada en arena húmeda, sol fuerte. Movimiento rápido. |
-| `clip_a592f367.mov` | H.264 1024×576, vertical (576×1024 efectivo) | 4.3 s | **Blanca** apoyada sobre rocas con espuma de mar; acercamiento al estampado. Baja resolución (se ve más blanda al escalar a 1080×1920). |
-| `clip_f2a34e51.mov` | H.264 1024×576, vertical | 7.9 s | Paneo playa → arena → **negra y blanca** de espaldas en la arena, termina en la blanca. Baja resolución. |
-
-### `LOGO/`
-- `rocce_logo.png` — **logo oficial**: "1" negro estilizado con "ROCCÉ" en blanco, inclinado, dentro del trazo. PNG 1254×1254, RGB sin transparencia, fondo casi blanco #FEFEFE.
-- Usarlo tal cual: solo escalar/posicionar. No recolorear, no invertir, no recortar el trazo, no quitar el fondo sin pedir permiso. Para placas, usar fondo #FEFEFE para que el borde del PNG no se note.
-
-### Audio
-- **Sin música** (indicación del usuario). Usar solo el sonido ambiente de las tomas (viento/olas), nivelado entre cortes.
-
 ## Encuadre vertical
-- El estampado tiene que verse completo y legible en todo momento.
-- Tomas horizontales (p. ej. `IMG_7859`): no recortar a 9:16 a pantalla completa si corta la prenda. Usar una ventana más ancha y rellenar arriba y abajo con el mar de la misma toma, ampliado y desenfocado (no repetir la persona desenfocada: queda una "cabeza fantasma").
-- `IMG_7793`: estampado completo solo entre 2.4 s y 4.8 s; antes y después la cámara se acerca y corta "Privée".
+- El estampado tiene que verse completo y legible en todo momento; la prenda no debe quedar cortada salvo que el plano original sea un detalle.
+- Tomas horizontales: no recortar a 9:16 a pantalla completa si corta la prenda. Usar una ventana más ancha y rellenar arriba/abajo con fondo de la misma toma (zona sin persona), ampliado y desenfocado. No repetir a la persona desenfocada ("cabeza fantasma").
+- En tomas verticales con zoom o movimiento, elegir solo el tramo donde el estampado entra completo.
 
-## Historial de exportaciones
-- `ROCCE_reel_founders_v01.mp4` — descartada: estampado cortado al final de la toma negra y fondo desenfocado con cabeza duplicada.
-- `ROCCE_reel_founders_v02.mp4` — 11.0 s, 30 fps. IMG_7793 2.4–4.8 s → IMG_7859 2.0–8.0 s → placa con logo + texto (2.6 s). Script: `scripts/reel_v02.sh`.
+## Revisión después de exportar
+- Decodificar el archivo completo sin errores (`ffmpeg -v error -i X -f null -`).
+- `ffprobe`: códecs, resolución, fps, duración de video y audio.
+- Fotogramas alrededor de cada corte (±0.04 s y ±0.10 s), inicio, medio y final (`scripts/verificar.sh`).
+- Verificar textos exactos, encuadre (prenda/estampado completos) y duración.
+- Medir niveles de audio por tramo (silencios, saltos de volumen, picos).
+- Informar siempre lo que no se pudo comprobar: el audio no se "escucha" (solo niveles/transcripción) y el movimiento solo se ve en fotogramas sueltos.
 
-## Primera prueba
-Reel vertical 10–15 s, dos tomas reales de la prenda, audio indicado por el usuario. Cierre con el texto exacto:
-`1/11 — DROP FOUNDERS PRIVÉE` (raya —, É con tilde).
+## Capacidades del entorno (verificado 2026-10-26)
+- FFmpeg / ffprobe 6.1.1: libx264, AAC, HEVC/H.264/ProRes (decodificación), drawtext con Inter, libass, xfade, loudnorm/ebur128, lut3d, zscale.
+- Python 3 + Pillow para inspeccionar imágenes.
+- **Falta transcripción**: Whisper no está instalado. Instalar cuando haga falta: `pip install faster-whisper` (requiere descargar el modelo; comprobar acceso a red antes de prometer transcripción).
