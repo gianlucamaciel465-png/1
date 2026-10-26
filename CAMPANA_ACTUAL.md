@@ -43,6 +43,8 @@ Fuentes: documento maestro (contexto al 26/10/2026) e indicaciones de Gianluca d
 | `detras_escena_blanca_rocas_mar.jpg` | Detrás de escena: blanca de espaldas sobre la roca frente al mar; a la derecha, chico con la negra agachado sacando la foto | 1512×2016 |
 | `blanca_puesta_espalda_balcon_playa.jpg` | Chico de espaldas con la **blanca puesta** en el balcón frente a la playa y la ciudad, cielo nublado. Estampado completo | 1932×2576 |
 | `blanca_puesta_frente_detalle_mar.jpg` | **Detalle del frente** de la blanca puesta (pecho, sin cara), mar detrás: "ROCCÉ / so f★cking close." en negro con la estrella en celeste. Mejor referencia del estampado del pecho. Horizontal | 2576×1932 |
+| `negra_frente_detalle_estampado.jpg` | **Macro** del estampado del pecho de la negra: "ROCCÉ / so f★cking close." en gris claro con relieve, estrella del mismo color; luz interior | 1512×2016 |
+| `blanca_frente_detalle_estampado.jpg` | **Macro** del estampado del pecho de la blanca: texto negro, estrella celeste; se ve la trama del tejido | 1512×2016 |
 
 ## Tomas (`ORIGINALES/`, todas 30 fps)
 Hojas de fotogramas de cada toma en `ORIGINALES/analisis/` (`scripts/catalogar.sh`). Las tomas de iPhone traen ubicación GPS en los metadatos (playa, zona de Mar del Plata, 11–12/10/2026); las exportaciones no deben llevarla (`verificar.sh` lo controla).
@@ -73,6 +75,8 @@ Gianluca: "videos reales que generalmente usamos para el final de los videos". E
 | `IMG_7857.mov` | HEVC 4K vertical, iPhone 15 | 7.0 s | Chico de espaldas con la **blanca puesta** frente al mar y las rocas; la cámara se mueve alrededor y se acerca. Estampado completo casi todo el plano. Posible voz entre 0.3 y 1.2 s ("el camino para acá", confianza media); las olas suben al final (−14 dBFS). |
 | `IMG_4530.mov` | HEVC 1080p vertical, **HDR (HLG)**, iPhone 13, **29,97 fps** | 3.2 s | Manos sostienen la **blanca de espaldas** en el balcón frente a la playa; estampado completo. Sin voz. |
 | `IMG_4531.mov` | HEVC 1080p vertical, **HDR (HLG)**, iPhone 13, **29,97 fps** | 7.5 s | Manos sostienen la **blanca de frente** en el balcón; logo del pecho chico pero legible. **Hay conversación de 0 a 3.4 s** ("no, no, no, claro que se mueve"): no usar ese audio. |
+| `IMG_3453.mov` | HEVC 1080p vertical, **HDR (HLG)**, iPhone 13, **fps variable (≈ 27,4 promedio)** | 4.7 s | **Macro de la negra (frente):** dedos que recorren el estampado del pecho y muestran el relieve; luz interior cálida. Prácticamente sin audio (−56 dBFS). Grabado el 10/09/2026. Al editar: convertir HDR→SDR y conformar a 30 fps. |
+| `IMG_3375.mov` | HEVC 1080p vertical, **HDR (HLG)**, iPhone 13 | 2.3 s | **Macro de la blanca (frente):** una mano sostiene la remera y muestra el estampado del pecho (estrella celeste). Sin audio (−73 dBFS). Grabado el 31/08/2026. |
 
 ### Tomas anteriores
 | Archivo | Formato | Dur. | Contenido / notas |
@@ -92,12 +96,13 @@ Gianluca: "videos reales que generalmente usamos para el final de los videos". E
 | R4 | Bala por tubo curvo (27 s) | Gancho 3D de curiosidad → remate "se va directa… al 1/11" → voz en off de venta con subtítulos → placa |
 
 - **Placa de la casa para este drop:** `ORIGINALES/IMG_7894.mov` (ambas remeras sobre las rocas frente al mar; confirmado por comparación con R1 y R4). Variantes: `IMG_7895` (ola que salpica), `IMG_7896` (acercamiento lento), `IMG_4631` (HDR, ola fuerte).
-- **Material de producto que aparece en las referencias y no tengo:**
-  - blanca de frente sobre rocas con espuma;
-  - negra cenital sobre rocas con olas;
+- **Ingreso de material terminado (26/10/2026: "este es el último").** Hay 30 tomas en `ORIGINALES/` y 15 fotos en `PRODUCTO/`. Planos de las referencias que no llegaron:
   - chico caminando con la blanca en el jardín;
-  - macro del frente blanco en video (hay foto: `PRODUCTO/blanca_puesta_frente_detalle_mar.jpg`);
-  - mano que sostiene la negra de frente.
+  - mano que sostiene la negra **de frente** (sí está de espaldas: `IMG_7824`);
+  - negra vista desde arriba sobre rocas con olas;
+  - blanca de frente sobre rocas con espuma.
+
+  Para el macro del frente ya hay `IMG_3375`, `IMG_3453` y dos fotos de detalle.
 
   Ver la tabla de planos en `ESTILO_REFERENCIAS.md`.
 

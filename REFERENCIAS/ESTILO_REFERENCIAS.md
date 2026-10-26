@@ -109,7 +109,7 @@ Transcripción (faster-whisper small, corregida con los subtítulos quemados; en
 | Blanca de frente sobre rocas con espuma | R4 | **falta** |
 | Negra sobre rocas con olas, cenital | R1 | **falta** |
 | Chico caminando de espaldas con la blanca, jardín | R1, R2, R4 | **falta** |
-| Macro del frente blanco "so f★cking close." | R1, R4 | **falta** |
+| Macro del frente blanco "so f★cking close." | R1, R4 | `ORIGINALES/IMG_3375.mov` (HDR) y `PRODUCTO/blanca_frente_detalle_estampado.jpg`; negra: `IMG_3453.mov` |
 | Mano que sostiene la negra de frente | R1, R2, R4 | **falta** |
 | Espalda blanca en diagonal, arena húmeda | R1, R2, R4 | `ORIGINALES/IMG_8008.mov` |
 | Chico de espaldas con la negra, balcón | R1, R2, R4 | `ORIGINALES/IMG_7793.mov` |
