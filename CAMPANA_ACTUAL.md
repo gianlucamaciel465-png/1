@@ -38,6 +38,10 @@ Fuentes: documento maestro (contexto al 26/10/2026) e indicaciones de Gianluca d
 | `blanca_negra_espalda_playa_2.jpg` | Ambas, espalda, arena: otra toma de la misma sesión (cambian ángulo y posición), más resolución. Recibida el 26/10/2026 | 1932×2576 |
 | `negra_frente_playa_2.jpg` | Negra, frente (detalle del logo del pecho), arena: otra toma casi igual a `negra_frente_playa.jpg` (encuadre corrido). Recibida el 26/10/2026 | 1200×1600 |
 | `blanca_espalda_rocas_espuma.jpg` | Blanca de espaldas sobre una roca con espuma de mar; estampado completo y nítido. Mismo lugar que `clip_a592f367` y `clip_a2c1cbe8`. Recibida el 26/10/2026 | 1932×2576 |
+| `blanca_espalda_roca_ola.jpg` | Blanca de espaldas sobre una roca, con una ola rompiendo detrás; cuadro inclinado. Estampado completo | 1512×2016 |
+| `detras_escena_negra_puesta_fotografia_blanca_rocas.jpg` | Detrás de escena: chico de espaldas con la **negra puesta** (espalda visible) fotografía con el celular la blanca sobre las rocas; mar arriba | 1512×2016 |
+| `detras_escena_blanca_rocas_mar.jpg` | Detrás de escena: blanca de espaldas sobre la roca frente al mar; a la derecha, chico con la negra agachado sacando la foto | 1512×2016 |
+| `blanca_puesta_espalda_balcon_playa.jpg` | Chico de espaldas con la **blanca puesta** en el balcón frente a la playa y la ciudad, cielo nublado. Estampado completo | 1932×2576 |
 
 ## Tomas (`ORIGINALES/`, todas 30 fps)
 Hojas de fotogramas de cada toma en `ORIGINALES/analisis/` (`scripts/catalogar.sh`). Las tomas de iPhone traen ubicación GPS en los metadatos (playa, zona de Mar del Plata, 11–12/10/2026); las exportaciones no deben llevarla (`verificar.sh` lo controla).
@@ -54,6 +58,17 @@ Gianluca: "videos reales que generalmente usamos para el final de los videos". E
 | `IMG_4641.mov` | HEVC 1080p vertical, **HDR (HLG)**, iPhone 13, **29,97 fps** | 4.0 s | **Blanca** de frente apoyada sobre una roca grande; atrás rompen las olas. Plano fijo con cielo arriba: buena base para placa con texto. El estampado del pecho se ve chico. Las olas suben el audio a ≈ −17 dBFS (2.0–2.5 s). Convertir HDR→SDR; al mezclar con tomas de 30 fps, conformar a 30 sin duplicar cuadros visibles. |
 | `clip_a2c1cbe8.mov` | H.264 576×1024 efectivo (baja resolución) | 3.7 s | Arranca en el mar con cielo, baja entre rocas con espuma y revela la **blanca** de espaldas sobre una roca; se acerca al estampado. Completo ≈ 1.5–2.0 s; desde 2.5 s "Privée" queda cortado. Mismo lugar que `clip_a592f367`. Se verá blando a 1080×1920. Sin voz. |
 | `IMG_7947.mov` | HEVC 4K vertical, iPhone 15 | 3.9 s | **Detrás de escena:** un chico sin remera acomoda la **blanca** sobre las rocas entre la espuma y sale de cuadro (≈ 3.0 s); la remera queda chica en el plano. Si no es Gianluca, confirmar permiso antes de publicarlo. Sin voz. |
+| `IMG_7894.mov` | HEVC 4K vertical, iPhone 15 | 2.5 s | **PLACA DE LA CASA (fuente de R1, R2 y R4).** Ambas remeras de espaldas sobre las rocas, mar arriba, plano casi fijo. R1 usa ≈ 1.75–2.0 s y R4 ≈ 0–0.5 s (comparación de píxeles). Sin voz. |
+| `IMG_7895.mov` | HEVC 4K vertical, iPhone 15 | 2.3 s | Ambas remeras sobre las rocas, más abierto: una ola rompe y salpica detrás (0–1.0 s). Plano de impacto. Sin voz. |
+| `IMG_7896.mov` | HEVC 4K vertical, iPhone 15 | 6.2 s | Ambas remeras sobre las rocas con el mar arriba; acercamiento lento. Abajo entra una roca pintada de azul. Sin voz. |
+| `IMG_4631.mov` | HEVC 1080p vertical, **HDR (HLG)**, iPhone 13 | 6.9 s | Ambas remeras sobre las rocas, olas rompiendo detrás (golpe fuerte ≈ 3.0 s, −13 dBFS). Cortar antes de 6.4 s (la cámara baja a las rocas). Sin voz. |
+| `IMG_4625.mov` | HEVC 1080p vertical, **HDR (HLG)**, iPhone 13 | 4.2 s | Blanca de espaldas sobre una roca, mar detrás, plano fijo. Estampado completo. Sin voz. |
+| `IMG_4627.mov` | HEVC 1080p vertical, **HDR (HLG)**, iPhone 13 | 13.8 s | La misma blanca sobre la roca con olas rompiendo detrás; plano largo casi fijo. Sirve como fondo de placa o para una toma continua. Sin voz. |
+| `IMG_7824.mov` | HEVC 4K vertical, iPhone 15, **29,97 fps variable** | 9.9 s | Manos sostienen la **negra de espaldas** frente al balcón, con la playa y la ciudad detrás; se acerca a cámara ≈ 5–6 s. Sin voz. |
+| `IMG_7884.mov` | HEVC 4K vertical, iPhone 15 | 5.2 s | **Detrás de escena:** chico con la negra puesta, agachado en las rocas, fotografía la blanca; la cámara pasa por encima de su hombro hasta la espalda de la blanca (completa ≈ 3.5–4.5 s). Sin voz. |
+| `IMG_7885.mov` | HEVC 4K vertical, iPhone 15 | 5.2 s | **Detrás de escena:** el mismo chico de espaldas (negra puesta) frente a la blanca en la roca; acercamiento a la blanca (≈ 3.5–4.5 s). Sin voz. |
+| `IMG_7887.mov` | HEVC 4K vertical, iPhone 15 | 3.7 s | **Detrás de escena:** chico sentado en las rocas, de espaldas con la negra ("Founders Privée" visible), fotografía la blanca; ola detrás. Sin voz. |
+| `IMG_7901.mov` | HEVC 4K vertical, iPhone 15 | 6.0 s | **Detrás de escena:** chico sin remera, de espaldas, acomoda la blanca en la roca; se ve sobre todo su espalda y la imagen está algo blanda. Poco uso de producto. Sin voz. |
 
 ### Tomas anteriores
 | Archivo | Formato | Dur. | Contenido / notas |
@@ -72,7 +87,7 @@ Gianluca: "videos reales que generalmente usamos para el final de los videos". E
 | R3 | Escalera (17 s) | Animación propia: escalera EMPEZÁ → APRENDÉ → so f★cking close. → CONSTRUÍ → TU META → placa de marca azul marino |
 | R4 | Bala por tubo curvo (27 s) | Gancho 3D de curiosidad → remate "se va directa… al 1/11" → voz en off de venta con subtítulos → placa |
 
-- **Placa de la casa para este drop:** foto de las dos remeras de espaldas sobre rocas frente al mar, con el texto en el tercio superior. **Todavía no tengo esa foto ni su video original:** pedirlo antes de replicar ese cierre exacto. Alternativas reales ya disponibles: `IMG_8002.mov` (0–0.5 s, cielo limpio arriba) y `blanca_negra_espalda_playa_2.jpg` (arena arriba).
+- **Placa de la casa para este drop:** `ORIGINALES/IMG_7894.mov` (ambas remeras sobre las rocas frente al mar; confirmado por comparación con R1 y R4). Variantes: `IMG_7895` (ola que salpica), `IMG_7896` (acercamiento lento), `IMG_4631` (HDR, ola fuerte).
 - **Material de producto que aparece en las referencias y no tengo:**
   - blanca de frente sobre rocas con espuma;
   - negra cenital sobre rocas con olas;

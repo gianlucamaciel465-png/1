@@ -104,7 +104,7 @@ Transcripción (faster-whisper small, corregida con los subtítulos quemados; en
 ## Planos recurrentes y originales disponibles
 | Plano | Usado en | Original en el repo |
 |---|---|---|
-| Ambas remeras sobre rocas frente al mar (placa) | R1, R2, R4 | **falta** |
+| Ambas remeras sobre rocas frente al mar (placa) | R1, R2, R4 | `ORIGINALES/IMG_7894.mov` (fuente confirmada); variantes `IMG_7895`, `IMG_7896`, `IMG_4631` |
 | Blanca de espaldas sobre rocas con espuma | R1, R4 | `ORIGINALES/clip_a592f367.mov` (baja resolución) |
 | Blanca de frente sobre rocas con espuma | R4 | **falta** |
 | Negra sobre rocas con olas, cenital | R1 | **falta** |
