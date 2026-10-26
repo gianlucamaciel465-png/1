@@ -167,4 +167,6 @@ F. **Revisión**: evaluar el export, corregir defectos y re-verificar lo modific
 - **Fuentes:** `scripts/fuentes/Montserrat-Bold.ttf` (OFL), igual a los subtítulos de muchos reels de referencia. Inter/Inter Display instaladas en el sistema.
 - **Música y tempo**: `scripts/ritmo.py` estima BPM y compara cortes con el golpe; es aproximado, no reemplaza escuchar.
 - **Sin reproducción ni escucha**: video revisado por fotogramas; audio por niveles, sonoridad, tempo estimado y transcripción.
+- **Sin doblaje con sincronización labial** (verificado 26/10/2026): no hay GPU (4 CPU, 15 GB RAM). Wav2Lip (pip) genera boca de 96 px y es de uso no comercial; LatentSync/MuseTalk necesitan GPU y dependencias pesadas; F5-TTS/XTTS (clonación de voz) tienen pesos no comerciales; Chatterbox (MIT) existe pero sin acento rioplatense garantizado. Para doblar un personaje hace falta un servicio de lip-sync con licencia comercial o una máquina con GPU, y una voz grabada o con permiso.
+- `yt-dlp` puede chocar con el límite anónimo de Instagram: reintentar una vez con `/reel/` en lugar de `/reels/`; si sigue, pedir el archivo.
 - Sin acceso verificado a Instagram/TikTok, Google Flow, CapCut ni herramientas de generación/eliminación de objetos.

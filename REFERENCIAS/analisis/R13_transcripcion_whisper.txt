@@ -1,0 +1,5 @@
+# /tmp/claude-0/-home-user-1/bd43937f-7b34-55cc-a48c-8ac864032e15/scratchpad/ref13/ref13.mp4
+# idioma detectado: en (p=0.99); duración audio 14.42s; VAD=sí
+[ 11.53 →  13.85] p_sin_voz=0.02 logprob=-0.40 | Comment realism and I'll show you how to do this
+      palabras: Comment@11.53 realism@11.85 and@12.17 I'll@12.87 show@13.03 you@13.15 how@13.27 to@13.37 do@13.49 this@13.65
+# tiempo de proceso: 6.0s

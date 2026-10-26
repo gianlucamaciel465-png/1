@@ -146,3 +146,11 @@ Referencia: Instagram `DdRfmrgDLIk` (cuenta **macrobodega**, publicidad de mater
 | `ROCCE_salto_v01.mp4` | Descartada | `alimiter` subió 2 dB toda la pista (pico +0,1 dBFS); refuerzo de base sobre el golpe de transición; restos difusos de "Macro"; plano de baranda con "ROCCÉ" doblado. |
 | `ROCCE_salto_v02.mp4` | Descartada | Audio corregido; primer plano de Roccé (IMG_8002) con "ROCCÉ" doblado detrás del tronco. |
 | `ROCCE_salto_v03.mp4` | **Más reciente (entregada, sin aprobación aún)** | 45,6 s / 1369 cuadros, 1080×1920, 30 fps, −14,2 LUFS, pico −1,5 dBFS. 0–39,45 s original intacto (imagen, voz, música, subtítulos; audio igual al original: −14,0 vs −13,9 LUFS). 39,0 s subtítulo "llegar a" sobre la explosión de píxeles (sin "Macro"). 39,17–39,47 transición de píxeles → `IMG_4530` blanca sostenida + subtítulo "Roccé." · 39,97 `IMG_4627` blanca en roca con ola · 41,73 `IMG_3453` dedos sobre estampado negra · 42,83 `IMG_7793` negra puesta · 43,97 `IMG_7894` ambas en rocas; "1/11 — DROP FOUNDERS PRIVÉE" desde 44,53 s en el estilo de subtítulo del original (Montserrat Bold). Cortes en los golpes de la base (≈ 107 BPM). Script `scripts/salto_rocce_v03.sh`. |
+
+
+### Encargo "doblaje del hombre de anteojos" (26/10/2026) — BLOQUEADO por capacidad
+Referencia: Instagram `De2oes9oLFO` (cuenta **isaiahrosslabs**, videos hechos con IA: "Comment 'realism' to get the full guide") → `REFERENCIAS/REF_13_isaiahrosslabs_domino_De2oes9oLFO.mp4` (14,5 s, **1440×1080 horizontal**, 24 fps).
+- Plano final 10,0–14,46 s: hombre de anteojos acostado de costado, primerísimo plano, cara girada ~90°. Dice en inglés 11,53–13,85 s: "Comment realism and I'll show you how to do this". En ese tramo la música casi no suena (−41 a −52 dBFS).
+- Diálogo pedido: "Demostrá que valés más. Primero de noviembre. Drop Founders Privée." + texto "DEMOSTRÁ QUE VALÉS MÁS." / "1/11 — DROP FOUNDERS PRIVÉE".
+- Preparado: `AUDIO/R13_base_sin_voz_demucs.flac` (sin voz residual) y `AUDIO/R13_voz_personaje_referencia_11.4-14.0.flac` (voz aislada del personaje, referencia de timbre).
+- **Falta:** sincronización labial de calidad (sin GPU; los modelos disponibles son de 96–256 px de boca o de uso no comercial), voz rioplatense con el timbre del personaje y extensión del plano final (~2,5 s más). Ver informe de entrega.
