@@ -42,6 +42,7 @@ Fuentes: documento maestro (contexto al 26/10/2026) e indicaciones de Gianluca d
 | `detras_escena_negra_puesta_fotografia_blanca_rocas.jpg` | Detrás de escena: chico de espaldas con la **negra puesta** (espalda visible) fotografía con el celular la blanca sobre las rocas; mar arriba | 1512×2016 |
 | `detras_escena_blanca_rocas_mar.jpg` | Detrás de escena: blanca de espaldas sobre la roca frente al mar; a la derecha, chico con la negra agachado sacando la foto | 1512×2016 |
 | `blanca_puesta_espalda_balcon_playa.jpg` | Chico de espaldas con la **blanca puesta** en el balcón frente a la playa y la ciudad, cielo nublado. Estampado completo | 1932×2576 |
+| `blanca_puesta_frente_detalle_mar.jpg` | **Detalle del frente** de la blanca puesta (pecho, sin cara), mar detrás: "ROCCÉ / so f★cking close." en negro con la estrella en celeste. Mejor referencia del estampado del pecho. Horizontal | 2576×1932 |
 
 ## Tomas (`ORIGINALES/`, todas 30 fps)
 Hojas de fotogramas de cada toma en `ORIGINALES/analisis/` (`scripts/catalogar.sh`). Las tomas de iPhone traen ubicación GPS en los metadatos (playa, zona de Mar del Plata, 11–12/10/2026); las exportaciones no deben llevarla (`verificar.sh` lo controla).
@@ -69,6 +70,9 @@ Gianluca: "videos reales que generalmente usamos para el final de los videos". E
 | `IMG_7885.mov` | HEVC 4K vertical, iPhone 15 | 5.2 s | **Detrás de escena:** el mismo chico de espaldas (negra puesta) frente a la blanca en la roca; acercamiento a la blanca (≈ 3.5–4.5 s). Sin voz. |
 | `IMG_7887.mov` | HEVC 4K vertical, iPhone 15 | 3.7 s | **Detrás de escena:** chico sentado en las rocas, de espaldas con la negra ("Founders Privée" visible), fotografía la blanca; ola detrás. Sin voz. |
 | `IMG_7901.mov` | HEVC 4K vertical, iPhone 15 | 6.0 s | **Detrás de escena:** chico sin remera, de espaldas, acomoda la blanca en la roca; se ve sobre todo su espalda y la imagen está algo blanda. Poco uso de producto. Sin voz. |
+| `IMG_7857.mov` | HEVC 4K vertical, iPhone 15 | 7.0 s | Chico de espaldas con la **blanca puesta** frente al mar y las rocas; la cámara se mueve alrededor y se acerca. Estampado completo casi todo el plano. Posible voz entre 0.3 y 1.2 s ("el camino para acá", confianza media); las olas suben al final (−14 dBFS). |
+| `IMG_4530.mov` | HEVC 1080p vertical, **HDR (HLG)**, iPhone 13, **29,97 fps** | 3.2 s | Manos sostienen la **blanca de espaldas** en el balcón frente a la playa; estampado completo. Sin voz. |
+| `IMG_4531.mov` | HEVC 1080p vertical, **HDR (HLG)**, iPhone 13, **29,97 fps** | 7.5 s | Manos sostienen la **blanca de frente** en el balcón; logo del pecho chico pero legible. **Hay conversación de 0 a 3.4 s** ("no, no, no, claro que se mueve"): no usar ese audio. |
 
 ### Tomas anteriores
 | Archivo | Formato | Dur. | Contenido / notas |
@@ -92,7 +96,7 @@ Gianluca: "videos reales que generalmente usamos para el final de los videos". E
   - blanca de frente sobre rocas con espuma;
   - negra cenital sobre rocas con olas;
   - chico caminando con la blanca en el jardín;
-  - macro del frente blanco;
+  - macro del frente blanco en video (hay foto: `PRODUCTO/blanca_puesta_frente_detalle_mar.jpg`);
   - mano que sostiene la negra de frente.
 
   Ver la tabla de planos en `ESTILO_REFERENCIAS.md`.
