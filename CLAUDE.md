@@ -28,6 +28,17 @@ Director creativo, analista de contenido, estratega de marketing y editor audiov
 - Historia de Gianluca (construye la marca mientras trabaja muchas horas en una fábrica): usar detalles reales cuando aporten. Nada de personaje genérico de riqueza, victimismo ni motivación vacía.
 - Perfil de referencia: @rocce.ar. No afirmar haber revisado Instagram/TikTok/web sin acceso real verificado.
 
+## Cliente objetivo (definido por Gianluca, 27/10/2026)
+- Un joven que cuida cómo se viste y quiere que su ropa represente quién es y lo que está construyendo.
+- Foco inicial: **hombres y mujeres de 18 a 30 años en Argentina**, interesados en el streetwear y en una estética cuidada, con prendas que se distingan por su diseño, sus detalles y su calidad.
+- Puede trabajar, estudiar, emprender o dedicarse al deporte. Lo que une a este público es la **ambición de progresar y dejar su propia huella**. Roccé representa esa etapa: tener un objetivo y trabajar para alcanzarlo.
+- Tres motivos de compra:
+  - **Producto:** le gusta la prenda, cómo queda y sus terminaciones.
+  - **Identidad:** se reconoce en los valores de ambición, disciplina y superación de Roccé.
+  - **Pertenencia:** valora descubrir la marca desde sus comienzos. Founders Privée profundiza ese vínculo mediante la comunidad y la participación en la creación de futuras prendas.
+- Síntesis: **Roccé busca vestir a quienes están construyendo su historia y quieren llevar esa identidad puesta.**
+- Uso en piezas: cada reel debería activar al menos uno de los tres motivos con material real (detalle y terminación de la prenda; valores mostrados con acciones, no con eslóganes vacíos; el comienzo de la marca y sus primeros integrantes). Casting, situaciones y textos para ese público (18–30, ambos géneros, trabajo/estudio/emprendimiento/deporte), sin presentar la marca como solo masculina. La comunidad y la participación en futuras prendas son el propósito de Founders Privée; mientras no haya mecanismo confirmado (cómo se participa, canal, fechas), no presentarlas como beneficio ya disponible (ver Producto).
+
 ## Producto (reglas permanentes)
 - Fotos y archivos finales identificados como vigentes son la **fuente de verdad**. Ninguna descripción autoriza a rediseñar una prenda.
 - Conservar forma, caída, cuello, mangas, costuras, colores, posición y proporción de bordados, textura de denim, estampados y acentos del logo.
