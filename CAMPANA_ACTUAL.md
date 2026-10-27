@@ -181,3 +181,17 @@ Concepto "casi impacto" (R5/R7, la de mejor resultado) con material propio: una 
 |---|---|---|
 | `ROCCE_casi_ola_v01.mp4` | **Más reciente (entregada, sin aprobación aún)** | 10,5 s / 315 cuadros, 1080×1920, 30 fps, −15,2 LUFS, pico −1,0 dBTP. H `IMG_4631` 0,70–3,87 + congelado 1,13 s · P1 `IMG_3375` 0,55–1,85 (blanca corregida a neutro) · P2 `IMG_4530` 0,80–2,30 · P3 `IMG_7793` 2,60–4,00 · Z `IMG_7896` 4,15–6,15 (1,16×). Script `scripts/casi_ola_v01.sh`. Página privada para verla en el celular: https://claude.ai/artifact/NR185psBSSR2UGzu15MaEQ (MP4 idéntico, sha256 `a7a85aa1…3683`). |
 
+### Encargo "producción autónoma" (27/10/2026): pieza 2 "Detrás de la foto"
+La sesión real del 11/10/2026 (Gianluca fotografía las remeras en las rocas: `IMG_7884`, `IMG_7887`) → disparo → la foto. Texto: "Así se hace una foto Roccé."; cierre "Drop Founders Privée — 01/11/2026". Audio real de las tomas + obturador sintetizado (`scripts/obturador.py`); sin música ni voz.
+- `PRODUCTO/blanca_espalda_roca_ola.jpg` es de esa sesión (misma roca, luz y ola), pero las fotos no traen fecha en sus metadatos: el montaje no afirma con texto que salió de ese disparo exacto.
+- Fotos 3:4 mostradas enteras como copia con borde blanco sobre la misma foto desenfocada (no se recorta la remera para llevarla a 9:16).
+| Versión | Estado | Detalle |
+|---|---|---|
+| `ROCCE_detras_foto_v01.mp4` | **Más reciente (entregada, sin aprobación aún)** | 10,73 s / 322 cuadros, 1080×1920, 30 fps, −15,3 LUFS, pico −1,4 dBTP, 19,4 MB. A `IMG_7884` 0–3,73 · F1 foto `blanca_espalda_roca_ola.jpg` 2 s · B `IMG_7887` 1,9–3,4 · F2 foto `detras_escena_negra_puesta_fotografia_blanca_rocas.jpg` 1,5 s · Z `IMG_7896` 4,15–6,15 (1,16×). Script `scripts/detras_foto_v01.sh`. En la página https://claude.ai/artifact/NR185psBSSR2UGzu15MaEQ va una copia comprimida (`TRABAJO/web/…_web.mp4`, 9,9 MB, crf 23) porque el límite es 15 MB por archivo. |
+
+## Estado del trabajo (actualizado 27/10/2026)
+- **Último encargo:** producción autónoma (27/10). Pieza 1 `ROCCE_casi_ola_v01` y pieza 2 `ROCCE_detras_foto_v01` exportadas, verificadas por fotogramas y niveles, entregadas por el chat y en la página privada. Ninguna aprobada todavía.
+- **Pendiente de Gianluca:** escuchar ambas (audio verificado solo por niveles); decidir si se suma música de la biblioteca de Instagram al publicar; confirmar que `blanca_espalda_roca_ola.jpg` es de la sesión de `IMG_7884`.
+- **Para retomar en una sesión nueva:** el repo arranca en esta rama. Herramientas: `scripts/instalar_entorno.sh` (y `instalar_doblaje.sh` para sincronización labial). Cada pieza se rehace con su receta `scripts/<pieza>_vNN.sh`.
+- **Bloqueos vigentes:** Instagram sin sesión (no se ve el feed ni el perfil); no hay música con uso permitido en el repo; voz sintética solo con acento no garantizado (falta una referencia rioplatense con permiso).
+
