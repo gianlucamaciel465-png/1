@@ -28,7 +28,7 @@ Fuentes: documento maestro (contexto al 26/10/2026) e indicaciones de Gianluca d
 - Actualizado el 27/10/2026: el 27/10 se había dicho "toda la ganancia"; la última indicación habla de "un porcentaje". Se usa **porcentaje** hasta que Gianluca diga otra cosa.
 - **Sin definir:** porcentaje, plazo y unidades. Idea en evaluación (no confirmada): pocas unidades vendidas solo entre los Founders.
 - Para comunicar: "el Founder 001 diseña una prenda y se lleva un porcentaje de la ganancia". Sin cifras, fechas ni cantidades.
-- Siguen sin confirmar: placa numerada, registro, porcentajes.
+- Siguen sin confirmar: placa numerada, registro y cualquier otro beneficio o porcentaje fuera de la prenda del Founder.
 
 ## Prendas del drop (protagonista: remera blanca y negra)
 - **Blanca** — frente: ROCCÉ pequeño en el pecho izquierdo + "so f★cking close." con estrella, en gris; etiqueta de cuello ROCCÉ con monograma. Espalda: **ROCCÉ en parche de denim azul** (en fotos y video se ve azul muy oscuro, casi negro) con borde/pespunte claro + "Founders Privée" en cursiva **celeste claro** con subrayado.
