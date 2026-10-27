@@ -16,10 +16,17 @@ Fuentes: documento maestro (contexto al 26/10/2026) e indicaciones de Gianluca d
 - Frase de cierre en R3: **"BANCAMOS A LOS QUE SIGUEN."** Pendiente confirmar si es del drop o de la marca.
 - Grafías: "ROCCÉ", "Founders Privée", "so f★cking close." (la estrella es parte del arte).
 - **Dichos en R4 (25/10/2026), sin confirmar vigencia:** "corte en V", "305 gramos", "bordados en tela de jean", "envío gratis". No reutilizarlos en piezas nuevas sin confirmación de Gianluca.
-- **No confirmado (no publicar ni inventar):** precios, talles/medidas, composición, stock, promociones, plazos de envío, link/CTA de compra, beneficios Founders implementados (placa numerada, WhatsApp, registro, porcentajes).
+- **No confirmado (no publicar ni inventar):** precios, talles/medidas, composición, stock, promociones, plazos de envío, link/CTA de compra, beneficios Founders no confirmados (placa numerada, registro, porcentajes). El grupo de WhatsApp y la prenda del Founder 001 sí están confirmados (ver Founders).
 
 ## Founders
-- Primeros 100 integrantes/compradores, numerados 001–100. No es stock ni ventas ni beneficio implementado.
+- Primeros 100 compradores, numerados 001–100. No es stock ni ventas.
+- **Confirmado por Gianluca el 27/10/2026:**
+  - **Comunidad:** grupo privado de WhatsApp — es un **grupo, NO un canal** — donde los 100 Founders están juntos con Gianluca.
+  - **Cómo se participa:** comprando el producto (ser uno de los primeros 100).
+  - **Desde cuándo:** activo desde el **01/11/2026** (día del drop).
+  - **Prenda del Founder:** el Founder **001** diseña una prenda a su gusto; si no quiere, pasa al siguiente en orden (002, 003…). Toda la ganancia que genere esa prenda es para ese Founder.
+- Pendiente de definir antes de comunicarlo con detalle: qué se cuenta como "ganancia" (ingreso total o lo que queda después de costos), plazos y cantidad de esa prenda.
+- Siguen sin confirmar: placa numerada, registro, porcentajes.
 
 ## Prendas del drop (protagonista: remera blanca y negra)
 - **Blanca** — frente: ROCCÉ pequeño en el pecho izquierdo + "so f★cking close." con estrella, en gris; etiqueta de cuello ROCCÉ con monograma. Espalda: **ROCCÉ en parche de denim azul** (en fotos y video se ve azul muy oscuro, casi negro) con borde/pespunte claro + "Founders Privée" en cursiva **celeste claro** con subrayado.
