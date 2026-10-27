@@ -1,0 +1,237 @@
+{%- liquid
+  assign current = product.selected_or_first_available_variant
+  assign abierta = false
+  if settings.estado_venta == 'abierta'
+    assign abierta = true
+  endif
+  assign cmp = current.compare_at_price | default: 0
+  assign hay_desc = false
+  if cmp > current.price
+    assign hay_desc = true
+    assign ahorro = cmp | minus: current.price
+    assign pct = ahorro | times: 100 | divided_by: cmp
+  endif
+  assign tiene_talle = false
+  for o in product.options
+    assign on = o | downcase
+    if on contains 'talle' or on contains 'size'
+      assign tiene_talle = true
+    endif
+  endfor
+  assign talles = settings.talles | strip
+  capture conf
+    render 'rc-confirmados'
+  endcapture
+  assign conf = conf | strip | plus: 0
+  assign cupo = settings.cupo_hasta | minus: settings.cupo_desde | plus: 1
+  assign libres = cupo | minus: conf
+  assign pstr = current.price | money_without_trailing_zeros
+  assign cta = 'Quiero mi número · ' | append: pstr | append: ' →'
+-%}
+<div class="cy" data-cyber>
+  <style>.cy-v-solo{grid-template-columns:1fr!important;max-width:560px;margin-left:auto;margin-right:auto}.cy-2009{background:var(--humo-soft);padding-bottom:0}.cy-2009+.cy-plate{padding-top:clamp(56px,9vw,110px)}.gal figure.vid{background:#1b2027}.gal figure.vid video{width:100%;height:100%;object-fit:cover;display:block}</style>
+  {%- if hay_desc -%}
+  <div class="cy-strip" aria-label="{{ settings.cyber_titulo | default: 'Cyber pre-drop' }}: −{{ pct }}%">
+    <div class="cy-strip-in" aria-hidden="true">
+      {%- for i in (1..6) -%}<span>{{ settings.cyber_titulo | default: 'Cyber pre-drop' }}</span><b>−{{ pct }}%</b><span>Envío 100% gratis, sin chamuyo</span><i>★</i>{%- endfor -%}
+    </div>
+  </div>
+  {%- endif -%}
+
+  <section class="pdp cy-pdp">
+    <div class="wrap">
+      <div class="pdp-grid">
+        <div>
+          <div class="gal" id="gal">
+            {%- liquid
+              assign im_macro = images['rc-blanca-sfc-macro.webp']
+              assign im_rocas = images['rc-blanca-rocas.webp']
+            -%}
+            <figure data-color="Blanca">{% render 'rc-img', key: 'rc-blanca-frente-fp.webp', alt: 'Frente de la remera blanca Founders Privée sobre la arena: ROCCÉ y so f★cking close', loading: 'eager' %}<figcaption>Frente</figcaption></figure>
+            <figure data-color="Blanca" class="vid"><video muted loop playsinline preload="none" poster="{{ 'rc-blanca-rocas-poster.jpg' | asset_url }}" aria-label="Remera blanca Founders Privée sobre las rocas, con el mar"><source src="{{ 'rc-blanca-rocas.mp4' | asset_url }}" type="video/mp4"></video><figcaption>Contra las olas</figcaption></figure>
+            <figure data-color="Blanca" class="vid"><video muted loop playsinline preload="none" poster="{{ 'rc-blanca-corte-v-poster.jpg' | asset_url }}" aria-label="Remera blanca puesta, de espaldas, con las líneas del corte V de los hombros a la cintura"><source src="{{ 'rc-blanca-corte-v.mp4' | asset_url }}" type="video/mp4"></video><figcaption>Corte V ROCCÉ</figcaption></figure>
+            {%- if im_macro != blank -%}<figure data-color="Blanca">{% render 'rc-img', img: im_macro, alt: 'Primer plano del frente: ROCCÉ y so f★cking close con la estrella celeste', sizes: '(min-width: 900px) 30vw, 88vw' %}<figcaption>so f★cking close.</figcaption></figure>{%- else -%}<figure data-color="Blanca" class="fit">{% render 'rc-img', key: 'rc-bordado-blanca.webp', alt: 'Primer plano del ROCCÉ bordado en tela de jean, con la costura a la vista' %}<figcaption>Bordado real</figcaption></figure>{%- endif -%}
+            {%- if im_rocas != blank -%}<figure data-color="Blanca">{% render 'rc-img', img: im_rocas, alt: 'Espalda de la remera blanca Founders Privée sobre las rocas, frente al mar', sizes: '(min-width: 900px) 30vw, 88vw' %}<figcaption>Espalda</figcaption></figure>{%- else -%}<figure data-color="Blanca">{% render 'rc-img', key: 'rc-blanca-espalda-fp.webp', alt: 'Espalda de la remera blanca Founders Privée: ROCCÉ bordado en tela de jean y Founders Privée en relieve celeste' %}<figcaption>Espalda</figcaption></figure>{%- endif -%}
+            {%- liquid
+              assign nim_macro = images['rc-negra-sfc-macro.webp']
+              assign nim_rambla = images['rc-negra-rambla.webp']
+            -%}
+            <figure data-color="Negra">{% render 'rc-img', key: 'rc-negra-frente-fp.webp', alt: 'Frente de la remera negra Founders Privée sobre la arena: ROCCÉ y so f★cking close', loading: 'eager' %}<figcaption>Frente</figcaption></figure>
+            <figure data-color="Negra" class="vid"><video muted loop playsinline preload="none" poster="{{ 'rc-negra-rocas-poster.jpg' | asset_url }}" aria-label="Remera negra Founders Privée sobre las rocas, con el mar"><source src="{{ 'rc-negra-rocas.mp4' | asset_url }}" type="video/mp4"></video><figcaption>Contra las olas</figcaption></figure>
+            <figure data-color="Negra" class="vid"><video muted loop playsinline preload="none" poster="{{ 'rc-negra-corte-v-poster.jpg' | asset_url }}" aria-label="Remera negra puesta, de espaldas, con las líneas del corte V de los hombros a la cintura"><source src="{{ 'rc-negra-corte-v.mp4' | asset_url }}" type="video/mp4"></video><figcaption>Corte V ROCCÉ</figcaption></figure>
+            {%- if nim_macro != blank -%}<figure data-color="Negra">{% render 'rc-img', img: nim_macro, alt: 'Primer plano del frente de la remera negra: ROCCÉ y so f★cking close en blanco', sizes: '(min-width: 900px) 30vw, 88vw' %}<figcaption>so f★cking close.</figcaption></figure>{%- endif -%}
+            {%- if nim_rambla != blank -%}<figure data-color="Negra">{% render 'rc-img', img: nim_rambla, alt: 'Remera negra Founders Privée puesta, de espaldas, frente a la playa', sizes: '(min-width: 900px) 30vw, 88vw' %}<figcaption>Espalda</figcaption></figure>{%- else -%}<figure data-color="Negra">{% render 'rc-img', key: 'rc-negra-espalda-fp.webp', alt: 'Espalda de la remera negra: ROCCÉ tono sobre tono y Founders Privée en gris' %}<figcaption>Espalda</figcaption></figure>{%- endif -%}
+            <figure class="fit plate-fig">{% render 'rc-img', key: 'rc-placa-fp.webp', alt: 'Placa metálica Founders Privée 2026 de Roccé' %}<figcaption>Viene con la placa</figcaption></figure>
+          </div>
+          <div class="gal-dots" id="galDots"></div>
+        </div>
+
+        <div class="pdp-info">
+          <p class="eyebrow">Founders Privée 2026 · Página 1</p>
+          <h1 style="margin-top:10px">{{ product.title }}</h1>
+          <p class="tagline">Remera · Corte V ROCCÉ · {{ settings.gramaje }} g · Algodón</p>
+
+          <div class="cy-price">
+            <p class="price" id="pPrice">{{ current.price | money_without_trailing_zeros }}</p>
+            {%- if hay_desc -%}
+              <s class="cy-was" aria-label="Antes {{ cmp | money_without_trailing_zeros }}">{{ cmp | money_without_trailing_zeros }}</s>
+              <span class="cy-off">−{{ pct }}%</span>
+            {%- endif -%}
+          </div>
+          {%- if hay_desc -%}<p class="cy-save">Ahorrás <b>{{ ahorro | money_without_trailing_zeros }}</b> · precio {{ settings.cyber_titulo | default: 'cyber pre-drop' | downcase }}{% if settings.cyber_fin_iso != blank %} <span class="cd-mini" data-cd-mini="{{ settings.cyber_fin_iso | escape }}"></span>{% elsif settings.cyber_fin != blank %} · {{ settings.cyber_fin }}{% endif %}</p>{%- endif -%}
+
+          <div class="cy-ship">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7z"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17.5" cy="17.5" r="1.8"/></svg>
+            <div><b>Envío 100% gratis, sin chamuyo.</b><span>A todo el país por Correo Argentino. Sin mínimo ni recargo, y el checkout no te suma nada.</span></div>
+          </div>
+
+          {%- if abierta -%}<p class="status">{% if conf == 0 %}Venta abierta · El 001 está libre{% else %}Venta abierta · Quedan {{ libres }} de {{ cupo }} remeras{% endif %}</p>{%- endif -%}
+
+          {%- form 'product', product, id: 'pf', novalidate: 'novalidate' -%}
+            <input type="hidden" name="id" value="{{ current.id }}" id="variantId">
+            <input type="hidden" name="return_to" value="/checkout">
+            {%- unless product.has_only_default_variant -%}
+              {%- for option in product.options_with_values -%}
+                <div class="opt">
+                  <div class="opt-h"><span>{{ option.name }}</span><span id="optSel{{ forloop.index0 }}">{{ option.selected_value }}</span></div>
+                  <div class="chips" data-opt="{{ forloop.index0 }}" data-name="{{ option.name | escape }}">
+                    {%- for value in option.values -%}
+                      <button type="button" class="chip" data-value="{{ value | escape }}" aria-pressed="{% if option.selected_value == value %}true{% else %}false{% endif %}">
+                        {%- assign vd = value | downcase -%}
+                        {%- if vd == 'blanca' -%}<span class="sw" style="background:#FAFAF7"></span>{%- elsif vd == 'negra' -%}<span class="sw" style="background:#121212"></span>{%- endif -%}{{ value }}
+                      </button>
+                    {%- endfor -%}
+                  </div>
+                </div>
+              {%- endfor -%}
+            {%- endunless -%}
+
+            {%- unless tiene_talle -%}
+              {%- if talles != blank -%}
+                <div class="opt" id="talleBox">
+                  <div class="opt-h"><span>Talle</span><a class="cy-q wa-link" data-motivo="talle" data-pagina="producto" href="#">¿Dudás? Te asesoramos</a></div>
+                  <div class="chips cy-tl" role="radiogroup" aria-label="Talle">
+                    {%- assign tl = talles | split: ',' -%}
+                    {%- for t in tl -%}{%- assign ts = t | strip -%}<label class="chip"><input type="radio" name="properties[Talle]" value="{{ ts | escape }}" required>{{ ts }}</label>{%- endfor -%}
+                  </div>
+                  <p class="cy-err" id="talleErr" hidden>Elegí tu talle.</p>
+                </div>
+              {%- else -%}
+                <div class="opt"><div class="opt-h"><span>Talle</span><a class="cy-q wa-link" data-motivo="talle" data-pagina="producto" href="#">Consultá tu talle por WhatsApp →</a></div></div>
+              {%- endif -%}
+            {%- endunless -%}
+
+            {%- if abierta -%}
+              <div style="display:grid;gap:10px;margin-top:20px">
+                <button type="submit" name="add" id="addBtn" data-label="{{ cta | escape }}" class="btn btn-dark btn-full cy-go"{% unless current.available %} disabled{% endunless %}>{% if current.available %}{{ cta }}{% else %}Sin stock{% endif %}</button>
+              </div>
+              <ul class="cy-trust">
+                {% if settings.mp_activo %}<li><b>Mercado Pago</b>Tarjeta, cuotas o dinero en cuenta</li>{% else %}<li><b>Te asesoramos</b>Por WhatsApp, antes de comprar</li>{% endif %}
+                <li><b>Envío gratis</b>A todo el país, sin mínimo</li>
+                <li><b>30 días</b>Para cambiarla</li>
+                <li><b>Tu número</b>Permanente, en El Registro</li>
+              </ul>
+
+              <details class="regbox cy-reg">
+                <summary><span class="eyebrow">Tu lugar en El Registro</span><span class="fine">Opcional · lo podés completar ahora</span></summary>
+                <div class="fld"><label for="propNombre">Nombre y apellido o alias</label><input id="propNombre" name="properties[Registro · nombre]" maxlength="40"></div>
+                <div class="fld"><label for="propProy">Estoy construyendo…</label><input id="propProy" name="properties[Registro · proyecto]" maxlength="60"></div>
+                {%- if settings.elegir_numero -%}<div class="fld"><label for="propNum">Número preferido</label><select id="propNum" name="properties[Registro · número preferido]"><option value="">Sin preferencia</option></select></div>{%- endif -%}
+                <p class="fine" style="margin-top:8px">El Registro es público: tu número, tu nombre o alias y lo que estás construyendo quedan a la vista de todos. Nunca publicamos teléfono, dirección ni datos bancarios o de pago.{% if settings.elegir_numero %} El número preferido se confirma con la compra si sigue libre.{% endif %}</p>
+              </details>
+            {%- else -%}
+              <div style="display:grid;gap:10px;margin-top:22px">
+                <a class="btn btn-dark btn-full wa-link" data-motivo="lista" data-pagina="producto" href="#">Entrar a la lista de prioridad</a>
+              </div>
+            {%- endif -%}
+          {%- endform -%}
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec cy-v" id="corte-v" data-vcut>
+    <div class="wrap">
+      <p class="eyebrow rv">El corte V ROCCÉ</p>
+      <h2 class="t-display t-l rv rv-d1" style="margin-top:14px;max-width:12em">Una remera recta te achica. Esta te arma.</h2>
+      <p class="lede rv rv-d2" style="margin-top:16px">{{ settings.corte_texto }}</p>
+
+      <div class="cy-v-grid cy-v-solo">
+        <div class="cy-v-lab rv">
+          <div class="cy-v-stage">
+            <svg viewBox="0 0 200 230" class="cy-sil" aria-hidden="true">
+              <path id="vSil" class="sil" d=""/>
+              <path id="vGuide" class="vg" d=""/>
+              <path id="vSh" class="vl" d=""/>
+              <path id="vWa" class="vl" d=""/>
+            </svg>
+            <span class="cy-v-tag t1" id="vT1">Hombros</span>
+            <span class="cy-v-tag t2" id="vT2">Cintura</span>
+          </div>
+          <div class="cy-v-ctrl">
+            <span>Remera recta</span>
+            <input type="range" id="vRange" min="0" max="100" value="0" aria-label="Pasar de remera recta a corte V ROCCÉ">
+            <span>Corte V</span>
+          </div>
+          <p class="cy-v-read" id="vRead" aria-live="polite">Deslizá para ver el corte V</p>
+          <p class="fine" style="text-align:center;margin-top:6px">Ilustración de la silueta, no es una tabla de medidas.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {% render 'rc-cyber-cd' %}
+
+  {% render 'rc-cyber-ruido' %}
+
+  <section class="sec cy-2009">
+    <div class="wrap">
+      <div class="cy-early rv" style="margin-top:0">
+        <p class="cy-early-k">2009</p>
+        <div>
+          <h3>¿Comprar cuando todavía no compra nadie?</h3>
+          <p>En 2009, comprar Bitcoin parecía de boludo. Hoy nadie habla de los que llegaron tarde: se habla de los que estuvieron antes, cuando todavía no se veía.</p>
+          <p>Que no haya fila no significa que te equivocás. Significa que llegaste antes. Comprás una remera de {{ settings.gramaje }} g bordada en tela de jean, a precio de pre-drop, y te llevás algo que ya no se puede comprar después: haber sido de los primeros.</p>
+          <p class="cy-early-f">No te vendemos una inversión ni te prometemos que valga más. Te vendemos buena ropa y el lugar de los que llegaron antes.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec cy-plate">
+    <div class="wrap grid-2">
+      <div class="rv">
+        <figure class="cy-plate-ph">{% render 'rc-img', key: 'rc-placa-fp.webp', alt: 'Placa metálica Founders Privée 2026 de Roccé', cls: 'zoom-full' %}</figure>
+        <p class="fine" style="margin-top:10px">Foto real de la placa que viene con cada remera.</p>
+      </div>
+      <div>
+        <p class="eyebrow rv">La placa Founders Privée</p>
+        <h2 class="t-display t-l rv rv-d1" style="margin-top:14px">No es una remera. Es la prueba de que llegaste antes.</h2>
+        <p class="lede rv rv-d2" style="margin-top:18px">Cada remera viene con la placa metálica Founders Privée 2026 y un número permanente en El Registro. Founders va a haber 100 como máximo. Tu número es tuyo y no se le reasigna a nadie.</p>
+        <p class="lede rv rv-d3" style="margin-top:14px">Esta prenda es solo para Founders: con «Founders Privée» en la espalda, existe para los primeros 100. Los que vengan después van a comprar Roccé. Vos vas a haber estado en la Página 1.</p>
+      </div>
+    </div>
+  </section>
+
+  {% render 'rc-cyber-cuenta' %}
+
+  {%- if abierta -%}
+  <section class="sec cy-end">
+    <div class="wrap" style="text-align:center">
+      <p class="eyebrow rv" style="color:var(--humo)">Página 1 · {{ cupo }} remeras · números del 001 al {{ settings.total_founders | default: 100 }}</p>
+      <h2 class="t-display t-l rv rv-d1" style="margin:14px auto 0;max-width:12em">La historia se escribe una sola vez.</h2>
+      <p class="cy-end-p rv rv-d2">{% if hay_desc %}<s>{{ cmp | money_without_trailing_zeros }}</s> {% endif %}<b>{{ current.price | money_without_trailing_zeros }}</b><span>Envío 100% gratis, sin chamuyo · 30 días para cambiarla</span></p>
+      <div class="rv rv-d3" style="margin-top:26px"><button type="submit" form="pf" name="add" class="btn btn-light cy-go">Ser Founder <span class="arr">→</span></button></div>
+    </div>
+  </section>
+  {%- endif -%}
+</div>
+<div class="buybar cy-bb" id="buybar"><span class="pp"><span id="bbPrice">{{ current.price | money_without_trailing_zeros }}</span>{% if hay_desc %}<s>{{ cmp | money_without_trailing_zeros }}</s>{% endif %}</span>{%- if abierta -%}<button type="submit" form="pf" name="add" class="btn btn-dark">Ser Founder</button>{%- else -%}<a class="btn btn-dark wa-link" data-motivo="lista" data-pagina="producto-barra" href="#">Lista de prioridad</a>{%- endif -%}</div>
+<script type="application/json" id="productJson">{{ product | json }}</script>
+{% schema %}
+{
+  "name": "Producto Cyber",
+  "settings": []
+}
+{% endschema %}
