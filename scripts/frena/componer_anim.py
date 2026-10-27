@@ -22,6 +22,8 @@ REF, M = 30, 6
 CAJAS = {"FEAR": (80, 1072, 185, 1096), "OPINIONS": (122, 982, 343, 1007), "DOUBT": (271, 926, 414, 951),
          "LAZINESS": (357, 880, 575, 905), "EXCUSES": (492, 750, 689, 775)}
 NUEVOS = {"FEAR": "MIEDO", "OPINIONS": "QUÉ DIRÁN", "DOUBT": "DUDAS", "LAZINESS": "FIACA", "EXCUSES": "EXCUSAS"}
+# v02: el villano definido por Gianluca es comodidad, fiaca, excusas, miedo y qué dirán → ROTULO_DOUBT=COMODIDAD
+NUEVOS["DOUBT"] = os.environ.get("ROTULO_DOUBT", NUEVOS["DOUBT"])
 
 def leer(f): return np.asarray(Image.open(f"{seq}/{f + 1:04d}.png").convert("RGB"))
 

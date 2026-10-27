@@ -1,0 +1,165 @@
+{
+ "modo": "voz guía provisoria (Chatterbox, voz incorporada del modelo; no es la voz de Gianluca)",
+ "frases": [
+  {
+   "frase": "Fracasé.",
+   "toma": "g1_ex0.7_cfg0.35_s4.wav 0,00–0,56",
+   "transcripcion": "Fracase,",
+   "parecido": 0.933,
+   "duracion": 0.6
+  },
+  {
+   "frase": "Me incomodé.",
+   "toma": "g1_ex0.7_cfg0.35_s4.wav 0,66–1,62",
+   "transcripcion": "me incomodé",
+   "parecido": 0.9,
+   "duracion": 0.71
+  },
+  {
+   "frase": "Y acá estoy.",
+   "toma": "g1_ex0.7_cfg0.35_s4.wav 1,66–2,26",
+   "transcripcion": "y acá estoy.",
+   "parecido": 1.0,
+   "duracion": 0.72
+  },
+  {
+   "frase": "Ahora te toca a vos.",
+   "toma": "f4_ex0.5_cfg0.5_s1.wav",
+   "transcripcion": "Ahora te toca a vos.",
+   "parecido": 1.0,
+   "duracion": 1.05,
+   "palabras": [
+    [
+     "Ahora",
+     -0.04,
+     0.24
+    ],
+    [
+     "te",
+     0.24,
+     0.42
+    ],
+    [
+     "toca",
+     0.42,
+     0.58
+    ],
+    [
+     "a",
+     0.58,
+     0.8
+    ],
+    [
+     "vos.",
+     0.8,
+     0.9
+    ]
+   ],
+   "otras": [
+    [
+     "f4_ex0.6_cfg0.4_s2.wav",
+     1.0,
+     "Ahora te toca a vos."
+    ]
+   ]
+  },
+  {
+   "frase": "El primero de noviembre, hacete founder de Roccé y creá lo que viene con nosotros.",
+   "toma": "f5_ex0.5_cfg0.5_s1.wav",
+   "transcripcion": "El 1 de noviembre, acete founder de Roccé y crea lo que viene con nosotros.",
+   "parecido": 0.94,
+   "duracion": 3.71,
+   "palabras": [
+    [
+     "El",
+     0.0,
+     0.12
+    ],
+    [
+     "1",
+     0.12,
+     0.36
+    ],
+    [
+     "de",
+     0.36,
+     0.56
+    ],
+    [
+     "noviembre,",
+     0.56,
+     1.08
+    ],
+    [
+     "acete",
+     1.16,
+     1.44
+    ],
+    [
+     "founder",
+     1.44,
+     1.78
+    ],
+    [
+     "de",
+     1.78,
+     1.98
+    ],
+    [
+     "Roccé",
+     1.98,
+     2.3
+    ],
+    [
+     "y",
+     2.3,
+     2.54
+    ],
+    [
+     "crea",
+     2.54,
+     2.78
+    ],
+    [
+     "lo",
+     2.78,
+     2.82
+    ],
+    [
+     "que",
+     2.82,
+     2.94
+    ],
+    [
+     "viene",
+     2.94,
+     3.1
+    ],
+    [
+     "con",
+     3.1,
+     3.3
+    ],
+    [
+     "nosotros.",
+     3.3,
+     3.56
+    ]
+   ],
+   "otras": [
+    [
+     "f5_ex0.6_cfg0.4_s2.wav",
+     0.934,
+     "El 1º de noviembre, aceite founder de Roccé y crea lo que viene con nosotros."
+    ]
+   ]
+  },
+  {
+   "frase": "Mandanos FOUNDERS y pedí acceso.",
+   "toma": "g2_ex0.7_cfg0.35_s4.wav 0,00–1,80",
+   "transcripcion": "mandanos founders y pedí acceso.",
+   "parecido": 0.968,
+   "duracion": 1.84
+  }
+ ]
+}
