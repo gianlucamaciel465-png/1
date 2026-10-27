@@ -124,7 +124,7 @@ Punto de partida para piezas nuevas; el encargo concreto manda. Detalle con tiem
   - control: `verificar.sh`;
   - edición: `reel.sh` (plantilla) y `reel_vNN.sh` (receta exacta de cada versión);
   - doblaje: `instalar_doblaje.sh`, `voz_chatterbox.py`, `lipsync_musetalk.py`, `doblaje_r13_vNN.sh` (receta);
-  - textos: `texto_png.py` (placa en Inter Display Bold, tramos de distinto color, sombra; `SOMBRA=#FFFFFF` para texto oscuro), `rotulos_r14.py` (rótulos cuadrados estilo animación; `TEXTO=...` para texto libre), `tics_contador.py` (tics de un contador "casi impacto"), `obturador.py` (sonido de obturador sintetizado);
+  - textos: `texto_png.py` (placa en Inter Display Bold, tramos de distinto color, sombra; `SOMBRA=#FFFFFF` para texto oscuro), `rotulos_r14.py` (rótulos cuadrados estilo animación; `TEXTO=...` para texto libre), `tics_contador.py` (tics de un contador "casi impacto"), `obturador.py` (sonido de obturador sintetizado), `anotaciones.py` (anotaciones de ficha técnica que siguen un detalle real de la prenda; necesita OpenCV), `sfx.py` (efectos sintetizados ubicados en una línea de tiempo: pulso, golpe, barrido, clic, subida);
   - entorno: `instalar_entorno.sh` + `requisitos/*.txt` (versiones exactas), `instagram_acceso.js` / `instagram_reels.js` (prueba de acceso con Chromium).
 
 ## Ingreso de material nuevo
