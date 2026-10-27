@@ -1,0 +1,92 @@
+{
+  "marca": "Roccé",
+  "fecha_revision_argentina": "2026-10-26",
+  "alcance_verificacion": {
+    "metodo": "Reproducción pública en navegador y revisión de capturas de distintos momentos.",
+    "duraciones": "HTMLVideoElement.duration observado en cada reproductor.",
+    "mp4_originales_descargados": false,
+    "audio_escuchado": false,
+    "revision_de_cada_fotograma": false,
+    "advertencia": "Las propuestas creativas no describen ediciones ya realizadas. Confirmar secuencias y cortes exactos en MP4 antes de reconstruir."
+  },
+  "referencias": [
+    {
+      "id": "R0",
+      "archivo_esperado": "R0.mp4",
+      "url": "https://www.instagram.com/p/De4SAJAOmPQ/",
+      "autor_observado": "rocce.ar",
+      "es_del_usuario": true,
+      "duracion_observada_s": 17.413513,
+      "observado": [
+        "Animación de personajes oscuros; uno lleva una remera blanca con marca.",
+        "Escalera con palabras en español como EMPEZÁ, APRENDÉ, CONSTRUÍ y TU META.",
+        "so f★cking close. aparece dentro de la escena de la escalera.",
+        "La descripción de la publicación anuncia Founders Privée el 1/11."
+      ],
+      "lectura_creativa": "La prenda se incorpora a una metáfora de avance; ofrece una referencia del estilo que el usuario ya acepta para Roccé.",
+      "propuesta_a_validar": "Conservar la integración narrativa de la prenda y usar esta pieza como comparación de identidad, sin asumir que todos sus recursos deben repetirse."
+    },
+    {
+      "id": "R1",
+      "archivo_esperado": "R1.mp4",
+      "url": "https://www.instagram.com/reels/DeUC8-gxNIn/",
+      "autor_observado": "neuronvisuals",
+      "es_del_usuario": false,
+      "duracion_observada_s": 8.055872,
+      "observado": [
+        "Escalera en perspectiva, figuras claras y grises sobre fondo negro.",
+        "Varios personajes y una atadura roja representan lo que frena al protagonista.",
+        "Se leen etiquetas como FEAR, OPINIONS, DOUBT, LAZINESS y EXCUSES.",
+        "La acción separa al protagonista de los obstáculos; se muestra en la parte alta con SUCCESS."
+      ],
+      "lectura_creativa": "Conflicto reconocible, fuerza visual de la atadura y una resolución que se entiende mediante la acción.",
+      "propuesta_a_validar": "Recrear una metáfora propia de avanzar pese a lo que te frena; traducir etiquetas y resolver cómo vestir al protagonista con la prenda real."
+    },
+    {
+      "id": "R2",
+      "archivo_esperado": "R2.mp4",
+      "url": "https://www.instagram.com/reels/DeuZO5YRIal/",
+      "autor_observado": "neuronvisuals",
+      "es_del_usuario": false,
+      "duracion_observada_s": 12.003264,
+      "observado": [
+        "Un personaje iluminado aparece rodeado progresivamente por manos que lo señalan.",
+        "Las manos tienen etiquetas sobre pasado, familia, dinero, expectativas, dudas y futuro.",
+        "La escena cambia a un dormitorio visto desde arriba, de noche, con un reloj de las tres de la mañana y el personaje en la cama."
+      ],
+      "lectura_creativa": "Convierte una presión interior en una acción exterior y después la reinterpreta en una situación cotidiana.",
+      "propuesta_a_validar": "Desarrollar una salida mediante una acción concreta del fundador o protagonista; mantener la relación entre conflicto inicial y desenlace."
+    },
+    {
+      "id": "R3",
+      "archivo_esperado": "R3.mp4",
+      "url": "https://www.instagram.com/reels/DeCuMzdvUM-/",
+      "autor_observado": "aidencalvarez",
+      "es_del_usuario": false,
+      "duracion_observada_s": 11.933604,
+      "observado": [
+        "Se ve una animación de un personaje con un pico frente a una zona llena de diamantes.",
+        "En otros momentos la animación ocupa una ventana sobre una escena real al aire libre, con una persona, una silla y una computadora.",
+        "En la escena real se lee just focus."
+      ],
+      "lectura_creativa": "Conecta una metáfora compacta con un comportamiento cotidiano mediante un cambio de escala y composición.",
+      "propuesta_a_validar": "Probar una conexión entre concentración y una acción real de Roccé; Enfocate es una posible adaptación de texto, no una transcripción del audio."
+    },
+    {
+      "id": "R4",
+      "archivo_esperado": "R4.mp4",
+      "url": "https://www.instagram.com/reels/Ddmb6ZAoc0R/",
+      "autor_observado": "kayn.world",
+      "es_del_usuario": false,
+      "duracion_observada_s": 10.999999,
+      "observado": [
+        "Una persona con atuendo claro aparece caminando por un cruce de calle y en planos más próximos.",
+        "Se ven palmeras, cielo y luz cálida; varios encuadres se toman desde un punto bajo y con perspectiva amplia.",
+        "La persona lleva la cabeza cubierta y anteojos oscuros; en un plano enmarca la cámara con las manos.",
+        "La prenda y su marca se ven sobre el cuerpo del protagonista, con continuidad de apariencia."
+      ],
+      "lectura_creativa": "La identidad se sostiene por la presencia del personaje, la silueta, el gesto, el entorno y la prenda.",
+      "propuesta_a_validar": "Trasladar encuadres, luz y protagonismo del producto al material propio de Roccé; no importar automáticamente el personaje o vestuario de KAYN."
+    }
+  ]
+}

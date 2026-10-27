@@ -1,0 +1,44 @@
+ROCCÉ — Referencias y código para Claude
+Preparado: 26/10/2026, Argentina.
+
+Para Gianluca
+Adjuntá este ZIP a la sesión de Claude Code que ya tiene el material de Roccé. Pedile que lo descomprima y ejecute PROMPT_PARA_CLAUDE.txt. También podés copiar el texto del prompt al chat.
+
+Qué contiene
+- PROMPT_PARA_CLAUDE.txt: encargo creativo concreto para estas cinco referencias.
+- referencias.json: URLs, autores observados, duraciones del reproductor, observaciones y propuestas claramente separadas.
+- preparar_referencias.py: código para trabajar con MP4 locales, intentar importación pública opcional y generar evidencia para el análisis.
+
+El código no es el proyecto original de Instagram ni un recreador automático de las animaciones. Prepara el material para que Claude pueda estudiarlo y escribir una adaptación específica.
+
+Qué se pudo verificar
+Se abrieron las cinco publicaciones en un navegador y se inspeccionaron escenas durante su reproducción. Las duraciones provienen del reproductor. Se revisaron capturas de varios momentos, no cada fotograma. No se escuchó el audio. La descarga del primer video desde el reproductor falló; los MP4 originales de estos cinco enlaces no se incluyen en este ZIP.
+
+Para Claude
+1. Usá los MP4 existentes si están en el repo; no vuelvas a descargarlos sin necesidad.
+2. Colocá cada MP4 en VIDEOS con el nombre R0.mp4, R1.mp4, R2.mp4, R3.mp4 o R4.mp4. Una grabación de pantalla sirve para estudiar la edición, pero conviene usar originales para el render final.
+3. Ejecutá, dentro de esta carpeta:
+   python preparar_referencias.py
+4. Para intentar importar únicamente los faltantes desde enlaces públicos:
+   python preparar_referencias.py --descargar
+5. Para preparar una selección:
+   python preparar_referencias.py --solo R1 R4
+6. Para transcribir con faster-whisper ya instalado y un modelo en caché:
+   python preparar_referencias.py --modelo-whisper small
+   La transcripción no equivale a escuchar la mezcla. El script no descarga modelos.
+
+Requisitos
+Python 3.10 o superior; FFmpeg y ffprobe; Pillow. yt-dlp solo para --descargar. faster-whisper solo para --modelo-whisper. No se instala ni configura nada automáticamente. El entorno informado por Claude ya tiene estas herramientas.
+
+Salida
+Cada ejecución crea una carpeta nueva dentro de ANALISIS. Por referencia disponible genera una hoja del hook con muestras cada 0,25 s entre 0 y 3 s; otra con 20 muestras del reel; fotogramas individuales; metadatos; audio mono 16 kHz si existe; una ficha creativa pendiente de completar. Los tiempos de los cortes exactos deben confirmarse en el video.
+
+El índice diferencia referencias preparadas, archivos faltantes y errores. El script devuelve código 2 si queda alguna referencia sin preparar. Los archivos originales se conservan. La descarga pública tiene un intento acotado, sin credenciales, cookies, cambios de red ni reintentos infinitos. Puede fallar por restricciones de Instagram. No garantiza acceso por el hecho de tener un enlace.
+
+Validación de este paquete
+Probado con el MP4 local ROCCE_detras_foto_v01.mp4 únicamente como prueba del preparador: lectura de metadatos, muestras del hook, hoja general y extracción de audio. Ese video de prueba no es R0 y no se incluye ni se usa como sustituto de las referencias. No se probaron aquí las descargas de yt-dlp ni la transcripción opcional. No se incluye una edición final nueva.
+
+Documentación de las herramientas
+https://github.com/yt-dlp/yt-dlp
+https://ffmpeg.org/ffmpeg.html
+https://github.com/SYSTRAN/faster-whisper

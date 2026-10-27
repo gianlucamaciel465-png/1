@@ -78,6 +78,22 @@ Punto de partida para piezas nuevas; el encargo concreto manda. Detalle con tiem
 - **Duración:** 9–17 s con música; hasta ~27 s con voz en off.
 - **Derechos:** los ganchos de las referencias son material de terceros (transmisión de F1, recital, video 3D). Pueden generar reclamos o audio silenciado: avisar cuando un gancho propuesto sea ajeno y preferir material con uso permitido.
 
+## Adaptar referencias (criterio de Gianluca, 27/10/2026 — vale para todos los chats)
+Detalle: `REFERENCIAS/paquete_2026-10-27/` (prompt, manifiesto, preparador) y `REFERENCIAS/analisis/PAQUETE_2026-10-27_analisis.md`.
+- Referencias que definen el contenido que le gusta: R0 `REF_03` (escalera propia), R1 `REF_15` (soga y obstáculos), R2 `REF_16` (manos y dormitorio 3 AM), R3 `REF_17` (minero / "just focus."), R4 `REF_18` (KAYN, presencia de la prenda).
+- Antes de editar, por referencia: qué se ve al empezar, qué genera curiosidad, qué cambia y cómo se resuelve, con momentos concretos. Separar lo observado de lo propuesto. Si una no se pudo ver, dejarla pendiente y avanzar con las demás. Los likes no prometen vistas.
+- Conservar el mecanismo que la hace interesante (conflicto, ritmo, desenlace) y hacer intervenciones precisas: una parte del gancho, el punto de vista, una frase con sentido, la forma en que aparece la remera. Cada cambio mejora algo identificable. Cambiar unas palabras no alcanza; no reemplazar una buena escena por una sucesión de fotos.
+- Textos en español argentino con voseo, traduciendo el sentido y adaptando el largo al plano. Texto incrustado: reconstruir la capa o borrarlo con seguimiento y máscara limpia (fondo, perspectiva y movimiento intactos); nunca dejar el inglés debajo. GIVE HISTORY YOUR NAME y so f★cking close. se mantienen cuando cumplen una función. Sin subtítulos automáticos.
+- Valores de Roccé mostrados con acción: ambición, disciplina, tomar acción, dejar tu nombre en tu historia. Un valor por pieza, no toda la marca a la vez.
+- Remera y logo reales. Sobre un personaje, la remera acompaña cuerpo, perspectiva, movimiento y oclusiones; una imagen pegada que flota no está terminada. Si la escena exige recrear, explicar la técnica y ejecutar una versión de calidad.
+- De KAYN se toma la presencia de la prenda, los encuadres y los gestos; no su vestuario, personaje ni identidad.
+- Música por energía y momento de resolución, con archivos adecuados para el destino; si la original está sincronizada con la acción, conservarla. Con voz, preservar su claridad. No declarar escucha por LUFS o ASR.
+- El producto forma parte del significado: nada de gancho ajeno + anuncio sin relación; la transición a la prenda continúa o resuelve lo que empezó.
+- Piloto: comparar dos adaptaciones en pocas líneas y ejecutar la más fuerte que se pueda hacer con el material, sin pedir aprobación de lo rutinario. Una pieza bien resuelta antes que variaciones. Línea de tiempo con archivo, entrada, salida, acción, texto y sonido.
+- Cierre de campaña: Drop Founders Privée — 01/11/2026 y una sola llamada a la acción coherente con la pieza; sin beneficios, escasez ni porcentajes inventados.
+- Entrega: MP4 reproducible, proyecto/código editable y explicación breve de qué se conservó, qué se mejoró y qué se revisó realmente (y qué no).
+- Técnica probada con R1 (`ROCCE_lo_que_te_frena_v01`, `scripts/frena/` + receta `scripts/lo_que_te_frena_v01.sh`): pose de una figura de palitos cuadro a cuadro, remera dibujada en el estilo de la animación que sigue esa pose (cabeza y soga por delante, desenfoque, estampado real del pecho), seguimiento y reemplazo de rótulos, cambio del título con su brillo. La letra de Neuron Visuals se parece más a **Saira** que a Orbitron (D/O/A).
+
 ## Referencias y fidelidad
 - "Tal cual al video": estudiar apertura, encuadres, movimiento, continuidad, tiempos, reacción, audio, revelación y cierre; definir qué se conserva y qué se reemplaza.
 - No afirmar haber visto una referencia sin acceso real; pedir el archivo.
@@ -125,6 +141,7 @@ Punto de partida para piezas nuevas; el encargo concreto manda. Detalle con tiem
   - edición: `reel.sh` (plantilla) y `reel_vNN.sh` (receta exacta de cada versión);
   - doblaje: `instalar_doblaje.sh`, `voz_chatterbox.py`, `lipsync_musetalk.py`, `doblaje_r13_vNN.sh` (receta);
   - textos: `texto_png.py` (placa en Inter Display Bold, tramos de distinto color, sombra; `SOMBRA=#FFFFFF` para texto oscuro), `rotulos_r14.py` (rótulos cuadrados estilo animación; `TEXTO=...` para texto libre), `tics_contador.py` (tics de un contador "casi impacto"), `obturador.py` (sonido de obturador sintetizado), `anotaciones.py` (anotaciones de ficha técnica que siguen un detalle real de la prenda; necesita OpenCV), `sfx.py` (efectos sintetizados ubicados en una línea de tiempo: pulso, golpe, barrido, clic, subida);
+  - animación intervenida (`scripts/frena/`): `pose_heroe.py` y `pose_salto.py` (pose de figura de palitos), `remera_heroe.py` (remera que sigue la pose), `seguir_rotulos.py` + `rotulos.py` (seguir, borrar y reescribir rótulos), `componer_anim.py`, `textos_frena.py`;
   - entorno: `instalar_entorno.sh` + `requisitos/*.txt` (versiones exactas), `instagram_acceso.js` / `instagram_reels.js` (prueba de acceso con Chromium).
 
 ## Ingreso de material nuevo
@@ -186,7 +203,7 @@ F. **Revisión**: evaluar el export, corregir defectos y re-verificar lo modific
 - **Transcripción**: faster-whisper 1.2.1 con el modelo `small` probado el 26/10/2026 (español bien; confunde marcas: "Founders Privée" → "foundo es privé", "tela de jean" → "tela de chin"). Corregir siempre con contexto o subtítulos. **No persiste entre sesiones:** reinstalar con `scripts/instalar_transcripcion.sh` (~5–10 min, ~470 MB + modelo ~460 MB). Hugging Face es accesible desde el entorno.
 - **Descarga de referencias:** `yt-dlp` (en un entorno aislado, `pip install yt-dlp`) bajó reels públicos de Instagram el 26/10/2026. Guardar el original en `REFERENCIAS/` con su `info.json`.
 - **Separación voz/música:** `demucs` 4.1 + torch CPU (`pip install torch torchaudio --index-url https://download.pytorch.org/whl/cpu` y `pip install demucs soundfile`, ~1,1 GB, ~10 min). `python -m demucs --two-stems=vocals -n htdemucs archivo.wav` separa 55 s en ~30 s. No persiste entre sesiones.
-- **Fuentes:** `scripts/fuentes/Montserrat-Bold.ttf` (OFL), igual a los subtítulos de muchos reels de referencia; `scripts/fuentes/Orbitron-Variable.ttf` (OFL), base de los rótulos cuadrados. Inter/Inter Display instaladas en el sistema. Google Fonts (GitHub `google/fonts`) es accesible para bajar otras con licencia OFL.
+- **Fuentes:** `scripts/fuentes/Montserrat-Bold.ttf` (OFL), igual a los subtítulos de muchos reels de referencia; `scripts/fuentes/Orbitron-Variable.ttf` (OFL), base de los rótulos cuadrados. `scripts/fuentes/Saira-Variable.ttf` (OFL, licencia al lado), la más parecida a los rótulos de Neuron Visuals. Inter/Inter Display instaladas en el sistema. Google Fonts se baja por `raw.githubusercontent.com/google/fonts/main/ofl/...` (la ruta `github.com/.../raw/` está bloqueada en esta sesión).
 - **Música y tempo**: `scripts/ritmo.py` estima BPM y compara cortes con el golpe; es aproximado, no reemplaza escuchar.
 - **Sin reproducción ni escucha**: video revisado por fotogramas; audio por niveles, sonoridad, tempo estimado y transcripción.
 - **Doblaje con sincronización labial en CPU: posible con calidad limitada** (probado 26/10/2026, `ROCCE_doblaje_v02`). No hay GPU (4 CPU, 15 GB RAM).

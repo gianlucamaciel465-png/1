@@ -206,9 +206,18 @@ Pedido: pieza fuerte desde los originales (no desde el MP4 exportado), primer cu
 |---|---|---|
 | `ROCCE_crea_v01.mp4` | **Más reciente (entregada, sin aprobación aún)** | 11,30 s / 339 cuadros, 1080×1920, 30 fps, −14,1 LUFS, pico −1,9 dBTP, 14,1 MB. S1 `IMG_8002` 0–1,10 · S2 `IMG_8004` 1,60–3,60 (01 DENIM, 02 PESPUNTE) · S3 `IMG_7857` 1,30–2,80 · S4 `IMG_7824` 4,60–5,60 (03 TONO SOBRE TONO) · S5 `IMG_3453` 1,92–4,62 (HDR→SDR + corrección) · S6 cuadro 0 de `IMG_8002` con acercamiento 1→1,035. Script `scripts/crea_v01.sh` (+ `anotaciones.py`, `textos_crea.py`, `sfx.py`, `scripts/crea/*.json`). En la página https://claude.ai/artifact/NR185psBSSR2UGzu15MaEQ (MP4 idéntico, sha256 `d58a8ebd…4dc0`). |
 
+### Encargo "referencias R0–R4" (27/10/2026): primera adaptación, R1 → "Lo que te frena"
+Paquete de Gianluca con cinco referencias y su criterio (guardado en `REFERENCIAS/paquete_2026-10-27/`; análisis con tiempos y comparación de adaptaciones en `REFERENCIAS/analisis/PAQUETE_2026-10-27_analisis.md`; criterio permanente en `CLAUDE.md`). Pidió conservar el atractivo de cada referencia con intervenciones precisas (gancho, textos al español argentino, música si mejora, remera integrada con calidad) y concentrarse en una primera pieza.
+- Elegida R1 (Neuron Visuals): conflicto → acción → desenlace intactos, texto incrustado para reemplazar y personaje para vestir. Valor: tomar acción.
+- Intervenciones: gancho "Lo que te frena / no está adelante." desde el primer cuadro; rótulos MIEDO · QUÉ DIRÁN · DUDAS · FIACA · EXCUSAS (borrado de los ingleses con seguimiento; letra Saira); el protagonista con la remera blanca dibujada sobre su pose; SUCCESS → "GIVE HISTORY / YOUR NAME."; giro a lo real con la misma remera puesta (`IMG_7857`) y placa de la casa (`IMG_7896`) con "Drop Founders Privée —" / "01/11/2026" y botón "Sé uno de los primeros 100.".
+- Música: la original de R1, sincronizada con los tirones, la soga y la llegada; no hay otra pista con uso permitido. Material de terceros (Neuron Visuals): se conserva su marca de agua; publicar requiere permiso o asumir riesgo de reclamo/audio silenciado.
+| Versión | Estado | Detalle |
+|---|---|---|
+| `ROCCE_lo_que_te_frena_v01.mp4` | **Más reciente (entregada, sin aprobación aún)** | 11,50 s / 345 cuadros, 1080×1920, 30 fps, −14,2 LUFS, pico −2,1 dBTP, 7,7 MB. R1 0,20–7,30 intervenida (0–7,10) · `IMG_7857` 2,90–5,30 (7,10–9,50) · `IMG_7896` 4,15–6,15 ×1,16 + cierre (9,50–11,50). Receta `scripts/lo_que_te_frena_v01.sh` (+ `scripts/frena/`). |
+
 ## Estado del trabajo (actualizado 27/10/2026)
-- **Último encargo:** rehacer "Detrás de la foto" con la dirección "¿Y si la próxima Roccé la creás vos?". `ROCCE_crea_v01` exportada, verificada por fotogramas y niveles, entregada por el chat y en la página privada (que ya no muestra la pieza rechazada). `ROCCE_casi_ola_v01` sigue sin aprobación.
-- **Pendiente de Gianluca:** escuchar `crea_v01` (efectos sintetizados y pausas medidos solo por niveles); decidir si se suma música de la biblioteca de Instagram al publicar; aprobar o corregir la pieza antes de multiplicar el estilo.
+- **Último encargo:** paquete de referencias R0–R4: primera pieza `ROCCE_lo_que_te_frena_v01` (adaptación de R1) exportada, verificada por fotogramas y niveles, entregada por el chat y en la página privada. Antes: `ROCCE_crea_v01` y `ROCCE_casi_ola_v01`, sin aprobación.
+- **Pendiente de Gianluca:** ver y escuchar `lo_que_te_frena_v01` (revisada solo por fotogramas y niveles); decidir sobre los derechos de R1 (pedir permiso a Neuron Visuals o usarla como piloto); aprobar o corregir antes de adaptar R2–R4. Siguen pendientes de escucha `crea_v01` y `casi_ola_v01`.
 - **Para retomar en una sesión nueva:** el repo arranca en esta rama. Herramientas: `scripts/instalar_entorno.sh` (y `instalar_doblaje.sh` para sincronización labial). Cada pieza se rehace con su receta `scripts/<pieza>_vNN.sh`.
 - **Bloqueos vigentes:** Instagram sin sesión (no se ve el feed ni el perfil); no hay música con uso permitido en el repo; voz sintética solo con acento no garantizado (falta una referencia rioplatense con permiso).
 

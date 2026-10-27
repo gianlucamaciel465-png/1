@@ -1,0 +1,44 @@
+Estas son mis referencias concretas para Roccé. Usalas para calibrar tu criterio y ejecutar una pieza, manteniendo el atractivo que ya tienen. Quiero pequeñas intervenciones creativas bien resueltas: una parte del hook, texto en español argentino, otra música cuando aporte, integración de nuestra prenda y una conexión más propia con Roccé.
+
+REFERENCIAS
+R0 — Nuestro: https://www.instagram.com/p/De4SAJAOmPQ/
+R1 — Escalera y obstáculos: https://www.instagram.com/reels/DeUC8-gxNIn/
+R2 — Presiones y dormitorio: https://www.instagram.com/reels/DeuZO5YRIal/
+R3 — Animación y escena real de concentración: https://www.instagram.com/reels/DeCuMzdvUM-/
+R4 — KAYN, presencia de producto: https://www.instagram.com/reels/Ddmb6ZAoc0R/
+
+QUÉ TENÉS QUE APRENDER DE ELLAS
+R0 muestra cómo una remera puede entrar en una historia de progreso. R1 construye una metáfora visible con una escalera, personajes, obstáculos y una atadura roja; la acción tiene una resolución. R2 convierte preocupaciones internas en manos que rodean al personaje y después cambia a una habitación de madrugada. R3 conecta una animación conceptual con una escena real de concentración. R4 construye presencia con la persona, la prenda, el encuadre, los gestos y la luz.
+
+Estas descripciones son observaciones preliminares. Confirmá la secuencia y sus tiempos viendo los archivos. El audio de estas cinco referencias no fue evaluado por ChatGPT. No asumas que una transcripción describe la música, el timbre o la mezcla.
+
+PRIMER PASO: MATERIAL REAL
+Si adjunté el ZIP, descomprimilo y leé LEER_PRIMERO.txt, referencias.json y preparar_referencias.py. El código prepara evidencia audiovisual; no crea automáticamente una adaptación. Usá los MP4 ya disponibles en el repo. Para los faltantes, podés intentar una descarga pública con el script. Si un enlace no entrega el video, registrá el bloqueo y avanzá con los disponibles. Si el bloqueo impide el piloto, pedime juntos los MP4 imprescindibles. No describas escenas que no viste.
+
+CALIBRÁ EL GUSTO ANTES DE EDITAR
+Para cada referencia que puedas revisar, anotá brevemente: qué se ve al empezar, qué genera curiosidad, qué cambia, cómo termina y qué mecanismo podemos trasladar a Roccé. Indicá los momentos concretos. Separá lo observado de lo que proponés. No conviertas likes en una garantía de vistas.
+
+MI CRITERIO CREATIVO
+1. Conservá el mecanismo visual que hace interesante la referencia. Cambiar unas palabras no alcanza si la adaptación pierde el conflicto, el ritmo o el desenlace. Tampoco reemplaces una buena escena por una sucesión genérica de fotos.
+2. Modificá lo necesario para hacerla propia: una intervención en la acción inicial, una frase con sentido, el punto de vista del protagonista o la forma en que aparece la remera. Cada cambio debe mejorar algo identificable.
+3. Usá español argentino natural, con voseo. Traducí el sentido y adaptá la longitud al plano. Si el texto en inglés está incrustado, reconstruí esa capa o editá el plano con seguimiento y una máscara limpia: fondo, perspectiva y movimiento deben mantenerse. No dejes el inglés debajo del español. Mantené GIVE HISTORY YOUR NAME y so f★cking close. cuando cumplan una función. No agregues subtítulos automáticos a todo.
+4. Roccé trata de ambición, disciplina, tomar acción y dejar tu nombre en tu historia. Mostrá esos valores mediante la acción. Elegí qué valor desarrolla esta pieza; no intentes explicar toda la marca a la vez.
+5. La remera y el logo tienen que ser los reales. Si la prenda va sobre un personaje, debe acompañar su cuerpo, perspectiva y movimiento, con las oclusiones que correspondan. Una imagen pegada que flota no es una integración terminada. Si la escena exige recreación, explicá la técnica y ejecutá una versión que puedas resolver con calidad.
+6. Tomá de KAYN la presencia de la prenda, los encuadres y los gestos; trasladalos a nuestro material y estética. Evitá trasladar automáticamente su vestuario, personaje o identidad a Roccé.
+7. Elegí la música por la energía y el momento de resolución. Usá archivos disponibles y adecuados para el destino del video. Cuando haya voz, preservá su claridad. No declares revisada la escucha basándote solo en LUFS o ASR.
+8. El producto tiene que formar parte del significado del video. Evitá un hook ajeno seguido de un anuncio sin relación. La transición a la prenda debe continuar o resolver lo que empezó.
+
+PILOTO
+Elegí la referencia con mejor combinación de identidad y ejecución posible con nuestro material. Compará dos adaptaciones en pocas líneas y ejecutá la más fuerte sin esperar aprobación de decisiones rutinarias. Prefiero una pieza bien resuelta antes de producir variaciones en cantidad.
+
+Si elegís R1, explorá como dirección la acción de avanzar pese a lo que te frena. Si elegís R2, resolvé el paso de presión mental a una acción concreta. Si elegís R3, conectá su idea de concentración con una acción real del fundador o con un detalle de la prenda. Son direcciones posibles, no escenas ya verificadas de la adaptación.
+
+Construí una línea de tiempo con archivo, entrada, salida, acción, texto y sonido de cada tramo. Usá el motor de edición que ya funciona. Generá el código y el proyecto de esta adaptación, renderizá y revisá el resultado. No vuelvas a instalar todo ni a repetir la auditoría del entorno.
+
+CIERRE Y REVISIÓN
+Para esta campaña, cuando el objetivo sea comunicar el lanzamiento: Drop Founders Privée — 01/11/2026. Elegí una sola llamada a la acción coherente con la pieza. No inventes beneficios, escasez o porcentajes.
+
+Comprobá el primer fotograma, los cambios de acción, la continuidad, la legibilidad y el cierre. Compará el resultado con su referencia: qué conserva, qué mejora y dónde aparece nuestra identidad. Corregí fallas visibles; no uses una nota propia de 10/10 como evidencia.
+
+ENTREGÁ
+Un MP4 reproducible, el proyecto/código editable y una explicación breve de las decisiones y de cualquier revisión que todavía no hayas podido hacer. El trabajo es preparar y entregar esta pieza; no publiques, compres servicios ni actives tareas recurrentes.
