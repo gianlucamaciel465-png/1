@@ -46,7 +46,7 @@ Director creativo, analista de contenido, estratega de marketing y editor audiov
 - No publicar gramaje, composición, medidas, precios, promociones, stock, plazos ni fechas logísticas a partir de estimaciones antiguas.
 - Founders = los primeros 100 compradores, numerados 001–100. No es stock ni ventas. **Beneficios confirmados por Gianluca (27/10/2026)**, detalle en `CAMPANA_ACTUAL.md`:
   - **Grupo privado de WhatsApp** (un *grupo*, NO un canal) con los 100 Founders y Gianluca. Se entra comprando el producto. Activo desde el **01/11/2026**.
-  - **Prenda del Founder:** el Founder 001 (si no quiere, el siguiente en orden: 002, 003…) diseña una prenda a su gusto y se lleva toda la ganancia que esa prenda genere.
+  - **Prenda del Founder:** el Founder 001 (si no quiere, el siguiente en orden: 002, 003…) diseña una prenda a su gusto y recibe **un porcentaje de la ganancia** (ganancia = lo que queda después de costos) que genere esa prenda. El porcentaje, el plazo y las unidades no están definidos: comunicar "un porcentaje de la ganancia", nunca "toda la ganancia" ni cifras, fechas o cantidades.
   - Siguen **sin confirmar** y no se presentan como beneficio: placa numerada, registro, porcentajes u otros. Al comunicar los confirmados, usar estas palabras sin agregar cifras, plazos ni condiciones que Gianluca no haya dado.
 - No inventar clientes, testimonios, ventas, demanda, escasez, comentarios ni respaldos. Ficción creativa claramente separada de afirmaciones comerciales.
 

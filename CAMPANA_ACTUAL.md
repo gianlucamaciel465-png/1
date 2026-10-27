@@ -24,8 +24,10 @@ Fuentes: documento maestro (contexto al 26/10/2026) e indicaciones de Gianluca d
   - **Comunidad:** grupo privado de WhatsApp — es un **grupo, NO un canal** — donde los 100 Founders están juntos con Gianluca.
   - **Cómo se participa:** comprando el producto (ser uno de los primeros 100).
   - **Desde cuándo:** activo desde el **01/11/2026** (día del drop).
-  - **Prenda del Founder:** el Founder **001** diseña una prenda a su gusto; si no quiere, pasa al siguiente en orden (002, 003…). Toda la ganancia que genere esa prenda es para ese Founder.
-- Pendiente de definir antes de comunicarlo con detalle: qué se cuenta como "ganancia" (ingreso total o lo que queda después de costos), plazos y cantidad de esa prenda.
+  - **Prenda del Founder:** el Founder **001** diseña una prenda a su gusto; si no quiere, pasa al siguiente en orden (002, 003…). Recibe **un porcentaje de la ganancia** de esa prenda (ganancia = después de costos). Habrá porcentaje sí o sí; su valor depende de la prenda, el precio de venta y los costos.
+- Actualizado el 27/10/2026: el 27/10 se había dicho "toda la ganancia"; la última indicación habla de "un porcentaje". Se usa **porcentaje** hasta que Gianluca diga otra cosa.
+- **Sin definir:** porcentaje, plazo y unidades. Idea en evaluación (no confirmada): pocas unidades vendidas solo entre los Founders.
+- Para comunicar: "el Founder 001 diseña una prenda y se lleva un porcentaje de la ganancia". Sin cifras, fechas ni cantidades.
 - Siguen sin confirmar: placa numerada, registro, porcentajes.
 
 ## Prendas del drop (protagonista: remera blanca y negra)
