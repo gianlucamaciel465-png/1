@@ -171,3 +171,13 @@ Referencia: Instagram `DeSZWn3RYFG` (cuenta **Neuron Visuals**, animación "perf
 | `ROCCE_construi_historia_v01.mp4` | Descartada | Cierre con `IMG_7894`: la manga de la blanca tocaba el borde. `scripts/construi_historia_v01.sh`. |
 | `ROCCE_construi_historia_v02.mp4` | **Más reciente (entregada, sin aprobación aún)** | 20,8 s / 624 cuadros, 1080×1920, 30 fps, −14,0 LUFS, pico −1,4 dBTP. 0–13,8 s animación original con rótulos en español (resto de la imagen igual al original: diferencia media ≤ 0,21/255). Cortes a 13,8 / 15,033 / 17,133 / 18,9 s sobre la grilla de la música. Textos en Inter Display Bold blanca (76 y 62 px). `scripts/construi_historia_v02.sh`. |
 
+
+### Encargo "producción autónoma" (27/10/2026): pieza 1 "Casi" (ola real)
+Concepto "casi impacto" (R5/R7, la de mejor resultado) con material propio: una ola real (`IMG_4631`) avanza hacia las dos remeras en las rocas, contador "FRAMES TO IMPACT" 120 → 001 que se desacelera (rojo desde 022), congelado a milímetros con "so f★cking close." → la frase en la prenda → producto → placa. Cierre pedido para esta campaña: **"Drop Founders Privée — 01/11/2026"** (en dos líneas: "Drop Founders Privée —" / "01/11/2026", la fecha más grande).
+- Instagram sin sesión (ver `REFERENCIAS/analisis/INSTAGRAM_ACCESO.md`): la referencia se tomó del repo (R5/R7).
+- Audio: sonido real de las tomas (ola de `IMG_4631`, mar de `IMG_7896`) + tics sintetizados (`scripts/tics_contador.py`). Sin música: no hay pista con uso permitido en el repo; se puede sumar música de la biblioteca de Instagram al publicar.
+- `IMG_4631`: la punta de la manga derecha de la negra toca el borde del cuadro en toda la toma (viene así del original; el estampado entra completo). Por eso el cierre usa `IMG_7896` acercada (ambas completas).
+| Versión | Estado | Detalle |
+|---|---|---|
+| `ROCCE_casi_ola_v01.mp4` | **Más reciente (entregada, sin aprobación aún)** | 10,5 s / 315 cuadros, 1080×1920, 30 fps, −15,2 LUFS, pico −1,0 dBTP. H `IMG_4631` 0,70–3,87 + congelado 1,13 s · P1 `IMG_3375` 0,55–1,85 (blanca corregida a neutro) · P2 `IMG_4530` 0,80–2,30 · P3 `IMG_7793` 2,60–4,00 · Z `IMG_7896` 4,15–6,15 (1,16×). Script `scripts/casi_ola_v01.sh`. Página privada para verla en el celular: https://claude.ai/artifact/NR185psBSSR2UGzu15MaEQ (MP4 idéntico, sha256 `a7a85aa1…3683`). |
+

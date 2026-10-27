@@ -110,7 +110,8 @@ Punto de partida para piezas nuevas; el encargo concreto manda. Detalle con tiem
   - control: `verificar.sh`;
   - edición: `reel.sh` (plantilla) y `reel_vNN.sh` (receta exacta de cada versión);
   - doblaje: `instalar_doblaje.sh`, `voz_chatterbox.py`, `lipsync_musetalk.py`, `doblaje_r13_vNN.sh` (receta);
-  - textos: `texto_png.py` (placa en Inter Display Bold, tramos de distinto color, sombra), `rotulos_r14.py` (rótulos cuadrados estilo animación; `TEXTO=...` para texto libre).
+  - textos: `texto_png.py` (placa en Inter Display Bold, tramos de distinto color, sombra; `SOMBRA=#FFFFFF` para texto oscuro), `rotulos_r14.py` (rótulos cuadrados estilo animación; `TEXTO=...` para texto libre), `tics_contador.py` (tics de un contador "casi impacto");
+  - entorno: `instalar_entorno.sh` + `requisitos/*.txt` (versiones exactas), `instagram_acceso.js` / `instagram_reels.js` (prueba de acceso con Chromium).
 
 ## Ingreso de material nuevo
 Gianluca manda material por tandas ("tenelos para siempre"). Con cada tanda:
@@ -163,8 +164,10 @@ F. **Revisión**: evaluar el export, corregir defectos y re-verificar lo modific
 - **Desde el 19/10/2026: sin tareas diarias ni recurrentes** (Infoverso, Club del Outfit, TikToks de moda, piezas Roccé). Solo encargos explícitos; no programar ni reactivar tareas.
 - No publicar, enviar mensajes, comprar servicios ni activar procesos permanentes sin pedido explícito.
 
-## Capacidades del entorno (verificado 26/10/2026)
-- Entorno: contenedor en la nube; el material llega por adjuntos del chat o por el repo de GitHub. Lo guardado se conserva en git (rama `claude/rocce-video-editor-uqf6fc`).
+## Capacidades del entorno (verificado 26–27/10/2026)
+- Entorno: Claude Code remoto (se usa desde la app de iOS), contenedor en la nube sin GPU (4 CPU, 15 GB RAM), permisos en modo `default`. El material llega por adjuntos del chat o por el repo de GitHub.
+- **Continuidad:** una sesión nueva arranca en una máquina limpia. Solo persiste el repo: la rama `claude/rocce-video-editor-uqf6fc` es la única del remoto y su rama por defecto (una sesión nueva arranca ahí, con este archivo). Entornos de Python: `scripts/instalar_entorno.sh` (versiones en `scripts/requisitos/`); Gianluca puede ponerlo en el *Setup script* del entorno (menú del entorno en la barra de título → Edit). Estado del trabajo: sección "Estado del trabajo" de `CAMPANA_ACTUAL.md`.
+- **Entrega al celular (verificada 27/10/2026):** (1) `SendUserFile` → tarjeta de archivo en el chat; (2) página privada en claude.ai (Artifact) con el MP4 publicado al lado (`files`, ≤ 15 MB por archivo): reproduce pero no descarga; comprobar con `list` de archivos y el sha256 del `read`; (3) el repo en GitHub. Una ruta del contenedor no es una entrega.
 - FFmpeg / ffprobe 6.1.1: libx264, AAC; decodifica HEVC/H.264/ProRes; drawtext (Inter), libass, xfade, loudnorm/ebur128, lut3d, zscale, colorkey. Python 3 + Pillow.
 - **Transcripción**: faster-whisper 1.2.1 con el modelo `small` probado el 26/10/2026 (español bien; confunde marcas: "Founders Privée" → "foundo es privé", "tela de jean" → "tela de chin"). Corregir siempre con contexto o subtítulos. **No persiste entre sesiones:** reinstalar con `scripts/instalar_transcripcion.sh` (~5–10 min, ~470 MB + modelo ~460 MB). Hugging Face es accesible desde el entorno.
 - **Descarga de referencias:** `yt-dlp` (en un entorno aislado, `pip install yt-dlp`) bajó reels públicos de Instagram el 26/10/2026. Guardar el original en `REFERENCIAS/` con su `info.json`.
@@ -174,8 +177,9 @@ F. **Revisión**: evaluar el export, corregir defectos y re-verificar lo modific
 - **Sin reproducción ni escucha**: video revisado por fotogramas; audio por niveles, sonoridad, tempo estimado y transcripción.
 - **Doblaje con sincronización labial en CPU: posible con calidad limitada** (probado 26/10/2026, `ROCCE_doblaje_v02`). No hay GPU (4 CPU, 15 GB RAM).
   - Boca: `scripts/lipsync_musetalk.py` (MuseTalk 1.5, MIT), ~6,5 s por cuadro. Recorte y elipses a mano sobre un cuadro de referencia, seguimiento por plantilla: sirve para caras casi quietas. Boca a 256 px: labios más blandos que el original. Empalmar donde el personaje empieza a hablar en el original (no en medio de una sonrisa) y con entrada gradual de 3 cuadros.
-  - Voz: `scripts/voz_chatterbox.py` (Chatterbox Multilingual, MIT), español con timbre de una referencia. Acento rioplatense no garantizado. Escribir fonético lo que no es español ("Privé" para Privée). Elegir tomas transcribiendo con Whisper: a veces agrega ruido inventado al final.
+  - Voz: `scripts/voz_chatterbox.py` — `chatterbox-tts` 0.1.7, **variante multilingüe** (`ChatterboxMultilingualTTS`, checkpoint `t3_mtl23ls_v2`, revisión `5bb1f6e` de `ResembleAI/chatterbox`, 23 idiomas), siempre con `language_id="es"`. La variante en inglés (`t3_cfg`) no está en caché ni se usa. El acento lo marca la **voz de referencia**: sin referencia usa una voz incorporada; en R13 se usó la del personaje (en inglés). Para rioplatense hace falta una referencia rioplatense con permiso (p. ej. una nota de voz de Gianluca). Escribir fonético lo que no es español ("Privé" para Privée). ~350 s por frase corta en CPU (con carga del modelo). Elegir tomas transcribiendo con Whisper: a veces agrega ruido inventado al final. Whisper no distingue "voz"/"vos" (suenan igual) ni marca tildes del voseo: eso es error de transcripción; "Roccé", "Privée" y el acento de "Demostrá" quedan pendientes de escucha.
   - Instalación: `scripts/instalar_doblaje.sh` (~25 min, ~6 GB con modelos); no persiste entre sesiones. Wav2Lip es no comercial; F5-TTS/XTTS tienen pesos no comerciales.
   - Calidad de entrega real: servicio de lip-sync con licencia comercial o GPU, y voz grabada o con permiso (ver "Voces de terceros").
 - `yt-dlp` puede chocar con el límite anónimo de Instagram: reintentar una vez con `/reel/` en lugar de `/reels/`; si sigue, pedir el archivo.
-- Sin acceso verificado a Instagram/TikTok, Google Flow, CapCut ni herramientas de generación/eliminación de objetos.
+- **Instagram (probado 27/10/2026, `REFERENCIAS/analisis/INSTAGRAM_ACCESO.md`):** Chromium headless (Playwright de Node) funciona, pero **sin sesión**: el feed muestra la portada de login y el perfil @rocce.ar da HTTP 429 → login. Reels públicos sueltos por URL: texto del posteo y metadatos (y descarga con `yt-dlp`), sin reproductor en la página. No hay forma de listar el perfil ni de ver el feed.
+- Sin acceso verificado a TikTok, Google Flow, CapCut ni herramientas de generación/eliminación de objetos.

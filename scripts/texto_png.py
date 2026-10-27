@@ -19,8 +19,11 @@ xx = x
 for t, col in parts:
     d.text((xx, y), t, font=ft, fill=col); dm.text((xx, y), t, font=ft, fill=255)
     xx += ft.getlength(t)
-sh = mask.filter(ImageFilter.GaussianBlur(5)).point(lambda v: int(v * 0.55))   # sombra negra al 55 %, desplazada 2,3 px
-shadow = Image.new("RGBA", (W, H), (0, 0, 0, 0)); shadow.paste((0, 0, 0, 255), (2, 3), sh)
+import os
+sc = os.environ.get("SOMBRA", "#000000")   # texto oscuro → SOMBRA=#FFFFFF (halo claro, sin desplazar)
+rgb = tuple(int(sc[i:i + 2], 16) for i in (1, 3, 5)); clara = sum(rgb) > 382
+sh = mask.filter(ImageFilter.GaussianBlur(7 if clara else 5)).point(lambda v: int(v * (0.45 if clara else 0.55)))
+shadow = Image.new("RGBA", (W, H), (0, 0, 0, 0)); shadow.paste(rgb + (255,), (0, 0) if clara else (2, 3), sh)
 Image.alpha_composite(shadow, txt).save(out)
 l, t_, r, b_ = mask.getbbox()
 print(f"{out}: '{full}' x {l}–{r} y {t_}–{b_} (ancho {r - l})")
