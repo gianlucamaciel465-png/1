@@ -1,0 +1,85 @@
+/* Carrusel de prelanzamiento Roccé — sistema visual
+   Placas de 1080 × 1350 px (4:5). Márgenes de 72 px. Tipografía: Inter Display (Medium 500, SemiBold 600, Bold 700),
+   sustituto de la tipografía de marca (no disponible). Fondos alternados: blanco cálido, celeste humo y azul denim;
+   la placa 08 usa #FEFEFE, el mismo fondo del archivo del logo, para que su borde no se note. */
+@font-face { font-family: "Inter Display"; font-weight: 500; src: url("fuentes/InterDisplay-Medium.otf"); }
+@font-face { font-family: "Inter Display"; font-weight: 600; src: url("fuentes/InterDisplay-SemiBold.otf"); }
+@font-face { font-family: "Inter Display"; font-weight: 700; src: url("fuentes/InterDisplay-Bold.otf"); }
+
+:root {
+  --blanco: #F7F7F3;   /* blanco cálido */
+  --humo:   #CDDDE5;   /* celeste humo */
+  --denim:  #233A55;   /* azul denim */
+  --carbon: #15191D;   /* carbón */
+  --logo:   #FEFEFE;   /* fondo del archivo del logo (mayoría de píxeles 254, 254, 254; varía ±1) */
+  --m: 72px;           /* margen */
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: #8a8f94; display: flex; flex-direction: column; align-items: center; gap: 48px; padding: 48px 0; }
+.placa { position: relative; width: 1080px; height: 1350px; overflow: hidden; font-family: "Inter Display", sans-serif;
+         -webkit-font-smoothing: antialiased; text-rendering: geometricPrecision; color: var(--carbon); }
+.placa > * { position: absolute; }
+.fondo-blanco { background: var(--blanco); }
+.fondo-humo   { background: var(--humo); color: var(--denim); }
+.fondo-denim  { background: var(--denim); color: var(--blanco); }
+.fondo-logo   { background: var(--logo); }
+img { display: block; }
+
+/* índice editorial, siempre en el mismo lugar */
+.indice { top: 62px; right: var(--m); font-weight: 500; font-size: 24px; letter-spacing: .08em; font-variant-numeric: tabular-nums; opacity: .72; }
+.meta   { top: 62px; left: var(--m); font-weight: 600; font-size: 24px; letter-spacing: .18em; }
+
+/* 01 — portada */
+.p01 .meta { opacity: .85; }
+.p01 h1 { left: var(--m); font-weight: 700; font-size: 136px; line-height: .95; letter-spacing: -.035em; }
+.p01 .tit-a { top: 236px; color: var(--blanco); }
+.p01 .franja { left: 0; top: 566px; width: 1080px; height: 268px; }
+.p01 .tit-b { top: 896px; color: var(--humo); }
+
+/* 02 — producto */
+.p02 .tit { left: var(--m); top: 116px; font-weight: 700; font-size: 104px; line-height: .97; letter-spacing: -.03em; }
+.p02 .apoyo { left: var(--m); top: 352px; font-weight: 500; font-size: 40px; opacity: .78; }
+.p02 .foto { left: 0; bottom: 0; width: 1080px; height: 889px; }
+
+/* 03 — detalles */
+.p03 .tit { left: var(--m); top: 116px; font-weight: 700; font-size: 96px; line-height: .97; letter-spacing: -.03em; }
+.p03 .principal { left: var(--m); top: 436px; width: 936px; height: 517px; }
+.p03 .detalle { right: var(--m); top: 1012px; width: 264px; height: 264px; }
+.nota { display: flex; flex-direction: column; align-items: center; font-weight: 600; font-size: 40px; letter-spacing: -.01em; }
+.nota i { display: block; width: 2px; background: currentColor; }
+.n-denim { left: 264px; top: 350px; width: 190px; }      /* la raya baja hasta la O de ROCCÉ */
+.n-denim i { height: 178px; margin-top: 6px; }
+.n-celeste { left: 409px; top: 784px; width: 230px; }    /* la raya sube hasta el subrayado celeste */
+.n-celeste i { height: 200px; margin-bottom: 8px; }
+.n-e { right: 360px; top: 1120px; flex-direction: row; gap: 14px; }
+.n-e i { width: 64px; height: 2px; }
+
+/* 04 — pausa tipográfica */
+.p04 .texto { left: var(--m); bottom: 150px; font-weight: 500; font-size: 88px; line-height: 1.04; letter-spacing: -.028em; }
+.p04 .texto b { font-weight: 700; }
+
+/* 05 — la frase */
+.p05 .frase { left: var(--m); top: 548px; width: 936px; height: 188px; }
+.p05 .apoyo { left: var(--m); top: 820px; font-weight: 500; font-size: 42px; line-height: 1.26; letter-spacing: -.01em; }
+
+/* 06 — Founders */
+.p06 .tit { left: var(--m); top: 116px; font-weight: 700; font-size: 88px; line-height: .98; letter-spacing: -.03em; }
+.p06 .numeros { left: 0; right: 0; top: 572px; text-align: center; font-weight: 700; font-size: 196px; line-height: 1;
+                letter-spacing: -.025em; color: var(--humo); font-variant-numeric: tabular-nums; }
+.p06 .pie { left: var(--m); right: var(--m); bottom: 96px; display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; }
+.p06 .apoyo { font-weight: 500; font-size: 40px; line-height: 1.3; }
+.p06 .ancla { width: 400px; height: 296px; }
+
+/* 07 — la remera puesta */
+.p07 .foto { left: 0; top: 0; width: 1080px; height: 1350px; }
+.p07 .tit { left: var(--m); top: 104px; font-weight: 700; font-size: 96px; line-height: .98; letter-spacing: -.03em; }
+.p07 .apoyo { left: var(--m); top: 312px; font-weight: 500; font-size: 40px; line-height: 1.28; }
+
+/* 08 — la fecha */
+.p08 > * { left: 0; right: 0; text-align: center; }
+.p08 .indice { left: auto; right: var(--m); text-align: right; }
+.p08 .logo { left: 50%; right: auto; transform: translateX(-50%); top: 132px; width: 320px; height: 320px; }
+.p08 .fecha { top: 548px; font-weight: 700; font-size: 168px; line-height: 1; letter-spacing: -.04em; color: var(--denim); font-variant-numeric: tabular-nums; }
+.p08 .drop { top: 754px; font-weight: 600; font-size: 32px; letter-spacing: .22em; }
+.p08 .lema { top: 1018px; font-weight: 700; font-size: 36px; letter-spacing: .06em; }
+.p08 .accion { top: 1100px; font-weight: 600; font-size: 48px; letter-spacing: -.01em; color: var(--denim); }

@@ -196,6 +196,18 @@ F. **Revisión**: evaluar el export, corregir defectos y re-verificar lo modific
 - Estadísticas: retención inicial, tiempo medio, finalización, compartidos, guardados, visitas, conversiones; comparar formatos similares; no concluir con un solo video.
 - Experimentos: una variable principal por versión; registrar qué ganó y con qué evidencia.
 
+## Carruseles y piezas estáticas
+- Formato de carrusel salvo otro pedido: 1080 × 1350 (4:5), PNG en sRGB, `ROCCE_<NOMBRE>_NN_vNN.png` + vista conjunta + ZIP + editable.
+- Flujo probado el 28/10/2026 (`CARRUSEL/prelanzamiento/`):
+  - placas en HTML/CSS con posiciones absolutas;
+  - `recortes.py` recorta las fotos de `PRODUCTO/` (o un fotograma de un video real) y documenta archivo y zona de cada recorte;
+  - `render.js` saca la captura de cada placa con Chromium (Playwright de Node);
+  - `finalizar.py` incrusta sRGB, controla medidas y arma la vista conjunta y los ZIP.
+- Las fotos de iPhone vienen en **Display P3**: convertirlas a sRGB (ImageCms) antes de usarlas, si no los colores cambian.
+- El fondo del logo no es plano: la mayoría de los píxeles es #FEFEFE, con variaciones de ±1. Poner la placa en #FEFEFE: la diferencia no se ve.
+- Revisar cada placa al ancho de un teléfono (≈ 360 px): los apoyos de menos de 40 px se vuelven difíciles de leer.
+- Las anotaciones van al lado de su evidencia: la raya tiene que tocar el detalle real. Comprobarlo a resolución completa.
+
 ## Memoria, ChatGPT y límites
 - Registrar correcciones reutilizables como reglas específicas acá; decisiones de campaña en `CAMPANA_ACTUAL.md`; eliminar contradicciones cuando una decisión nueva sustituye a otra.
 - No suponer memoria ni archivos compartidos con ChatGPT. Para pasar un trabajo: nota breve con objetivo, archivos usados, versión vigente, partes aprobadas y siguiente cambio. No editar ni sobrescribir el mismo archivo que el otro asistente.

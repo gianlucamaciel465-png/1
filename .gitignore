@@ -4,3 +4,11 @@ __pycache__/
 
 # Piezas nuevas fuera del repo mientras sea público (voz de marca, sin aprobar). Copias en la página privada de reels.
 EXPORTACIONES/ROCCE_proxima_*.mp4
+
+# Carruseles: PNG finales y ZIP fuera del repo público (se entregan por el chat). Recortes: se rehacen con recortes.py.
+EXPORTACIONES/carrusel_*/
+CARRUSEL/*/recursos/*.jpg
+# Referencia de terceros (grabación de Momentum) y sus hojas de fotogramas: solo local
+REFERENCIAS/REF_19_momentum_carrusel_grabacion.mov
+REFERENCIAS/analisis/carrusel_momentum/*.jpg
+CARRUSEL/*/recursos/rocce_logo.png

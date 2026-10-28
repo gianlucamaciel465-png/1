@@ -237,8 +237,24 @@ Especificación de Gianluca: `ROCCE_Director_Creativo_Reel_Desde_Cero.txt` + ban
 |---|---|---|
 | `ROCCE_proxima_v01.mp4` | **Más reciente (entregada, sin aprobación aún)** | 26,87 s / 806 cuadros, 1080×1920, 30 fps, −14,0 LUFS, pico −1,3 dBFS, 41,6 MB, sha256 `86a8c4f1…6462`. A `IMG_3453` · B `IMG_7887` · C `IMG_7884` · D `IMG_8004`/`IMG_7793`/`IMG_3375` · E `IMG_7857` · F `IMG_4631`/`IMG_4530`/`IMG_7824` · G `IMG_7896` ×1,16 (tiempos en `PROYECTO_v01.md`). Voz 10,0–15,7 dB sobre el fondo, medido frase por frase. **No está en el repo** (repo público): MP4 en el chat; copia web (13,6 MB, sha256 `97efa7e1…6308`) en https://claude.ai/artifact/NR185psBSSR2UGzu15MaEQ; se rehace igual con `scripts/proxima_v01.sh` + la locución guardada en el banco vocal. |
 
+### Encargo "carrusel editorial de prelanzamiento" (28/10/2026)
+Pedido de Gianluca: un carrusel de 8 placas 4:5 para Instagram antes del 01/11, sin contenido nuevo (solo material existente), con guion cerrado ("TODAVÍA NO SALIÓ. YA TIENE HISTORIA."). Referencia de lenguaje: carrusel de Momentum (R19, `REFERENCIAS/analisis/carrusel_momentum/ANALISIS.md`).
+- Proyecto editable: `CARRUSEL/prelanzamiento/` (`index.html` + `estilos.css`, `recortes.py` desde `PRODUCTO/` con conversión Display P3 → sRGB, `render.js` con Chromium, `finalizar.py`, `LEEME.md`).
+- Material usado:
+  - `blanca_negra_espalda_playa_2.jpg`: franja de portada y foto completa de la 02;
+  - `blanca_espalda_rocas_espuma.jpg`: denim, celeste y la É (03);
+  - `blanca_frente_detalle_estampado.jpg`: la frase (05);
+  - fotograma 6,8 s de `IMG_7824.mov`: la negra (06);
+  - `blanca_puesta_espalda_balcon_playa.jpg`: 07;
+  - logo original (08).
+- Tipografía Inter Display (la de marca no está disponible). Logo original sobre #FEFEFE, su mismo fondo.
+- Descripción del post: «Todavía no salió. Ya tiene historia. / El denim, el celeste y una idea que fue tomando forma hasta convertirse en Roccé. / Founders Privée 2026. / 01.11 — Guardá la fecha. / GIVE HISTORY YOUR NAME.»
+| Versión | Estado | Detalle |
+|---|---|---|
+| `ROCCE_PRELAUNCH_01–08_v01.png` | **Más reciente (entregada para revisión, sin aprobación aún)** | 8 PNG 1080×1350 sRGB + vista conjunta + ZIP de PNG + ZIP editable, en `EXPORTACIONES/carrusel_prelanzamiento_v01/` (fuera del repo: es público). Fondos: denim · blanco + foto · celeste humo · blanco · celeste humo · denim · foto a sangre · #FEFEFE. |
+
 ## Estado del trabajo (actualizado 28/10/2026)
-- **Último encargo:** reel nuevo desde cero, `ROCCE_proxima_v01` ("La próxima empieza con vos"), con la voz de marca Firme 04. Entregado por el chat y en la página privada de reels. Banco vocal guardado en una página privada (https://claude.ai/artifact/AQSWzDitj143yjJdqkoXQk), con recuperación probada por sha256.
+- **Último encargo:** carrusel de prelanzamiento v01 (8 placas, entregadas por el chat el 28/10/2026; pendiente de revisión de Gianluca). Antes: reel nuevo desde cero, `ROCCE_proxima_v01` ("La próxima empieza con vos"), con la voz de marca Firme 04. Entregado por el chat y en la página privada de reels. Banco vocal guardado en una página privada (https://claude.ai/artifact/AQSWzDitj143yjJdqkoXQk), con recuperación probada por sha256.
 - **Pendiente de Gianluca:**
   - escuchar `proxima_v01`: voz, "Royé", FOUNDERS y mezcla. Solo se revisó por fotogramas, niveles y transcripción;
   - confirmar que @rocce.ar recibe mensajes y que alguien va a responder "FOUNDERS";

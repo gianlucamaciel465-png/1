@@ -1,0 +1,111 @@
+{
+ "p01_franja": {
+  "original": "PRODUCTO/blanca_negra_espalda_playa_2.jpg",
+  "caja": [
+   0,
+   905,
+   1932,
+   1385
+  ],
+  "salida": [
+   1080,
+   268
+  ],
+  "escala": 0.559,
+  "uso": "Portada: franja de las dos espaldas (ROCCÉ en denim, Founders Privée celeste y gris)."
+ },
+ "p02_ambas": {
+  "original": "PRODUCTO/blanca_negra_espalda_playa_2.jpg",
+  "caja": [
+   0,
+   395,
+   1932,
+   1985
+  ],
+  "salida": [
+   1080,
+   889
+  ],
+  "escala": 0.559,
+  "uso": "Placa 02: las dos remeras de espaldas sobre la arena, completas (la manga izquierda de la blanca toca el borde en el original)."
+ },
+ "p03_principal": {
+  "original": "PRODUCTO/blanca_espalda_rocas_espuma.jpg",
+  "caja": [
+   395,
+   790,
+   1535,
+   1420
+  ],
+  "salida": [
+   936,
+   517
+  ],
+  "escala": 0.821,
+  "uso": "Placa 03: ROCCÉ en denim con pespunte claro y Founders Privée celeste (blanca, espalda)."
+ },
+ "p03_e": {
+  "original": "PRODUCTO/blanca_espalda_rocas_espuma.jpg",
+  "caja": [
+   1048,
+   812,
+   1268,
+   1032
+  ],
+  "salida": [
+   264,
+   264
+  ],
+  "escala": 1.2,
+  "uso": "Placa 03: la É con su acento, en denim (detalle del mismo original)."
+ },
+ "p05_frase": {
+  "original": "PRODUCTO/blanca_frente_detalle_estampado.jpg",
+  "caja": [
+   110,
+   1200,
+   1505,
+   1480
+  ],
+  "salida": [
+   936,
+   188
+  ],
+  "escala": 0.671,
+  "uso": "Placa 05: so f★cking close. tal como está estampada en el pecho de la blanca (estrella celeste)."
+ },
+ "p06_negra": {
+  "original": "ORIGINALES/IMG_7824.mov (fotograma 6.8 s)",
+  "caja": [
+   0,
+   960,
+   2160,
+   2560
+  ],
+  "salida": [
+   400,
+   296
+  ],
+  "escala": 0.185,
+  "uso": "Placa 06: la negra sostenida de espaldas (ROCCÉ en denim negro, Founders Privée gris), fotograma de 6,8 s del video real IMG_7824."
+ },
+ "p07_puesta": {
+  "original": "PRODUCTO/blanca_puesta_espalda_balcon_playa.jpg",
+  "caja": [
+   0,
+   0,
+   1932,
+   2415
+  ],
+  "salida": [
+   1080,
+   1350
+  ],
+  "escala": 0.559,
+  "uso": "Placa 07: la blanca puesta, de espaldas, frente a la playa (sin cara visible)."
+ },
+ "rocce_logo": {
+  "original": "LOGO/rocce_logo.png",
+  "uso": "Placa 08: logo original (copia exacta, fondo #FEFEFE)."
+ }
+}
