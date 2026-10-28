@@ -6,13 +6,15 @@
 #   demucs-env   demucs 4.1 + torch CPU (+ diffusers/transformers/opencv/librosa para MuseTalk)
 #   tts-env      Chatterbox Multilingual 0.1.7 (Python 3.11; pesos t3_mtl23ls_v2 ~3 GB se bajan al primer uso)
 #   ytdlp-env    yt-dlp 2026.10.21 (descarga de referencias públicas)
+#   voz-env      edge-tts 7.3.1 + praat-parselmouth 0.4.7 + scipy/soundfile (voz de marca Firme 04 y música sintetizada;
+#                edge-tts necesita salida a speech.platform.bing.com — ver scripts/voz/BANCO_VOCAL.md)
 # Modelos de sincronización labial: scripts/instalar_doblaje.sh (reutiliza los entornos si ya existen).
-# Uso: scripts/instalar_entorno.sh [CARPETA] [whisper demucs tts ytdlp]   (por defecto: todos, en $S o ./.entornos)
+# Uso: scripts/instalar_entorno.sh [CARPETA] [whisper demucs tts ytdlp voz]   (por defecto: todos, en $S o ./.entornos)
 # Las recetas buscan los entornos en $S (variable de entorno): exportar S=CARPETA antes de usarlas.
 set -euo pipefail
 cd "$(dirname "$0")/.."
 D=${1:-${S:-$PWD/.entornos}}; shift || true
-QUE=${*:-whisper demucs tts ytdlp}
+QUE=${*:-whisper demucs tts ytdlp voz}
 CPU=https://download.pytorch.org/whl/cpu
 mkdir -p "$D"
 for e in $QUE; do

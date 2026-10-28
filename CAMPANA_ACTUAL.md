@@ -226,9 +226,30 @@ Pedido: conservar el inicio aprobado y su resolución; conectar la animación co
 |---|---|---|
 | `ROCCE_lo_que_te_frena_v02.mp4` | **Más reciente (entregada con voz guía, sin aprobación aún)** | 21,43 s / 643 cuadros, 1080×1920, 30 fps, −13,6 LUFS, pico −2,0 dBTP, 25,2 MB. A animación (0–7,10, COMODIDAD) · B1 `IMG_7887` 0,00– (7,10–9,67, "Fracasé." "Me incomodé.") · B2 `IMG_7884` 2,90– (9,67–10,97, "Y acá estoy.") · C1 `IMG_7857` 2,90– (10,97–14,93, "Ahora te toca a vos." "El primero de noviembre…") · C2 `IMG_7824` 4,20– (14,93–16,43, entra en "creá") · D `IMG_7896` 1,15– ×1,16 (16,43–21,43, placa). Música: R1 tal cual en A; su capa melódica (demucs) filtrada bajo la confesión; R1 otra vez desde el principio en C con su golpe de llegada en la placa; subida y golpes propios en los cortes; la música baja sola con la voz (voz ≈ 13–15 dB arriba del fondo, medido). Receta `scripts/lo_que_te_frena_v02.sh` (+ `scripts/frena/montaje_v02.py`, `preparar_voz.py`, `textos_frena_v02.py`). En la página privada va una copia de 11,2 MB (crf 24). |
 
-## Estado del trabajo (actualizado 27/10/2026)
-- **Último encargo:** corrección de `ROCCE_lo_que_te_frena` → v02 (animación aprobada + Gianluca real + invitación), exportada con voz guía provisoria, verificada por fotogramas y niveles, entregada por el chat y en la página privada.
-- **Pendiente de Gianluca:** mandar la nota de voz con la locución (reemplaza la guía; la edición se recalcula sola); ver y escuchar v02 (revisada solo por fotogramas y niveles); confirmar COMODIDAD en lugar de DUDAS; decidir los derechos de R1 (Neuron Visuals). Siguen pendientes de escucha `crea_v01` y `casi_ola_v01`.
-- **Para retomar en una sesión nueva:** el repo arranca en esta rama. Herramientas: `scripts/instalar_entorno.sh` (y `instalar_doblaje.sh` para sincronización labial). Cada pieza se rehace con su receta `scripts/<pieza>_vNN.sh`.
-- **Bloqueos vigentes:** Instagram sin sesión (no se ve el feed ni el perfil); no hay música con uso permitido en el repo; voz sintética solo con acento no garantizado (falta una referencia rioplatense con permiso).
+### Encargo "reel nuevo desde cero" (27–28/10/2026): "La próxima empieza con vos"
+Especificación de Gianluca: `ROCCE_Director_Creativo_Reel_Desde_Cero.txt` + banco vocal (Firme 04, su voz real, JSON de perfiles), guardados en el banco vocal privado (ver `scripts/voz/BANCO_VOCAL.md`). Concepto, guion, línea de tiempo y autorrevisión: `scripts/proxima/PROYECTO_v01.md`.
+- **Concepto elegido:** creación compartida. Villano: "algún día" (postergar). Guía: Roccé (también fue una idea; Gianluca la construye mientras labura en una fábrica; cada detalle decidido). Plan: 01/11, los primeros 100 en comprar son founders; el founder 001 diseña una prenda y se lleva un porcentaje de la ganancia.
+- **CTA único (voz, pantalla y descripción):** "Escribinos FOUNDERS hoy y conocé cómo participar" → mensaje a @rocce.ar. La cuenta es la de la marca; no se pudo comprobar que reciba mensajes (Instagram sin sesión). Los mensajes se responden a mano: no hay respuestas automáticas ni lista configurada.
+- **Voz:** Firme 04 regenerada con su configuración documentada (edge-tts + tratamiento reconstruido), sin clonar a nadie. Pendiente de escucha: identidad, "Royé", FOUNDERS e imperativo del CTA.
+- **Música:** original sintetizada (`scripts/proxima/musica.py`), sin material de terceros.
+- **Descripción del posteo:** «¿Hace cuánto que guardás esa idea? / Roccé también empezó como una idea: Gianluca la construye mientras labura en una fábrica, y cada detalle lo decidimos nosotros. / La próxima Roccé puede empezar con vos. / El 01/11 abre el Drop Founders Privée: los primeros 100 en comprar son founders, y el founder 001 diseña una prenda y se lleva un porcentaje de la ganancia. / Escribinos FOUNDERS hoy por mensaje y conocé cómo participar.»
+| Versión | Estado | Detalle |
+|---|---|---|
+| `ROCCE_proxima_v01.mp4` | **Más reciente (entregada, sin aprobación aún)** | 26,87 s / 806 cuadros, 1080×1920, 30 fps, −14,0 LUFS, pico −1,3 dBFS, 41,6 MB, sha256 `86a8c4f1…6462`. A `IMG_3453` · B `IMG_7887` · C `IMG_7884` · D `IMG_8004`/`IMG_7793`/`IMG_3375` · E `IMG_7857` · F `IMG_4631`/`IMG_4530`/`IMG_7824` · G `IMG_7896` ×1,16 (tiempos en `PROYECTO_v01.md`). Voz 10,0–15,7 dB sobre el fondo, medido frase por frase. **No está en el repo** (repo público): MP4 en el chat; copia web (13,6 MB, sha256 `97efa7e1…6308`) en https://claude.ai/artifact/NR185psBSSR2UGzu15MaEQ; se rehace igual con `scripts/proxima_v01.sh` + la locución guardada en el banco vocal. |
 
+## Estado del trabajo (actualizado 28/10/2026)
+- **Último encargo:** reel nuevo desde cero, `ROCCE_proxima_v01` ("La próxima empieza con vos"), con la voz de marca Firme 04. Entregado por el chat y en la página privada de reels. Banco vocal guardado en una página privada (https://claude.ai/artifact/AQSWzDitj143yjJdqkoXQk), con recuperación probada por sha256.
+- **Pendiente de Gianluca:**
+  - escuchar `proxima_v01`: voz, "Royé", FOUNDERS y mezcla. Solo se revisó por fotogramas, niveles y transcripción;
+  - confirmar que @rocce.ar recibe mensajes y que alguien va a responder "FOUNDERS";
+  - pasar el repo a privado (hoy es público);
+  - de antes: nota de voz para `lo_que_te_frena`, derechos de R1, escucha de `crea_v01` y `casi_ola_v01`.
+- **Para retomar en una sesión nueva:**
+  - el repo arranca en esta rama;
+  - herramientas: `scripts/instalar_entorno.sh` (incluye voz-env) e `instalar_doblaje.sh`;
+  - voz: `scripts/voz/BANCO_VOCAL.md` y la skill `.claude/skills/rocce-voz/`;
+  - cada pieza se rehace con su receta `scripts/<pieza>_vNN.sh`.
+- **Bloqueos vigentes:**
+  - Instagram sin sesión: no se ve el feed ni el perfil, ni se puede comprobar que la cuenta reciba mensajes;
+  - no hay música con uso permitido en el repo; se usa música propia sintetizada;
+  - la voz de marca se regenera con un servicio en línea gratuito (edge-tts): si dejara de responder, usar la locución guardada o la voz real de Gianluca.

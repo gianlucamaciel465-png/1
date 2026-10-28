@@ -1,3 +1,6 @@
 TRABAJO/
 .DS_Store
 __pycache__/
+
+# Piezas nuevas fuera del repo mientras sea público (voz de marca, sin aprobar). Copias en la página privada de reels.
+EXPORTACIONES/ROCCE_proxima_*.mp4
