@@ -13,3 +13,9 @@ REFERENCIAS/REF_19_momentum_carrusel_grabacion.mov
 REFERENCIAS/analisis/carrusel_momentum/*.jpg
 CARRUSEL/*/recursos/rocce_logo.png
 CARRUSEL/*/capas/
+# Encargo 28/10 (hielo y escalada): grabaciones de referencia de terceros (con interfaz) solo locales;
+# piezas sin aprobar fuera del repo público
+REFERENCIAS/REF_20_hacha_hielo_grabacion.mp4
+REFERENCIAS/REF_21_neuronvisuals_escalada_grabacion.mp4
+EXPORTACIONES/ROCCE_01_HIELO_REVELACION_*
+EXPORTACIONES/ROCCE_02_HACETE_FOUNDER_*

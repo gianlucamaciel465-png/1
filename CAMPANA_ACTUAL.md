@@ -269,6 +269,25 @@ Gianluca rechazó v01 por ser ocho imágenes quietas: pidió un carrusel editori
 | `ROCCE_PRELAUNCH_01–08_v02` | **Más reciente (entregada para revisión, sin aprobación aún)** | 01, 02, 03, 05 y 07 en MP4 (8 / 8 / 7 / 6,7 / 9 s; 1080×1350, H.264 yuv420p, 30 fps, 1,7–4,0 MB) con clips reales en ventanas; 04, 06 y 08 en PNG sRGB. Clips: `IMG_4530`, `IMG_4531`, `IMG_7824`, `IMG_7857`, `IMG_7859`, `IMG_7793`, `IMG_8004`, `IMG_8008`, `IMG_3453`, `IMG_3375`. Control sobre los MP4 finales: fuera de las ventanas el cambio medio entre cuadros es 0 a 0,003; dentro hay movimiento en todos los cuadros. `EXPORTACIONES/carrusel_prelanzamiento_v02/` (fuera del repo) + ZIP MIXTO + editable + previews. |
 | `ROCCE_PRELAUNCH_01–08_v01` | Rechazada (28/10/2026) | Ocho PNG quietos: no usaba los videos de la ropa. |
 
+### Encargo 28/10/2026 — dos videos: hielo (revelación) y escalada (hacete founder)
+Pedido de Gianluca: adaptar dos referencias con ejecución cuidada. Material nuevo de este encargo:
+- `PRODUCTO/negra_frente_arena_F266ACD9.png` y `PRODUCTO/negra_espalda_arena_DFDC5DED.png`: la negra sobre arena, frente y espalda (sRGB). La de frente trae una barra negra abajo; la de espalda, una viñeta oscura editada y la manga izquierda tocando el margen.
+- `REFERENCIAS/REF_20_hacha_hielo_grabacion.mp4` (bloques de hielo con prendas, hacha; con interfaz) y `REFERENCIAS/REF_21_neuronvisuals_escalada_grabacion.mp4` (escalada de Neuron Visuals; grabación de pantalla con interfaz). Ambas de terceros: solo locales (fuera del repo público); hay que volver a pasarlas en una sesión nueva.
+- Tomas de Gianluca con la negra puesta: `IMG_7887` (confirmado), `IMG_7884` y `IMG_7885` (misma sesión). Todas de espaldas, sentado o agachado en las rocas. **No hay ninguna toma de él con la negra de frente ni parado mostrando calce**; `IMG_7793` (balcón, de espaldas, parado) no está confirmado como Gianluca y no se usó.
+
+#### ROCCE_02_HACETE_FOUNDER (escalada)
+Detalle y línea de tiempo: `scripts/escalada/PROYECTO_v01.md` · receta `scripts/escalada_v01.sh`.
+- Rótulos: TRABAJO · SUEÑO · INICIAR / UN NEGOCIO · CONSTRUIR / UN IMPERIO · ÉXITO. Bandera celeste "GIVE / HISTORY / YOUR NAME.". Escalador con la negra (estampado real de espalda mientras trepa, del pecho arriba).
+- Placa: "SI TAMBIÉN / PASASTE POR ESO, / HACETE FOUNDER" + "Lista privada de Roccé para vos / y creás prendas con nosotros." + logo original en ficha #FEFEFE.
+- Música de la referencia ("Timeless", The Weeknd según la interfaz): terceros; publicar puede generar reclamo o audio silenciado.
+
+| Versión | Estado | Detalle |
+|---|---|---|
+| `ROCCE_02_HACETE_FOUNDER_v01.mp4` | **Más reciente (entregada para revisión, sin aprobación aún)** | 20,0 s / 600 cuadros, 1080×1920, 30 fps, −14,0 LUFS, pico −1,5 dBTP, 4,5 MB. Animación 0–15,77 s + placa 15,77–20,0 s. Fuera del repo (`EXPORTACIONES/`, en `.gitignore`). |
+
+#### ROCCE_01_HIELO_REVELACION (hielo)
+Detalle y línea de tiempo: `scripts/hielo/PROYECTO_v01.md` · receta `scripts/hielo_v01.sh`.
+
 ## Estado del trabajo (actualizado 28/10/2026)
 - **Último encargo:** carrusel de prelanzamiento v02 mixto (5 MP4 con video real en ventanas + 3 PNG), entregado por el chat el 28/10/2026; pendiente de revisión de Gianluca. v01 (8 PNG) fue rechazada. Antes: reel nuevo desde cero, `ROCCE_proxima_v01` ("La próxima empieza con vos"), con la voz de marca Firme 04. Entregado por el chat y en la página privada de reels. Banco vocal guardado en una página privada (https://claude.ai/artifact/AQSWzDitj143yjJdqkoXQk), con recuperación probada por sha256.
 - **Pendiente de Gianluca:**

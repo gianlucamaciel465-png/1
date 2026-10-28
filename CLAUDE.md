@@ -56,6 +56,7 @@ Director creativo, analista de contenido, estratega de marketing y editor audiov
 - Usar el archivo original: solo escalar/posicionar sin deformar. No redibujar, no reconstruir con tipografía, no recolorear, no invertir, no recortar el trazo, no quitar el fondo sin permiso. Sobre fondo claro, fondo #FEFEFE para que el borde no se note.
 - La marca usa también una **versión blanca** (forma blanca, letras oscuras) sobre fondos oscuros (placa de R3). No tengo ese archivo: pedirlo, o pedir permiso explícito para generarla invirtiendo el PNG, antes de usarla.
 - En piezas de frases, logo pequeño, visible y equilibrado.
+- Sobre fondo oscuro, mientras no esté la versión blanca: el logo original sobre su propio fondo #FEFEFE como ficha de esquinas redondeadas (radio ≤ 12 %: el dibujo empieza a 182 px del borde de 1254, así que solo se recorta fondo).
 
 ## Buen contenido
 - Idea concreta, apertura potente, desarrollo que sostenga, revelación/cierre que cumpla. La prenda tiene función clara en la historia.
@@ -94,6 +95,13 @@ Detalle: `REFERENCIAS/paquete_2026-10-27/` (prompt, manifiesto, preparador) y `R
 - Cierre de campaña: Drop Founders Privée — 01/11/2026 y una sola llamada a la acción coherente con la pieza; sin beneficios, escasez ni porcentajes inventados.
 - Entrega: MP4 reproducible, proyecto/código editable y explicación breve de qué se conservó, qué se mejoró y qué se revisó realmente (y qué no).
 - Técnica probada con R1 (`ROCCE_lo_que_te_frena_v01`, `scripts/frena/` + receta `scripts/lo_que_te_frena_v01.sh`): pose de una figura de palitos cuadro a cuadro, remera dibujada en el estilo de la animación que sigue esa pose (cabeza y soga por delante, desenfoque, estampado real del pecho), seguimiento y reemplazo de rótulos, cambio del título con su brillo. La letra de Neuron Visuals se parece más a **Saira** que a Orbitron (D/O/A).
+- Técnica probada con la escalada (`ROCCE_02_HACETE_FOUNDER_v01`, `scripts/escalada/` + `scripts/escalada_v01.sh`, 28/10/2026):
+  - rótulos de una pared que se mueve: seguir cada renglón por correlación con escala y ajustar por cuadro una semejanza (escala + traslación) con los renglones firmes;
+  - borrar las letras **con su resplandor** (si no, quedan letras fantasma más oscuras: revisar con la imagen aclarada ×2); proteger bordes y mástiles (líneas largas);
+  - lo que pasa por delante se detecta por **grosor del trazo** fuera de las letras, no por diferencia con la referencia (eso marcaba las letras mismas cuando la cámara se mueve);
+  - si una tilde no entra bajo un borde (ÉXITO bajo el borde de la torre), bajar el renglón lo justo y mover su rayita guía;
+  - una marca de agua fija de pantalla se puede sacar (alfa estimada) y volver a poner para reencuadrar un plano sin que salte;
+  - vestir una figura: mangas por recorrido sobre los píxeles reales del brazo desde el hombro (no por un ángulo estimado), cadera a 0,80 del torso medido, estampados reales extraídos con apertura morfológica (la foto tiene luz despareja).
 
 ## Referencias y fidelidad
 - "Tal cual al video": estudiar apertura, encuadres, movimiento, continuidad, tiempos, reacción, audio, revelación y cierre; definir qué se conserva y qué se reemplaza.
@@ -242,4 +250,6 @@ F. **Revisión**: evaluar el export, corregir defectos y re-verificar lo modific
   - Calidad de entrega real: servicio de lip-sync con licencia comercial o GPU, y voz grabada o con permiso (ver "Voces de terceros").
 - `yt-dlp` puede chocar con el límite anónimo de Instagram: reintentar una vez con `/reel/` en lugar de `/reels/`; si sigue, pedir el archivo.
 - **Instagram (probado 27/10/2026, `REFERENCIAS/analisis/INSTAGRAM_ACCESO.md`):** Chromium headless (Playwright de Node) funciona, pero **sin sesión**: el feed muestra la portada de login y el perfil @rocce.ar da HTTP 429 → login. Reels públicos sueltos por URL: texto del posteo y metadatos (y descarga con `yt-dlp`), sin reproductor en la página. No hay forma de listar el perfil ni de ver el feed.
+- **3D con Blender (verificado 28/10/2026):** `bpy` 5.0.1 (Blender como módulo; Python 3.11; `instalar_entorno.sh "" bpy`, ~375 MB) renderiza con Cycles en CPU, ≈ 60–90 s por cuadro a 720×1280 con 28 muestras + OIDN (141 cuadros ≈ 2,5–3 h; correr con `nice` y no componer pesado en paralelo, que lo frena). Sin GPU no hay EEVEE. Trucos probados en `scripts/hielo/escena.py`: hielo sin volumen (lo más caro), luz lateral y cenit oscuro (una luz cenital se refleja y vela el bloque visto desde arriba), sombra parcial del hielo con "Is Shadow Ray" en vez de cáusticas, atributo `pos0` (posición original) para las texturas de pedazos fracturados, planos de fractura casi verticales (desde arriba se ven como grietas finas; acostados parecen pétalos), esquirlas blancas sin transmisión (las transparentes dan destellos en estrella).
+- Grabaciones de pantalla de Instagram (1170×2532): el reel ocupa 1170×2080 desde y=203; la cabecera "Reels · Amigos" deja un fantasma ≈ 4/255 en todo el video: restar el mínimo temporal de esas filas.
 - Sin acceso verificado a TikTok, Google Flow, CapCut ni herramientas de generación/eliminación de objetos.

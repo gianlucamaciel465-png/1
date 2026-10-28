@@ -8,6 +8,8 @@
 #   ytdlp-env    yt-dlp 2026.10.21 (descarga de referencias públicas)
 #   voz-env      edge-tts 7.3.1 + praat-parselmouth 0.4.7 + scipy/soundfile (voz de marca Firme 04 y música sintetizada;
 #                edge-tts necesita salida a speech.platform.bing.com — ver scripts/voz/BANCO_VOCAL.md)
+#   bpy-env      Blender 5.0.1 como módulo de Python (Python 3.11; ~375 MB): escenas 3D con Cycles en CPU
+#                (scripts/hielo/escena.py). No se instala por defecto: pedirlo con "bpy".
 # Modelos de sincronización labial: scripts/instalar_doblaje.sh (reutiliza los entornos si ya existen).
 # Uso: scripts/instalar_entorno.sh [CARPETA] [whisper demucs tts ytdlp voz]   (por defecto: todos, en $S o ./.entornos)
 # Las recetas buscan los entornos en $S (variable de entorno): exportar S=CARPETA antes de usarlas.
@@ -19,7 +21,7 @@ CPU=https://download.pytorch.org/whl/cpu
 mkdir -p "$D"
 for e in $QUE; do
   [ -x "$D/$e-env/bin/python" ] && { echo "$e-env ya existe"; continue; }
-  py=python3; [ "$e" = tts ] && py=/usr/bin/python3.11
+  py=python3; { [ "$e" = tts ] || [ "$e" = bpy ]; } && py=/usr/bin/python3.11
   $py -m venv "$D/$e-env"
   "$D/$e-env/bin/pip" install -q --default-timeout 60 --extra-index-url $CPU -r scripts/requisitos/$e.txt
   echo "$e-env instalado en $D"
