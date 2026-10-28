@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Roccé — carrusel de prelanzamiento v02 (mixto)</title>
+<!-- Proyecto editable. Cada <section class="placa"> es una lámina de 1080 × 1350 px.
+     .ventana = recuadro de video (sus clips están en proyecto.py; acá se ve el primer cuadro).
+     Construir todo: python3 construir.py (fotos → capas con Chromium → MP4/PNG con FFmpeg → controles). -->
+<link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+
+<!-- 01 — PORTADA CON VIDA (MP4) -->
+<section class="placa p01" id="p01">
+  <img class="fondo" src="recursos/f01_fondo_mar.jpg" alt="Mar y rocas, costa de Mar del Plata">
+  <div class="meta">FOUNDERS PRIVÉE 2026</div>
+  <div class="indice">01/08</div>
+  <h1 class="tit">Todavía<br>no salió.<br>Ya tiene<br>historia.</h1>
+  <div class="ventana v01 marco" data-v="v01"><img src="capas/poster_v01.jpg" alt=""></div>
+  <img class="detalle marco" src="recursos/f01_denim.jpg" alt="Espalda de la blanca: ROCCÉ en denim y Founders Privée celeste">
+</section>
+
+<!-- 02 — PRODUCTO (MP4) -->
+<section class="placa p02 fondo-blanco" id="p02">
+  <div class="indice">02/08</div>
+  <h2 class="tit">Así empieza<br>Founders Privée.</h2>
+  <p class="apoyo">Las primeras remeras de Roccé.</p>
+  <div class="ventana v02a" data-v="v02a"><img src="capas/poster_v02a.jpg" alt=""></div>
+  <div class="ventana v02b" data-v="v02b"><img src="capas/poster_v02b.jpg" alt=""></div>
+  <img class="ambas" src="recursos/f02_ambas.jpg" alt="Remeras blanca y negra de espaldas sobre la arena">
+</section>
+
+<!-- 03 — DETALLE (MP4) -->
+<section class="placa p03 fondo-humo" id="p03">
+  <div class="indice">03/08</div>
+  <h2 class="tit">De cerca<br>se entiende.</h2>
+  <div class="ventana v03" data-v="v03"><img src="capas/poster_v03.jpg" alt=""></div>
+  <img class="det d1" src="recursos/f03_denim.jpg" alt="Letras de denim con pespunte">
+  <img class="det d2" src="recursos/f03_celeste.jpg" alt="Founders Privée en celeste">
+  <img class="det d3" src="recursos/f03_e.jpg" alt="La É en denim">
+  <div class="cap c1">El denim.</div>
+  <div class="cap c2">El celeste.</div>
+  <div class="cap c3">La É.</div>
+</section>
+
+<!-- 04 — EL MUNDO QUE INSPIRA ROCCÉ (PNG) -->
+<section class="placa p04 fondo-blanco" id="p04">
+  <div class="indice">04/08</div>
+  <h2 class="tit">También hay mar<br>en esta historia.</h2>
+  <p class="apoyo">Mar del Plata como inspiración.</p>
+  <img class="ciudad" src="recursos/f04_ciudad.jpg" alt="Mar del Plata: edificios, playa y rambla">
+  <img class="mar" src="recursos/f04_mar.jpg" alt="Mar y rocas">
+  <img class="medano" src="recursos/f04_medano.jpg" alt="Médano, troncos y cielo azul con la remera blanca">
+</section>
+
+<!-- 05 — LA FRASE Y EL MOMENTO (MP4) -->
+<section class="placa p05 fondo-humo" id="p05">
+  <div class="indice">05/08</div>
+  <img class="frase" src="recursos/f05_frase.jpg" alt="so f★cking close., estampada en el pecho de la remera blanca">
+  <div class="ventana v05" data-v="v05"><img src="capas/poster_v05.jpg" alt=""></div>
+  <p class="apoyo">La frase está<br>en la prenda.<br>Y también en<br>este momento.</p>
+</section>
+
+<!-- 06 — LOS PRIMEROS 100 (PNG) -->
+<section class="placa p06 fondo-denim" id="p06">
+  <div class="indice">06/08</div>
+  <h2 class="tit">Los primeros 100<br>son parte<br>del comienzo.</h2>
+  <div class="numeros">001—100</div>
+  <div class="pie">
+    <p class="apoyo">Founders Privée.<br>Para quienes<br>se sumen primero.</p>
+    <img class="ancla" src="recursos/f06_negra.jpg" alt="La remera negra sostenida de espaldas">
+  </div>
+</section>
+
+<!-- 07 — LA HISTORIA SIGUE CON QUIEN MIRA (MP4) -->
+<section class="placa p07" id="p07">
+  <img class="fondo" src="recursos/f07_fondo.jpg" alt="Remera blanca puesta, de espaldas, frente a la playa de Mar del Plata">
+  <div class="indice">07/08</div>
+  <h2 class="tit">La próxima foto<br>puede ser la tuya.</h2>
+  <p class="apoyo">A partir del 1/11,<br>la historia sigue<br>con vos.</p>
+  <div class="ventana v07 marco" data-v="v07"><img src="capas/poster_v07.jpg" alt=""></div>
+</section>
+
+<!-- 08 — CIERRE (PNG) -->
+<section class="placa p08 fondo-logo" id="p08">
+  <div class="indice">08/08</div>
+  <img class="logo" src="recursos/rocce_logo.png" alt="Logo de Roccé">
+  <div class="fecha">01.11.2026</div>
+  <div class="drop">DROP FOUNDERS PRIVÉE</div>
+  <div class="lema">GIVE HISTORY YOUR NAME.</div>
+  <div class="accion">Guardá la fecha.</div>
+  <img class="franja" src="recursos/f08_franja.jpg" alt="Franja de mar">
+</section>
+
+</body>
+</html>

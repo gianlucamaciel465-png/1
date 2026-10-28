@@ -251,10 +251,26 @@ Pedido de Gianluca: un carrusel de 8 placas 4:5 para Instagram antes del 01/11, 
 - Descripción del post: «Todavía no salió. Ya tiene historia. / El denim, el celeste y una idea que fue tomando forma hasta convertirse en Roccé. / Founders Privée 2026. / 01.11 — Guardá la fecha. / GIVE HISTORY YOUR NAME.»
 | Versión | Estado | Detalle |
 |---|---|---|
-| `ROCCE_PRELAUNCH_01–08_v01.png` | **Más reciente (entregada para revisión, sin aprobación aún)** | 8 PNG 1080×1350 sRGB + vista conjunta + ZIP de PNG + ZIP editable, en `EXPORTACIONES/carrusel_prelanzamiento_v01/` (fuera del repo: es público). Fondos: denim · blanco + foto · celeste humo · blanco · celeste humo · denim · foto a sangre · #FEFEFE. |
+| `ROCCE_PRELAUNCH_01–08_v01.png` | Rechazada (28/10/2026): faltaban los videos | 8 PNG 1080×1350 sRGB + vista conjunta + ZIP de PNG + ZIP editable, en `EXPORTACIONES/carrusel_prelanzamiento_v01/` (fuera del repo: es público). Fondos: denim · blanco + foto · celeste humo · blanco · celeste humo · denim · foto a sangre · #FEFEFE. |
+
+#### Corrección v02 (28/10/2026): carrusel MIXTO con video real
+Gianluca rechazó v01 por ser ocho imágenes quietas: pidió un carrusel editorial mixto con sus videos reproduciéndose dentro de recuadros fijos, y Mar del Plata como inspiración (instrucciones "versión 03"; reemplazan a las de v01 para este carrusel).
+- Proyecto: `CARRUSEL/prelanzamiento_v02/`.
+  - `proyecto.py`: clips y fotos;
+  - `pagina.html` + `estilos.css`: diseño;
+  - `construir.py`: Chromium para las capas fijas + FFmpeg para las ventanas con clips reales;
+  - `verificar.py`: movimiento adentro, quietud afuera;
+  - `FUENTES.md`: ficha de fuentes.
+- Mar del Plata: el GPS de las tomas del 11 y 12/10/2026 confirma la costa de Mar del Plata. Las macros `IMG_3453` y `IMG_3375` son de provincia de Buenos Aires y no se presentan como Mar del Plata.
+- Sin audio en los MP4 (se entienden en silencio). No se sumó música.
+- Descripción del post: «Todavía no salió. Ya tiene historia. / El mar, Mar del Plata y una idea propia que fue tomando forma en cada detalle. / Founders Privée 2026. / 01.11 — Guardá la fecha. / GIVE HISTORY YOUR NAME.»
+| Versión | Estado | Detalle |
+|---|---|---|
+| `ROCCE_PRELAUNCH_01–08_v02` | **Más reciente (entregada para revisión, sin aprobación aún)** | 01, 02, 03, 05 y 07 en MP4 (8 / 8 / 7 / 6,7 / 9 s; 1080×1350, H.264 yuv420p, 30 fps, 1,7–4,0 MB) con clips reales en ventanas; 04, 06 y 08 en PNG sRGB. Clips: `IMG_4530`, `IMG_4531`, `IMG_7824`, `IMG_7857`, `IMG_7859`, `IMG_7793`, `IMG_8004`, `IMG_8008`, `IMG_3453`, `IMG_3375`. Control sobre los MP4 finales: fuera de las ventanas el cambio medio entre cuadros es 0 a 0,003; dentro hay movimiento en todos los cuadros. `EXPORTACIONES/carrusel_prelanzamiento_v02/` (fuera del repo) + ZIP MIXTO + editable + previews. |
+| `ROCCE_PRELAUNCH_01–08_v01` | Rechazada (28/10/2026) | Ocho PNG quietos: no usaba los videos de la ropa. |
 
 ## Estado del trabajo (actualizado 28/10/2026)
-- **Último encargo:** carrusel de prelanzamiento v01 (8 placas, entregadas por el chat el 28/10/2026; pendiente de revisión de Gianluca). Antes: reel nuevo desde cero, `ROCCE_proxima_v01` ("La próxima empieza con vos"), con la voz de marca Firme 04. Entregado por el chat y en la página privada de reels. Banco vocal guardado en una página privada (https://claude.ai/artifact/AQSWzDitj143yjJdqkoXQk), con recuperación probada por sha256.
+- **Último encargo:** carrusel de prelanzamiento v02 mixto (5 MP4 con video real en ventanas + 3 PNG), entregado por el chat el 28/10/2026; pendiente de revisión de Gianluca. v01 (8 PNG) fue rechazada. Antes: reel nuevo desde cero, `ROCCE_proxima_v01` ("La próxima empieza con vos"), con la voz de marca Firme 04. Entregado por el chat y en la página privada de reels. Banco vocal guardado en una página privada (https://claude.ai/artifact/AQSWzDitj143yjJdqkoXQk), con recuperación probada por sha256.
 - **Pendiente de Gianluca:**
   - escuchar `proxima_v01`: voz, "Royé", FOUNDERS y mezcla. Solo se revisó por fotogramas, niveles y transcripción;
   - confirmar que @rocce.ar recibe mensajes y que alguien va a responder "FOUNDERS";

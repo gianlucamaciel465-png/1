@@ -203,6 +203,14 @@ F. **Revisión**: evaluar el export, corregir defectos y re-verificar lo modific
   - `recortes.py` recorta las fotos de `PRODUCTO/` (o un fotograma de un video real) y documenta archivo y zona de cada recorte;
   - `render.js` saca la captura de cada placa con Chromium (Playwright de Node);
   - `finalizar.py` incrusta sRGB, controla medidas y arma la vista conjunta y los ZIP.
+- **Carrusel mixto** (`CARRUSEL/prelanzamiento_v02/`, 28/10/2026):
+  - láminas con video real dentro de recuadros fijos, en MP4 1080×1350 (H.264 yuv420p, 30 fps, sin audio), y láminas fijas en PNG;
+  - `proyecto.py` define clips (toma, desde, hasta, encuadre) y fotos fijas;
+  - Chromium saca la base fija y la capa superior; FFmpeg compone base + ventanas con los clips recortados a su proporción + capa superior;
+  - `verificar.py` controla sobre el MP4 final que dentro de las ventanas haya movimiento y afuera no cambie nada.
+- Si Gianluca ya pasó videos de la ropa, un carrusel no se resuelve solo con fotos fijas: v01 de prelanzamiento se rechazó por eso. Un MP4 de una foto quieta, o con paneo o zoom sobre una foto, no cuenta como video.
+- Las tomas HDR de iPhone traen un bloque Dolby Vision antes de la rotación: leer la rotación buscando la entrada que la tiene (`video.py`), si no los recortes salen girados.
+- Mar del Plata (u otro lugar) solo con evidencia: GPS de la toma o la misma sesión. Las macros `IMG_3453`/`IMG_3375` son de provincia de Buenos Aires. No poner coordenadas en archivos del repo.
 - Las fotos de iPhone vienen en **Display P3**: convertirlas a sRGB (ImageCms) antes de usarlas, si no los colores cambian.
 - El fondo del logo no es plano: la mayoría de los píxeles es #FEFEFE, con variaciones de ±1. Poner la placa en #FEFEFE: la diferencia no se ve.
 - Revisar cada placa al ancho de un teléfono (≈ 360 px): los apoyos de menos de 40 px se vuelven difíciles de leer.

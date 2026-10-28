@@ -1,0 +1,91 @@
+/* Carrusel de prelanzamiento v02 (mixto) — sistema visual
+   Láminas de 1080 × 1350 px (4:5), márgenes de 72 px, Inter Display (Medium 500, SemiBold 600, Bold 700).
+   Fondos: fotos propias de la costa de Mar del Plata, blanco cálido, celeste humo y azul denim.
+   .ventana = recuadro donde se reproduce un clip real (componer.py lo superpone en su lugar exacto);
+   en esta maqueta muestra el primer cuadro del clip (póster). .arriba = capa que va por encima del video. */
+@font-face { font-family: "Inter Display"; font-weight: 500; src: url("fuentes/InterDisplay-Medium.otf"); }
+@font-face { font-family: "Inter Display"; font-weight: 600; src: url("fuentes/InterDisplay-SemiBold.otf"); }
+@font-face { font-family: "Inter Display"; font-weight: 700; src: url("fuentes/InterDisplay-Bold.otf"); }
+
+:root {
+  --blanco: #F7F7F3; --humo: #CDDDE5; --denim: #233A55; --carbon: #15191D; --logo: #FEFEFE;
+  --m: 72px; --marco: 6px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: #8a8f94; display: flex; flex-direction: column; align-items: center; gap: 48px; padding: 48px 0; }
+.placa { position: relative; width: 1080px; height: 1350px; overflow: hidden; font-family: "Inter Display", sans-serif;
+         -webkit-font-smoothing: antialiased; text-rendering: geometricPrecision; color: var(--carbon); }
+.placa > * { position: absolute; }
+.fondo-blanco { background: var(--blanco); }
+.fondo-humo   { background: var(--humo); color: var(--denim); }
+.fondo-denim  { background: var(--denim); color: var(--blanco); }
+.fondo-logo   { background: var(--logo); }
+img { display: block; }
+.fondo { left: 0; top: 0; width: 1080px; height: 1350px; }
+.ventana { background: #2a2f35; overflow: hidden; }
+.ventana img { width: 100%; height: 100%; }
+.marco { box-shadow: 0 0 0 var(--marco) var(--blanco); }            /* borde blanco por fuera del recuadro */
+.indice { top: 62px; right: var(--m); font-weight: 500; font-size: 24px; letter-spacing: .08em; font-variant-numeric: tabular-nums; opacity: .72; }
+.meta   { top: 62px; left: var(--m); font-weight: 600; font-size: 24px; letter-spacing: .18em; }
+.tit { font-weight: 700; letter-spacing: -.03em; line-height: .97; }
+.apoyo { font-weight: 500; font-size: 40px; line-height: 1.28; letter-spacing: -.01em; }
+
+/* captura de la capa superior: solo .arriba, fondo transparente */
+.modo-arriba body, body.modo-arriba { background: transparent; }
+body.modo-arriba .placa { background: transparent !important; }
+body.modo-arriba .placa > *:not(.arriba) { visibility: hidden; }
+
+/* 01 — portada: mar de fondo, titular en el cielo, ventana con la remera en movimiento, detalle fijo */
+.p01 .meta { color: var(--carbon); opacity: .8; }
+.p01 .tit { left: var(--m); top: 150px; font-size: 112px; }
+.p01 .v01 { left: 556px; top: 150px; width: 452px; height: 566px; }
+.p01 .detalle { left: var(--m); top: 852px; width: 360px; height: 300px; }
+
+/* 02 — producto: blanca grande, negra al lado, las dos juntas abajo */
+.p02 .tit { left: var(--m); top: 112px; font-size: 100px; }
+.p02 .apoyo { left: var(--m); top: 330px; opacity: .8; }
+.p02 .v02a { left: var(--m); top: 432px; width: 560px; height: 700px; }
+.p02 .v02b { left: 636px; top: 432px; width: 372px; height: 466px; }
+.p02 .ambas { left: 636px; top: 922px; width: 372px; height: 210px; }
+
+/* 03 — detalle: banda de video sobre los estampados + tres detalles fijos con su nombre */
+.p03 .tit { left: var(--m); top: 112px; font-size: 96px; }
+.p03 .v03 { left: var(--m); top: 360px; width: 936px; height: 560px; }
+.p03 .det { top: 958px; width: 276px; height: 276px; }
+.p03 .d1 { left: var(--m); } .p03 .d2 { left: 402px; } .p03 .d3 { left: 732px; }
+.p03 .cap { top: 1252px; width: 276px; font-weight: 600; font-size: 40px; letter-spacing: -.01em; }
+.p03 .c1 { left: var(--m); } .p03 .c2 { left: 402px; } .p03 .c3 { left: 732px; }
+
+/* 04 — moodboard fijo del mar y Mar del Plata */
+.p04 .tit { left: var(--m); top: 112px; font-size: 96px; }
+.p04 .apoyo { left: var(--m); top: 326px; opacity: .8; }
+.p04 .ciudad { left: var(--m); top: 432px; width: 936px; height: 560px; }
+.p04 .mar { left: var(--m); top: 1018px; width: 456px; height: 256px; }
+.p04 .medano { left: 552px; top: 1018px; width: 456px; height: 256px; }
+
+/* 05 — la frase: arte original arriba, video de la frase en la prenda, apoyo al lado */
+.p05 .frase { left: var(--m); top: 168px; width: 936px; height: 188px; }
+.p05 .v05 { left: var(--m); top: 420px; width: 504px; height: 630px; }
+.p05 .apoyo { left: 612px; top: 862px; font-size: 42px; }
+
+/* 06 — Founders (igual a v01) */
+.p06 .tit { left: var(--m); top: 116px; font-size: 88px; line-height: .98; }
+.p06 .numeros { left: 0; right: 0; top: 572px; text-align: center; font-weight: 700; font-size: 196px; line-height: 1;
+                letter-spacing: -.025em; color: var(--humo); font-variant-numeric: tabular-nums; }
+.p06 .pie { left: var(--m); right: var(--m); bottom: 96px; display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; }
+.p06 .ancla { width: 400px; height: 296px; }
+
+/* 07 — la remera puesta frente a Mar del Plata + ventana con la ropa puesta en movimiento */
+.p07 .tit { left: var(--m); top: 104px; font-size: 96px; }
+.p07 .apoyo { left: var(--m); top: 312px; }
+.p07 .v07 { left: var(--m); top: 742px; width: 420px; height: 526px; }
+
+/* 08 — la fecha */
+.p08 > * { left: 0; right: 0; text-align: center; }
+.p08 .indice { left: auto; right: var(--m); text-align: right; }
+.p08 .logo { left: 50%; right: auto; transform: translateX(-50%); top: 112px; width: 300px; height: 300px; }
+.p08 .fecha { top: 476px; font-weight: 700; font-size: 168px; line-height: 1; letter-spacing: -.04em; color: var(--denim); font-variant-numeric: tabular-nums; }
+.p08 .drop { top: 682px; font-weight: 600; font-size: 32px; letter-spacing: .22em; }
+.p08 .lema { top: 880px; font-weight: 700; font-size: 36px; letter-spacing: .06em; }
+.p08 .accion { top: 954px; font-weight: 600; font-size: 48px; letter-spacing: -.01em; color: var(--denim); }
+.p08 .franja { left: 0; top: 1170px; width: 1080px; height: 180px; }
