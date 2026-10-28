@@ -10,5 +10,6 @@ mkdir -p "$T/hielo"; cd "$T"
 $PY $H/textura_remera.py $R/PRODUCTO/negra_espalda_arena_DFDC5DED.png hielo/remera_espalda.png
 $S/bpy-env/bin/python $H/escena.py hielo/remera_espalda.png hielo/v01            # arma la escena (escena.blend + escena.json)
 nice -n 15 $S/bpy-env/bin/python $H/render.py hielo/v01/escena.blend hielo/v01/r67 0 140 67 28
+$PY $H/suavizar_marcas.py hielo/v01/r67 hielo/v01/r67_post             # marcas de impacto: de estrella a escarcha
 python3 $H/etiqueta.py hielo/etiqueta.png
-PY=$PY $H/montar.sh "$T" hielo/v01/r67 "$R/EXPORTACIONES/ROCCE_01_HIELO_REVELACION_v01.mp4"
+PY=$PY $H/montar.sh "$T" hielo/v01/r67_post "$R/EXPORTACIONES/ROCCE_01_HIELO_REVELACION_v01.mp4"

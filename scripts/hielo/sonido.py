@@ -80,7 +80,7 @@ def arrastre(t0, dur, g=-22):
 
 golpes = esc["golpes"]; f_rot = esc["rotura"]
 # fondo exterior muy bajo (que no haya silencio digital)
-amb = lp(rng.standard_normal(N), 700) * db(-46); L += amb; R += amb * 0.95
+amb = lp(rng.standard_normal(N), 700) * db(-40); L += amb; R += amb * 0.95
 for k, (f, x, y, rc, rm) in enumerate(golpes):
     th = f / FPS; fuerte = (f == f_rot); pan = float(np.clip(x * 1.2, -0.5, 0.5))
     pre = 0.2 if k == 0 else 0.3
@@ -91,7 +91,7 @@ for k, (f, x, y, rc, rm) in enumerate(golpes):
     put(crujido(0.45 if fuerte else 0.3, 60 if fuerte else 34, -11 if fuerte else -14), th + 0.01, 0, pan)
     if fuerte:
         put(estallido(-6), th + 0.005, 0, 0.0)
-        tintineo(th + 0.12, 0.9, 46, -17)
+        tintineo(th + 0.12, 1.3, 52, -17)
         arrastre(th + 0.18, 0.75, -21)
 # el hielo se asienta: crujidos sueltos y bajos mientras la cámara se acerca
 for k in range(26):

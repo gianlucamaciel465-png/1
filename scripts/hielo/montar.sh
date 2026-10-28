@@ -42,8 +42,15 @@ ffmpeg -v error -y -i "$T/v1_sfx.wav" \
 [0:a]apad=whole_dur=$DUR[fx];\
 [fx][real]amix=inputs=2:normalize=0:duration=first[m]" -map "[m]" -ar 48000 -c:a pcm_s24le "$T/v1_audio_bruto.wav" </dev/null
 I=$(ffmpeg -v info -i "$T/v1_audio_bruto.wav" -af ebur128=peak=true -f null - 2>&1 | $PY -c "import sys,re; t=sys.stdin.read(); print(re.findall(r'I:\s+(-?[0-9.]+) LUFS', t)[-1])")
+# dos pasadas: ganancia + limitador (techo −3 dB de muestra, para que el pico real quede < −1 dBTP después del AAC);
+# la segunda corrige lo que bajó el limitador. El audio dura exactamente lo mismo que el video (N × 1600 muestras).
+NS=$((N*1600))
+medir() { ffmpeg -v info -i "$1" -af ebur128=peak=true -f null - 2>&1 | $PY -c "import sys,re; t=sys.stdin.read(); print(re.findall(r'I:\s+(-?[0-9.]+) LUFS', t)[-1])"; }
 G=$($PY -c "print(f'{-14.0-($I):.2f}')")
-ffmpeg -v error -y -i "$T/v1_audio_bruto.wav" -af "volume=${G}dB,alimiter=limit=0.84:level=false:attack=1:release=50" -ar 48000 -c:a pcm_s24le "$T/v1_audio.wav" </dev/null
+for pasada in 1 2; do
+  ffmpeg -v error -y -i "$T/v1_audio_bruto.wav" -af "volume=${G}dB,alimiter=limit=0.70:level=false:attack=1:release=50,apad=whole_len=$NS,atrim=end_sample=$NS" -ar 48000 -c:a pcm_s24le "$T/v1_audio.wav" </dev/null
+  I2=$(medir "$T/v1_audio.wav"); G=$($PY -c "print(f'{$G+(-14.0-($I2)):.2f}')")
+done
 ffmpeg -v error -y -i "$T/v1_video.mp4" -i "$T/v1_audio.wav" -map 0:v -map 1:a -c:v copy -c:a aac -b:a 192k -ar 48000 -ac 2 \
-  -map_metadata -1 -movflags +faststart -shortest "$OUT" </dev/null
+  -map_metadata -1 -movflags +faststart "$OUT" </dev/null
 echo "listo: $OUT ($DUR s; ganancia ${G} dB desde ${I} LUFS)"

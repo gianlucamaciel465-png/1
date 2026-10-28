@@ -1,6 +1,6 @@
 # ROCCE_01_HIELO_REVELACION_v01 — la remera negra congelada, el hacha y Gianluca con la remera puesta
 
-Receta: `scripts/hielo_v01.sh` · 9,93 s · 1080×1920 · 30 fps · H.264 High yuv420p BT.709 · AAC 48 kHz estéreo.
+Receta: `scripts/hielo_v01.sh` · 9,93 s · 1080×1920 · 30 fps · H.264 High yuv420p BT.709 · AAC 48 kHz estéreo · −14,7 LUFS, pico −2,0 dBTP.
 
 ## Referencia (observado, `REFERENCIAS/REF_20_hacha_hielo_grabacion.mp4`, 512×1108, 18,8 s)
 - 0–1 s: vista cenital sobre cemento gris; una mano con un hacha negra golpea un bloque de hielo blanco con un jogger adentro (se ve el logo). Etiqueta "Baggy Nike Jogger>" (blanca, negrita itálica, sombra oscura).
@@ -24,7 +24,10 @@ Receta: `scripts/hielo_v01.sh` · 9,93 s · 1080×1920 · 30 fps · H.264 High y
 | 8,53–9,93 | `IMG_7884.mov` | 0,00–1,40 s | agachado sacando la foto de la blanca (la tela al agacharse) | — | mar real (+4 dB), salida 0,3 s |
 
 ## Revisión
-(se completa en la entrega)
+- Verificado técnicamente: decodifica completo; 298 cuadros; video 9,933 s y audio 9,933 s; 1080×1920, 30 fps, High, yuv420p, BT.709; −14,7 LUFS integrado, pico −2,0 dBTP (limitador a −3 dB de muestra, dos pasadas); sin GPS ni metadatos de las tomas.
+- Corregido en la revisión: (1) el primer montaje perdía el último cuadro al unir audio y video (el audio duraba 0,04 ms menos): ahora el audio se ajusta a N × 1600 muestras; (2) el pico real superaba −1 dBTP después del AAC (−0,2): limitador más bajo; (3) las marcas de impacto salían como estrellas blancas de rayos finos: se suavizan en 2D en su posición exacta, calculada desde la escena 3D (`marcas_2d.py` + `suavizar_marcas.py`), y quedan como manchas de escarcha.
+- Revisado visualmente (fotogramas): la secuencia completa a 4 cuadros por segundo, el primer cuadro y la rotura a resolución completa, ±0,04 y ±0,10 s alrededor de cada corte.
+- Sin reproducción ni escucha: el sonido se revisó por niveles por tramo (3,0–3,9 s queda bajo a propósito, antes del acercamiento).
 
 ## Limitaciones conocidas
 - Render a 720×1280 escalado a 1080×1920 (Cycles en CPU, ≈ 70 s por cuadro): un poco menos de detalle fino que un render nativo.

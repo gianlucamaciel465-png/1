@@ -287,9 +287,17 @@ Detalle y línea de tiempo: `scripts/escalada/PROYECTO_v01.md` · receta `script
 
 #### ROCCE_01_HIELO_REVELACION (hielo)
 Detalle y línea de tiempo: `scripts/hielo/PROYECTO_v01.md` · receta `scripts/hielo_v01.sh`.
+- Escena 3D real (Blender, Cycles en CPU): bloque de hielo con la remera negra real adentro (textura de la foto de espalda), 4 golpes de hacha con grietas, marcas de hielo molido, esquirlas y rotura en 36 pedazos que quedan alrededor; la cámara entra en "Founders Privée" y corta a la misma inscripción en la espalda de Gianluca.
+- Tomas: `IMG_7887` 2,20–3,67 · `IMG_7885` 0–2,40 · `IMG_7884` 0–1,40 (de espaldas; no hay toma de frente).
+- Etiqueta "Remera roccé>". Sonido sintetizado sincronizado con la escena + mar real de las tomas. Sin música.
+
+| Versión | Estado | Detalle |
+|---|---|---|
+| `ROCCE_01_HIELO_REVELACION_v01.mp4` | **Más reciente (entregada para revisión, sin aprobación aún)** | 9,93 s / 298 cuadros, 1080×1920, 30 fps, −14,7 LUFS, pico −2,0 dBTP, 22,3 MB. Hielo 0–4,67 s (render 720×1280 escalado) + tomas reales 4,67–9,93 s. Fuera del repo (`EXPORTACIONES/`). Editable: `ROCCE_01_HIELO_REVELACION_v01_editable.zip` (escena .blend + cuadros renderizados). |
 
 ## Estado del trabajo (actualizado 28/10/2026)
-- **Último encargo:** carrusel de prelanzamiento v02 mixto (5 MP4 con video real en ventanas + 3 PNG), entregado por el chat el 28/10/2026; pendiente de revisión de Gianluca. v01 (8 PNG) fue rechazada. Antes: reel nuevo desde cero, `ROCCE_proxima_v01` ("La próxima empieza con vos"), con la voz de marca Firme 04. Entregado por el chat y en la página privada de reels. Banco vocal guardado en una página privada (https://claude.ai/artifact/AQSWzDitj143yjJdqkoXQk), con recuperación probada por sha256.
+- **Último encargo (28/10/2026):** dos videos, `ROCCE_01_HIELO_REVELACION_v01` y `ROCCE_02_HACETE_FOUNDER_v01`, entregados por el chat con sus editables; pendientes de revisión de Gianluca. Falta una toma de él con la negra de frente o parado (calce). Las referencias de este encargo son de terceros y no persisten en una sesión nueva (volver a pasarlas para rehacer).
+- **Encargo anterior:** carrusel de prelanzamiento v02 mixto (5 MP4 con video real en ventanas + 3 PNG), entregado por el chat el 28/10/2026; pendiente de revisión de Gianluca. v01 (8 PNG) fue rechazada. Antes: reel nuevo desde cero, `ROCCE_proxima_v01` ("La próxima empieza con vos"), con la voz de marca Firme 04. Entregado por el chat y en la página privada de reels. Banco vocal guardado en una página privada (https://claude.ai/artifact/AQSWzDitj143yjJdqkoXQk), con recuperación probada por sha256.
 - **Pendiente de Gianluca:**
   - escuchar `proxima_v01`: voz, "Royé", FOUNDERS y mezcla. Solo se revisó por fotogramas, niveles y transcripción;
   - confirmar que @rocce.ar recibe mensajes y que alguien va a responder "FOUNDERS";
