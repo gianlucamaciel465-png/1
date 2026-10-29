@@ -283,7 +283,8 @@ Detalle y línea de tiempo: `scripts/escalada/PROYECTO_v01.md` · receta `script
 
 | Versión | Estado | Detalle |
 |---|---|---|
-| `ROCCE_02_HACETE_FOUNDER_v01.mp4` | **Más reciente (entregada para revisión, sin aprobación aún)** | 20,0 s / 600 cuadros, 1080×1920, 30 fps, −14,0 LUFS, pico −1,5 dBTP, 4,5 MB. Animación 0–15,77 s + placa 15,77–20,0 s. Fuera del repo (`EXPORTACIONES/`, en `.gitignore`). |
+| `ROCCE_02_HACETE_FOUNDER_v01.mp4` | **Rechazada (29/10/2026)** | Remera rígida y rectangular, marca NEURONVISUALS visible, logo con recuadro blanco. |
+| `ROCCE_02_HACETE_FOUNDER_v02.mp4` | **Más reciente (entregada, sin aprobación aún)** | 20,27 s / 608 cuadros. Remera articulada sobre un esqueleto por cuadro (`esqueleto.py` + `remera2d.py`: cuello, hombros, mangas por brazo, ruedo, capas brazo/pierna delante, estampado real de espalda pegado al torso); NEURONVISUALS restado en todos los cuadros (`marca_agua_v2.py`, alfa en dos capas alineada por cuadro); placa celeste con el logo original sin fondo (`placa_v02.py`, 4,5 s). Receta: `componer_v02.py` + `montar_v02.sh`. Fuera del repo. |
 
 #### ROCCE_01_HIELO_REVELACION (hielo)
 Detalle y línea de tiempo: `scripts/hielo/PROYECTO_v01.md` · receta `scripts/hielo_v01.sh`.
@@ -293,10 +294,11 @@ Detalle y línea de tiempo: `scripts/hielo/PROYECTO_v01.md` · receta `scripts/h
 
 | Versión | Estado | Detalle |
 |---|---|---|
-| `ROCCE_01_HIELO_REVELACION_v01.mp4` | **Más reciente (entregada para revisión, sin aprobación aún)** | 9,93 s / 298 cuadros, 1080×1920, 30 fps, −14,7 LUFS, pico −2,0 dBTP, 22,3 MB. Hielo 0–4,67 s (render 720×1280 escalado) + tomas reales 4,67–9,93 s. Fuera del repo (`EXPORTACIONES/`). Editable: `ROCCE_01_HIELO_REVELACION_v01_editable.zip` (escena .blend + cuadros renderizados). |
+| `ROCCE_01_HIELO_REVELACION_v01.mp4` | **Rechazada (29/10/2026)** | Hielo 3D con aspecto de placas de vidrio; la remera no existía dentro del hielo. |
+| `ROCCE_01_HIELO_REVELACION_v02.mp4` | **Más reciente (entregada, sin aprobación aún)** | 9,1 s / 273 cuadros, 1080×1920, 30 fps, −14,4 LUFS, 11,3 MB. Metraje real de REF_20 (golpes 305–402, levantar 440–469, caída 472–497) con la remera negra compuesta adentro del hielo en luz lineal (`scripts/hielo2/`), rótulo viejo borrado, "Remera roccé>"; después `IMG_7793` 2,40–4,60 (balcón, parado de espaldas) e `IMG_7887` 1,90–3,67. Sonido sintetizado sincronizado con los 17 golpes reales. Receta `scripts/hielo2/montar.sh`. Base de terceros (REF_20): posible reclamo. |
 
-## Estado del trabajo (actualizado 28/10/2026)
-- **Último encargo (28/10/2026):** dos videos, `ROCCE_01_HIELO_REVELACION_v01` y `ROCCE_02_HACETE_FOUNDER_v01`, entregados por el chat con sus editables; pendientes de revisión de Gianluca. Falta una toma de él con la negra de frente o parado (calce). Las referencias de este encargo son de terceros y no persisten en una sesión nueva (volver a pasarlas para rehacer).
+## Estado del trabajo (actualizado 29/10/2026)
+- **Último encargo (29/10/2026):** corrección de los dos videos (v01 rechazadas). `ROCCE_01_HIELO_REVELACION_v02`, `ROCCE_02_HACETE_FOUNDER_v02` y `LOGO/ROCCE_logo_sin_fondo.png` entregados por el chat; pendientes de revisión. Falta una toma de él con la negra de frente; `IMG_7793` se usó como suya (confirmar). Las referencias de este encargo son de terceros y no persisten en una sesión nueva (volver a pasarlas para rehacer).
 - **Encargo anterior:** carrusel de prelanzamiento v02 mixto (5 MP4 con video real en ventanas + 3 PNG), entregado por el chat el 28/10/2026; pendiente de revisión de Gianluca. v01 (8 PNG) fue rechazada. Antes: reel nuevo desde cero, `ROCCE_proxima_v01` ("La próxima empieza con vos"), con la voz de marca Firme 04. Entregado por el chat y en la página privada de reels. Banco vocal guardado en una página privada (https://claude.ai/artifact/AQSWzDitj143yjJdqkoXQk), con recuperación probada por sha256.
 - **Pendiente de Gianluca:**
   - escuchar `proxima_v01`: voz, "Royé", FOUNDERS y mezcla. Solo se revisó por fotogramas, niveles y transcripción;

@@ -16,7 +16,7 @@ import numpy as np, cv2
 from PIL import Image
 
 TRAB = os.environ.get("ESCALADA_TRABAJO", ".")
-ESQ = {int(k): v for k, v in json.load(open(os.path.join(TRAB, "an", "esqueleto.json"))).items()}
+ESQ = {int(k): dict(v, f=int(k)) for k, v in json.load(open(os.path.join(TRAB, "an", "esqueleto.json"))).items()}
 SS = 3
 NEGRO = np.array([15, 15, 17], np.float32)
 CONTORNO = np.array([168, 170, 176], np.float32)
@@ -32,6 +32,15 @@ MANGA_L, MANGA_R0, MANGA_R1 = 1.62, 0.56, 0.64
 # tramos donde un brazo o una pierna cercanos pasan por delante del cuerpo (brazo en V, trepar el borde, agachado,
 # parado con el brazo colgando); en el resto solo la manga cercana va delante
 FRENTE = [(212, 236), (263, 302), (303, 372)]
+# brazo cercano colgando a lo largo del cuerpo (parado arriba), por delante y con contorno: la manga sigue ese
+# brazo (ángulo relativo al torso en grados, corrimiento del hombro en r hacia el pecho) y el antebrazo queda
+# delante de la remera. Medido sobre los cuadros 302 (brazo del lado de la espalda) y 330 (del lado del pecho).
+COLGANDO = [((288, 314), -2.0, -0.40), ((315, 372), -1.0, 0.80)]
+
+def colgando(f):
+    for (a, b), rel, off in COLGANDO:
+        if f is not None and a <= f <= b: return rel, off
+    return None
 OL = 0.075
 
 def _estampas():
@@ -61,28 +70,33 @@ def interp(f, t):
     r["H"] = (np.array(e["H"]) * (1 - a) + np.array(o["H"]) * a).tolist()
     for k in ("tor", "cer", "lej"): r[k] = la(e[k], o[k])
     r["vis_lej"] = e["vis_lej"] * (1 - a) + o["vis_lej"] * a
+    r["off"] = e.get("off", 0.0) * (1 - a) + o.get("off", 0.0) * a
     return r
 
 def geometria(e):
     H = np.array(e["H"], float); r = float(e["r"]); d = u(e["tor"]); fr = np.array([d[1], -d[0]])
-    N = H + r * d
+    N = H + r * d - fr * float(e.get("off", 0.0))                 # off: desplazamiento lateral (normal = −fr)
     def B(x, y): return N + fr * x * r + d * y * r              # cuerpo → imagen
     # contorno del cuerpo (pecho a la derecha): escote, hombros caídos, costados apenas entallados, ruedo curvo;
     # se suaviza con subdivisión de Chaikin para que no quede una caja
     W = ANCHO
     cuello = [(-0.40, 0.03), (-0.21, 0.12), (0.0, 0.16), (0.23, 0.13), (0.42, 0.03)]
     contorno = cuello + [(0.62, 0.12), (0.78, 0.28), (W, 0.55), (W - 0.03, 0.95),          # hombro caído
-                         (0.80, 1.6), (0.72, 2.6), (0.66, 3.5), (0.69, 4.6), (0.74, LARGO - 0.12),  # entallada
-                         (0.70, LARGO), (0.3, LARGO + 0.05), (0.0, LARGO + 0.06), (-0.3, LARGO + 0.05),
-                         (-0.70, LARGO), (-0.74, LARGO - 0.12), (-0.69, 4.6), (-0.66, 3.5), (-0.72, 2.6),
-                         (-0.80, 1.6), (-W + 0.03, 0.95), (-W, 0.55), (-0.78, 0.28), (-0.62, 0.12)]
+                         (0.80, 1.6), (0.72, 2.6), (0.68, 3.5), (0.72, 4.6), (0.78, LARGO - 0.12),  # entallada
+                         (0.74, LARGO), (0.3, LARGO + 0.05), (0.0, LARGO + 0.07), (-0.4, LARGO + 0.07),
+                         (-0.84, LARGO), (-0.90, LARGO - 0.15), (-0.86, 4.5), (-0.76, 3.6), (-0.76, 2.6),
+                         (-0.82, 1.6), (-W + 0.02, 0.95), (-W, 0.55), (-0.78, 0.28), (-0.62, 0.12)]
+    # (la espalda cae un poco más ancha sobre la cadera, como una remera de perfil)
     c = np.array(contorno, float)
     for _ in range(2):                                           # Chaikin (cerrado)
         q = np.roll(c, -1, 0); c = np.concatenate([0.75 * c + 0.25 * q, 0.25 * c + 0.75 * q], 1).reshape(-1, 2)
     cuerpo = np.array([B(x, y) for x, y in c])
     esc = np.array([B(x, y) for x, y in cuello])
     S = N + 0.6 * r * d
-    def manga(a):
+    cg = colgando(e.get("f"))
+    Sm = S + fr * cg[1] * r if cg else S                          # hombro de la manga cercana
+    a_cer = e["tor"] + math.radians(cg[0]) if cg else e["cer"]
+    def manga(a, S=S):
         """Tubo de la manga sobre el brazo: raíz redondeada dentro del hombro, costados rectos que abren apenas,
         ruedo perpendicular al brazo (levemente curvo)."""
         m = u(a); q = np.array([-m[1], m[0]])
@@ -94,7 +108,7 @@ def geometria(e):
         poly += [fin - q * MANGA_R1 * r]
         return np.array(poly), fin, m, q
     return dict(H=H, r=r, d=d, fr=fr, N=N, S=S, cuerpo=cuerpo, esc=esc, B=B,
-                cerca=manga(e["cer"]), lejos=manga(e["lej"]), vis_lej=float(e.get("vis_lej", 1.0)))
+                cerca=manga(a_cer, Sm), lejos=manga(e["lej"]), vis_lej=float(e.get("vis_lej", 1.0)), Sm=Sm, a_cer=a_cer)
 
 def _poly(shape, pts, off):
     m = np.zeros(shape, np.uint8)
@@ -187,7 +201,7 @@ def vestir(img, f, plano=None):
     for g in (f - 1, f + 1):
         if g in ESQ and ESQ[g]["plano"] == e["plano"]:
             vel = max(vel, float(np.hypot(*(np.array(ESQ[g]["N"]) - np.array(e["N"])))))
-    ts = [0.0] if vel < 2.5 else list(np.linspace(-0.25, 0.25, 5))
+    ts = [0.0] if vel < 2.5 else list(np.linspace(-0.25, 0.25, int(np.clip(vel / 2.5, 5, 15))))
     acc_d = None; acc_f = None
     for t in ts:
         ee = interp(f, t)
@@ -240,6 +254,12 @@ def vestir(img, f, plano=None):
             if comp.sum() < 0.6 * (2 * r) ** 2 * 4: delante_m |= comp
     # cerca de la pelvis las piernas entran por debajo del ruedo (detrás de la remera)
     delante_m &= np.hypot(xx - Pl[0], yy - Pl[1]) > 1.3 * r
+    if colgando(f):
+        # solo el antebrazo (desde el ruedo de la manga hacia abajo), con su contorno; nada más del cuerpo delante
+        S_l = g["Sm"] - off; ua = u(g["a_cer"])
+        va = np.stack([xx - S_l[0], yy - S_l[1]], -1); sa = va @ ua
+        da = np.linalg.norm(va - np.clip(sa, 0, 4.6 * r)[..., None] * ua, axis=-1)
+        delante_m = (da < 0.50 * r) & (sa > (MANGA_L - 0.1) * r) & (lum > 60) & ~cabeza
     dm = cv2.dilate(delante_m.astype(np.uint8), cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (5, 5))).astype(np.float32)
     dm = cv2.GaussianBlur(dm, (0, 0), 0.6)[..., None]
     out = out * (1 - dm) + reg * dm

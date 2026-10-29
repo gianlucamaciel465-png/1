@@ -103,6 +103,15 @@ Detalle: `REFERENCIAS/paquete_2026-10-27/` (prompt, manifiesto, preparador) y `R
   - una marca de agua fija de pantalla se puede sacar (alfa estimada) y volver a poner para reencuadrar un plano sin que salte;
   - vestir una figura: mangas por recorrido sobre los píxeles reales del brazo desde el hombro (no por un ángulo estimado), cadera a 0,80 del torso medido, estampados reales extraídos con apertura morfológica (la foto tiene luz despareja).
 
+- Técnica probada con el hielo (`ROCCE_01_HIELO_REVELACION_v02`, `scripts/hielo2/`, 29/10/2026): reemplazar la prenda dentro de un metraje real en vez de renderizar hielo 3D (que se veía como placas de vidrio):
+  - modelo por píxel en **luz lineal** `observado = s·color_tela + w` (s = tela visible, w = luz que suma el hielo); la tela nueva entra como `s·remera + w`, y escarcha, brillos, manos y herramienta quedan intactos;
+  - la remera y el logo a borrar se ubican con homografía por plano (Lucas-Kanade sobre la prenda + RANSAC); controlar el error contra un detalle real (el logo original) y medir el desenfoque por cuadro sobre ese detalle;
+  - fuera de la cara de la prenda, cambiar solo lo que tiene el tono de la tela (si no, el piso y la piel cambian de color); comprobar que el piso quede idéntico al original.
+- Técnica probada con la remera del escalador (`ROCCE_02_HACETE_FOUNDER_v02`, `scripts/escalada/esqueleto.py` + `remera2d.py`):
+  - esqueleto con proporciones fijas del personaje medidas en un cuadro claro (torso 5,1 radios de cabeza, brazo 2,2) y ajuste de ángulos por cuadro, con el eje del torso centrado en cortes limpios del trazo; claves manuales donde el brazo cruza delante del torso;
+  - prenda dibujada por cuadro (contorno suavizado, mangas que siguen cada brazo, ruedo y cuello acanalados) y capas: brazo lejano → manga lejana → cuerpo → miembros cercanos → manga cercana → cabeza; revisar siempre a tamaño real, no en miniaturas.
+- Marca de agua fija semitransparente (NEURONVISUALS): estimar su alfa en dos capas (relleno blanco + sombra) con todos los cuadros y alinearla por cuadro (las grabaciones de pantalla la mueven ±0,5 px); donde el fondo es liso, completar el trazo con el grano medido del fondo (`marca_agua_v2.py`).
+
 ## Referencias y fidelidad
 - "Tal cual al video": estudiar apertura, encuadres, movimiento, continuidad, tiempos, reacción, audio, revelación y cierre; definir qué se conserva y qué se reemplaza.
 - No afirmar haber visto una referencia sin acceso real; pedir el archivo.
