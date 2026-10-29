@@ -112,6 +112,8 @@ Detalle: `REFERENCIAS/paquete_2026-10-27/` (prompt, manifiesto, preparador) y `R
   - prenda dibujada por cuadro (contorno suavizado, mangas que siguen cada brazo, ruedo y cuello acanalados) y capas: brazo lejano → manga lejana → cuerpo → miembros cercanos → manga cercana → cabeza; revisar siempre a tamaño real, no en miniaturas.
 - Marca de agua fija semitransparente (NEURONVISUALS): estimar su alfa en dos capas (relleno blanco + sombra) con todos los cuadros y alinearla por cuadro (las grabaciones de pantalla la mueven ±0,5 px); donde el fondo es liso, completar el trazo con el grano medido del fondo (`marca_agua_v2.py`).
 
+- Pieza editorial animada por código (`ROCCE_04_ANTES_DEL_APLAUSO`, `scripts/antes/`, 29/10/2026): canvas en Chromium renderizado cuadro a cuadro (fuentes e imágenes como data URL), serif Instrument Serif con cursivas puntuales + Inter para rótulos/CTA; figura blanca con contorno por miembros (cinemática inversa de dos huesos) y avisos automáticos si una mano no llega (el lápiz tiene que tocar la hoja en todos los cuadros: `avisos.json` vacío). El lápiz se dibuja por delante de la mano y el trazo crece desde la punta. La línea de tiempo (`TL`) se exporta a `eventos.json` para sincronizar el sonido.
+
 ## Referencias y fidelidad
 - "Tal cual al video": estudiar apertura, encuadres, movimiento, continuidad, tiempos, reacción, audio, revelación y cierre; definir qué se conserva y qué se reemplaza.
 - No afirmar haber visto una referencia sin acceso real; pedir el archivo.
