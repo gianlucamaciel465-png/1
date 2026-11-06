@@ -1,0 +1,6 @@
+{
+  "name": "rocce-procrastinar",
+  "private": true,
+  "description": "Escena 3D de 'Dejá de procrastinar' (three.js en Chromium). npm install en esta carpeta.",
+  "dependencies": { "three": "0.170.0" }
+}

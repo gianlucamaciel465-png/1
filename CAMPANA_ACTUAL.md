@@ -23,7 +23,7 @@ Fuentes: documento maestro (contexto al 26/10/2026) e indicaciones de Gianluca d
 - Frase de cierre en R3: **"BANCAMOS A LOS QUE SIGUEN."** Pendiente confirmar si es del drop o de la marca.
 - Grafías: "ROCCÉ", "Founders Privée", "so f★cking close." (la estrella es parte del arte).
 - **Dichos en R4 (25/10/2026), sin confirmar vigencia:** "corte en V", "305 gramos", "bordados en tela de jean", "envío gratis". No reutilizarlos en piezas nuevas sin confirmación de Gianluca.
-- **No confirmado (no publicar ni inventar):** precios, talles/medidas, composición, stock, promociones, plazos de envío, link/CTA de compra, beneficios Founders no confirmados (placa numerada, registro, porcentajes). El grupo de WhatsApp y la prenda del Founder 001 sí están confirmados (ver Founders).
+- **No confirmado (no publicar ni inventar):** precios, talles/medidas, composición, stock, promociones, plazos de envío, beneficios Founders no confirmados (placa numerada, registro, porcentajes). El grupo de WhatsApp y la prenda del Founder 001 sí están confirmados (ver Founders).
 
 ## Founders
 - Primeros 100 compradores, numerados 001–100. No es stock ni ventas.
@@ -325,8 +325,19 @@ Receta: `scripts/cerca/` — `voces.py` (dos voces es-AR de edge-tts: chico = To
 |---|---|---|
 | `ROCCE_05_ESTUVISTE_CERCA_v01.mp4` | **Más reciente (entregada, sin aprobación aún)** | 44,0 s / 1320 cuadros, 1080×1920, 30 fps, −14,4 LUFS, pico −2,8 dBFS. 15 subtítulos, placa celeste humo 40–44 s. Fuera del repo. |
 
-## Estado del trabajo (actualizado 05/11/2026)
-- **Último encargo (05/11/2026):** `ROCCE_05_ESTUVISTE_CERCA_v01` (guion de Gianluca, Higgsfield + posproducción), entregado por el chat. Pendiente: escucha de las dos voces (edge-tts, sin actuación real) y revisión de la remera que sostiene el chico en la entrega y al final.
+#### ROCCE_06_DEJA_DE_PROCRASTINAR (06/11/2026, pedido de Gianluca: "de 0, un video así" + CTA)
+Referencia: `REFERENCIAS/REF_26_referencia_viral_grabacion.mp4` (Neuron Visuals, "same deadline / same grade / different month"; tercero, solo local). Se tomó el mecanismo, no la imagen: escena 3D original (three.js 0.170 en Chromium, WebGL por software, ≈0,6 s por cuadro). Receta: `scripts/procrastinar/` — `escena.js` + `escena.html` + `render.js` (cuadros) · `cta.py` (CTA sobre `IMG_7857` 3,55–6,95 s) · `sonido.py` (todo sintetizado + mar real de `IMG_7857`) · `montar.sh`. `npm install` en esa carpeta antes de renderizar.
+- Método: apuesta 0 s (MISMO PLAZO, 30 DÍAS, dos torres vacías marcadas) · pregunta (¿llega el que está sentado sobre sus ladrillos con el celular? pistas: "mañana…", nube que crece) · giro 1 a 7,2 s (MISMA PARED: llega, pero torcida) · giro 2 a 8,7 s (DISTINTO MES: queda destruido y se le cae un ladrillo; el constructor sube otro piso) · reenganche 9,6 s (vuelve a 30 DÍAS y él dice "mañana…" otra vez) · CTA 11,6 s sobre la espalda real "ROCCÉ Founders Privée".
+- El constructor lleva la remera blanca con el estampado real del pecho. Ladrillos = la fábrica familiar de Gianluca y el "construir" de la marca.
+- CTA pedido: "DEJA DE PROCASTINAR, HACETE FOUNDER / rocce.shop". Se puso **"DEJÁ DE PROCRASTINAR,"** (tilde del voseo y la R que faltaba); pendiente que Gianluca confirme. **rocce.shop** = link de compra dado por Gianluca el 06/11/2026.
+
+| Versión | Estado | Detalle |
+|---|---|---|
+| `ROCCE_06_DEJA_DE_PROCRASTINAR_v01.mp4` | **Más reciente (entregada, sin aprobación aún)** | 15,0 s / 450 cuadros, 1080×1920, 30 fps, −14,2 LUFS, pico −2,8 dBFS, 10 MB. Fuera del repo. |
+
+## Estado del trabajo (actualizado 06/11/2026)
+- **Último encargo (06/11/2026):** `ROCCE_06_DEJA_DE_PROCRASTINAR_v01`, entregado por el chat. Pendiente: confirmar la grafía del CTA y escuchar la mezcla.
+- **Encargo del 05/11/2026:** `ROCCE_05_ESTUVISTE_CERCA_v01` (guion de Gianluca, Higgsfield + posproducción), entregado por el chat. Pendiente: escucha de las dos voces (edge-tts, sin actuación real) y revisión de la remera que sostiene el chico en la entrega y al final.
 - **Encargo del 29/10/2026:** cuarto video `ROCCE_04_ANTES_DEL_APLAUSO_v01` en dos versiones (con y sin locución), entregado por el chat. Antes: corrección de los dos videos (v01 rechazadas). `ROCCE_01_HIELO_REVELACION_v02`, `ROCCE_02_HACETE_FOUNDER_v02` y `LOGO/ROCCE_logo_sin_fondo.png` entregados por el chat; pendientes de revisión. Falta una toma de él con la negra de frente; `IMG_7793` se usó como suya (confirmar). Las referencias de este encargo son de terceros y no persisten en una sesión nueva (volver a pasarlas para rehacer).
 - **Encargo anterior:** carrusel de prelanzamiento v02 mixto (5 MP4 con video real en ventanas + 3 PNG), entregado por el chat el 28/10/2026; pendiente de revisión de Gianluca. v01 (8 PNG) fue rechazada. Antes: reel nuevo desde cero, `ROCCE_proxima_v01` ("La próxima empieza con vos"), con la voz de marca Firme 04. Entregado por el chat y en la página privada de reels. Banco vocal guardado en una página privada (https://claude.ai/artifact/AQSWzDitj143yjJdqkoXQk), con recuperación probada por sha256.
 - **Pendiente de Gianluca:**
