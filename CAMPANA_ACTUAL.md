@@ -7,6 +7,13 @@ Fuentes: documento maestro (contexto al 26/10/2026) e indicaciones de Gianluca d
 - Lanzamiento confirmado: **01/11/2026**, zona horaria America/Argentina/Buenos_Aires.
 - Esta fecha pertenece a este drop: no reutilizarla después ni incrustarla en todas las piezas por defecto.
 
+## Métricas y ventas (dichas por Gianluca, 06/11/2026; referencias de su fecha)
+- Drop disponible desde el **01/11/2026**. Unidades cobradas y facturación: **pendientes** hasta recibir los datos de Shopify (separar pagadas, pruebas, cancelaciones y devoluciones).
+- **26/10:** reel de 26 s → ≈ 3 s de reproducción promedio.
+- **29/10:** dos reels inspirados en Neuron Visuals (a confirmar cuáles de las exportaciones) → ≈ 7 s de reproducción promedio y 5 % de finalización; uno cerca de 80 me gusta.
+- **28/10:** Meta Ads del pre-drop, corte inicial → USD 0,08 de gasto y 2 clics en el enlace.
+- Lectura con cautela: pocas piezas y datos parciales; sirven para comparar formatos, no para concluir.
+
 ## Textos
 - Cierre posible cuando la pieza lo requiera: `1/11 — DROP FOUNDERS PRIVÉE` (raya —, É). Redacción, duración y posición según cada encargo.
 - Variantes usadas en las piezas de la marca (`REFERENCIAS/`):
