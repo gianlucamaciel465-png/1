@@ -36,6 +36,7 @@ Fuentes: documento maestro (contexto al 26/10/2026) e indicaciones de Gianluca d
 - **Sin definir:** porcentaje, plazo y unidades. Idea en evaluación (no confirmada): pocas unidades vendidas solo entre los Founders.
 - Para comunicar: "el Founder 001 diseña una prenda y se lleva un porcentaje de la ganancia". Sin cifras, fechas ni cantidades.
 - Siguen sin confirmar: placa numerada, registro y cualquier otro beneficio o porcentaje fuera de la prenda del Founder.
+- **Dato nuevo (16/11/2026, lectura de Shopify):** desde el 10/11, la ficha de la remera dice literalmente «Incluye la placa metálica Founders Privée y tu número permanente, del 001 al 100.». REAL-02 la nombra con ese texto. Falta que Gianluca confirme la placa por mensaje para cerrar esta contradicción y actualizar `CLAUDE.md`.
 
 ## Prendas del drop (protagonista: remera blanca y negra)
 - **Blanca** — frente: ROCCÉ pequeño en el pecho izquierdo + "so f★cking close." con estrella, en gris; etiqueta de cuello ROCCÉ con monograma. Espalda: **ROCCÉ en parche de denim azul** (en fotos y video se ve azul muy oscuro, casi negro) con borde/pespunte claro + "Founders Privée" en cursiva **celeste claro** con subrayado.
@@ -333,10 +334,33 @@ Referencia: `REFERENCIAS/REF_26_referencia_viral_grabacion.mp4` (Neuron Visuals,
 
 | Versión | Estado | Detalle |
 |---|---|---|
-| `ROCCE_06_DEJA_DE_PROCRASTINAR_v01.mp4` | **Más reciente (entregada, sin aprobación aún)** | 15,0 s / 450 cuadros, 1080×1920, 30 fps, −14,2 LUFS, pico −2,8 dBFS, 10 MB. Fuera del repo. |
+| `ROCCE_06_DEJA_DE_PROCRASTINAR_v01.mp4` | Entregada, sin aprobación aún | 15,0 s / 450 cuadros, 1080×1920, 30 fps, −14,2 LUFS, pico −2,8 dBFS, 10 MB. Fuera del repo. |
 
-## Estado del trabajo (actualizado 06/11/2026)
-- **Último encargo (06/11/2026):** `ROCCE_06_DEJA_DE_PROCRASTINAR_v01`, entregado por el chat. Pendiente: confirmar la grafía del CTA y escuchar la mezcla.
+#### ROCCE_REAL02_CUAL_SE_LA_LLEVA (16/11/2026, pedido de Gianluca: «el más viral que planeen»)
+Equipo completo (Rena, Pepe, Cata, Fede, Pedro, Roma, Bruno). Todos los documentos están en la carpeta del proyecto `piezas/REAL-02/` (00–11). Solo tomas reales, más la foto de la ficha en el cierre. Receta: `scripts/real02_v01.sh` y `scripts/real02_v01_1.sh` + `scripts/real02/`.
+- Método:
+  - apuesta en el cuadro 0: remera en la roca, ola, «¿Cuál se la lleva?» + «1»;
+  - sube la apuesta: «2» (7884) y «3» (4627);
+  - giro: «Ninguna.», con casi silencio;
+  - pista cobrada: el pecho «so f★cking close.» (3375), cuando entra la música;
+  - remera puesta (7857, sin texto);
+  - CTA consecuencia: «Llevátela vos.» / «rocce.shop» sobre 4625;
+  - placa: «Con placa y número / del 001 al 100.» (resumen del texto de la ficha).
+- Sin «después», sin palabras de resistencia y sin presentar a nadie como cliente: las tomas no están en orden cronológico.
+
+| Versión | Estado | Detalle |
+|---|---|---|
+| `ROCCE_REAL02_cual_se_la_lleva_v01.mp4` | Revisada: REVISAR (dictamen 08) | 10,2 s. El cierre era una foto quieta de 2,6 s con texto chico y el «3» quedaba sobre la espuma. |
+| `ROCCE_REAL02_cual_se_la_lleva_v01_1.mp4` | **Más reciente. Máster aprobado por Roma (16/11), sin publicar** | 10,233 s / 307 cuadros, 1080×1920, 30 fps, H.264 nivel 4.0, −14,1 LUFS, −1,5 dBTP. Huellas de paquetes: video `2daf4bc7…47ac`, audio `d59151cc…6de0`. Fuera del repo. |
+
+## Estado del trabajo (actualizado 16/11/2026)
+- **Último encargo (16/11/2026):** REAL-02, `ROCCE_REAL02_cual_se_la_lleva_v01_1`. Máster aprobado por Roma; revisión privada, sin publicar.
+  - Pendientes antes de publicar:
+    - escucha humana;
+    - comprobar que rocce.shop abre la ficha;
+    - confirmar quién aparece en `IMG_7857`;
+    - confirmar la placa (ver Founders).
+- **Encargo del 06/11/2026:** `ROCCE_06_DEJA_DE_PROCRASTINAR_v01`, entregado por el chat. Pendiente: confirmar la grafía del CTA y escuchar la mezcla.
 - **Encargo del 05/11/2026:** `ROCCE_05_ESTUVISTE_CERCA_v01` (guion de Gianluca, Higgsfield + posproducción), entregado por el chat. Pendiente: escucha de las dos voces (edge-tts, sin actuación real) y revisión de la remera que sostiene el chico en la entrega y al final.
 - **Encargo del 29/10/2026:** cuarto video `ROCCE_04_ANTES_DEL_APLAUSO_v01` en dos versiones (con y sin locución), entregado por el chat. Antes: corrección de los dos videos (v01 rechazadas). `ROCCE_01_HIELO_REVELACION_v02`, `ROCCE_02_HACETE_FOUNDER_v02` y `LOGO/ROCCE_logo_sin_fondo.png` entregados por el chat; pendientes de revisión. Falta una toma de él con la negra de frente; `IMG_7793` se usó como suya (confirmar). Las referencias de este encargo son de terceros y no persisten en una sesión nueva (volver a pasarlas para rehacer).
 - **Encargo anterior:** carrusel de prelanzamiento v02 mixto (5 MP4 con video real en ventanas + 3 PNG), entregado por el chat el 28/10/2026; pendiente de revisión de Gianluca. v01 (8 PNG) fue rechazada. Antes: reel nuevo desde cero, `ROCCE_proxima_v01` ("La próxima empieza con vos"), con la voz de marca Firme 04. Entregado por el chat y en la página privada de reels. Banco vocal guardado en una página privada (https://claude.ai/artifact/AQSWzDitj143yjJdqkoXQk), con recuperación probada por sha256.
