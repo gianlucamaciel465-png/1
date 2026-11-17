@@ -98,17 +98,24 @@ def encuadre(toma, caja=None, z0=1.0, z1=None, dur=1.0, cx=None, cy=None, espejo
         caja = ((nw - cw) // 2, (nh - ch) // 2, cw, ch)
     x, y, w, h = caja
     z1 = z0 if z1 is None else z1
-    if z0 == 1.0 and z1 == 1.0:
-        f = [f'crop={w}:{h}:{x}:{y}']
+    if z0 == z1:
+        if z0 == 1.0:
+            f = [f'crop={w}:{h}:{x}:{y}']
+        else:
+            # acercamiento fijo (funciona: las expresiones son constantes). Se conserva el cálculo original
+            # para que las recetas aprobadas se reproduzcan igual.
+            cx = x + w / 2 if cx is None else cx; cy = y + h / 2 if cy is None else cy
+            Z = f'({z0}+({z1}-{z0})*min(t/{dur},1))'
+            ww = f'{w}/{Z}'; hh = f'{h}/{Z}'
+            xx = f'max({x},min({x}+{w}-{w}/{Z},{cx}-{w}/{Z}/2))'
+            yy = f'max({y},min({y}+{h}-{h}/{Z},{cy}-{h}/{Z}/2))'
+            f = [f"scale=iw*2:ih*2:flags=bicubic", f"crop=w='2*{ww}':h='2*{hh}':x='2*{xx}':y='2*{yy}':exact=1"]
     else:
-        # zoom = z0 + (z1-z0)*t/dur ; ventana w/zoom centrada en (cx, cy)
-        cx = x + w / 2 if cx is None else cx; cy = y + h / 2 if cy is None else cy
-        Z = f'({z0}+({z1}-{z0})*min(t/{dur},1))'
-        ww = f'{w}/{Z}'; hh = f'{h}/{Z}'
-        xx = f'max({x},min({x}+{w}-{w}/{Z},{cx}-{w}/{Z}/2))'
-        yy = f'max({y},min({y}+{h}-{h}/{Z},{cy}-{h}/{Z}/2))'
-        # crop con dimensiones variables no está permitido: se escala primero 2x para que el redondeo no tiemble
-        f = [f"scale=iw*2:ih*2:flags=bicubic", f"crop=w='2*{ww}':h='2*{hh}':x='2*{xx}':y='2*{yy}':exact=1"]
+        # El crop de FFmpeg evalúa w/h una sola vez: un acercamiento variable con crop deja la ventana fija
+        # (detectado por Pedro en FMT-04, 17/11/2026). Usar una función que recorte por cuadro, p. ej.
+        # fmt04_util.plano_zoom o fmt03.plano_z.
+        raise NotImplementedError('video.encuadre: acercamiento variable (z0 != z1) no soportado; '
+                                  'usar fmt04_util.plano_zoom o fmt03.plano_z')
     f.append(f'scale={W}:{H}:flags=lanczos')
     if espejo:
         f.append('hflip')
@@ -161,6 +168,9 @@ def foto(path, dur, salida, caja=None, z0=1.0, z1=1.0, cx=None, cy=None, tmp=Non
         caja = ((iw - cw) // 2, (ih - ch) // 2, cw, ch)
     x, y, w, h = caja
     nf = round(dur * FPS)
+    if z0 != z1:
+        # mismo problema que encuadre(): crop evalúa w/h una sola vez y la ventana no cambia de tamaño
+        raise NotImplementedError('video.foto: acercamiento variable (z0 != z1) no soportado; recortar por cuadro aparte')
     cx = x + w / 2 if cx is None else cx; cy = y + h / 2 if cy is None else cy
     # zoompan por cuadro con precisión subpíxel: escalar la foto 4x antes (suave) y recortar
     Z = f'({z0}+({z1}-{z0})*on/{max(nf - 1, 1)})'
@@ -244,7 +254,9 @@ def master(video, audio_wav, salida, ass_path=None, overlays=None):
     for i, (png, x, y, t0, t1) in enumerate(overlays or []):
         inputs += ['-loop', '1', '-i', str(png)]
         nl = f'v{i + 1}'
-        fc.append(f"[{lab}][{i + 2}:v]overlay={x}:{y}:enable='between(t,{t0},{t1})':shortest=1[{nl}]")
+        # por número de cuadro: con between(t,...) el overlay entraba un cuadro antes (FMT-04, 17/11/2026)
+        n0, n1 = round(t0 * FPS), round(t1 * FPS) - 1
+        fc.append(f"[{lab}][{i + 2}:v]overlay={x}:{y}:enable='between(n,{n0},{n1})':shortest=1[{nl}]")
         lab = nl
     if ass_path:
         fc.append(f"[{lab}]subtitles={ass_path}:fontsdir=/usr/share/fonts/opentype/inter[vs]"); lab = 'vs'

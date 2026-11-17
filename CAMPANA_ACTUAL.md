@@ -335,8 +335,24 @@ Referencia: `REFERENCIAS/REF_26_referencia_viral_grabacion.mp4` (Neuron Visuals,
 |---|---|---|
 | `ROCCE_06_DEJA_DE_PROCRASTINAR_v01.mp4` | **Más reciente (entregada, sin aprobación aún)** | 15,0 s / 450 cuadros, 1080×1920, 30 fps, −14,2 LUFS, pico −2,8 dBFS, 10 MB. Fuera del repo. |
 
-## Estado del trabajo (actualizado 06/11/2026)
-- **Último encargo (06/11/2026):** `ROCCE_06_DEJA_DE_PROCRASTINAR_v01`, entregado por el chat. Pendiente: confirmar la grafía del CTA y escuchar la mezcla.
+#### Tanda FMT (17/11/2026, pedido de Gianluca: «los videos me parecen malísimos… analizá las marcas que mejor contenido hacen y copiarlo. Haceme 5 videos»)
+Formatos tomados de marcas de ropa (fuentes en `/mnt/project-files/piezas/FMT_tanda_formatos/07_links_inspiracion.md`; Instagram no se pudo leer desde la sesión, se usó prensa). Solo la mecánica; todo el material es propio. Flujo completo de Roma (guion → máster → descripción) en `/mnt/project-files/piezas/FMT_tanda_formatos/`. Recetas en `scripts/fmt/` (`video.py`, `sonido.py` y `fmt0X*.py`). Música propia sintetizada (TEMP) y versión `_SINMUSICA` de cada una para poner un audio de Instagram al subir. Sin voz, sin subtítulos.
+
+| Versión | Estado | Detalle |
+|---|---|---|
+| `ROCCE_FMT01_PERFIL_BAJO_v02.mp4` | Aprobado por Roma, entregado para revisión | 10,0 s · revelación de espalda (4531 → 4530, 7824) · A1 envíos · video md5 `9b77cbf3…` |
+| `ROCCE_FMT02_19_ANIOS_CANUELAS_v01.mp4` | Aprobado por Roma, entregado para revisión | 10,2 s · fundador (7887, 7885, 7896) · P1 comentarios · video md5 `741abb75…` |
+| `ROCCE_FMT03_BLANCA_O_NEGRA_v02.mp4` | Aprobado por Roma, entregado para revisión | 10,2 s · transición de prenda + elección (7824 → 7793, 7996 → 7857) · C2 · video md5 `f73cc24e…` |
+| `ROCCE_FMT04_PASALE_EL_DEDO_v02.mp4` | Aprobado por Roma, entregado para revisión | 10,0 s · demostración táctil (3453, 3375, 8004, 7824, 7859) · C1 · video md5 `6239a778…` |
+| `ROCCE_FMT05_TRES_MOVIMIENTOS_v02.mp4` | Aprobado por Roma, entregado para revisión | 10,0 s · detrás de escena en loop (8002, 7884, 8004) · A2 guardados · video md5 `b22b5917…` |
+
+- Las v01 de FMT-01/03/04/05 quedan como referencia (no aprobadas). Fuera del repo.
+- Lecciones de material: 8004 tiene «ROCCÉ» entero solo en 3,167–3,667 s (paneo de detalle); 7793 trae sonidos tonales en 1,27–2,33 s; 4531 tiene una mano con puño beige abajo a la derecha en 0,4–1,1 s.
+- Pendientes para publicar: confirmar que es Gianluca en 7884/7885; consentimiento del chico de 7793/7857/7859; quién tira la Blanca en 7996; antebrazo tatuado (7824, 3375); destino del link en bio y checkout (C1/C2); escucha humana; foley real del dedo sobre el relieve.
+
+## Estado del trabajo (actualizado 17/11/2026)
+- **Último encargo (17/11/2026):** tanda FMT de 5 videos con formatos de marcas top (tabla arriba), aprobados por Roma y entregados para revisión de Gianluca; nada publicado.
+- **Encargo del 06/11/2026:** `ROCCE_06_DEJA_DE_PROCRASTINAR_v01`, entregado por el chat. Pendiente: confirmar la grafía del CTA y escuchar la mezcla.
 - **Encargo del 05/11/2026:** `ROCCE_05_ESTUVISTE_CERCA_v01` (guion de Gianluca, Higgsfield + posproducción), entregado por el chat. Pendiente: escucha de las dos voces (edge-tts, sin actuación real) y revisión de la remera que sostiene el chico en la entrega y al final.
 - **Encargo del 29/10/2026:** cuarto video `ROCCE_04_ANTES_DEL_APLAUSO_v01` en dos versiones (con y sin locución), entregado por el chat. Antes: corrección de los dos videos (v01 rechazadas). `ROCCE_01_HIELO_REVELACION_v02`, `ROCCE_02_HACETE_FOUNDER_v02` y `LOGO/ROCCE_logo_sin_fondo.png` entregados por el chat; pendientes de revisión. Falta una toma de él con la negra de frente; `IMG_7793` se usó como suya (confirmar). Las referencias de este encargo son de terceros y no persisten en una sesión nueva (volver a pasarlas para rehacer).
 - **Encargo anterior:** carrusel de prelanzamiento v02 mixto (5 MP4 con video real en ventanas + 3 PNG), entregado por el chat el 28/10/2026; pendiente de revisión de Gianluca. v01 (8 PNG) fue rechazada. Antes: reel nuevo desde cero, `ROCCE_proxima_v01` ("La próxima empieza con vos"), con la voz de marca Firme 04. Entregado por el chat y en la página privada de reels. Banco vocal guardado en una página privada (https://claude.ai/artifact/AQSWzDitj143yjJdqkoXQk), con recuperación probada por sha256.
