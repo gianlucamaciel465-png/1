@@ -350,8 +350,19 @@ Formatos tomados de marcas de ropa (fuentes en `/mnt/project-files/piezas/FMT_ta
 - Lecciones de material: 8004 tiene «ROCCÉ» entero solo en 3,167–3,667 s (paneo de detalle); 7793 trae sonidos tonales en 1,27–2,33 s; 4531 tiene una mano con puño beige abajo a la derecha en 0,4–1,1 s.
 - Pendientes para publicar: confirmar que es Gianluca en 7884/7885; consentimiento del chico de 7793/7857/7859; quién tira la Blanca en 7996; antebrazo tatuado (7824, 3375); destino del link en bio y checkout (C1/C2); escucha humana; foley real del dedo sobre el relieve.
 
-## Estado del trabajo (actualizado 17/11/2026)
-- **Último encargo (17/11/2026):** tanda FMT de 5 videos con formatos de marcas top (tabla arriba), aprobados por Roma y entregados para revisión de Gianluca; nada publicado.
+#### Tanda VIR (18/11/2026, pedido de Gianluca: «analizá… marcas que empezaron hace poco y están siendo muy virales… y hacé 2 videos perfectos»)
+- De la tanda FMT le gustó solo **FMT-03 «¿Blanca o Negra?» v02**: «la rompieron con las transiciones y con el sistema de apuesta… repreguntas inconscientes todo el tiempo». Es la calibración: transición = micro-apuesta encadenada.
+- Radar y documentos en `/mnt/project-files/piezas/VIR_marcas_nuevas_virales/` (00 brief, 01 contenido propio, 02 radar de Pepe con fuentes, 03 verificación, 04 Cata, 05 filtro, 06 audio). Lección verificada: en marcas nuevas lo que más pesa es **el fundador hablando** (Mutimer: «It really changed when I started talking in the videos»; Nude Project sin un solo video de producto solo).
+| Pieza | Versión aprobada | md5 video / audio | Notas |
+|---|---|---|---|
+| VIR-01 «A nada» (10,6 s) | `ROCCE_VIR01_A_NADA_A_v02.mp4` (+ B «¿Se las lleva?», + SINMUSICA) | a7bc5936…6c74 / 9d75a283…30b1 | Ola contra las dos remeras con lazo abierto; Gianluca (7887) y la Blanca puesta (7857). Receta `scripts/vir/vir01_v02.py`. Descripción D2 aprobada. |
+| VIR-02 «Lo que no se mueve» (9,0 s, respaldo sin voz) | `ROCCE_VIR02_NOMBRE_A_v02.mp4` (+ B «¿Qué no cambia?», + SINMUSICA) | 91e0f899…ebe4 / e8e70a14…14ef | «Founders Privée» fijo en pantalla mientras cambia todo; revelación en Gianluca (7885). Receta `scripts/vir/vir02n_v02.py`. |
+| VIR-02 «voz» | — | — | Guion con 3 huecos para la voz real de Gianluca; espera su audio. |
+- Nada publicado. Pendientes de Gianluca: escucha, consentimiento del chico de 7857, confirmar 7884/7885, destino del link, audio para VIR-02 «voz».
+
+## Estado del trabajo (actualizado 18/11/2026)
+- **Último encargo (18/11/2026):** tanda VIR de 2 videos (tabla arriba), aprobados por Roma y entregados para revisión; VIR-02 «voz» espera el audio de Gianluca; nada publicado.
+- **Encargo del 17/11/2026:** tanda FMT de 5 videos con formatos de marcas top (tabla arriba), aprobados por Roma y entregados para revisión de Gianluca; nada publicado.
 - **Encargo del 06/11/2026:** `ROCCE_06_DEJA_DE_PROCRASTINAR_v01`, entregado por el chat. Pendiente: confirmar la grafía del CTA y escuchar la mezcla.
 - **Encargo del 05/11/2026:** `ROCCE_05_ESTUVISTE_CERCA_v01` (guion de Gianluca, Higgsfield + posproducción), entregado por el chat. Pendiente: escucha de las dos voces (edge-tts, sin actuación real) y revisión de la remera que sostiene el chico en la entrega y al final.
 - **Encargo del 29/10/2026:** cuarto video `ROCCE_04_ANTES_DEL_APLAUSO_v01` en dos versiones (con y sin locución), entregado por el chat. Antes: corrección de los dos videos (v01 rechazadas). `ROCCE_01_HIELO_REVELACION_v02`, `ROCCE_02_HACETE_FOUNDER_v02` y `LOGO/ROCCE_logo_sin_fondo.png` entregados por el chat; pendientes de revisión. Falta una toma de él con la negra de frente; `IMG_7793` se usó como suya (confirmar). Las referencias de este encargo son de terceros y no persisten en una sesión nueva (volver a pasarlas para rehacer).
