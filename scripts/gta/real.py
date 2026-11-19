@@ -124,13 +124,42 @@ def producto():
     return out
 
 
-def etapa_color():
+K_CROMA_4631 = 0.85      # v01: fracción de croma que se quita en los oscuros fríos de la Negra de 4631
+
+
+def croma_oscuros(rgb, caja, K=K_CROMA_4631):
+    """v01 (03 de Roma, corrección 3): baja el croma de los oscuros fríos de la Negra (4631 sale azulada, B−R ≈ +17).
+    Máscara: oscuros (L < 110) con B − R > 2, componente que más se superpone con la caja de la Negra (así no se tocan
+    las letras oscuras de la Blanca ni la grieta azulada de la roca), con borde suave. Peso por luminancia 1 → 0 entre
+    L 70 y 110. Escala el croma alrededor de la luma (Y' se conserva): no puede cambiar el signo de B−R ni de R−G,
+    así que no lleva la Negra a marrón (R > G > B)."""
+    from scipy import ndimage as nd
+    L = rgb @ np.array([0.2126, 0.7152, 0.0722], np.float32)
+    m0 = (L < 110) & (rgb[..., 2] - rgb[..., 0] > 2)
+    m0 = nd.binary_opening(m0, iterations=2)
+    lab, k = nd.label(m0)
+    if k == 0:
+        return rgb, np.zeros(L.shape, np.float32)
+    x0, y0, x1, y1 = caja
+    sol = np.bincount(lab[y0:y1, x0:x1].ravel(), minlength=k + 1); sol[0] = 0
+    m = nd.binary_dilation(nd.binary_fill_holes(lab == int(np.argmax(sol))), iterations=2)
+    w = nd.gaussian_filter(m.astype(np.float32), 2.0) * np.clip((110 - L) / 40, 0, 1)
+    Y = L[..., None]
+    return Y + (rgb - Y) * (1 - K * w[..., None]), w
+
+
+def etapa_color(solo=None):
     import vir01_v02 as C
     rep = dict(metodo='vir01_v02.MapaBlanco por toma (caja de la Blanca; en 7887 la caja sigue la ventana del acercamiento). '
-                      'Peso 0 para L < 120 y para lo saturado: la Negra, las rocas, la piel y el celeste no se tocan.',
+                      'Peso 0 para L < 120 y para lo saturado: la Negra, las rocas, la piel y el celeste no se tocan. '
+                      'v01: en 4631, además, croma de los oscuros fríos de la Negra × (1 − 0,85) (croma_oscuros).',
                producto=producto(), tomas={})
+    if solo and (TR / 'color.json').exists():
+        rep['tomas'] = json.load(open(TR / 'color.json'))['tomas']
     planos = json.load(open(TR / 'planos.json'))
     for toma in TOMAS:
+        if solo and toma not in solo:
+            continue
         src = seg(toma, '_pre'); dst = seg(toma)
         fr = leer_rgb(src)
         mb = C.MapaBlanco(CAJA_BLANCA[toma])
@@ -161,6 +190,9 @@ def etapa_color():
                     mb.box[cb[1]:cb[3], cb[0]:cb[2]] = True
                 caja = cb
             rgb2, w_, g = mb(rgb)
+            wc = None
+            if toma == 'IMG_4631':
+                rgb2, wc = croma_oscuros(rgb2, CAJA_NEGRA[toma])
             Y2, Cb2, Cr2 = C.rgb_yuv(rgb2)
             if k in (0, len(fr) // 2, len(fr) - 1) or k % 10 == 0:
                 cajan = CAJA_NEGRA[toma]
@@ -170,7 +202,8 @@ def etapa_color():
                                   celeste_despues=medir_celeste(rgb2, caja) if caja[2] > caja[0] else None,
                                   negra_antes=medir(rgb, cajan, 'negra') if cajan and k >= 9 else None,
                                   negra_despues=medir(rgb2, cajan, 'negra') if cajan and k >= 9 else None,
-                                  pct_tocado=round(float((w_ > 0.01).mean() * 100), 1)))
+                                  pct_tocado=round(float((w_ > 0.01).mean() * 100), 1),
+                                  pct_croma_oscuros=round(float((wc > 0.01).mean() * 100), 1) if wc is not None else None))
             enc.stdin.write(np.concatenate([Y2.ravel(), Cb2.ravel(), Cr2.ravel()]).round().clip(0, 255).astype(np.uint8).tobytes())
         enc.stdin.close(); enc.wait()
         rep['tomas'][toma] = dict(caja_blanca=CAJA_BLANCA[toma], caja_negra=CAJA_NEGRA[toma], medidas=filas)
@@ -193,9 +226,32 @@ def negro():
     rep = dict(fuente='IMG_7887 c57 a z 2,5 (ventana 864×1536 de la toma, centro (1680, 2696)) = primer cuadro del drop',
                media_recorte_rgb=[round(float(v), 2) for v in m], media_recorte_hex='#%02X%02X%02X' % tuple(int(round(v)) for v in m),
                media_solo_tela_rgb=[round(float(v), 2) for v in rgb[tela].mean(0)], fraccion_tela=round(float(tela.mean()), 3))
+    # v01 (03 de Roma, corrección 2): el puente se llena con la TELA sola. Zona de la remera marcada a mano en este
+    # cuadro: debajo del estampado y arriba del ruedo (600 ≤ y < 980), a la izquierda del pantalón gris (x < 840),
+    # dentro de la espalda (oscuro, poco saturado, rellenada) erosionada 12 px; fuera lo claro (estampado) y la roca.
+    from scipy import ndimage as nd
+    m = (L < 70) & (sat < 0.30)
+    m = nd.binary_fill_holes(nd.binary_closing(nd.binary_opening(m, iterations=3), iterations=10))
+    lab, k = nd.label(m); s_ = nd.sum(m, lab, range(1, k + 1)); Bm = lab == (int(np.argmax(s_)) + 1)
+    yy, xx = np.mgrid[:rgb.shape[0], :rgb.shape[1]]
+    cr = rgb.max(-1) - rgb.min(-1)
+    tela2 = (nd.binary_erosion(Bm, iterations=12) & (yy >= 600) & (yy < 980) & (xx < 840)
+             & ~nd.binary_dilation(L > 90, iterations=4) & (cr < 30))
+    t2 = rgb[tela2].mean(0)
+    rep.update(v01_tela_remera=dict(
+        zona='c57 z2,5 · 600 ≤ y < 980, x < 840, espalda erosionada 12 px, sin L > 90 (estampado) ni roca',
+        rgb=[round(float(v), 2) for v in t2], hex='#%02X%02X%02X' % tuple(int(round(v)) for v in t2),
+        b_menos_r=round(float(t2[2] - t2[0]), 2), r_menos_g=round(float(t2[0] - t2[1]), 2),
+        pixeles=int(tela2.sum()), fraccion_del_cuadro=round(float(tela2.mean()), 3)))
+    ov = (rgb * 0.45).astype(np.uint8); ov[tela2] = (0, 220, 0)
+    from PIL import Image as _I
+    _I.fromarray(ov).resize((540, 960)).save(T / 'evidencia' / 'negro_7887_mascara_tela.jpg', quality=88)
     guardar_json(rep, T / 'negro_7887.json')
     print(rep)
 
 
 if __name__ == '__main__':
-    {'planos': etapa_planos, 'color': etapa_color, 'negro': negro}[sys.argv[1]]()
+    if sys.argv[1] == 'color' and len(sys.argv) > 2:
+        etapa_color(solo=sys.argv[2:])          # p. ej. python real.py color IMG_4631 (el resto de color.json se conserva)
+    else:
+        {'planos': etapa_planos, 'color': etapa_color, 'negro': negro}[sys.argv[1]]()

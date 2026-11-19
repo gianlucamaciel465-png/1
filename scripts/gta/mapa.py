@@ -57,7 +57,8 @@ class Mapa:
         self.orig = np.array(merc(*FLORIDA), np.float64)
         try:
             nj = json.loads((T / 'negro_7887.json').read_text())
-            self.negro = tuple(int(round(v)) for v in nj['media_recorte_rgb'])
+            # v01: tela sola (03 de Roma, corrección 2); v00 usaba la media del recorte (con estampado y roca)
+            self.negro = tuple(int(round(v)) for v in nj.get('v01_tela_remera', {}).get('rgb', nj['media_recorte_rgb']))
         except FileNotFoundError:
             self.negro = (48, 43, 41)
         # ruta: Bézier cuadrática que se abre sobre el Atlántico

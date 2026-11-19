@@ -40,6 +40,7 @@ PROD = Path('/home/user/1/PRODUCTO/negra_espalda_estudio.jpg')
 CROP = (260, 610, 940, 980)          # zona del estampado en la foto de estudio (1170×2036)
 S0 = 0.6                             # escala de la plantilla (≈ tamaño del estampado en 7887 a 1080 de ancho)
 N0, NF = 57, 53                      # IMG_7887 c57–c109 (1,90–3,67), a z 1
+REG = TC / 'registro_7887.npz'          # registro por cuadro (Hp, malla d, seguimientos) para reutilizar (v3)
 FONT = '/usr/share/fonts/opentype/inter/Inter-Bold.otf'
 
 
@@ -425,21 +426,29 @@ def main():
     lado = encoder(TC / 'lado_a_lado_7887.mp4', 1080, 960, 20, ('-profile:v', 'high', '-level:v', '4.0', '-movflags', '+faststart'))
     roi = ROI0; Hn = None; Htr = Htr1 = None; vel = vel1 = np.eye(3)
     prev = None; rhoR_cal = rhoF_vid = None; ref0 = None; Hrel = np.eye(3)
+    # v3: el registro (lo caro: LK + malla + seguimientos) se guarda en registro_7887.npz y se reutiliza
+    R = dict(np.load(REG)) if REG.exists() else None
+    guardar = {'Hp': [], 'd': [], 'Htr': [], 'Htr1': []}
     for k in range(NF):
         f = F[k]; ff = f.astype(np.float32)
         B, L, sat = espalda(f, roi)
         P, lvl = exceso(L, B)
-        if k == 0:
+        if R is not None:
+            Hp, d, Htr, Htr1 = R['Hp'][k], R['d'][k], R['Htr'][k], R['Htr1'][k]
+        if R is None and k == 0:
             Hn = inicial(P, M, lk)
             Hn, _ = lk.ajustar(P, Hn, sigmas=(8, 4, 2), iters=40, modelo='sim', foto=False)
             Hn, _ = lk.ajustar(P, Hn, sigmas=(4, 2, 1), iters=40, modelo='s', foto=False)
-        Hn, _ = lk.ajustar(P, Hn, sigmas=(2, 1), iters=30, foto=False)
-        Hp = lk.a_pixeles(Hn); Hp = Hp / Hp[2, 2]
-        d = malla.ajustar(P, Hn)
+        if R is None:
+            Hn, _ = lk.ajustar(P, Hn, sigmas=(2, 1), iters=30, foto=False)
+            Hp = lk.a_pixeles(Hn); Hp = Hp / Hp[2, 2]
+            d = malla.ajustar(P, Hn)
         # --- seguimiento cuadro a cuadro desde el registro del cuadro 0 (sin estampado = T2; con estampado = T1)
         Pm = nd.binary_dilation(P > 0.2, iterations=6)
         # T2 = encadenado k−1 → k (acumula deriva); T3 = cada cuadro contra el cuadro 0 (sin estampado, sin cadena)
-        if k == 0:
+        if R is not None:
+            pass
+        elif k == 0:
             Htr = Hp.copy(); Htr1 = Hp.copy()
             m0r = (nd.binary_dilation(B, iterations=8) & ~nd.binary_erosion(B, iterations=40)) | B
             ref0 = (L.copy(), m0r & ~Pm, Hp.copy())
@@ -452,6 +461,8 @@ def main():
             Hrel = flujo_cuadro(ref0[0], L, ref0[1], Hrel)
             Htr1 = Hrel @ ref0[2]; Htr1 /= Htr1[2, 2]
         prev = (L, B, Pm)
+        for nm_, v_ in (('Hp', Hp), ('d', d), ('Htr', Htr), ('Htr1', Htr1)):
+            guardar[nm_].append(np.array(v_, np.float64))
         # --- recuadro de trabajo
         q = esquinas(Hp, bbA)
         bb = (max(0, int(q[:, 0].min()) - 30), max(0, int(q[:, 1].min()) - 30), min(W, int(q[:, 0].max()) + 30), min(H, int(q[:, 1].max()) + 30))
@@ -525,6 +536,8 @@ def main():
               hm.get('iou'), hm.get('ancho_pct'), '| T2', t2.get('d_centro'), t2.get('bordes_px'), '| T3', (medidas['seguimiento_ref0_sin_estampado'] or {}).get('d_centro'),
               '| L', fot, flush=True)
     sal.stdin.close(); sal.wait(); lado.stdin.close(); lado.wait()
+    if R is None:
+        np.savez(REG, **{k_: np.stack(v_) for k_, v_ in guardar.items()})
     resumen = resumir(filas, M, rhoR_cal, rhoF_vid)
     guardar_json(dict(metodo=__doc__, resumen=resumen, por_cuadro=filas), TC / 'medidas.json')
     hoja(hojas, filas)
@@ -613,5 +626,152 @@ def hoja(hojas, filas):
     g.save(TC / 'grafico_compuesto.png')
 
 
+# ==================================================================================================== v01 · ROCCÉ
+def forma_masks(tm, rm):
+    """igual que forma() pero con las dos máscaras ya hechas (estudio/capa ubicada = tm, real = rm)."""
+    if tm.sum() < 50 or rm.sum() < 50:
+        return None
+    def geo(m):
+        ys, xs = np.nonzero(m)
+        return np.array([xs.mean(), ys.mean()]), np.percentile(xs, 98) - np.percentile(xs, 2), np.percentile(ys, 98) - np.percentile(ys, 2)
+    ct, wt_, ht = geo(tm); cr, wr, hr = geo(rm)
+    et, er = bordes(tm), bordes(rm)
+    dr = nd.distance_transform_edt(~er); dt = nd.distance_transform_edt(~et)
+    return dict(d_centro=round(float(np.hypot(*(ct - cr))), 2), ancho_pct=round(float(wt_ / wr - 1) * 100, 2),
+                alto_pct=round(float(ht / hr - 1) * 100, 2), iou=round(float((tm & rm).sum() / (tm | rm).sum()), 3),
+                bordes_px=round(float((dr[et].mean() + dt[er].mean()) / 2), 2), real_a_2px=round(float((dt[rm] <= 2).mean()), 3))
+
+
+def main_rocce():
+    """v01 (03 de Roma, corrección 4): compuesto con el Founders de estudio + la capa del ROCCÉ extraída de 7887 4K
+    (rocce_capa.py), sobre el registro guardado. Prueba sin trampa: cada cuadro usa la capa hecha con los cuadros de la
+    otra paridad (los de c57–c59 y c109, que no entraron en la extracción, usan la capa completa)."""
+    import rocce_capa as RC
+    M = modelo_estudio(); Tm = plantilla(M); lk = LK(Tm); th, tw = Tm.shape; malla = Malla(lk, tw, th)
+    R = dict(np.load(REG)); Cp = np.load(TC / 'rocce_capa.npz')
+    zx0, zy0, zx1, zy1 = [float(v) for v in Cp['zona']]; Gc = float(Cp['G'])
+    F = cuadros_7887(); bbA = (0, 0, tw, th)
+    sal = encoder(TC / 'compuesto_rocce_7887.mp4', W, H)
+    lado = encoder(TC / 'lado_a_lado_rocce_7887.mp4', 1080, 960, 20, ('-profile:v', 'high', '-level:v', '4.0', '-movflags', '+faststart'))
+    filas = []; hojas = {}; rhoF_vid = None
+    for k in range(NF):
+        f = F[k]; ff = f.astype(np.float32)
+        B, L, sat = espalda(f, ROI0); P, _ = exceso(L, B)
+        Hp, d = R['Hp'][k], R['d'][k]
+        q = esquinas(Hp, bbA)
+        bb = (max(0, int(q[:, 0].min()) - 30), max(0, int(q[:, 1].min()) - 30), min(W, int(q[:, 0].max()) + 30), min(H, int(q[:, 1].max()) + 30))
+        aF, _ = warp_alfa2(M, Hp, bb, malla, d)
+        # capa del ROCCÉ: paridad contraria (prueba sin usar el mismo cuadro)
+        j = k - RC.K0
+        if 0 <= j <= RC.K1 - RC.K0:
+            capa = Cp['capa_impar'] if j % 2 == 0 else Cp['capa_par']; origen = 'impar' if j % 2 == 0 else 'par'
+        else:
+            capa = Cp['capa']; origen = 'completa (cuadro fuera de la extracción)'
+        alfa = Cp['alfa']
+        ys, xs = np.mgrid[bb[1]:bb[3], bb[0]:bb[2]]
+        tx, ty = inversa(Hp, malla, d, xs.ravel().astype(np.float64), ys.ravel().astype(np.float64))
+        gx = (tx / S0 - zx0 + 0.5) * Gc - 0.5; gy = (ty / S0 - zy0 + 0.5) * Gc - 0.5
+        esc = descomponer(Hp, 200, 100)[1] * S0
+        sg = max(0.0, 0.5 * Gc / max(esc, 1e-3))
+        Rw = np.stack([nd.map_coordinates(nd.gaussian_filter(capa[..., c] - 1, sg), [gy, gx], order=1, mode='constant')
+                       .reshape(xs.shape) for c in range(3)], -1) + 1
+        aRw = nd.map_coordinates(nd.gaussian_filter(alfa, sg), [gy, gx], order=1, mode='constant').reshape(xs.shape)
+        cl = lin(ff)
+        dentro = B | (nd.binary_dilation(B, iterations=25) & (sat < 0.22))
+        occ = oclusion(ff, dentro)
+        footF = np.zeros((H, W), bool); footF[bb[1]:bb[3], bb[0]:bb[2]] = nd.binary_dilation(aF > 0.05, iterations=8)
+        footR = np.zeros((H, W), bool); footR[bb[1]:bb[3], bb[0]:bb[2]] = nd.binary_dilation(aRw > 0.02, iterations=4)
+        borrar = (nd.binary_dilation((P > 0.12) & footF, iterations=3) | footR) & dentro & ~occ
+        tela = B & ~borrar & ~occ & ~(P > 0.12)
+        S = sombreado_multi(cl, tela, bb)
+        tm_ = tela & (S.max(-1) > 0)
+        res = (cl - S)[tm_]; sdv = res.std(0) if len(res) > 100 else np.zeros(3)
+        rng = np.random.default_rng(k)
+        borr = cl.copy()
+        borr[borrar] = np.clip(S[borrar] + rng.normal(0, 1, (borrar.sum(), 1)) * sdv[None, :] * 0.8, 0, 1)
+        Sc = S[bb[1]:bb[3], bb[0]:bb[2]]; clc = cl[bb[1]:bb[3], bb[0]:bb[2]]; oc = occ[bb[1]:bb[3], bb[0]:bb[2]]
+        Pc = P[bb[1]:bb[3], bb[0]:bb[2]]
+        if rhoF_vid is None:
+            mF_ = (aF > 0.9) & (Pc > 0.5)
+            rhoF_vid = np.median(clc[mF_] / np.maximum(Sc[mF_], 1e-4), 0)
+        rho = 1 + aF[..., None] * (rhoF_vid[None, None] - 1) + (Rw - 1)
+        bc = borr[bb[1]:bb[3], bb[0]:bb[2]]
+        blk = np.where(oc[..., None], clc, bc + (rho - 1) * Sc)
+        out = borr.copy(); out[bb[1]:bb[3], bb[0]:bb[2]] = blk
+        comp = np.clip(srgb(out) + 0.5, 0, 255).astype(np.uint8)
+        fuera = ~nd.binary_dilation(B, iterations=25); comp[fuera] = f[fuera]
+        sal.stdin.write(comp.tobytes())
+        izq = np.asarray(Image.fromarray(f).resize((540, 960), Image.LANCZOS)); der = np.asarray(Image.fromarray(comp).resize((540, 960), Image.LANCZOS))
+        lado.stdin.write(np.concatenate([izq, der], 1).tobytes())
+        # --- medidas del ROCCÉ (zona = huella de la capa ubicada, sin piel)
+        zonaR = nd.binary_dilation(aRw > 0.02, iterations=6) & dentro[bb[1]:bb[3], bb[0]:bb[2]] & ~oc
+        Ls = luma(Sc); rl_real = luma(clc) / np.maximum(Ls, 1e-5); rl_comp = luma(blk) / np.maximum(Ls, 1e-5)
+        real_m = nd.binary_opening((np.abs(rl_real - 1) > 0.10) & zonaR, iterations=1)
+        capa_m = (aRw > 0.5) & zonaR
+        L8r = luma(ff)[bb[1]:bb[3], bb[0]:bb[2]]; L8c = luma(comp.astype(np.float32))[bb[1]:bb[3], bb[0]:bb[2]]
+        L8b = luma(np.clip(srgb(bc) + 0.5, 0, 255))
+        cr_ = np.corrcoef((rl_real - 1)[zonaR], (rl_comp - 1)[zonaR])[0, 1] if zonaR.sum() > 100 else None
+        mR = capa_m & real_m
+        fila = dict(cuadro=k, fuente_c=N0 + k, capa=origen,
+                    rocce_forma=forma_masks(capa_m, real_m),
+                    rocce_error_L=dict(mae_compuesto=round(float(np.abs(L8c - L8r)[zonaR].mean()), 2),
+                                       mae_solo_borrado=round(float(np.abs(L8b - L8r)[zonaR].mean()), 2),
+                                       correlacion_relieve=round(float(cr_), 3) if cr_ is not None else None),
+                    rocce_L_letras=dict(real=round(float(np.median(L8r[mR])), 1), comp=round(float(np.median(L8c[mR])), 1)) if mR.sum() > 50 else None,
+                    founders_forma=forma(aF, Pc, nd.binary_dilation(B, iterations=25)[bb[1]:bb[3], bb[0]:bb[2]]))
+        filas.append(fila)
+        if k in (0, 13, 26, 39, 52):
+            hojas[k] = (f, comp, bb, zonaR, real_m, capa_m)
+        rf = fila['rocce_forma'] or {}
+        print(k, origen, 'ROCCÉ bordes', rf.get('bordes_px'), 'iou', rf.get('iou'), 'centro', rf.get('d_centro'), '| MAE', fila['rocce_error_L'], flush=True)
+    sal.stdin.close(); sal.wait(); lado.stdin.close(); lado.wait()
+
+    def st(v):
+        v = [x for x in v if x is not None]
+        return dict(mediana=round(float(np.median(v)), 3), p90=round(float(np.percentile(v, 90)), 3), max=round(float(np.max(v)), 3),
+                    min=round(float(np.min(v)), 3), n=len(v)) if v else None
+    g = lambda grp, key, ab=False: st([(abs(f_[grp][key]) if ab else f_[grp][key]) for f_ in filas if f_[grp]])
+    resumen = dict(
+        cuadros=NF, prueba='cada cuadro con la capa de la otra paridad (no se mide sobre los cuadros que la hicieron)',
+        rocce=dict(bordes_px=g('rocce_forma', 'bordes_px'), iou=g('rocce_forma', 'iou'), d_centro_px=g('rocce_forma', 'd_centro'),
+                   ancho_pct_abs=g('rocce_forma', 'ancho_pct', True), alto_pct_abs=g('rocce_forma', 'alto_pct', True),
+                   real_a_2px=g('rocce_forma', 'real_a_2px'),
+                   mae_L_compuesto=g('rocce_error_L', 'mae_compuesto'), mae_L_solo_borrado=g('rocce_error_L', 'mae_solo_borrado'),
+                   correlacion_relieve=g('rocce_error_L', 'correlacion_relieve'),
+                   L_letras_real=st([f_['rocce_L_letras']['real'] for f_ in filas if f_['rocce_L_letras']]),
+                   L_letras_comp=st([f_['rocce_L_letras']['comp'] for f_ in filas if f_['rocce_L_letras']])),
+        founders=dict(bordes_px=g('founders_forma', 'bordes_px'), iou=g('founders_forma', 'iou'), d_centro_px=g('founders_forma', 'd_centro')),
+        rhoF_video=[round(float(v), 2) for v in rhoF_vid])
+    guardar_json(dict(resumen=resumen, por_cuadro=filas), TC / 'medidas_rocce.json')
+    # hoja 1:1 del ROCCÉ: original | compuesto | diferencia ×4 | bordes (rojo real, cian capa)
+    fnt = ImageFont.truetype(FONT, 20); filas_img = []
+    for k, (f, comp, bb, zonaR, real_m, capa_m) in hojas.items():
+        ys_, xs_ = np.nonzero(zonaR)
+        y0, y1 = bb[1] + max(0, ys_.min() - 20), bb[1] + ys_.max() + 20; x0, x1 = bb[0] + max(0, xs_.min() - 20), bb[0] + xs_.max() + 20
+        a_ = f[y0:y1, x0:x1]; b_ = comp[y0:y1, x0:x1]
+        dif = np.clip(128 + (luma(b_.astype(np.float32)) - luma(a_.astype(np.float32))) * 4, 0, 255).astype(np.uint8)
+        ov = (a_.astype(np.float32) * 0.5).astype(np.uint8)
+        er = bordes(real_m)[y0 - bb[1]:y1 - bb[1], x0 - bb[0]:x1 - bb[0]]; et = bordes(capa_m)[y0 - bb[1]:y1 - bb[1], x0 - bb[0]:x1 - bb[0]]
+        ov[er] = (255, 60, 60); ov[et] = (60, 230, 255); ov[er & et] = (255, 255, 255)
+        rf = filas[k]['rocce_forma'] or {}
+        tiles = [(a_, f'original c{N0 + k}'), (b_, f"compuesto (capa {filas[k]['capa']})"),
+                 (np.stack([dif] * 3, -1), f"comp − real ×4 · MAE {filas[k]['rocce_error_L']['mae_compuesto']}"),
+                 (ov, f"rojo real · cian capa · {rf.get('bordes_px')} px")]
+        row = []
+        for im, t in tiles:
+            tt = Image.new('RGB', (im.shape[1], im.shape[0] + 28), (20, 20, 20)); tt.paste(Image.fromarray(np.ascontiguousarray(im)), (0, 28))
+            ImageDraw.Draw(tt).text((4, 3), t, font=fnt, fill=(255, 220, 80)); row.append(tt)
+        rw = Image.new('RGB', (sum(t.width + 8 for t in row), max(t.height for t in row)), (20, 20, 20)); x = 0
+        for t in row:
+            rw.paste(t, (x, 0)); x += t.width + 8
+        filas_img.append(rw)
+    Wd = max(r.width for r in filas_img); Hd = sum(r.height + 8 for r in filas_img)
+    o = Image.new('RGB', (Wd, Hd), (20, 20, 20)); y = 0
+    for r in filas_img:
+        o.paste(r, (0, y)); y += r.height + 8
+    o.save(TC / 'hoja_rocce_1a1.jpg', quality=90)
+    print(json.dumps(resumen, ensure_ascii=False, indent=1))
+
+
 if __name__ == '__main__':
-    main()
+    main_rocce() if 'rocce' in sys.argv[1:] else main()

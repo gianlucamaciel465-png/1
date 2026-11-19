@@ -56,7 +56,7 @@ TM = dict(
 )
 # posiciones (guion §3; y = borde superior de la tinta)
 Y = dict(logo=(150, 310), hook1=340, hook2=540, caja=460, esquina=(60, 170), esquina_escala=0.75,
-         gana=300, sol=400, casi_det=180, rep=300, contador=640, frase=520, inspirado=440,
+         gana=300, sol=400, casi_det=180, rep=300, contador=640, frase=520, inspirado=414,
          mini=(60, 1215, 290, 1445), carga=(540, 1430))
 SEPARACION_MIN = 30          # px a 1080 (10 px a 360) entre cajas de tinta+contorno/caja de los elementos del hook
 
@@ -370,7 +370,8 @@ class Grafica:
         self.rep = panel([(texto_sprite([(TXT['rep'], saira(120, 800), BLANCO)], pad=4), 0)])
         self.frase = texto_sprite([('so f', inter(98), BLANCO), ('★', inter(98), CELESTE), ('cking close.', inter(98), BLANCO)],
                                   stroke=6, stroke_fill=NEGRO)
-        self.insp = panel([(texto_sprite([(TXT['inspirado'], saira(44, 700), CELESTE)], pad=4), 0)], padx=24, pady=14)
+        # v01 (03 de Roma, corrección 1): ×1,41 (Saira 44 → 62, caja 24/14 → 34/20): tinta 692 px, caja 768 px ≤ 814 (frase)
+        self.insp = panel([(texto_sprite([(TXT['inspirado'], saira(62, 700), CELESTE)], pad=4), 0)], padx=34, pady=20)
         x0, y0, x1, y1 = Y['mini']; self.mini_r = (x1 - x0) / 2; self.mini_c = ((x0 + x1) / 2, (y0 + y1) / 2)
         self.mini_fondo = sp_minimapa_fondo(self.mini_r - 9)
         self.mini_anillo = Anillo(self.mini_r - 4.5, 9)
@@ -547,9 +548,9 @@ class Grafica:
             lz.poner(fr, xs, ys, alfa=u, escala=sg, ancla=(xs, ys))
             vis.append(f'viaje de la frase u={u:.2f}')
             return
-        # final: «INSPIRADO EN EL DROP» (Etiqueta, y 440) + «so f★cking close.» (Grande, y 520) hasta 15,70
+        # final: «INSPIRADO EN EL DROP» (Etiqueta 62 px, y 414) + «so f★cking close.» (Grande, y 520) hasta 15,70
         k = n - v1
-        si = [1.12, 1.08, 1.04][k] if k < 3 else 1.0
+        si = [1.06, 1.04, 1.02][k] if k < 3 else 1.0       # v01: el pop no pasa el ancho de la frase (768 × 1,06 = 814)
         cy = Y['inspirado'] - self.insp.oy + self.insp.h / 2
         lz.poner(self.insp, 540 - self.insp.ink[0] / 2, Y['inspirado'], alfa=al_fin, escala=si, ancla=(540, cy))
         lz.poner(fr, 540 - fr.ink[0] / 2, Y['frase'], alfa=al_fin)

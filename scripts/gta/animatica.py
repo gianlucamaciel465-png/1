@@ -23,6 +23,7 @@ import mapa as MP                                                               
 
 A = T / 'audio'
 TR = T / 'real'
+VER = next((a.split('=')[1] for a in sys.argv if a.startswith('--ver=')), 'v00')   # v01: --ver=v01
 NOMBRE = {('A', False): 'ROCCE_GTA6_animatica_v00.mp4', ('B', False): 'ROCCE_GTA6_animatica_B_v00.mp4',
           ('A', True): 'ROCCE_GTA6_animatica_ALT7895_v00.mp4'}
 NEUTRO = (62, 66, 72)
@@ -98,7 +99,7 @@ def enc_rgb(salida):
 
 def render(variante='A', alt=False):
     g = Grafica(variante)
-    pre = T / f'animatica_pre_{variante}.mp4'
+    pre = T / f'animatica_pre_{variante}{"" if VER == "v00" else "_" + VER}.mp4'
     if not (alt and pre.exists()):
         M = MP.Mapa()
         contenido = fondo(cuadro(15.00) - 1)          # último cuadro de G7 (marcador), sin gráfica
@@ -114,7 +115,7 @@ def render(variante='A', alt=False):
     segs = [TR / '7887.mp4', TR / '7884.mp4', TR / ('7895.mp4' if alt else '4631.mp4')]
     lst = T / f'animatica_{variante}{"_alt" if alt else ""}.txt'
     lst.write_text(''.join(f"file '{p}'\n" for p in [pre] + segs))
-    out = T / NOMBRE[(variante, alt)]
+    out = T / NOMBRE[(variante, alt)].replace('_v00', f'_{VER}')
     nf = ND + sum(int(run(['ffprobe', '-v', 'error', '-count_frames', '-select_streams', 'v:0', '-show_entries',
                            'stream=nb_read_frames', '-of', 'csv=p=0', str(s)]).decode()) for s in segs)
     wav = (T / 'audio_alt7895' if alt else A) / 'mezcla_animatica.wav'      # ALT: ambiente de 7895 bajo 7895
@@ -174,7 +175,8 @@ def hoja(mp4, ns, salida, ancho=360, cols=5, rotulos=None):
 
 
 def control(variante='A', alt=False):
-    mp4 = T / NOMBRE[(variante, alt)]
+    mp4 = T / NOMBRE[(variante, alt)].replace('_v00', f'_{VER}')
+    sfx = ('_alt' if alt else '') + ('' if VER == 'v00' else f'_{VER}')
     E = T / 'evidencia'; E.mkdir(exist_ok=True)
     rep = {}
     pr = json.loads(run(['ffprobe', '-v', 'error', '-show_entries',
@@ -207,13 +209,13 @@ def control(variante='A', alt=False):
     rep['negro_medido_7887'] = json.loads((T / 'negro_7887.json').read_text())
     # hoja 360 de cuadros clave
     claves = [0, 13, 20, 47, 70, 175, 240, 290, 320, 365, 400, 415, 455, 465, 474, 479, 480, 500, 545, 610]
-    hoja(mp4, claves, E / f'hoja_360_claves_{variante}{"_alt" if alt else ""}.jpg', 360, 5)
+    hoja(mp4, claves, E / f'hoja_360_claves_{variante}{sfx}.jpg', 360, 5)
     # cortes: cuadro antes y después de cada corte
     cortes = [45, 117, 189, 249, 300, 378, 450, 480, 533, 575]
     ns = sorted(set(sum([[c - 1, c] for c in cortes], [])))
-    hoja(mp4, ns, E / f'hoja_cortes_{variante}{"_alt" if alt else ""}.jpg', 216, 10)
-    hoja(mp4, list(range(0, rep['cuadros_contados'], 15)), E / f'hoja_contacto_{variante}{"_alt" if alt else ""}.jpg', 180, 11)
-    guardar_json(rep, E / f'control_{variante}{"_alt" if alt else ""}.json')
+    hoja(mp4, ns, E / f'hoja_cortes_{variante}{sfx}.jpg', 216, 10)
+    hoja(mp4, list(range(0, rep['cuadros_contados'], 15)), E / f'hoja_contacto_{variante}{sfx}.jpg', 180, 11)
+    guardar_json(rep, E / f'control_{variante}{sfx}.json')
     print(json.dumps({k: v for k, v in rep.items() if k != 'ffprobe'}, ensure_ascii=False, indent=1))
     return rep
 

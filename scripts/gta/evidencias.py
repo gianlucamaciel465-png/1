@@ -90,5 +90,42 @@ def hoja_mapa():
     print(hoja(mp4, ns, E / 'hoja_mapa_A.jpg', 216, 10))
 
 
+def hoja_cambios():
+    """v01: antes (v00) | después (v01) de las correcciones 1–3 de 03_roma_revision_pre_v00.md."""
+    v0 = T / 'ROCCE_GTA6_animatica_v00.mp4'; v1 = T / 'ROCCE_GTA6_animatica_v01.mp4'
+    fnt = ImageFont.truetype(FNT, 22)
+
+    def rot(im, t):
+        im = Image.fromarray(im) if not isinstance(im, Image.Image) else im
+        out = Image.new('RGB', (im.width, im.height + 32), (20, 20, 20)); out.paste(im, (0, 32))
+        ImageDraw.Draw(out).text((6, 5), t, font=fnt, fill=(255, 220, 80)); return out
+
+    filas = []
+    # 1 · «INSPIRADO EN EL DROP» (c420 = 14,00 s), recorte 1:1 de y 340–660
+    a0 = cuadros_rgb(v0, [420])[420][340:660]; a1 = cuadros_rgb(v1, [420])[420][340:660]
+    filas.append([rot(a0, 'v00 · c420 · etiqueta Saira 44 · caja 548 px'), rot(a1, 'v01 · c420 · Saira 62 (×1,41) · caja 768 px ≤ frase 814')])
+    # 2 · a 360 px de ancho (lectura en teléfono)
+    b0 = cuadros_rgb(v0, [420], 360)[420]; b1 = cuadros_rgb(v1, [420], 360)[420]
+    filas.append([rot(b0, 'v00 a 360 px'), rot(b1, 'v01 a 360 px')])
+    # 3 · puente c478 | c479 | c480
+    ns = [478, 479, 480]
+    c0 = cuadros_rgb(v0, ns, 216); c1 = cuadros_rgb(v1, ns, 216)
+    tira = lambda c: np.concatenate([c[n] for n in ns], 1)
+    filas.append([rot(tira(c0), 'v00 · c478 c479 c480 · puente #322D2B (con roca)'),
+                  rot(tira(c1), 'v01 · c478 c479 c480 · puente = tela sola')])
+    # 4 · 4631 c36 (tramo real): Negra antes/después del croma de oscuros
+    d0 = cuadros_rgb(TR / '4631_v00.mp4', [36])[36][900:1800]; d1 = cuadros_rgb(TR / '4631.mp4', [36])[36][900:1800]
+    filas.append([rot(d0, 'v00 · 4631 c36 · Negra B−R +17,1'), rot(d1, 'v01 · 4631 c36 · Negra B−R +2,5 · R−G −0,8')])
+    ancho = 2 * 1080 + 12
+    alto = sum(max(r[0].height, r[1].height) + 12 for r in filas)
+    out = Image.new('RGB', (ancho, alto), (10, 10, 10)); y = 0
+    for r in filas:
+        x = 0
+        for t in r:
+            out.paste(t, (x, y)); x += 1080 + 12
+        y += max(r[0].height, r[1].height) + 12
+    sal = E / 'hoja_cambios_v01.jpg'; out.save(sal, quality=88); print(sal, out.size)
+
+
 if __name__ == '__main__':
-    {'color': hoja_color, 'mapa': hoja_mapa}[sys.argv[1]]()
+    {'color': hoja_color, 'mapa': hoja_mapa, 'cambios': hoja_cambios}[sys.argv[1]]()
