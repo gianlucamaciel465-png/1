@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""BOC-SUD P2 «La cuarta final» · valor: GIVE HISTORY YOUR NAME (el casi como etapa) · receta v01 (24/11/2026).
+"""BOC-SUD P2 «La cuarta final» · valor: GIVE HISTORY YOUR NAME (el casi como etapa) · receta v02 (24/11/2026; v02 = correcciones de Roma).
 
 Hechos (01_pepe_verificacion.md): finales internacionales perdidas desde la Recopa 2008: Libertadores 2012 (vuelta en
 Pacaembú), 2018 (vuelta en el Bernabéu, alargue), 2023 (Maracaná, alargue). 21/11/2026: 2-0 a Mineiro en Barranquilla.
@@ -22,19 +22,20 @@ A = C.ARCH
 PACAEMBU = A / 'pacaembu_1920.jpg'          # Commons «Estádio do Pacaembu 1.jpg» (Rodrigo Soldon, CC BY 2.0)
 BERNABEU = A / 'bernabeu_noche_1920.jpg'    # Commons «Estadio Santiago Bernabéu 13.jpg» (Luis García, CC BY-SA 3.0)
 MARACANA = A / 'maracana_1920.jpg'          # Commons «Maracana 2022.jpg» (Arne Müseler, CC BY-SA 3.0 de)
-TELONES = A / 'telones_1920.jpg'            # Commons «Hinchada de Boca desplegando sus telones.JPG» (Gonzaloges, dominio público)
-ESTADIO = A / 'final2026_1920.jpg'          # Commons «Estadio Metropolitano de Barranquilla.jpg» (licencia dudosa)
+TELONES = A / 'telones_2560.jpg'            # Commons «Hinchada de Boca desplegando sus telones.JPG» (Gonzaloges, dominio público)
+ESTADIO = A / 'final2026_3840.jpg'          # Commons «Estadio Metropolitano de Barranquilla.jpg» (licencia dudosa)
 OBELISCO_A = A / 'Buenos_Aires_-_Boca_Juniors_-_D_a_del_hincha_-_131212a.webm'
 SALIDA = C.T / 'borradores' / 'p2_borrador.mp4'
 
 # encuadres por foto (centro x, y en 0..1)
-ENC = {'pacaembu': (0.54, 0.48), 'bernabeu': (0.36, 0.48), 'maracana': (0.5, 0.47), 'telones': (0.42, 0.55)}
+ENC = {'pacaembu': (0.54, 0.48), 'bernabeu': (0.36, 0.48), 'maracana': (0.5, 0.47)}
 
-# cuadros (las tres finales aceleran: 36, 28 y 26 cuadros)
+# cuadros (las tres finales aceleran: 36, 30 y 28 cuadros; cada «NO.» + «Alargue.» queda 14–18 cuadros en pantalla)
 F1, NO1 = (0, 36), 22
-F2, NO2 = (36, 64), 52
-F3, NO3 = (64, 90), 78
-SEQ = (90, 126)
+F2, NO2 = (36, 66), 48
+F3, NO3 = (66, 94), 76
+SEQ = (94, 126)
+NO_Y, ALARGUE_Y, DOS_Y = 1200, 1362, 560
 F4 = (126, 162)
 GOL = (162, 195); GOL_T = 171
 CAMP = (195, 231)
@@ -54,16 +55,23 @@ def planos():
         cx, cy = ENC[key]
         P.append(C.foto_movil(img, (b - a) / FPS, T / f's_{key}.mp4', 'cubrir', z0=1.05, z1=1.22, c0=(cx, cy),
                               sacudida=[(no - a, 14)], por_cuadro=gris_desde(no - a)))
-    cx, cy = ENC['telones']
-    P.append(C.foto_movil(TELONES, (SEQ[1] - SEQ[0]) / FPS, T / 's_telones.mp4', 'cubrir', z0=1.0, z1=1.12, c0=(cx, cy)))
-    P.append(C.foto_movil(ESTADIO, (F4[1] - F4[0]) / FPS, T / 's_2026.mp4', 'cubrir', z0=1.0, z1=1.3,
-                          c0=(0.5, 0.55), c1=(0.42, 0.62)))
-    P.append(C.propia('IMG_7895', 0.0, (GOL[1] - GOL[0]) / FPS, T / 's_7895.mp4', cx=0.45, cy=0.45, z0=1.05, z1=1.12))
-    P.append(C.foto_movil(ESTADIO, (CAMP[1] - CAMP[0]) / FPS, T / 's_campeon.mp4', 'cubrir', z0=1.15, z1=1.35,
-                          c0=(0.66, 0.64), c1=(0.68, 0.63)))
+    # telones: recorte sobre las banderas (afuera el tablero electrónico de arriba y los carteles de los costados)
+    P.append(C.foto_movil(TELONES, (SEQ[1] - SEQ[0]) / FPS, T / 's_telones.mp4', 'cubrir', z0=1.45, z1=1.6,
+                          c0=(0.505, 0.545), c1=(0.50, 0.53)))
+    # final 2026: de la cancha hacia el estadio entero (movimiento inverso al de P1)
+    P.append(C.foto_movil(ESTADIO, (F4[1] - F4[0]) / FPS, T / 's_2026.mp4', 'cubrir', z0=1.4, z1=1.0,
+                          c0=(0.44, 0.58), c1=(0.5, 0.55)))
+    # la ola de 7895 en recorte cerrado (en P1 va abierta)
+    k0 = GOL_T - GOL[0]
+    P.append(C.propia('IMG_7895', 0.0, (GOL[1] - GOL[0]) / FPS, T / 's_7895.mp4', cx=0.42, cy=0.36, z0=1.4, z1=1.5,
+                      por_cuadro=lambda k, f: C.sombra(f, 540, DOS_Y) if k >= k0 else f))
+    # la tribuna llena del otro lado (encuadre que no usan P1 ni P3)
+    P.append(C.foto_movil(ESTADIO, (CAMP[1] - CAMP[0]) / FPS, T / 's_campeon.mp4', 'cubrir', z0=1.5, z1=1.7,
+                          c0=(0.84, 0.56), c1=(0.85, 0.57)))
     P.append(C.propia('IMG_3375', 0.3, 0.3 + (CASI[1] - CASI[0]) / FPS, T / 's_3375.mp4', z0=1.0, z1=1.06))
-    P.append(C.placa((PLACA[1] - PLACA[0]) / FPS, T / 's_placa.mp4', empuje=0.18, foco=(0.5, 0.78)))
-    P.append(C.propia('IMG_7896', 4.15, 4.15 + (CTA[1] - CTA[0]) / FPS, T / 's_7896.mp4', cx=0.5, cy=0.42, z0=1.16, z1=1.20))
+    cta = C.propia('IMG_7896', 4.15, 4.15 + (CTA[1] - CTA[0]) / FPS, T / 's_7896.mp4', cx=0.5, cy=0.42, z0=1.16, z1=1.20)
+    P.append(C.placa((PLACA[1] - PLACA[0]) / FPS, T / 's_placa.mp4', empuje=0.18, foco=(0.5, 0.78), fondo=T / 's_7896.mp4'))
+    P.append(cta)
     n = C.armar(P, T / 'p2_video.mp4')
     assert n == NF, n
     json.dump(P, open(T / 'planos.json', 'w'), ensure_ascii=False, indent=1, default=str)
@@ -84,14 +92,14 @@ def textos():
                                                  (F3, NO3, 'Final 2023', 'Río', '¿Esta sí?', 'Alargue.')):
         caja(a, b, f'{anio}\\N{preg}', pop=(a == 0))
         X.append(dict(t0=t(a), t1=t(b), txt=f'Boca · Libertadores · {lugar}', estilo='CajaN_ctx', y=585))
-        X.append(dict(t0=t(no), t1=t(b), txt='NO.', estilo='SelloG', y=1040, pop=True, extra='\\frz6'))
-        if extra:
-            X.append(dict(t0=t(no + 3), t1=t(b), txt=extra, estilo='CajaN_96', y=1260))
+        X.append(dict(t0=t(no), t1=t(b), txt='NO.', estilo='SelloG', y=NO_Y, pop=True, extra='\\frz6'))
+        if extra:       # entra junto con el «NO.»: es la pista que cobra «Sin alargue.»
+            X.append(dict(t0=t(no), t1=t(b), txt=extra, estilo='CajaN_96', y=ALARGUE_Y, pop=True))
     caja(SEQ[0], SEQ[1], 'Desde 2008,\\Nninguna internacional.')
     caja(F4[0], F4[1], 'Final 2026\\N¿Otra vez?')
     X.append(dict(t0=t(F4[0]), t1=t(F4[1]), txt='Boca · Sudamericana · Barranquilla', estilo='CajaN_ctx', y=585))
-    X.append(dict(t0=t(GOL_T), t1=t(GOL[1]), txt='2-0.', estilo='Golpe', y=560, pop=True))
-    caja(CAMP[0], CAMP[1], 'Sin alargue. Campeón.')
+    X.append(dict(t0=t(GOL_T), t1=t(GOL[1]), txt='2-0.', estilo='Golpe', y=DOS_Y, pop=True))
+    caja(CAMP[0], CAMP[1], 'Sin alargue.\\NCampeón.')
     caja(CASI[0], CASI[1], 'Tres casi.\\NDespués, historia.')
     caja(PLACA[0], PLACA[1], '2026.')
     caja(CTA[0], NF, 'Cerrá tu 2026.')

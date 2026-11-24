@@ -360,8 +360,22 @@ Formatos tomados de marcas de ropa (fuentes en `/mnt/project-files/piezas/FMT_ta
 | VIR-02 «voz» | — | — | Guion con 3 huecos para la voz real de Gianluca; espera su audio. |
 - Nada publicado. Pendientes de Gianluca: escucha, consentimiento del chico de 7857, confirmar 7884/7885, destino del link, audio para VIR-02 «voz».
 
-## Estado del trabajo (actualizado 18/11/2026)
-- **Último encargo (18/11/2026):** tanda VIR de 2 videos (tabla arriba), aprobados por Roma y entregados para revisión; VIR-02 «voz» espera el audio de Gianluca; nada publicado.
+#### Tanda BOC-SUD (24/11/2026, pedido de Gianluca: «los 3 MEJORES VIDEOS… relacionados con boca campeón de la copa sudamericana para LLAMAR LA ATENCIÓN Y DARLE DOPAMINA. Podés usar cualquier imagen real»)
+- Hechos verificados (Pepe): Boca 2-0 Atlético Mineiro, 21/11/2026, Barranquilla; travesaño de Merentiel, gol anulado a Ascacíbar, gol de Ascacíbar minutos después, Merentiel el 2-0; primer título internacional desde la Recopa 2008; finales perdidas 2012, 2018 y 2023.
+- La red de la sesión no llegó a la transmisión ni a redes (YouTube, X, TikTok, IG, ESPN, Conmebol, diarios, Vimeo, Flickr): no hay clips del partido. Se hizo con fotos de Wikimedia Commons animadas por código + tomas propias. Gianluca lo aceptó («Bueno dale», «Hacelo»).
+- Carpeta: `/mnt/project-files/piezas/BOC-SUD_sudamericana/` (docs 00–07, hojas en `control/`). Recetas: `scripts/bocsud/{comun,p1,p2,p3}.py` (etapas `planos | trans | audio | master | todo`; intermedios en `TRABAJO/bocsud/`). MP4 fuera del repo.
+| Pieza | Versión vigente | md5 video / audio | Notas |
+|---|---|---|---|
+| P1 «Tres veces» (12,5 s) | `ROCCE_BOCSUD_P1_TRES_VECES_v02.mp4` | f0ae7c43…7c2c / cd7ab103…1aab | El Casi: las olas hacen de remates (4631, 7895, 4627), 3453, cierre 4641. CTA «Pateá la tercera.» |
+| P2 «La cuarta final» (12,1 s) | `ROCCE_BOCSUD_P2_LA_CUARTA_FINAL_v02.mp4` | 4356d2e6…7d26 / 1ac7ad3b…6334 | GIVE HISTORY YOUR NAME: tres finales «NO.» → «2-0.»; 7895, 3375, cierre 7896. CTA «Cerrá tu 2026.» |
+| P3 «Los que estaban» (11,9 s) | `ROCCE_BOCSUD_P3_LOS_QUE_ESTABAN_v02.mp4` | d713b779…b775 / 63a07ab4…df56 | Pertenencia: Día del Hincha 12/12/2013 en el Obelisco → «Antes de los miles, estuvo uno.» (7887); cierre 7857. CTA «Bancá desde el principio.» |
+- v01 de las tres: revisión de máster de Roma «aprobadas con correcciones»; v02 aplica esas correcciones (detalle en `05_pedro_master.md`). Las v01 quedan en la carpeta.
+- Nada publicado. Antes de publicar: foto de la final 2026 con licencia dudosa (está en las tres); créditos obligatorios en la descripción de P2 y P3 (CC BY / CC BY-SA, compartir igual); caras y marcas en las fotos de hinchas; el festejo del 12/12/2013 terminó con incidentes (P3 pone esa fecha en pantalla); consentimiento del chico de 7857; música TEMP sintetizada y «bombo de cancha» sintetizado en P3; escucha y reproducción humanas (no se hicieron).
+- Lecciones: las fotos de Commons bajan con `commons.wikimedia.org/w/thumb.php?f=<Archivo>&w=<1280|1920|2560|3840>` (agente honesto, 8 s entre pedidos); `upload.wikimedia.org` da 429. Placa: recortarla por su contorno y ponerla sobre el plano del cierre desenfocado (el rectángulo oscuro se nota). Barridos: los dos planos se desplazan juntos con desenfoque de movimiento. No repetir la misma toma de cierre en dos piezas de una tanda. Un paneo sobre una foto se frena si el centro pedido queda fuera del rango que permite el acercamiento.
+
+## Estado del trabajo (actualizado 24/11/2026)
+- **Último encargo (24/11/2026):** tanda BOC-SUD de 3 videos «Boca campeón de la Sudamericana» (tabla arriba), v02 exportados a la carpeta del proyecto, con la segunda mirada de Roma en curso; faltan clips reales del partido y la música definitiva; nada publicado.
+- **Encargo del 18/11/2026:** tanda VIR de 2 videos (tabla arriba), aprobados por Roma y entregados para revisión; VIR-02 «voz» espera el audio de Gianluca; nada publicado.
 - **Encargo del 17/11/2026:** tanda FMT de 5 videos con formatos de marcas top (tabla arriba), aprobados por Roma y entregados para revisión de Gianluca; nada publicado.
 - **Encargo del 06/11/2026:** `ROCCE_06_DEJA_DE_PROCRASTINAR_v01`, entregado por el chat. Pendiente: confirmar la grafía del CTA y escuchar la mezcla.
 - **Encargo del 05/11/2026:** `ROCCE_05_ESTUVISTE_CERCA_v01` (guion de Gianluca, Higgsfield + posproducción), entregado por el chat. Pendiente: escucha de las dos voces (edge-tts, sin actuación real) y revisión de la remera que sostiene el chico en la entrega y al final.

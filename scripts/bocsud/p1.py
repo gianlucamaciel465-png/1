@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""BOC-SUD P1 «Tres veces» · valor: el Casi (seguir pateando) · receta v01 (24/11/2026).
+"""BOC-SUD P1 «Tres veces» · valor: el Casi (seguir pateando) · receta v02 (24/11/2026; v02 = correcciones de Roma).
 
 Hechos (01_pepe_verificacion.md): travesaño de Merentiel (3'), gol de Ascacíbar anulado por offside (11'),
 «minutos después» gol de Ascacíbar (15'), Merentiel el 2-0 (47'). Sin minutos en pantalla.
@@ -16,9 +16,10 @@ V = C.V
 
 T = C.T / 'p1'
 FPS = 30
-ESTADIO = C.ARCH / 'final2026_1920.jpg'      # Commons «Estadio Metropolitano de Barranquilla.jpg», 1920 px
+ESTADIO = C.ARCH / 'final2026_3840.jpg'      # Commons «Estadio Metropolitano de Barranquilla.jpg», miniatura de 3840 px
 OBELISCO_A = C.ARCH / 'Buenos_Aires_-_Boca_Juniors_-_D_a_del_hincha_-_131212a.webm'
 SALIDA = C.T / 'borradores' / 'p1_borrador.mp4'
+GOL1_Y, GOL2_Y, DOS_Y = 560, 430, 1180      # altura de «GOL.», «GOL.» y «2-0.»
 
 
 def planos():
@@ -26,19 +27,26 @@ def planos():
     P.append(C.foto_movil(ESTADIO, 1.0, T / 's01_estadio_arco.mp4', 'cubrir', z0=1.0, z1=1.45,
                           c0=(0.42, 0.6), c1=(0.385, 0.66)))                                   # c0–c29 ¿Entra?
     P.append(C.propia('IMG_4631', 3.45, 4.35, T / 's02_4631.mp4', z0=1.0, z1=1.06))            # c30–c56 travesaño (golpe c40 = 3,78 s)
-    P.append(C.propia('IMG_7895', 0.0, 0.8, T / 's03_7895.mp4', cx=0.45, cy=0.45, z0=1.05, z1=1.12))  # c57–c80 ¿Y ahora? / GOL
+    P.append(C.propia('IMG_7895', 0.0, 0.8, T / 's03_7895.mp4', cx=0.45, cy=0.45, z0=1.05, z1=1.12,
+                      por_cuadro=lambda k, f: C.sombra(f, 540, GOL1_Y) if k >= 9 else f))        # c57–c80 ¿Y ahora? / GOL (c66)
     P.append(C.congelar(T / 's03_7895.mp4', 23, 15, T / 's04_anulado.mp4',
-                        por_cuadro=lambda k, f: C.destenir(f, 1.0, min(1.0, 0.25 + k * 0.08))))   # c81–c95 ANULADO
-    P.append(C.propia('IMG_3453', 0.2, 1.4, T / 's05_3453.mp4', z0=1.0, z1=1.08))              # c96–c131 ¿casi?
-    P.append(C.propia('IMG_4627', 10.0, 11.9, T / 's06_4627.mp4', z0=1.0, z1=1.10))            # c132–c188 tercera / GOL (ola c165 = 11,1 s)
-    P.append(C.foto_movil(ESTADIO, 1.3, T / 's07_estadio_grupo.mp4', 'cubrir', z0=1.15, z1=1.35,
-                          c0=(0.66, 0.64), c1=(0.68, 0.63)))                                   # c189–c227 el del anulado
+                        por_cuadro=lambda k, f: C.destenir(C.sombra(f, 540, GOL1_Y, k=0.35), 1.0, 0.12)))   # c81–c95 ANULADO: gris (el sello rojo resalta)
+    # 3453 2,3–3,5 s: «so f★cking close.» entra completa en todos los cuadros y los dedos llegan al final
+    P.append(C.propia('IMG_3453', 2.3, 3.5, T / 's05_3453.mp4', z0=1.0, z1=1.03))              # c96–c131 ¿casi?
+    P.append(C.propia('IMG_4627', 10.0, 11.9, T / 's06_4627.mp4', z0=1.0, z1=1.10,
+                      por_cuadro=lambda k, f: C.sombra(f, 540, GOL2_Y) if k >= 33 else f))       # c132–c188 tercera / GOL (ola c165 = 11,1 s)
+    # el plantel reunido en la cancha (recorte cerrado; el teléfono que filma queda abajo)
+    P.append(C.foto_movil(ESTADIO, 1.3, T / 's07_estadio_grupo.mp4', 'cubrir', z0=2.2, z1=2.6,
+                          c0=(0.69, 0.66), c1=(0.69, 0.645)))                                  # c189–c227 el del anulado
     # vuelve al arco del primer cuadro (el del travesaño); golpe y destello en el «2-0.» (k = 20)
+    # (encuadre corrido a la derecha: las ambulancias de atrás del arco quedan afuera)
     P.append(C.foto_movil(ESTADIO, 1.3, T / 's08_estadio_arco2.mp4', 'cubrir', z0=1.5, z1=1.9,
-                          c0=(0.385, 0.66), c1=(0.38, 0.665), sacudida=[(20, 12)],
-                          por_cuadro=lambda k, f: C.flash(f, max(0.0, 0.5 - 0.17 * (k - 20))) if k >= 20 else f))   # c228–c266
-    P.append(C.placa(1.2, T / 's09_placa.mp4'))                                                  # c267–c302 primeros 100
-    P.append(C.propia('IMG_4627', 4.0, 6.4, T / 's10_4627.mp4', z0=1.0, z1=1.05))              # c303–c374 CTA
+                          c0=(0.48, 0.62), c1=(0.455, 0.64), sacudida=[(20, 12)],
+                          por_cuadro=lambda k, f: C.flash(C.sombra(f, 540, DOS_Y), max(0.0, 0.5 - 0.17 * (k - 20))) if k >= 20 else f))   # c228–c266
+    # cierre: 4641 (la Blanca de frente en la roca; la ola rompe detrás en 1,5–2,5 s). No repite 4627 ni el cierre de P2.
+    cta = C.propia('IMG_4641', 0.6, 3.0, T / 's10_4641.mp4', z0=1.0, z1=1.06)                  # c303–c374 CTA
+    P.append(C.placa(1.2, T / 's09_placa.mp4', fondo=T / 's10_4641.mp4'))                        # c267–c302 primeros 100 (fondo: el cierre desenfocado)
+    P.append(cta)
     n = C.armar(P, T / 'p1_video.mp4')
     json.dump(P, open(T / 'planos.json', 'w'), ensure_ascii=False, indent=1, default=str)
     print('cuadros', n)
@@ -54,24 +62,24 @@ def textos():
         est = C.caja(txt, maximo)
         X.append(dict(t0=t(a), t1=t(b), txt=txt, estilo=est, y=C.Y_HOOK if est == 'CajaN_hook' else y, pop=True, **kw))
     caja(0, 30, '¿Entra?')
-    X.append(dict(t0=t(0), t1=t(30), txt='Final de la Sudamericana', estilo='CajaN_ctx', y=455))
+    X.append(dict(t0=t(0), t1=t(30), txt='Boca · Final de la Sudamericana', estilo='CajaN_ctx', y=455))
     caja(40, 57, 'Travesaño.')
     caja(57, 66, '¿Y ahora?')
-    X.append(dict(t0=t(66), t1=t(81), txt='GOL.', estilo='Golpe', y=560, pop=True))
+    X.append(dict(t0=t(66), t1=t(81), txt='GOL.', estilo='Golpe', y=GOL1_Y, pop=True))
     X.append(dict(t0=t(81), t1=t(96), txt='ANULADO.', estilo='Sello', y=560, pop=True, extra='\\frz8'))
     caja(96, 132, '¿Se queda en casi?')
     caja(132, 165, 'Minutos después.')
-    X.append(dict(t0=t(165), t1=t(189), txt='GOL.', estilo='Golpe', y=430, pop=True))
-    caja(189, 228, 'Lo hizo el del anulado.')
+    X.append(dict(t0=t(165), t1=t(189), txt='GOL.', estilo='Golpe', y=GOL2_Y, pop=True))
+    caja(189, 228, 'Lo hizo\\Nel del anulado.')
     caja(228, 267, 'Y el del travesaño:')
-    X.append(dict(t0=t(248), t1=t(267), txt='2-0.', estilo='Golpe', y=1180, pop=True))
+    X.append(dict(t0=t(248), t1=t(267), txt='2-0.', estilo='Golpe', y=DOS_Y, pop=True))
     caja(267, 303, 'Uno de los primeros 100.')
     caja(303, 375, 'Pateá la tercera.')
     X.append(dict(t0=t(312), t1=t(375), txt='link en bio', estilo='CajaN_link', y=445))
     return X
 
 
-TRANS = {30: 'barrido', 57: 'zoom', 132: 'barrido', 189: 'zoom+destello', 228: 'zoom', 303: 'barrido_izq'}
+TRANS = {30: 'barrido', 57: 'zoom', 132: 'barrido', 189: 'zoom+destello', 228: 'zoom', 303: 'zoom'}   # 303: la placa sale y el fondo queda en foco
 
 
 def trans():
@@ -88,9 +96,9 @@ def audio(con_musica=True):
         m.real(OBELISCO_A, 2.0, t(0), t(57), -14, hp=120, ini=0.05, fin=0.08, etiqueta='Obelisco 2013 (murmullo)')
     m.toma('IMG_4631', 3.45, t(30), t(57), -6, ini=0.01, fin=0.05)
     m.toma('IMG_7895', 0.0, t(57), t(81), -4, fin=0.02)
-    m.toma('IMG_3453', 0.2, t(96), t(132), -18, ini=0.1, fin=0.05)
+    m.toma('IMG_3453', 2.3, t(96), t(132), -18, ini=0.1, fin=0.05)
     m.toma('IMG_4627', 10.0, t(132), t(189), -5, ini=0.05, fin=0.05)
-    m.toma('IMG_4627', 4.0, t(303), t(375), -8, ini=0.05, fin=0.3)
+    m.toma('IMG_4641', 0.6, t(303), t(375), -9, ini=0.05, fin=0.3)
     if hay_hinchada:
         m.real(OBELISCO_A, 20.0, t(66), t(81), -6, ini=0.01, fin=0.01, etiqueta='Obelisco 2013 (grito)')
         m.real(OBELISCO_A, 30.0, t(165), t(267), -4, ini=0.01, fin=0.4, etiqueta='Obelisco 2013 (festejo)')

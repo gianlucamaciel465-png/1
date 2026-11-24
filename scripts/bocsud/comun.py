@@ -103,6 +103,23 @@ def foto_movil(path, dur, salida, modo='cubrir', z0=1.0, z1=1.06, c0=(0.5, 0.5),
     return dict(foto=str(path), cuadros=n, salida=str(salida), modo=modo, z=(z0, z1), c=(c0, c1))
 
 
+def foto_desenfocada(path, zonas, salida):
+    """copia de la foto con zonas elípticas desenfocadas (caras de terceros a media distancia).
+    zonas: [(cx, cy, rx, ry, sigma, pluma)] en píxeles de la foto. No toca el archivo original."""
+    im = ImageOps.exif_transpose(Image.open(path)).convert('RGB')
+    for (cx, cy, rx, ry, sigma, pluma) in zonas:
+        pad = int(max(rx, ry) + 4 * sigma + 3 * pluma)
+        b = (cx - pad, cy - pad, cx + pad, cy + pad)
+        reg = im.crop(b)
+        bl = reg.filter(ImageFilter.GaussianBlur(sigma))
+        m = Image.new('L', reg.size, 0)
+        ImageDraw.Draw(m).ellipse([pad - rx, pad - ry, pad + rx, pad + ry], fill=255)
+        m = m.filter(ImageFilter.GaussianBlur(pluma))
+        im.paste(Image.composite(bl, reg, m), b[:2])
+    im.save(salida, quality=96)
+    return salida
+
+
 def leer_video(src, t0, dur, w, h, vf=''):
     """cuadros RGB del video src (cualquier tamaño) desde t0 durante dur, a 30 fps, escalados a w x h"""
     n = nf(dur)
@@ -185,11 +202,18 @@ PLACAS = Path('/mnt/project-files/piezas/BOC-01_ultimo_minuto/material/rc-blanca
 FONDO_PLACA = (16, 17, 19)
 
 
+def _primer_cuadro(video):
+    raw = subprocess.run(['ffmpeg', '-v', 'error', '-i', str(video), '-frames:v', '1', '-f', 'rawvideo', '-pix_fmt', 'rgb24', '-'],
+                         capture_output=True, check=True).stdout
+    return Image.fromarray(np.frombuffer(raw, np.uint8).reshape(H, W, 3))
+
+
 def placa(dur, salida, ancho=720, cy=880, z_in=1.35, k_in=4, temblor=(3, (3, -2), (-2, 2), (1, -1)),
-          brillo=(8, 16), empuje=0.04, foco=None):
-    """Placa izquierda de rc-blanca-placas en recorte duro (x 12–234, y 54–212, como BOC-04) sobre #101113.
-    Entra de z_in a 1,0 en k_in cuadros, tiembla (k0, desplazamientos...), la cruza un brillo (k0, k1) y empuja
-    suave (empuje) hasta el final. foco=(fx, fy) 0..1 sobre la placa: el empuje se centra ahí (p. ej. el «2026»)."""
+          brillo=(8, 16), empuje=0.08, foco=None, fondo=None, oscurecer=0.42, desenfoque=26):
+    """Placa izquierda de rc-blanca-placas (x 12–234, y 54–212), recortada por su contorno (chapa + marco) y con sombra.
+    fondo: video 1080x1920 cuyo primer cuadro, desenfocado y oscurecido, hace de fondo (el plano de cierre que sigue);
+    sin fondo, color liso. Entra de z_in a 1,0 en k_in cuadros, tiembla, la cruza un brillo y empuja suave hasta el
+    final. foco=(fx, fy) 0..1 sobre la placa: el empuje se centra ahí (p. ej. el «2026»)."""
     src = Image.open(PLACAS).convert('RGB').crop((12, 54, 234, 212))
     sa = np.asarray(src).astype(np.float32)
     # la estrella azul de abajo a la derecha (fuente x 195–230, y 192–212) se tapa con el fondo oscuro vecino
@@ -197,10 +221,22 @@ def placa(dur, salida, ancho=720, cy=880, z_in=1.35, k_in=4, temblor=(3, (3, -2)
     sa[188 - 54:, 185 - 12:] = fondo_local
     src = Image.fromarray(sa.round().clip(0, 255).astype(np.uint8))
     placa_m = (sa.mean(2) > 110).astype(np.float32)          # la chapa (para enmascarar el brillo)
+    # contorno: esquinas por extremos de la zona clara, agrandado para incluir el marco oscuro de la chapa
+    ys, xs = np.nonzero(placa_m > 0)
+    esq = [(xs[i], ys[i]) for i in (np.argmin(xs + ys), np.argmax(xs - ys), np.argmax(xs + ys), np.argmin(xs - ys))]
+    mx = sum(e[0] for e in esq) / 4; my = sum(e[1] for e in esq) / 4
+    esq = [(mx + (x - mx) * 1.05, my + (y - my) * 1.07) for x, y in esq]
+    S4 = 8
+    alfa_src = Image.new('L', (src.width * S4, src.height * S4), 0)
+    ImageDraw.Draw(alfa_src).polygon([((x + 0.5) * S4, (y + 0.5) * S4) for x, y in esq], fill=255)
+    if fondo is not None:
+        fb = _primer_cuadro(fondo).filter(ImageFilter.GaussianBlur(desenfoque))
+        base0 = np.asarray(fb, np.float32) * oscurecer
+    else:
+        base0 = np.zeros((H, W, 3), np.float32); base0[:] = FONDO_PLACA
     n = nf(dur); enc = encoder(salida)
     k_t0 = temblor[0]; desps = temblor[1:]
     for k in range(n):
-        fr = Image.new('RGB', (W, H), FONDO_PLACA)
         if k < k_in:
             z = z_in + (1.0 - z_in) * suave((k + 1) / k_in)
         else:
@@ -216,29 +252,31 @@ def placa(dur, salida, ancho=720, cy=880, z_in=1.35, k_in=4, temblor=(3, (3, -2)
         dx = dy = 0
         if k_t0 <= k < k_t0 + len(desps):
             dx, dy = desps[k - k_t0]
-        im = src.resize((int(round(w)), int(round(h))), Image.LANCZOS)
-        pm = np.asarray(Image.fromarray((placa_m * 255).astype(np.uint8)).resize(im.size, Image.BILINEAR), np.float32) / 255
-        # bordes con calado de 40 px hacia el fondo
-        m = Image.new('L', im.size, 255); d = ImageDraw.Draw(m)
-        mk = np.asarray(m, np.float32)
-        yy, xx = np.mgrid[0:im.size[1], 0:im.size[0]]
-        dist = np.minimum.reduce([xx, yy, im.size[0] - 1 - xx, im.size[1] - 1 - yy]).astype(np.float32)
-        mk = np.clip(dist / 40.0, 0, 1)
+        tam = (int(round(w)), int(round(h)))
+        im = src.resize(tam, Image.LANCZOS)
+        pm = np.asarray(Image.fromarray((placa_m * 255).astype(np.uint8)).resize(tam, Image.BILINEAR), np.float32) / 255
+        al_im = alfa_src.resize(tam, Image.LANCZOS).filter(ImageFilter.GaussianBlur(1.2))
+        al = np.asarray(al_im, np.float32) / 255
+        yy, xx = np.mgrid[0:tam[1], 0:tam[0]]
         a = np.asarray(im, np.float32)
         if brillo and brillo[0] <= k <= brillo[1]:
             u = (k - brillo[0]) / max(brillo[1] - brillo[0], 1)
-            xc = -0.2 * im.size[0] + u * 1.4 * im.size[0]
+            xc = -0.2 * tam[0] + u * 1.4 * tam[0]
             band = np.clip(1 - np.abs((xx - 0.35 * yy) - xc) / 60.0, 0, 1)
             a = a + (255 - a) * 0.15 * (band * pm)[..., None]
-        base = np.asarray(fr, np.float32)
+        base = base0.copy()
         x0 = int(round(x + dx)); y0 = int(round(y + dy))
-        h_, w_ = mk.shape
+        # sombra de la chapa sobre el fondo
+        sm = Image.new('L', (W, H), 0); sm.paste(al_im, (x0 + 14, y0 + 20))
+        sm = np.asarray(sm.filter(ImageFilter.GaussianBlur(22)), np.float32) / 255
+        base *= (1 - 0.6 * sm)[..., None]
+        h_, w_ = al.shape
         xa, ya = max(x0, 0), max(y0, 0); xb, yb = min(x0 + w_, W), min(y0 + h_, H)
-        sub = base[ya:yb, xa:xb]; aa = a[ya - y0:yb - y0, xa - x0:xb - x0]; mm = mk[ya - y0:yb - y0, xa - x0:xb - x0, None]
+        sub = base[ya:yb, xa:xb]; aa = a[ya - y0:yb - y0, xa - x0:xb - x0]; mm = al[ya - y0:yb - y0, xa - x0:xb - x0, None]
         base[ya:yb, xa:xb] = sub * (1 - mm) + aa * mm
         enc.stdin.write(base.round().clip(0, 255).astype(np.uint8).tobytes())
     enc.stdin.close(); enc.wait()
-    return dict(foto=str(PLACAS), recorte=(12, 54, 234, 212), cuadros=n, salida=str(salida))
+    return dict(foto=str(PLACAS), recorte=(12, 54, 234, 212), cuadros=n, salida=str(salida), fondo=str(fondo))
 
 
 # ---------------- sonido: mezcla con audio real de cualquier archivo y efectos de cancha ----------------
@@ -354,6 +392,19 @@ def destenir(f, k=1.0, rojo=0.0):
     return Image.fromarray(b.clip(0, 255).astype(np.uint8))
 
 
+_SOMBRAS = {}
+
+
+def sombra(f, cx, cy, rx=430, ry=190, k=0.5):
+    """oscurece suave una elipse centrada en (cx, cy): apoyo para texto blanco sobre espuma o cielo"""
+    clave = (cx, cy, rx, ry, k)
+    if clave not in _SOMBRAS:
+        yy, xx = np.mgrid[0:H, 0:W].astype(np.float32)
+        d = ((xx - cx) / rx) ** 2 + ((yy - cy) / ry) ** 2
+        _SOMBRAS[clave] = (1 - k * np.exp(-1.3 * d))[..., None]
+    return Image.fromarray((np.asarray(f, np.float32) * _SOMBRAS[clave]).clip(0, 255).astype(np.uint8))
+
+
 def flash(f, a):
     x = np.asarray(f, np.float32)
     return Image.fromarray((x + (255 - x) * a).clip(0, 255).astype(np.uint8))
@@ -365,6 +416,7 @@ _FUENTE_SB = '/usr/share/fonts/opentype/inter/InterDisplay-SemiBold.otf'
 V.ESTILOS.update({
     'CajaN_96': ('Inter Display SemiBold', 96, '&H00FFFFFF', '&H00141414', '&H00141414', 0, 26, 0, 3, 8, 0),
     'CajaN_84': ('Inter Display SemiBold', 84, '&H00FFFFFF', '&H00141414', '&H00141414', 0, 23, 0, 3, 8, 0),
+    'CajaN_108': ('Inter Display SemiBold', 108, '&H00FFFFFF', '&H00141414', '&H00141414', 0, 30, 0, 3, 8, 0),
     'SelloG': ('Inter Display ExtraBold', 250, '&H002B2BE0', '&H00FFFFFF', '&H00000000', 0, 10, 0, 1, 5, 0),
 })
 _TAM = (('CajaN_hook', 120, 33), ('CajaN_96', 96, 26), ('CajaN_84', 84, 23), ('CajaN_125', 72, 20))
@@ -382,29 +434,53 @@ def caja(txt, maximo='CajaN_hook', ancho_max=1000):
 
 
 # ---------------- transiciones sobre el montaje (barrido, golpe de zoom, destello) ----------------
+def _desenfoque_h(a, L):
+    """desenfoque de movimiento horizontal (caja de L px) sobre un arreglo HxWx3"""
+    if L < 2:
+        return a
+    r = L // 2
+    p = np.pad(a.astype(np.float64), ((0, 0), (r + 1, r), (0, 0)), mode='edge')
+    c = np.cumsum(p, axis=1)
+    return (c[:, 2 * r + 1:] - c[:, :-(2 * r + 1)]) / (2 * r + 1)
+
+
+_AVANCE = (0.05, 0.18, 0.40, 0.60, 0.82, 0.95)      # fracción del ancho recorrida en c-3 … c+2
+_ESTELA = (60, 200, 420, 420, 200, 60)              # largo del desenfoque de movimiento, px
+
+
 def transiciones(src, dst, cortes, n_total):
     """cortes: {cuadro_del_corte: 'barrido' | 'barrido_izq' | 'zoom' | 'destello' | 'zoom+destello'}.
-    barrido: los 3 cuadros previos se corren y se estiran hacia un lado y los 3 siguientes llegan desde el otro;
+    barrido: paneo de látigo de 6 cuadros (3 antes y 3 después del corte): el plano que sale y el que entra se
+    desplazan juntos, pegados, con desenfoque de movimiento horizontal (sin bandas ni cuadros estirados);
     zoom: el plano nuevo entra ampliado (1,16 → 1,0 en 4 cuadros); destello: blanco que decae en 4 cuadros."""
-    dec = subprocess.Popen(['ffmpeg', '-v', 'error', '-i', str(src), '-f', 'rawvideo', '-pix_fmt', 'rgb24', '-'],
-                           stdout=subprocess.PIPE)
-    enc = encoder(dst)
     nb = W * H * 3
     plan = {}
+    barr = {}
     for c, tipo in cortes.items():
         for parte in tipo.split('+'):
             if parte.startswith('barrido'):
                 sg = -1 if parte.endswith('izq') else 1
-                for i, (dx, f) in enumerate(((90, 6), (220, 14), (420, 28))):       # saliente: c-3, c-2, c-1
-                    plan.setdefault(c - 3 + i, []).append(('corr', -sg * dx, f))
-                for i, (dx, f) in enumerate(((380, 24), (170, 12), (60, 5))):       # entrante: c, c+1, c+2
-                    plan.setdefault(c + i, []).append(('corr', sg * dx, f))
+                barr[c] = sg
+                for i in range(6):
+                    plan.setdefault(c - 3 + i, []).append(('push', c, sg, _AVANCE[i], _ESTELA[i]))
             elif parte == 'zoom':
                 for i, z in enumerate((1.16, 1.09, 1.04, 1.015)):
                     plan.setdefault(c + i, []).append(('zoom', z))
             elif parte == 'destello':
                 for i, a in enumerate((0.7, 0.42, 0.2, 0.08)):
                     plan.setdefault(c + i, []).append(('dest', a))
+    refs = {}
+    if barr:       # último cuadro del plano que sale (c-1) y primero del que entra (c)
+        need = sorted({c - 1 for c in barr} | set(barr))
+        sel = '+'.join(f'eq(n\\,{k})' for k in need)
+        raw = subprocess.run(['ffmpeg', '-v', 'error', '-i', str(src), '-vf', f"select='{sel}'", '-vsync', '0',
+                              '-f', 'rawvideo', '-pix_fmt', 'rgb24', '-'], capture_output=True, check=True).stdout
+        assert len(raw) == nb * len(need), (len(raw), len(need))
+        for i, k in enumerate(need):
+            refs[k] = np.frombuffer(raw[i * nb:(i + 1) * nb], np.uint8).reshape(H, W, 3)
+    dec = subprocess.Popen(['ffmpeg', '-v', 'error', '-i', str(src), '-f', 'rawvideo', '-pix_fmt', 'rgb24', '-'],
+                           stdout=subprocess.PIPE)
+    enc = encoder(dst)
     k = 0
     while True:
         b = dec.stdout.read(nb)
@@ -413,14 +489,17 @@ def transiciones(src, dst, cortes, n_total):
         if k in plan:
             im = Image.frombuffer('RGB', (W, H), b, 'raw', 'RGB', 0, 1)
             for op in plan[k]:
-                if op[0] == 'corr':
-                    _, dx, f = op
-                    im = im.resize((max(8, W // f), H), Image.BOX).resize((W, H), Image.BILINEAR)   # estela horizontal
-                    a = np.asarray(im)
-                    a = np.roll(a, dx, axis=1)
-                    if dx > 0: a[:, :dx] = a[:, dx:dx + 1]
-                    else: a[:, dx:] = a[:, dx - 1:dx]
-                    im = Image.fromarray(a)
+                if op[0] == 'push':
+                    _, c, sg, p, L = op
+                    cur = np.asarray(im)
+                    A = cur if k < c else refs[c - 1]
+                    B = refs[c] if k < c else cur
+                    d = int(round(p * W))
+                    if sg > 0:       # el plano viejo sale por la izquierda, el nuevo entra por la derecha
+                        v = np.concatenate([A, B], axis=1)[:, d:d + W]
+                    else:
+                        v = np.concatenate([B, A], axis=1)[:, W - d:2 * W - d]
+                    im = Image.fromarray(_desenfoque_h(v, L).clip(0, 255).astype(np.uint8))
                 elif op[0] == 'zoom':
                     z = op[1]; w = W / z; h = H / z
                     im = im.resize((W, H), Image.BICUBIC, box=((W - w) / 2, (H - h) / 2, (W + w) / 2, (H + h) / 2))
