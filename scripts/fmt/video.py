@@ -252,11 +252,14 @@ def master(video, audio_wav, salida, ass_path=None, overlays=None):
     lab = 'v0'
     fc.append(f'[0:v]setsar=1[{lab}]')
     for i, (png, x, y, t0, t1) in enumerate(overlays or []):
-        inputs += ['-loop', '1', '-i', str(png)]
+        # el PNG en bucle entra a 25 fps si no se le da -framerate: con enable por número de cuadro la placa
+        # parpadeaba (aparecía cada 6 cuadros; Roccé Life V2, 24/11/2026). PNG a FPS y ventana por tiempo con medio
+        # cuadro de margen (con between(t,...) exacto entraba un cuadro antes: FMT-04, 17/11/2026).
+        inputs += ['-framerate', str(FPS), '-loop', '1', '-i', str(png)]
         nl = f'v{i + 1}'
-        # por número de cuadro: con between(t,...) el overlay entraba un cuadro antes (FMT-04, 17/11/2026)
         n0, n1 = round(t0 * FPS), round(t1 * FPS) - 1
-        fc.append(f"[{lab}][{i + 2}:v]overlay={x}:{y}:enable='between(n,{n0},{n1})':shortest=1[{nl}]")
+        fc.append(f"[{lab}][{i + 2}:v]overlay={x}:{y}:enable='between(t,{(n0 - 0.5) / FPS:.5f},{(n1 + 0.5) / FPS:.5f})'"
+                  f":shortest=1[{nl}]")
         lab = nl
     if ass_path:
         fc.append(f"[{lab}]subtitles={ass_path}:fontsdir=/usr/share/fonts/opentype/inter[vs]"); lab = 'vs'

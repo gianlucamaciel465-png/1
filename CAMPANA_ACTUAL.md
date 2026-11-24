@@ -378,8 +378,22 @@ Formatos tomados de marcas de ropa (fuentes en `/mnt/project-files/piezas/FMT_ta
 | VIR-02 «voz» | — | — | Guion con 3 huecos para la voz real de Gianluca; espera su audio. |
 - Nada publicado. Pendientes de Gianluca: escucha, consentimiento del chico de 7857, confirmar 7884/7885, destino del link, audio para VIR-02 «voz».
 
-## Estado del trabajo (actualizado 18/11/2026)
-- **Último encargo (18/11/2026):** tanda VIR de 2 videos (tabla arriba), aprobados por Roma y entregados para revisión; VIR-02 «voz» espera el audio de Gianluca; nada publicado.
+#### Roccé Life (24/11/2026, pedido de Gianluca: «3 fotos con frases motivadoras orientadas a los valores de roccé en pinterest y 2 videos de roccé motivadores, para roccé life»)
+- Lectura adoptada: Roccé Life = línea de estilo de vida y motivación; firma chica «ROCCÉ LIFE» + logo original en ficha #FEFEFE (no hay composición propia documentada; se le pidió un ejemplo a Gianluca). Carpeta `/mnt/project-files/piezas/LIFE_rocce_life/` (brief, Rena, Pepe, material, Cata, filtro, hojas, dictámenes, textos de Bruno).
+- Pines 1000×1500 PNG sRGB, Instrument Serif con cursiva + firma; receta `scripts/life/pines.py` + `pines_config.py` (`PINES['v02']`) + `render.js`, editable `scripts/life/editable.py`.
+| Pieza | Versión aprobada | ID (md5) | Notas |
+|---|---|---|---|
+| Pin 1 «Esta parte no sale en la foto.» (disciplina) | `ROCCE_LIFE_PIN_01_esta_parte_v02.png` | píxeles 75b5d8e7…cdd | `IMG_7887` 1,067 s (Gianluca); Blanca neutralizada solo sobre la Blanca |
+| Pin 2 «No lo grites. Que se note.» (presencia) | `ROCCE_LIFE_PIN_02_que_se_note_v02.png` (+ alternativa `…_02B_no_grita_v02.png`) | píxeles 29e4adb6…5df / 1f1a58dd…014 | `IMG_7824` 5,9 s; elige Gianluca |
+| Pin 3 «Andá hasta donde rompe.» (ambición) | `ROCCE_LIFE_PIN_03_donde_rompe_v02.png` | píxeles 2b0f89c2…e47 | foto `blanca_espalda_roca_ola.jpg`; degradé 0,75 (99 % del trazo ≥ 3:1) |
+| V1 «Del piso» (10,0 s) | `ROCCE_LIFE_V1_DEL_PISO_v01.mp4` (+ SINMUSICA) | video 854af5ab…ef39 / audio b13d6207…3892 | 7999 → 7996 → 3375 → 4625 → 8002 → 4641; CTA «Guardalo para el próximo no.». Receta `scripts/life/life_v1.py` |
+| V2 «Fichate vos» (9,367 s) | `ROCCE_LIFE_V2_FICHATE_VOS_v01.mp4` (+ SINMUSICA) | video e984ba2e…9b54 / audio 406eb27d…e6e9 | 7824 → corte por letras → 7887 → 7885 → 7896; solo hook A; CTA «Seguí al equipo.». Receta `scripts/life/life_v2.py` |
+- `video.master(overlays=…)` hace parpadear un PNG superpuesto (entra a 25 fps contra `enable` por cuadro): las recetas de Life usan copias corregidas (`master_v1`/`master_v2`, PNG a 30 fps). Ninguna pieza anterior usó overlays.
+- Nada publicado. Pendientes: elección de frase del pin 2, escucha, cuenta de empresa de Pinterest y link, consentimiento de quien tira en 7999/7996, de 7885 y de las manos de 7824.
+
+## Estado del trabajo (actualizado 24/11/2026)
+- **Último encargo (24/11/2026):** Roccé Life, 3 pines de Pinterest v02 + 2 videos v01 (tabla arriba), aprobados por Roma y entregados para revisión privada; nada publicado.
+- **Encargo del 18/11/2026:** tanda VIR de 2 videos (tabla arriba), aprobados por Roma y entregados para revisión; VIR-02 «voz» espera el audio de Gianluca; nada publicado.
 - **Encargo del 17/11/2026:** tanda FMT de 5 videos con formatos de marcas top (tabla arriba), aprobados por Roma y entregados para revisión de Gianluca; nada publicado.
 - **Encargo del 16/11/2026:** REAL-02, `ROCCE_REAL02_cual_se_la_lleva_v01_1`. Máster aprobado por Roma; revisión privada, sin publicar.
   - Pendientes antes de publicar:
