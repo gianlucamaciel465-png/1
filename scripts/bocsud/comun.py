@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """BOC-SUD (24/11/2026) · herramientas comunes para las 3 piezas de Boca campeón de la Sudamericana.
 
-Material: tomas propias (biblioteca SDR en TRABAJO/bocsud/lib, hecha con scripts/fmt/video.plano) y archivos de
-Wikimedia Commons (TRABAJO/bocsud/commons/arch, con su ficha de licencia en fichas.json).
+Material: tomas propias (biblioteca SDR en TRABAJO/bocsud/lib, hecha con scripts/fmt/video.plano), archivos de
+Wikimedia Commons (TRABAJO/bocsud/commons/arch, con su ficha de licencia en fichas.json) y, desde v03, clips oficiales
+de la final bajados del TikTok de la CONMEBOL Sudamericana (TRABAJO/bocsud/clips/tt, © CONMEBOL: material de terceros).
 Todo sale a 1080x1920, 30 fps, BT.709 rango limitado, intermedios x264 crf 12.
 """
 import subprocess, json, math, sys
@@ -186,6 +187,34 @@ def propia(toma, desde, hasta, salida, cx=0.5, cy=0.5, z0=1.0, z1=1.0, por_cuadr
     """tramo [desde,hasta) en segundos de la FUENTE original de una toma propia, desde la biblioteca SDR 1080x1920"""
     p, a = lib(toma)
     return video_cubrir(p, desde - a, hasta - desde, salida, cx, cy, z0, z1, por_cuadro=por_cuadro, src_size=(W, H))
+
+
+# ---------------- clips oficiales de la final (TikTok @sudamericana, © CONMEBOL: ver 06_licencias.md) ----------------
+CLIPS = T / 'clips' / 'tt'
+
+
+def clip(id6):
+    """ruta del clip bajado cuyo id de TikTok termina en id6"""
+    r = sorted(CLIPS.glob(f'*{id6}.mp4'))
+    if not r:
+        raise FileNotFoundError(f'falta el clip …{id6} en {CLIPS}')
+    return r[0]
+
+
+def real(id6, t0, n, salida, c0=(0.5, 0.5), c1=None, z0=1.0, z1=None, uno_a_uno=False, por_cuadro=None):
+    """n cuadros del clip desde t0 s, llenando 9:16; el recorte va de (c0, z0) a (c1, z1) en línea recta.
+    uno_a_uno: un cuadro de la fuente por cuadro de salida (los clips de 23,976/24 fps corren 25 % más rápido,
+    sin cuadros repetidos); si no, la fuente se lleva a 30 fps."""
+    src = clip(id6)
+    c1 = c1 or c0
+    z1 = z0 if z1 is None else z1
+    vf = f'setpts=N/({FPS}*TB)' if uno_a_uno else ''
+    r = video_cubrir(src, t0, n / FPS, salida,
+                     cx=lambda k: c0[0] + (c1[0] - c0[0]) * k / max(n - 1, 1),
+                     cy=lambda k: c0[1] + (c1[1] - c0[1]) * k / max(n - 1, 1),
+                     z0=z0, z1=z1, vf=vf, por_cuadro=por_cuadro)
+    r.update(clip=id6, uno_a_uno=uno_a_uno, c=(c0, c1), z=(z0, z1))
+    return r
 
 
 def negro(dur, salida, color=(0, 0, 0)):
