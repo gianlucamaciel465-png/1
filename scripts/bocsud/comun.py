@@ -155,8 +155,8 @@ def video_ventana(src, t0, dur, salida, recorte=None, fg_w=W, fg_y=None, z0=1.0,
     return dict(video=str(src), desde=t0, cuadros=n, salida=str(salida))
 
 
-def video_cubrir(src, t0, dur, salida, cx=0.5, cy=0.5, z0=1.0, z1=1.0, vf='', por_cuadro=None, src_size=None):
-    """Video que llena 9:16 (recorte centrado en cx,cy con acercamiento z0->z1 por cuadro)."""
+def video_cubrir(src, t0, dur, salida, cx=0.5, cy=0.5, z0=1.0, z1=1.0, vf='', por_cuadro=None, src_size=None, zf=None):
+    """Video que llena 9:16 (recorte centrado en cx,cy con acercamiento z0->z1 por cuadro; zf(k) reemplaza al acercamiento lineal)."""
     if src_size is None:
         sw, sh_ = [int(x) for x in sh(['ffprobe', '-v', 'error', '-select_streams', 'v:0', '-show_entries',
                                        'stream=width,height', '-of', 'csv=p=0', str(src)]).strip().split(',')[:2]]
@@ -166,7 +166,7 @@ def video_cubrir(src, t0, dur, salida, cx=0.5, cy=0.5, z0=1.0, z1=1.0, vf='', po
     n = len(cuadros); enc = encoder(salida)
     for k, a in enumerate(cuadros):
         im = Image.fromarray(a)
-        z = z0 + (z1 - z0) * k / max(n - 1, 1)
+        z = zf(k) if zf else z0 + (z1 - z0) * k / max(n - 1, 1)
         ccx = cx(k) if callable(cx) else cx; ccy = cy(k) if callable(cy) else cy
         fr = im.resize((W, H), Image.LANCZOS, box=ventana_de(im.width, im.height, ccx, ccy, z))
         if por_cuadro:
@@ -201,20 +201,28 @@ def clip(id6):
     return r[0]
 
 
-def real(id6, t0, n, salida, c0=(0.5, 0.5), c1=None, z0=1.0, z1=None, uno_a_uno=False, por_cuadro=None):
-    """n cuadros del clip desde t0 s, llenando 9:16; el recorte va de (c0, z0) a (c1, z1) en línea recta.
-    uno_a_uno: un cuadro de la fuente por cuadro de salida (los clips de 23,976/24 fps corren 25 % más rápido,
-    sin cuadros repetidos); si no, la fuente se lleva a 30 fps."""
+def real(id6, t0, n, salida, c0=(0.5, 0.5), c1=None, z0=1.0, z1=None, uno_a_uno=False, por_cuadro=None, ventana=None):
+    """n cuadros de un clip oficial desde t0 (s de la fuente), recortados a 9:16 con centro c0->c1 y acercamiento z0->z1.
+    uno_a_uno: la fuente es de 24 fps y cada cuadro suyo pasa a ser un cuadro de la pieza (25 % más rápido, sin cuadros
+    repetidos). ventana: función k -> (cx, cy, z) para un recorrido que no es lineal (reemplaza a c0, c1, z0 y z1)."""
     src = clip(id6)
     c1 = c1 or c0
     z1 = z0 if z1 is None else z1
     vf = f'setpts=N/({FPS}*TB)' if uno_a_uno else ''
-    r = video_cubrir(src, t0, n / FPS, salida,
-                     cx=lambda k: c0[0] + (c1[0] - c0[0]) * k / max(n - 1, 1),
-                     cy=lambda k: c0[1] + (c1[1] - c0[1]) * k / max(n - 1, 1),
-                     z0=z0, z1=z1, vf=vf, por_cuadro=por_cuadro)
-    r.update(clip=id6, uno_a_uno=uno_a_uno, c=(c0, c1), z=(z0, z1))
+    if ventana:
+        cx, cy, zf = (lambda k: ventana(k)[0]), (lambda k: ventana(k)[1]), (lambda k: ventana(k)[2])
+    else:
+        cx = lambda k: c0[0] + (c1[0] - c0[0]) * k / max(n - 1, 1)
+        cy = lambda k: c0[1] + (c1[1] - c0[1]) * k / max(n - 1, 1)
+        zf = None
+    r = video_cubrir(src, t0, n / FPS, salida, cx=cx, cy=cy, z0=z0, z1=z1, vf=vf, por_cuadro=por_cuadro, zf=zf)
+    r.update(clip=id6, uno_a_uno=uno_a_uno, c=(c0, c1), z=(z0, z1), ventana=bool(ventana))
     return r
+
+
+def anclada(x0, y0, z, src=(1080, 1920)):
+    """(cx, cy, z) de la ventana 9:16 de acercamiento z cuya esquina superior izquierda está en (x0, y0) px de la fuente"""
+    return (x0 + src[0] / z / 2) / src[0], (y0 + src[1] / z / 2) / src[1], z
 
 
 def negro(dur, salida, color=(0, 0, 0)):

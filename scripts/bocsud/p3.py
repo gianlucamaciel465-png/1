@@ -33,6 +33,7 @@ S7 = (240, 312)     # 7857: Bancá desde el principio. / link en bio
 NF = 312
 UNO = S5[0] + 30
 CAMPEON_Y = 420       # en el cielo oscuro, arriba de los fuegos
+CTX_Y = 600           # renglón de contexto del gancho: debajo de la marca de agua del clip, sobre el cielo
 
 
 def d(s):
@@ -41,13 +42,20 @@ def d(s):
 
 def planos():
     P = []
-    # S1: la tribuna de Boca al atardecer (24 fps, un cuadro por cuadro); tramo 10,3–11,8 s y recorte que se corre a la derecha:
-    # sin los carteles de cerveza del principio ni la pantalla gigante con un jugador que entra por la izquierda al final
-    P.append(C.real('171912', 10.3, S1[1] - S1[0], T / 's1_tribuna.mp4', c0=(0.5, 0.5), c1=(0.58, 0.5), z0=1.08, z1=1.15, uno_a_uno=True))
+    # S1: la tribuna de Boca al atardecer (24 fps, un cuadro por cuadro); tramo 9,9–11,4 s, solo el 70 % superior de la fuente:
+    # afuera el telón «LA BARRA DE BOCA · LEOPARDI» y la zona de servicio con la ambulancia (Roma, máster v03), y con ellos los
+    # carteles de cerveza del borde de la cancha. Termina antes de que entre la pantalla gigante con un jugador (11,6 s).
+    P.append(C.real('171912', 9.9, S1[1] - S1[0], T / 's1_tribuna.mp4', c0=(0.41, 0.35), c1=(0.40, 0.35), z0=1.43, z1=1.50, uno_a_uno=True))
     # S2: el Obelisco esa noche: un hincha arriba del semáforo con los brazos en alto, la multitud abajo
     P.append(C.real('965384', 0.0, S2[1] - S2[0], T / 's2_obelisco.mp4', c0=(0.5, 0.55), z0=1.0, z1=1.12))
-    # S3: la copa desde arriba: el arco «CAMPEÓN 2026», el papel picado y el fuego artificial que sube (hasta el corte de la fuente en 17,77 s)
-    P.append(C.real('352840', 16.45, S3[1] - S3[0], T / 's3_copa.mp4', c0=(0.5, 0.42), z0=1.0, z1=1.12))
+    # S3: la copa desde arriba: el arco «CAMPEÓN 2026», el papel picado y el fuego artificial que sube (hasta el corte de la fuente en 17,77 s).
+    # El tercio inferior de la fuente arranca negro (techo del estadio): la ventana entra cerrada y anclada arriba a la izquierda
+    # (1,30: deja la marca de agua entera y casi nada del negro) y se abre a 1,06 para cuando sube el fuego artificial.
+    n3 = S3[1] - S3[0]
+    def v_copa(k):
+        z = 1.30 + (1.06 - 1.30) * C.suave(k / (n3 - 1))
+        return C.anclada(0, 0, z)
+    P.append(C.real('352840', 16.45, n3, T / 's3_copa.mp4', ventana=v_copa))
     # S4: el estadio rodeado de fuegos artificiales
     P.append(C.real('352840', 17.83, S4[1] - S4[0], T / 's4_fuegos.mp4', c0=(0.5, 0.42), z0=1.0, z1=1.1))   # sin acercar más: la marca de agua del clip queda entera, no cortada por el borde
     P.append(C.propia('IMG_7887', 0.0, d(S5), T / 's5_7887.mp4', cx=0.55, cy=0.5, z0=1.0, z1=1.10))
@@ -76,6 +84,8 @@ def textos():
         est = C.caja(txt, maximo)
         X.append(dict(t0=tx(a), t1=tx(b), txt=txt, estilo=est, y=C.Y_HOOK if est == 'CajaN_hook' else y, pop=True, **kw))
     caja(S1[0], S1[1], '¿Cuántos son?')
+    # pone algo en juego en el gancho y planta lo que cobra «Primera internacional desde 2008.» (Roma, máster v03)
+    X.append(dict(t0=tx(S1[0]), t1=tx(S1[1]), txt='Boca · sin una internacional desde 2008', estilo='CajaN_ctx', y=CTX_Y))
     caja(S2[0], S2[1], 'Miles.')
     X.append(dict(t0=tx(S2[0] + 4), t1=tx(S2[1]), txt='Obelisco · esa noche', estilo='CajaN_125', y=452, pop=True))
     caja(S3[0], S3[1], 'Primera internacional\\Ndesde 2008.')
@@ -84,8 +94,9 @@ def textos():
     caja(UNO, S5[1], 'estuvo uno.')
     caja(S6[0], S6[1], 'Del 001 al 100.')
     # en 7857 la cabeza ocupa el tercio superior: el texto va abajo, sobre el pantalón (sin tapar cabeza ni estampado)
-    X.append(dict(t0=tx(S7[0]), t1=tx(NF), txt='Bancá desde\\Nel principio.', estilo='CajaN_108', y=1160, pop=True))
-    X.append(dict(t0=tx(S7[0] + 10), t1=tx(NF), txt='link en bio', estilo='CajaN_link', y=1436))
+    # la caja de «link en bio» termina en y 1464 (zona segura: 1470); la del CTA, en 1366, sigue debajo del estampado (≈ 970)
+    X.append(dict(t0=tx(S7[0]), t1=tx(NF), txt='Bancá desde\\Nel principio.', estilo='CajaN_108', y=1120, pop=True))
+    X.append(dict(t0=tx(S7[0] + 10), t1=tx(NF), txt='link en bio', estilo='CajaN_link', y=1400))
     return X
 
 

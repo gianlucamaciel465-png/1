@@ -91,7 +91,9 @@ def textos():
         est = C.caja(txt, maximo)
         X.append(dict(t0=tx(a), t1=tx(b), txt=txt, estilo=est, y=C.Y_HOOK if est == 'CajaN_hook' else y, pop=kw.pop('pop', True), **kw))
     caja(S0[0], S0[1], 'Cuarta final.\\N¿La gana?')
-    X.append(dict(t0=tx(S0[0]), t1=tx(S0[1]), txt='Boca · Sudamericana 2026 · Barranquilla', estilo='CajaN_ctx', y=585))
+    # «Cuarta final.» lleva su calificador al lado (regla: siempre «internacional»): 2012, 2018, 2023 y 2026. «tras» y no
+    # «desde»: la Recopa 2008 también fue una final. Sin esto, junto a «Sudamericana» se leía como cuarta final de esa copa.
+    X.append(dict(t0=tx(S0[0]), t1=tx(S0[1]), txt='Boca · finales internacionales tras 2008', estilo='CajaN_ctx', y=585))
     for (a, b), no, anio, lugar, extra in ((F1, NO1, 'Final 2012', 'São Paulo', None),
                                            (F2, NO2, 'Final 2018', 'Madrid', 'Alargue.'),
                                            (F3, NO3, 'Final 2023', 'Río', 'Alargue.')):
@@ -102,6 +104,7 @@ def textos():
             X.append(dict(t0=tx(no), t1=tx(b), txt=extra, estilo='CajaN_96', y=ALARGUE_Y, pop=True))
     caja(SEQ[0], SEQ[1], 'Desde 2008,\\Nninguna internacional.')
     caja(GOL[0], GOL_T, 'Final 2026\\N¿Otra vez?')
+    X.append(dict(t0=tx(GOL[0]), t1=tx(GOL_T), txt='Boca · Sudamericana · Barranquilla', estilo='CajaN_ctx', y=585))
     X.append(dict(t0=tx(GOL_T), t1=tx(GOL[1]), txt='2-0.', estilo='Golpe', y=DOS_Y, pop=True))
     caja(CAMP[0], CAMP[1], 'Sin alargue.\\NCampeón.')
     caja(CASI[0], CASI[1], 'Tres casi.\\NDespués, historia.')

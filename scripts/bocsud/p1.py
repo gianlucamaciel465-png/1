@@ -32,8 +32,12 @@ def planos():
     # c30–c56 la ola de 4631 revienta en el corte (golpe en 3,78 s de la toma = c31)
     P.append(C.propia('IMG_4631', 3.75, 4.65, T / 's02_4631.mp4', z0=1.0, z1=1.06))
     # c57–c80 la tribuna real: de la tensión al grito en un plano continuo (24 fps, un cuadro por cuadro).
-    # Ventana x 0–500, y 250–1139 de la fuente: tribuna general; afuera el rótulo del clip (y 1215–1280) y las caras cercanas.
-    P.append(C.real('035221', 1.625, 24, T / 's03_grito.mp4', c0=(0.2315, 0.362), z0=2.16, uno_a_uno=True,
+    # Ventana anclada arriba a la izquierda de la fuente (x 0, y 250): 417 px de ancho en «¿Y ahora?» y se cierra a 385 en el
+    # grito. Afuera quedan el rótulo del clip (y 1215–1280), los perfiles cercanos del borde derecho (Roma, máster v03) y la
+    # cara que aparecía abajo en los últimos cuadros y en el congelado. No se puede correr más a la izquierda: x 0 es el borde.
+    def v_grito(k):
+        return C.anclada(0, 250.5, 2.16 * (1.2 if k < 9 else 1.2 + 0.1 * (k - 9) / 14))
+    P.append(C.real('035221', 1.625, 24, T / 's03_grito.mp4', ventana=v_grito, uno_a_uno=True,
                     por_cuadro=lambda k, f: C.sombra(f, 540, GOL1_Y, k=0.4) if k >= 9 else f))   # ¿Y ahora? / GOL (c66)
     P.append(C.congelar(T / 's03_grito.mp4', 23, 15, T / 's04_anulado.mp4',
                         por_cuadro=lambda k, f: C.destenir(C.sombra(f, 540, GOL1_Y, k=0.35), 1.0, 0.12)))   # c81–c95 ANULADO: gris
