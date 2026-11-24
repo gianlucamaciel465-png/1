@@ -38,3 +38,7 @@ EXPORTACIONES/ROCCE_FMT*
 # Tanda VIR (18/11/2026): másteres sin publicar fuera del repo público
 EXPORTACIONES/ROCCE_VIR*
 EXPORTACIONES/ROCCE_GTA6*
+# REAL-02 (16/11): máster sin aprobar fuera del repo público; la copia de revisión está en /mnt/project-files/piezas/REAL-02/
+EXPORTACIONES/ROCCE_REAL02_*
+# Roccé Life (24/11/2026): piezas sin aprobar fuera del repo público
+EXPORTACIONES/ROCCE_LIFE*

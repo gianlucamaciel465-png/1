@@ -36,6 +36,7 @@ Fuentes: documento maestro (contexto al 26/10/2026) e indicaciones de Gianluca d
 - **Sin definir:** porcentaje, plazo y unidades. Idea en evaluación (no confirmada): pocas unidades vendidas solo entre los Founders.
 - Para comunicar: "el Founder 001 diseña una prenda y se lleva un porcentaje de la ganancia". Sin cifras, fechas ni cantidades.
 - Siguen sin confirmar: placa numerada, registro y cualquier otro beneficio o porcentaje fuera de la prenda del Founder.
+- **Dato nuevo (16/11/2026, lectura de Shopify):** desde el 10/11, la ficha de la remera dice literalmente «Incluye la placa metálica Founders Privée y tu número permanente, del 001 al 100.». REAL-02 la nombra con ese texto. Falta que Gianluca confirme la placa por mensaje para cerrar esta contradicción y actualizar `CLAUDE.md`.
 
 ## Prendas del drop (protagonista: remera blanca y negra)
 - **Blanca** — frente: ROCCÉ pequeño en el pecho izquierdo + "so f★cking close." con estrella, en gris; etiqueta de cuello ROCCÉ con monograma. Espalda: **ROCCÉ en parche de denim azul** (en fotos y video se ve azul muy oscuro, casi negro) con borde/pespunte claro + "Founders Privée" en cursiva **celeste claro** con subrayado.
@@ -333,7 +334,24 @@ Referencia: `REFERENCIAS/REF_26_referencia_viral_grabacion.mp4` (Neuron Visuals,
 
 | Versión | Estado | Detalle |
 |---|---|---|
-| `ROCCE_06_DEJA_DE_PROCRASTINAR_v01.mp4` | **Más reciente (entregada, sin aprobación aún)** | 15,0 s / 450 cuadros, 1080×1920, 30 fps, −14,2 LUFS, pico −2,8 dBFS, 10 MB. Fuera del repo. |
+| `ROCCE_06_DEJA_DE_PROCRASTINAR_v01.mp4` | Entregada, sin aprobación aún | 15,0 s / 450 cuadros, 1080×1920, 30 fps, −14,2 LUFS, pico −2,8 dBFS, 10 MB. Fuera del repo. |
+
+#### ROCCE_REAL02_CUAL_SE_LA_LLEVA (16/11/2026, pedido de Gianluca: «el más viral que planeen»)
+Equipo completo (Rena, Pepe, Cata, Fede, Pedro, Roma, Bruno). Todos los documentos están en la carpeta del proyecto `piezas/REAL-02/` (00–11). Solo tomas reales, más la foto de la ficha en el cierre. Receta: `scripts/real02_v01.sh` y `scripts/real02_v01_1.sh` + `scripts/real02/`.
+- Método:
+  - apuesta en el cuadro 0: remera en la roca, ola, «¿Cuál se la lleva?» + «1»;
+  - sube la apuesta: «2» (7884) y «3» (4627);
+  - giro: «Ninguna.», con casi silencio;
+  - pista cobrada: el pecho «so f★cking close.» (3375), cuando entra la música;
+  - remera puesta (7857, sin texto);
+  - CTA consecuencia: «Llevátela vos.» / «rocce.shop» sobre 4625;
+  - placa: «Con placa y número / del 001 al 100.» (resumen del texto de la ficha).
+- Sin «después», sin palabras de resistencia y sin presentar a nadie como cliente: las tomas no están en orden cronológico.
+
+| Versión | Estado | Detalle |
+|---|---|---|
+| `ROCCE_REAL02_cual_se_la_lleva_v01.mp4` | Revisada: REVISAR (dictamen 08) | 10,2 s. El cierre era una foto quieta de 2,6 s con texto chico y el «3» quedaba sobre la espuma. |
+| `ROCCE_REAL02_cual_se_la_lleva_v01_1.mp4` | **Más reciente. Máster aprobado por Roma (16/11), sin publicar** | 10,233 s / 307 cuadros, 1080×1920, 30 fps, H.264 nivel 4.0, −14,1 LUFS, −1,5 dBTP. Huellas de paquetes: video `2daf4bc7…47ac`, audio `d59151cc…6de0`. Fuera del repo. |
 
 #### Tanda FMT (17/11/2026, pedido de Gianluca: «los videos me parecen malísimos… analizá las marcas que mejor contenido hacen y copiarlo. Haceme 5 videos»)
 Formatos tomados de marcas de ropa (fuentes en `/mnt/project-files/piezas/FMT_tanda_formatos/07_links_inspiracion.md`; Instagram no se pudo leer desde la sesión, se usó prensa). Solo la mecánica; todo el material es propio. Flujo completo de Roma (guion → máster → descripción) en `/mnt/project-files/piezas/FMT_tanda_formatos/`. Recetas en `scripts/fmt/` (`video.py`, `sonido.py` y `fmt0X*.py`). Música propia sintetizada (TEMP) y versión `_SINMUSICA` de cada una para poner un audio de Instagram al subir. Sin voz, sin subtítulos.
@@ -363,6 +381,12 @@ Formatos tomados de marcas de ropa (fuentes en `/mnt/project-files/piezas/FMT_ta
 ## Estado del trabajo (actualizado 18/11/2026)
 - **Último encargo (18/11/2026):** tanda VIR de 2 videos (tabla arriba), aprobados por Roma y entregados para revisión; VIR-02 «voz» espera el audio de Gianluca; nada publicado.
 - **Encargo del 17/11/2026:** tanda FMT de 5 videos con formatos de marcas top (tabla arriba), aprobados por Roma y entregados para revisión de Gianluca; nada publicado.
+- **Encargo del 16/11/2026:** REAL-02, `ROCCE_REAL02_cual_se_la_lleva_v01_1`. Máster aprobado por Roma; revisión privada, sin publicar.
+  - Pendientes antes de publicar:
+    - escucha humana;
+    - comprobar que rocce.shop abre la ficha;
+    - confirmar quién aparece en `IMG_7857`;
+    - confirmar la placa (ver Founders).
 - **Encargo del 11/11/2026:** «más videos reales», tema libre. `REAL-01_v1` «No se mueve» (13,3 s, 400 cuadros, 30 fps, H.264 High L4.0, −14,1 LUFS, −1,6 dBTP), solo tomas reales de la sesión del 11/10 en las rocas: `IMG_7887` 0–3,667 · `IMG_7884` 1,400–4,000 · foto `PRODUCTO/blanca_espalda_roca_ola.jpg` · `IMG_4627` 8,967–13,767. Textos: «La ola rompe.» «No se mueve.» «19 años.» «Su marca.» «Viene otra.» «La ola era la foto.» «Ponétela.» «Uno de los primeros 100.» «rocce.shop». Sonido real del mar + obturador + música original sintetizada desde 8,9 s. Entregado por el chat para revisión privada (MP4 fuera del repo, carpeta del proyecto `piezas/REAL-01_la_ola/`). Huella de paquetes: video `627ec32f…`, audio `e19026d5…`. Pendiente de Gianluca: si la foto de la ola es de esa sesión y quién la sacó (el giro depende de eso), link exacto de la ficha, OK de «Ponétela.» y escucha.
 - **Encargo del 06/11/2026:** `ROCCE_06_DEJA_DE_PROCRASTINAR_v01`, entregado por el chat. Pendiente: confirmar la grafía del CTA y escuchar la mezcla.
 - **Encargo del 05/11/2026:** `ROCCE_05_ESTUVISTE_CERCA_v01` (guion de Gianluca, Higgsfield + posproducción), entregado por el chat. Pendiente: escucha de las dos voces (edge-tts, sin actuación real) y revisión de la remera que sostiene el chico en la entrega y al final.
