@@ -76,6 +76,18 @@ def neutralizar(im, caja):
 
 def fondo(p, carpeta):
     """p['fuente'] = ('foto', 'archivo.jpg') o ('toma', 'IMG_7887', segundo). p['caja'] = (x, y, w) con h = 1,5·w."""
+    if p['fuente'][0] == 'color':
+        # fondo liso con degradé vertical (arriba → abajo) y grano de ±1,5 niveles para que no haga bandas en 8 bits
+        import numpy as np
+        a = np.array(Image.new('RGB', (1, 1), p['fuente'][1]).getpixel((0, 0)), float)
+        b = np.array(Image.new('RGB', (1, 1), p['fuente'][2]).getpixel((0, 0)), float)
+        t = np.linspace(0, 1, H)[:, None, None]
+        arr = a + (b - a) * t + np.zeros((H, W, 3))
+        arr += np.random.default_rng(7).normal(0, 1.5, arr.shape)
+        bg = Image.fromarray(np.clip(arr.round(), 0, 255).astype('uint8'))
+        out = carpeta / f"_fondo_{p['id']}.png"
+        bg.save(out)
+        return out, (W, H)
     if p['fuente'][0] == 'foto':
         im = srgb(R / 'PRODUCTO' / p['fuente'][1])
     else:
@@ -119,14 +131,15 @@ def html(p, fondo_png, carpeta):
              lh=p.get('lh', '1.0'), acento=p.get('acento', '#CDDDE5'), logo=p.get('logo', 72), ffs=p.get('ffs', 21),
              radio=round(p.get('logo', 72) * 0.11), fcolor=p.get('fcolor', 'rgba(255,255,255,.92)'),
              sombra=p.get('sombra', '0 2px 24px rgba(0,0,0,.28)'), sombra_f=p.get('sombra_f', '0 1px 8px rgba(0,0,0,.35)'))
-    g = p.get('grad')  # (lado, alto_px, opacidad_max, color)
     grad = ''
-    if g:
+    for g in (p.get('grad'), p.get('grad2')):  # (lado, alto_px, opacidad_max, color); grad2 = segundo degradé (v03)
+        if not g:
+            continue
         lado, alto, op, col = g
         r, gg, b = col
         d = 'to top' if lado == 'bottom' else 'to bottom'
-        grad = (f'<div class="grad" style="{lado}:0;height:{alto}px;background:linear-gradient({d},'
-                f'rgba({r},{gg},{b},{op}) 0%,rgba({r},{gg},{b},{op * 0.55:.3f}) 45%,rgba({r},{gg},{b},0) 100%)"></div>')
+        grad += (f'<div class="grad" style="{lado}:0;height:{alto}px;background:linear-gradient({d},'
+                 f'rgba({r},{gg},{b},{op}) 0%,rgba({r},{gg},{b},{op * 0.55:.3f}) 45%,rgba({r},{gg},{b},0) 100%)"></div>')
     pos_f = p['pos_frase']  # css (p. ej. 'top:120px' o 'bottom:210px')
     pos_s = p['pos_firma']
     logo = R / 'LOGO' / 'rocce_logo.png'

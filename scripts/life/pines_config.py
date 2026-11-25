@@ -50,3 +50,41 @@ _p2b = _c.deepcopy(_v['p2']); _p2b.update(id='p2b', nombre='ROCCE_LIFE_PIN_02B_n
                                          frase_html='No grita.<br><em class="c">Se nota.</em>', frase_txt='No grita. Se nota.')
 _v['p3'].update(grad=('top', 780, 0.75, (12, 18, 26)))   # 0,75: 98 % del trazo ≥ 3:1 (0,62 daba 83 %)
 PINES['v02'] = [_v['p1'], _v['p2'], _v['p3'], _p2b]
+
+
+# v03 = tanda 2 (25/11/2026): frases de Cata aprobadas por Roma (TANDA2/04_roma_filtro_ideas_t2.md); la marca del logo
+# bien visible (ficha de 128–160 px en vez de 72) porque Gianluca pidió pines «que tengan la marca del logo roccé».
+# P6 es solo frase con marca, sobre el azul marino del cierre de marca de R3 (#0f1929 → #0a1522, ESTILO_REFERENCIAS).
+PINES['v03'] = [
+    # P4 · Ambición · 7885 a 0,2 s: de espaldas con la Negra frente a la Blanca, la ola revienta a la izquierda.
+    dict(id='p4', nombre='ROCCE_LIFE_PIN_04_agrandado_v03', fuente=('toma', 'IMG_7885', 0.2), caja=(0, 0, 2160),
+         frase_html='Querer más no te hace<br><em>agrandado</em>.', frase_txt='Querer más no te hace agrandado.',
+         pos_frase='top:96px', fs=94, mx=72, logo=128, ffs=24, pos_firma='left:72px;bottom:72px',
+         grad=('top', 560, 0.62, (12, 18, 26)), grad2=('bottom', 420, 0.55, (12, 18, 26))),
+    # P5 · Disciplina · la Blanca sola en la roca entre la espuma (foto de PRODUCTO, nítida).
+    dict(id='p5', nombre='ROCCE_LIFE_PIN_05_quedate_igual_v03', fuente=('foto', 'blanca_espalda_rocas_espuma.jpg'),
+         caja=(0, 0, 1717),
+         frase_html='Nadie te aplaude<br>por quedarte.<br>Quedate <em>igual</em>.',
+         frase_txt='Nadie te aplaude por quedarte. Quedate igual.',
+         pos_frase='top:84px', fs=96, mx=72, logo=128, ffs=24, pos_firma='left:72px;bottom:72px',
+         grad=('top', 620, 0.72, (12, 18, 26)), grad2=('bottom', 420, 0.6, (12, 18, 26))),
+    # P6 · Tomar acción · solo frase con marca: azul marino de R3, frase centrada en el tercio superior, logo grande debajo.
+    dict(id='p6', nombre='ROCCE_LIFE_PIN_06_enero_excusas_v03', fuente=('color', '#0f1929', '#0a1522'),
+         caja=(0, 0, 1000),
+         frase_html='Enero<br><em class="c">también</em><br>va a tener<br>excusas.',
+         frase_txt='Enero también va a tener excusas.',
+         pos_frase='top:250px', fs=150, lh='0.98', mx=72, alinear='center', logo=160, ffs=26,
+         pos_firma='left:0;right:0;top:1060px;justify-content:center;flex-direction:column;gap:26px',
+         sombra='none', sombra_f='none'),
+]
+
+# v04 = correcciones del dictamen independiente de Roma sobre v03 (25/11): P5 la caja (0,0,1717) cortaba la manga derecha
+# de la Blanca, que en la foto termina en x 1782 → caja desde x 215 (la izquierda ya viene cortada en la foto) y degradé de
+# abajo reducido a 300 px / 0,5 para no agrisar el ruedo; P4 pasa a 7895 a 0,4 s (las dos remeras con la ola reventando
+# atrás, sin persona): a 180 px ya no se confunde con v02 P1 y no depende de un consentimiento.
+_v4 = {p['id']: _c.deepcopy(p) for p in PINES['v03']}
+for _p in _v4.values():
+    _p['nombre'] = _p['nombre'].replace('_v03', '_v04')
+_v4['p4'].update(fuente=('toma', 'IMG_7895', 0.4), caja=(260, 0, 1800), grad=('top', 640, 0.78, (12, 18, 26)))  # 0,62 daba 86 % del trazo ≥ 3:1
+_v4['p5'].update(caja=(215, 0, 1717), grad2=('bottom', 300, 0.5, (12, 18, 26)))
+PINES['v04'] = [_v4['p4'], _v4['p5'], _v4['p6']]
