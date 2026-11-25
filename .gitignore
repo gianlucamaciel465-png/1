@@ -42,3 +42,7 @@ EXPORTACIONES/ROCCE_GTA6*
 EXPORTACIONES/ROCCE_REAL02_*
 # Roccé Life (24/11/2026): piezas sin aprobar fuera del repo público
 EXPORTACIONES/ROCCE_LIFE*
+
+# Tanda MARCA comunidad (25/11/2026): másteres sin publicar fuera del repo público
+EXPORTACIONES/ROCCE_MC0*
+EXPORTACIONES/ROCCE_H0*

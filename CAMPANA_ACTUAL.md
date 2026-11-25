@@ -405,7 +405,24 @@ Formatos tomados de marcas de ropa (fuentes en `/mnt/project-files/piezas/FMT_ta
 - Nada publicado. Antes de publicar (`06_licencias.md`, sección v03): el video y la hinchada son de la CONMEBOL sin licencia (reclamo, baja, vínculo sugerido con el torneo y con Boca); marca de agua sin borrar; jugadores e hinchas reconocibles; P2 conserva tres fotos CC BY / BY-SA (crédito en la descripción); consentimiento del chico de 7857; música TEMP sintetizada; cuatro planos de 24 fps corren 25 % más rápido; escucha y reproducción humanas (no se hicieron).
 - Lecciones: la red cambia en el día (volver a probar antes de dar una fuente por cerrada). Clips de 24 fps: pasarlos cuadro por cuadro a 30 (`uno_a_uno`). El `.ass` redondea a centésimas: restar 4 ms a cada tiempo de texto o entra un cuadro tarde. Fijar el cuadro exacto de cada golpe con hojas ampliadas de la fuente. Elegir hinchada por espectro y nivel y decir que no se escuchó. Revisar a tamaño completo telones y caras de las tribunas (en la fuente de P3 había un telón de la barra). Commons: `commons.wikimedia.org/w/thumb.php?f=<Archivo>&w=<ancho>` con agente honesto. Placa: recortada por su contorno sobre el cierre desenfocado. No repetir la toma de cierre entre piezas de una tanda.
 
-## Estado del trabajo (actualizado 24/11/2026)
+## Estado del trabajo (actualizado 25/11/2026)
+- **Último encargo (24–25/11/2026, noche):** tanda **MARCA · comunidad** («crear marca»): 5 videos estilo creador UGC + 3 historias para Destacadas, todo con tomas reales y la mecánica de casa de apuestas. Carpeta del proyecto `piezas/MARCA_comunidad/` (brief, marco, ideas, guiones G1, especificación, dictámenes de Roma, descripciones D1 de Bruno). Recetas en `scripts/marca/` (`comun.py`, `mc01.py`…`mc05.py`, `historias.py`, `mc_control.py`). Másteres fuera del repo (`.gitignore`). Vigentes, aprobados por Roma solo para revisión privada (md5 del flujo de video):
+  - MC-01 «LADRILLO A LADRILLO · Cap. 1» v01, A `01fd8b2f…` y B `f45c405b…`.
+  - MC-02 «me comí alto anuncio» v01, `0866f31b…`.
+  - MC-03 «0-40» v02, A `d85aeb0b…` y B `fa921f77…`.
+  - MC-04 «¿Founder 001 o Founder 100?» v02, `51e1bfe4…`.
+  - MC-05 «NADIE TE VA A DAR PERMISO.» v02, `eda2f69f…`.
+  - Historias v02: H1 ROCCÉ `1c4dfffe…`, H2 FOUNDERS `226e0553…` y H3 TU CASI `0b835586…`.
+  - Cada video tiene además una versión `_SINMUSICA`.
+  - Nada publicado.
+  - Pendiente de Gianluca:
+    - confirmar personas: 7884/7885, quien tira o camina en 7996/7999, los antebrazos tatuados de 7824;
+    - OK a la serie «LADRILLO A LADRILLO», a «En casa se construye de a un ladrillo. Roccé también.», a «te respondo con video» y a «Aquel video sí era un anuncio. Tenías razón.»;
+    - permiso para mostrar comentarios sin usuario;
+    - selfies para las v2;
+    - bio de Instagram;
+    - recurso de ayuda para H3;
+    - escucha.
 - **Último encargo (24/11/2026):** tanda BOC-SUD de 3 videos «Boca campeón de la Sudamericana» (tabla arriba). Vigente v03 con video real del TikTok oficial de la CONMEBOL, aprobada por Roma solo para revisión privada (no para publicar) y entregada a Gianluca; pendientes: que las vea y las escuche, decisión sobre derechos, música definitiva; nada publicado.
 - **Encargo del 24/11/2026 (mañana):** Roccé Life, 3 pines de Pinterest v02 + 2 videos v01 (tabla arriba), aprobados por Roma y entregados para revisión privada; nada publicado.
 - **Encargo del 18/11/2026:** tanda VIR de 2 videos (tabla arriba), aprobados por Roma y entregados para revisión; VIR-02 «voz» espera el audio de Gianluca; nada publicado.
