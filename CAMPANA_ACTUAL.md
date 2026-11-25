@@ -406,7 +406,18 @@ Formatos tomados de marcas de ropa (fuentes en `/mnt/project-files/piezas/FMT_ta
 - Lecciones: la red cambia en el día (volver a probar antes de dar una fuente por cerrada). Clips de 24 fps: pasarlos cuadro por cuadro a 30 (`uno_a_uno`). El `.ass` redondea a centésimas: restar 4 ms a cada tiempo de texto o entra un cuadro tarde. Fijar el cuadro exacto de cada golpe con hojas ampliadas de la fuente. Elegir hinchada por espectro y nivel y decir que no se escuchó. Revisar a tamaño completo telones y caras de las tribunas (en la fuente de P3 había un telón de la barra). Commons: `commons.wikimedia.org/w/thumb.php?f=<Archivo>&w=<ancho>` con agente honesto. Placa: recortada por su contorno sobre el cierre desenfocado. No repetir la toma de cierre entre piezas de una tanda.
 
 ## Estado del trabajo (actualizado 25/11/2026)
-- **Último encargo (24–25/11/2026, noche):** tanda **MARCA · comunidad** («crear marca»): 5 videos estilo creador UGC + 3 historias para Destacadas, todo con tomas reales y la mecánica de casa de apuestas. Carpeta del proyecto `piezas/MARCA_comunidad/` (brief, marco, ideas, guiones G1, especificación, dictámenes de Roma, descripciones D1 de Bruno). Recetas en `scripts/marca/` (`comun.py`, `mc01.py`…`mc05.py`, `historias.py`, `mc_control.py`). Másteres fuera del repo (`.gitignore`). Vigentes, aprobados por Roma solo para revisión privada (md5 del flujo de video):
+- **Último encargo (25/11/2026):** tanda **MARCA · momento**, que rehace los 5 videos de marca. Gianluca rechazó la tanda comunidad el 25/11 a las 08:41 UTC: pidió guiones atados al momento, imágenes de otras personas y una vuelta de tuerca para viralizar. El 25/11 a las 15:21 UTC agregó un criterio: analizar qué videos necesitan voz, porque sin voz quedan vacíos.
+  - **Sistema «la apuesta abierta»:** el video termina antes del hecho real, el protagonista es un tercero y la remera aparece solo como veredicto. Va GIVE HISTORY YOUR NAME. si pasa y so f★cking close. si no pasa.
+  - **Carpeta del proyecto:** `piezas/MARCA_momento/` (documentos 00–17 y carpetas `LIB-1/` y `LIB-2/`).
+  - **Recetas:** `scripts/momento/` (`lib1.py`, `lib2.py`, `lib_comun.py`, `voz_mezcla.py`, `ocr_cuadros.py`, `lib2_variables.json`, guiones de voz `voz_LIB*.tsv`).
+  - **Fuera de git:** clips de terceros (Mixkit y TikTok @libertadores) e intermedios, en `TRABAJO/momento/`.
+  - **LIB-1 «Sin un gol» v01** (27,2 s, voz Firme 04 + voz original de Muslera): `ROCCE_LIB1_SIN_UN_GOL_v01.mp4`, md5 v `df9ace80…` / a `6f769b8d…`, y la versión `_SINMUSICA` (v `4543f5d2…`). Aprobada por Roma para revisión privada. Sale el viernes 27/11 antes de las 20:00.
+  - **LIB-2 «Le faltaba uno»:** cuatro versiones (G1, G2, P1, P2) con voz y placeholders, v01. El sábado 28/11 se rehace la que corresponda con el clip oficial de la final: variables en `lib2_variables.json`, operación en `LIB-2/02_pedro_variables_sabado_v01.md`.
+  - **Guiones aprobados que faltan producir:** CASI-2026 (se completa el 30/11 y se arma el 1/12), ÚLTIMA SEMANA (sale el 8/12) y «El tío de ___» (sale el 21–22/12; faltan clips).
+  - Nada publicado. Riesgos:
+    - clips de la CONMEBOL sin licencia;
+    - Firme 04 sin escucha humana.
+- **Encargo del 24–25/11/2026 (noche), RECHAZADO el 25/11:** tanda **MARCA · comunidad** («crear marca»): 5 videos estilo creador UGC + 3 historias para Destacadas, todo con tomas reales y la mecánica de casa de apuestas. Carpeta del proyecto `piezas/MARCA_comunidad/` (brief, marco, ideas, guiones G1, especificación, dictámenes de Roma, descripciones D1 de Bruno). Recetas en `scripts/marca/` (`comun.py`, `mc01.py`…`mc05.py`, `historias.py`, `mc_control.py`). Másteres fuera del repo (`.gitignore`). Vigentes, aprobados por Roma solo para revisión privada (md5 del flujo de video):
   - MC-01 «LADRILLO A LADRILLO · Cap. 1» v01, A `01fd8b2f…` y B `f45c405b…`.
   - MC-02 «me comí alto anuncio» v01, `0866f31b…`.
   - MC-03 «0-40» v02, A `d85aeb0b…` y B `fa921f77…`.

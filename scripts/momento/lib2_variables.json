@@ -1,0 +1,60 @@
+{
+ "_nota": "LIB-2 · variables del sábado (ver LIB-2/02_pedro_variables_sabado_v01.md). fc.id = null y respaldo = false → placeholders T1/T3 con la etiqueta PLACEHOLDER. fc.id = null y respaldo = true → sin clip oficial a las 21:00: congelado T13 33,0 (09, condición 6) y T1/T3 sin etiqueta.",
+ "fc": {
+  "id": null,
+  "fps": null,
+  "sha256": null,
+  "congelado_s": null,
+  "entrada_s": null,
+  "decisivo_f": 240,
+  "s5_desde_s": null,
+  "s7_desde_s": null,
+  "audio_propio": "ambiente",
+  "respaldo": false
+ },
+ "respaldo_sin_fc": {
+  "clip": "T13",
+  "congelado_s": 33.0
+ },
+ "placeholder": {
+  "congelado": [
+   "T1",
+   3.211
+  ],
+  "s4": [
+   "T1",
+   1.0
+  ],
+  "s5_G": [
+   "T1",
+   17.0
+  ],
+  "s5_P": [
+   "T3",
+   11.0
+  ],
+  "s7_G": [
+   "T1",
+   24.6
+  ],
+  "s7_P": [
+   "T6",
+   96.45
+  ],
+  "s7_P2": [
+   "T6",
+   96.408
+  ]
+ },
+ "textos": {
+  "apellido": "[APELLIDO]",
+  "goles_est": "[X]",
+  "goles_pal": "[Y]",
+  "penales_est": "[a]",
+  "penales_pal": "[b]",
+  "g2_empate_con_goles": false,
+  "g1_gol_en_contra": false,
+  "p1_por_penales": false,
+  "p1_solo_gol_de_palmeiras": false
+ }
+}
