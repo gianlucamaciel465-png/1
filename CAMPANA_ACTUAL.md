@@ -391,8 +391,21 @@ Formatos tomados de marcas de ropa (fuentes en `/mnt/project-files/piezas/FMT_ta
 - `video.master(overlays=…)` hace parpadear un PNG superpuesto (entra a 25 fps contra `enable` por cuadro): las recetas de Life usan copias corregidas (`master_v1`/`master_v2`, PNG a 30 fps). Ninguna pieza anterior usó overlays.
 - Nada publicado. Pendientes: elección de frase del pin 2, escucha, cuenta de empresa de Pinterest y link, consentimiento de quien tira en 7999/7996, de 7885 y de las manos de 7824.
 
-## Estado del trabajo (actualizado 24/11/2026)
-- **Último encargo (24/11/2026):** Roccé Life, 3 pines de Pinterest v02 + 2 videos v01 (tabla arriba), aprobados por Roma y entregados para revisión privada; nada publicado.
+#### Roccé Life · tanda 2 (25/11/2026, pedido de Gianluca: «3 videos para rocce life (pueden ser frases de ilia topuria, tik toks pegados…)» + «3 pines con frases motivadoras que tengan la marca del logo roccé»)
+- Carpeta `/mnt/project-files/piezas/LIFE_rocce_life/TANDA2/` (brief, marco, Topuria con fuentes, ideas, filtro, guiones, hojas de Pedro, dictámenes, descripciones y paquete). Reglas propias: sin lenguaje de apuestas en pantalla; Topuria nunca en cuadro con la prenda o el logo (socio de MR. AB, publicita 1win, causa de ene. 2026).
+| Pieza | Versión aprobada | ID (md5) | Notas |
+|---|---|---|---|
+| Pin 4 «Querer más no te hace *agrandado*.» (ambición) | `PINES_v04/ROCCE_LIFE_PIN_04_agrandado_v04.png` | píxeles b973180f…be44a | 7895 0,4 s, sin persona; logo en ficha de 128 px |
+| Pin 5 «Nadie te aplaude por quedarte. Quedate *igual*.» (disciplina) | `PINES_v04/ROCCE_LIFE_PIN_05_quedate_igual_v04.png` | píxeles 39c47b26…a63b | `blanca_espalda_rocas_espuma.jpg` |
+| Pin 6 «Enero *también* va a tener excusas.» (tomar acción) | `PINES_v04/ROCCE_LIFE_PIN_06_enero_excusas_v04.png` | píxeles 81891906…e41 | azul marino del cierre de R3; publicar antes de enero |
+| V3 «5 domingos» (13,1 s) | `ROCCE_LIFE_V3_5_DOMINGOS_{37…33}_v02.mp4` (+ SINMUSICA) | 36: video 6c8e8fc4…9337 / audio 3263fe27…268d | número del día (37 el 25/11 … 33 el 29/11); no se publica después del 29/11. Receta `scripts/life/life_v3.py` (`V3_VERSION=v02`) |
+| V4 «¿Vuelve?» B (16,1 s) | `ROCCE_LIFE_V4_VUELVE_v02.mp4` (+ SINMUSICA) | video 94262453…0417 / audio cad52455…dcdce | Topuria solo en texto (ensayo «Este soy yo»); la versión A/B/C la decide Gianluca. Receta `scripts/life/life_v4_v02.py` |
+| V5 «Agrandado» (11,17 s) | `ROCCE_LIFE_V5_AGRANDADO_v02.mp4` (+ SINMUSICA) | video 2574aebe…fb3f / audio a9124449…2e6f | 7887 (Gianluca) + etiquetas; CTA en 4530 (dedos sin consentimiento). Receta `scripts/life/life_v5.py` (`V5_VER=v02`) |
+- Nada publicado. Pendientes: tarjeta A/B/C de Topuria, capturas de gianluccamaciel, consentimientos (7884/7885, dedos de 4530), escucha, cuentas y autorización por destino.
+
+## Estado del trabajo (actualizado 25/11/2026)
+- **Último encargo (25/11/2026):** Roccé Life tanda 2, 3 pines v04 + 3 videos v02 (tabla arriba), aprobados por Roma y entregados para revisión privada; nada publicado.
+- **Encargo del 24/11/2026:** Roccé Life, 3 pines de Pinterest v02 + 2 videos v01 (tabla arriba), aprobados por Roma y entregados para revisión privada; nada publicado.
 - **Encargo del 18/11/2026:** tanda VIR de 2 videos (tabla arriba), aprobados por Roma y entregados para revisión; VIR-02 «voz» espera el audio de Gianluca; nada publicado.
 - **Encargo del 17/11/2026:** tanda FMT de 5 videos con formatos de marcas top (tabla arriba), aprobados por Roma y entregados para revisión de Gianluca; nada publicado.
 - **Encargo del 16/11/2026:** REAL-02, `ROCCE_REAL02_cual_se_la_lleva_v01_1`. Máster aprobado por Roma; revisión privada, sin publicar.
