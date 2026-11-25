@@ -338,8 +338,10 @@ class MezclaB(S.Mezcla):
         seg = a[s0:s0 + n].copy()
         if len(seg) < n:
             seg = np.concatenate([seg, np.zeros((n - len(seg), 2))])
-        if hp: seg = filt(seg.T, 'high', hp).T
-        if lp: seg = filt(seg.T, 'low', lp).T
+        # seg es (muestras, canales): filt filtra en axis=0, o sea a lo largo del tiempo.
+        # Antes se pasaba seg.T y filtraba entre los dos canales (hp no hacía nada; lp bajaba ~20–30 dB).
+        if hp: seg = filt(seg, 'high', hp)
+        if lp: seg = filt(seg, 'low', lp)
         r = np.ones(n); k1 = int(ini * SR); k2 = int(fin * SR)
         if k1: r[:k1] = np.linspace(0, 1, k1)
         if k2: r[-k2:] = np.minimum(r[-k2:], np.linspace(1, 0, k2))
