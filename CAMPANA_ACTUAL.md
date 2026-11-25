@@ -401,7 +401,7 @@ Formatos tomados de marcas de ropa (fuentes en `/mnt/project-files/piezas/FMT_ta
 | V3 «5 domingos» (13,1 s) | `ROCCE_LIFE_V3_5_DOMINGOS_{37…33}_v02.mp4` (+ SINMUSICA) | 36: video 6c8e8fc4…9337 / audio 3263fe27…268d | número del día (37 el 25/11 … 33 el 29/11); no se publica después del 29/11. Receta `scripts/life/life_v3.py` (`V3_VERSION=v02`) |
 | V4 «¿Vuelve?» B (16,1 s) | `ROCCE_LIFE_V4_VUELVE_v02.mp4` (+ SINMUSICA) | video 94262453…0417 / audio cad52455…dcdce | Topuria solo en texto (ensayo «Este soy yo»); la versión A/B/C la decide Gianluca. Receta `scripts/life/life_v4_v02.py` |
 | V5 «Agrandado» (11,17 s) | `ROCCE_LIFE_V5_AGRANDADO_v02.mp4` (+ SINMUSICA) | video 2574aebe…fb3f / audio a9124449…2e6f | 7887 (Gianluca) + etiquetas; CTA en 4530 (dedos sin consentimiento). Receta `scripts/life/life_v5.py` (`V5_VER=v02`) |
-- Nada publicado. Pendientes: tarjeta A/B/C de Topuria, capturas de gianluccamaciel, consentimientos (7884/7885, dedos de 4530), escucha, cuentas y autorización por destino.
+- Nada publicado. Topuria: Gianluca eligió «Clips y voz reales de él» (25/11): versión A en producción, B queda como hermana. Personas de las tomas (7884/7885, dedos de 4530): Gianluca declaró «Siempre hay permiso de todo» (25/11). Pendientes: capturas de gianluccamaciel, escucha, cuentas y autorización por destino.
 
 ## Estado del trabajo (actualizado 25/11/2026)
 - **Último encargo (25/11/2026):** Roccé Life tanda 2, 3 pines v04 + 3 videos v02 (tabla arriba), aprobados por Roma y entregados para revisión privada; nada publicado.
