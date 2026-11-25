@@ -88,3 +88,42 @@ for _p in _v4.values():
 _v4['p4'].update(fuente=('toma', 'IMG_7895', 0.4), caja=(260, 0, 1800), grad=('top', 640, 0.78, (12, 18, 26)))  # 0,62 daba 86 % del trazo ≥ 3:1
 _v4['p5'].update(caja=(215, 0, 1717), grad2=('bottom', 300, 0.5, (12, 18, 26)))
 PINES['v04'] = [_v4['p4'], _v4['p5'], _v4['p6']]
+
+# v05 = la ejecución de los pines del perfil de Gianluca (capturas IMG_5539–5541 del 25/11; medidas en la hoja de Pedro):
+# MAYÚSCULAS en Anton centradas en el tercio superior, relleno blanco → gris claro por renglón con el acento celeste,
+# sombra oscura marcada, logo «1» recortado (LOGO/ROCCE_logo_sin_fondo.png) centrado justo debajo; sin firma ni ficha.
+# Mismas frases que v04. Fotos (cambio de Roma por los guardados medidos por Pepe): P4 con las remeras (7895), P5 y P6 frase
+# sola sobre una toma de ambiente propia sin la prenda (no hay tomas de noche ni de atardecer: las más sobrias, nubladas).
+_OSC = (12, 18, 26)   # mismo color de degradé que v01–v04
+# Degradé oscuro arriba (queda en el pin «sin frase»: cuenta para el contraste, como en v04): 0,74 → 0,64 hasta 5 px debajo
+# de la última línea de base y se apaga en 220 px, para que el logo negro quede sobre un fondo medio (sin borde: no es
+# oscuro). Sombra: una dura corta (dy 5 % de la mayúscula, alfa 0,65) + un halo blando (desenfoque 10 %, alfa 0,55).
+_SOMBRA = dict(dura=(0.05, 0.012, 0.65), halo=(0.03, 0.10, 0.55))
+# Roma (25/11): acento = el celeste medido en su pin «GIVE HISTORY YOUR NAME» (#B2E2FD, #C4E8FD arriba);
+# el #CDDDE5 de v04 se leía blanco a 180 px.
+PINES['v05'] = [
+    # P4 · con remera · 7895 a 0,4 s: las dos remeras en la roca con la ola reventando atrás. Caja más cerrada que v04
+    # (1700 contra 1800) y corrida a la derecha: remeras x 740–1660 de la toma → 23–77 % del ancho; frase y logo sobre
+    # mar y ola (y < 1300 de la toma); las remeras empiezan en y 1640.
+    dict(id='p4', nombre='ROCCE_LIFE_PIN_04_agrandado_v05', estilo='anton', fuente=('toma', 'IMG_7895', 0.4),
+         caja=(350, 0, 1700), frase_txt='QUERER MÁS NO TE HACE AGRANDADO.',
+         lineas=[[('QUERER MÁS', None)], [('NO TE HACE', None)], [('AGRANDADO.', 'c')]],
+         fs=162, top=110, logo_h=120, logo_gap=36, con_remera=True, sombra=_SOMBRA, acento=('#C4E8FD', '#B2E2FD'),
+         motivo_foto='la misma de v04 (pedido de Roma): las dos remeras enteras con la ola reventando atrás',
+         grads=[dict(lado='top', alto=792, color=_OSC, stops=[(0, 0.74), (72.2, 0.64), (100, 0)])]),
+    # P5 · frase sola · 7857 a 0,0 s: rocas vacías frente al mar picado, cielo nublado (el cuadro antes de que entre él).
+    dict(id='p5', nombre='ROCCE_LIFE_PIN_05_quedate_igual_v05', estilo='anton', fuente=('toma', 'IMG_7857', 0.0),
+         caja=(0, 0, 2160), frase_txt='NADIE TE APLAUDE POR QUEDARTE. QUEDATE IGUAL.',
+         lineas=[[('NADIE TE APLAUDE', None)], [('POR QUEDARTE.', None)], [('QUEDATE IGUAL.', 'c')]],
+         fs=127, top=120, logo_h=120, logo_gap=36, con_remera=False, sombra=_SOMBRA, acento=('#C4E8FD', '#B2E2FD'),
+         motivo_foto='lugar vacío con horizonte: rocas frente al mar picado, nadie mirando',
+         grads=[dict(lado='top', alto=703, color=_OSC, stops=[(0, 0.74), (68.7, 0.64), (100, 0)])]),
+    # P6 · frase sola · 7793 a 0,0 s: la playa de la ciudad nublada desde el balcón, antes del paneo a la remera.
+    # Caja hasta y 2520: deja afuera los autos y a los dos peatones cercanos de las esquinas (y > 2550).
+    dict(id='p6', nombre='ROCCE_LIFE_PIN_06_enero_excusas_v05', estilo='anton', fuente=('toma', 'IMG_7793', 0.0),
+         caja=(60, 0, 1680), frase_txt='ENERO TAMBIÉN VA A TENER EXCUSAS.',
+         lineas=[[('ENERO ', None), ('TAMBIÉN', 'c')], [('VA A TENER', None)], [('EXCUSAS.', None)]],
+         fs=144, top=140, logo_h=120, logo_gap=36, con_remera=False, sombra=_SOMBRA, acento=('#C4E8FD', '#B2E2FD'),
+         motivo_foto='la playa de la ciudad fuera de temporada, nublada: el lugar de enero, todavía gris',
+         grads=[dict(lado='top', alto=771, color=_OSC, stops=[(0, 0.74), (71.5, 0.64), (100, 0)])]),
+]

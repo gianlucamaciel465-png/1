@@ -154,18 +154,172 @@ def html(p, fondo_png, carpeta):
     return out
 
 
+# ---------------------------------------------------------------------------------------------------------------------
+# v05 · estilo de los pines del perfil de Gianluca (capturas IMG_5539–5541, 25/11/2026): frase en MAYÚSCULAS en Anton,
+# centrada en el tercio superior, relleno con degradé vertical por renglón (blanco → gris claro; acento celeste), sombra
+# oscura marcada debajo (una dura corta + un halo blando), logo «1» recortado (LOGO/ROCCE_logo_sin_fondo.png, sin tocar:
+# solo escala y posición) centrado justo debajo de la frase; borde blanco fino solo sobre fondo oscuro. Sin firma ni ficha.
+# El texto va en SVG: la línea de base y los degradés quedan en píxeles exactos (no dependen de las métricas de CSS).
+# Medidas de Anton (Pillow, 1000 px): mayúscula 0,860 em, ascendente 1,177 em, tilde de mayúscula 0,241 em sobre la H.
+ANTON_CAP = 0.860
+LOGO_SF = R / 'LOGO' / 'ROCCE_logo_sin_fondo.png'
+LOGO_BBOX = (356, 179, 870, 1056)          # caja del dibujo (alfa > 0) en el PNG de 1254×1254
+BLANCO = ('#FFFFFF', '#D4D4D2')            # arriba → abajo de cada renglón (sus pines: 249–253 → 207–222)
+ACENTO = ('#E1EBEF', '#CDDDE5')            # celeste del acento de v04 abajo, «un poco más claro» arriba (pedido de Roma)
+
+CSS_ANTON = """
+@font-face{font-family:'Anton';src:url('file://%(F)s/Anton-Regular.ttf')}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:%(W)dpx;height:%(H)dpx;overflow:hidden;background:%(fondo_body)s}
+.bg{position:absolute;inset:0;background-size:cover}
+.grad{position:absolute;left:0;right:0}
+svg{position:absolute;left:0;top:0}
+.logo{position:absolute;display:block}
+"""
+
+
+def geometria(p):
+    """Renglones: línea de base de cada uno a partir de la altura de mayúscula del primero (p['top']), el cuerpo (fs) y la
+    interlínea (paso / mayúscula). Logo: alto del dibujo p['logo_h'], a p['logo_gap'] px debajo de la última base."""
+    fs = p['fs']; cap = ANTON_CAP * fs; paso = cap * p.get('inter', 1.14)
+    bases = [p['top'] + cap + i * paso for i in range(len(p['lineas']))]
+    s = p['logo_h'] / (LOGO_BBOX[3] - LOGO_BBOX[1])
+    logo_top = bases[-1] + p['logo_gap']
+    cx = W / 2 + p.get('dx', 0)
+    lx = cx - (LOGO_BBOX[0] + LOGO_BBOX[2]) / 2 * s
+    ly = logo_top - LOGO_BBOX[1] * s
+    return dict(fs=fs, cap=cap, paso=paso, bases=bases, cx=cx, logo_escala=s, logo_img=(lx, ly, 1254 * s),
+                logo_caja=(cx - (LOGO_BBOX[2] - LOGO_BBOX[0]) / 2 * s, logo_top,
+                           cx + (LOGO_BBOX[2] - LOGO_BBOX[0]) / 2 * s, logo_top + p['logo_h']))
+
+
+def html_anton(p, fondo_png, carpeta, modo='final'):
+    """modo: 'final' · 'sin' (sin frase ni logo, con los degradés: base del contraste, mismo método que v04) ·
+    'mascara' (frase blanca sólida sin sombra sobre negro: píxeles del trazo) · 'logo' (solo el logo sobre blanco)."""
+    g = geometria(p)
+    t = dict(F=F, W=W, H=H, fondo_body='#000' if modo == 'mascara' else ('#FFF' if modo == 'logo' else '#15191D'))
+    capas = ''
+    if modo in ('final', 'sin'):
+        capas += f'<div class="bg" style="background-image:url(\'file://{fondo_png}\')"></div>'
+        for gr in p.get('grads', []):  # dict(lado, alto, color, stops=[(pct, opacidad), ...])
+            r, gg, b = gr['color']
+            d = 'to top' if gr['lado'] == 'bottom' else 'to bottom'
+            st = ','.join(f'rgba({r},{gg},{b},{o}) {pc}%' for pc, o in gr['stops'])
+            capas += f'<div class="grad" style="{gr["lado"]}:0;height:{gr["alto"]}px;background:linear-gradient({d},{st})"></div>'
+    svg = ''
+    if modo in ('final', 'mascara'):
+        cap, fs = g['cap'], g['fs']
+        sm = p.get('sombra', dict(dura=(0.05, 0.012, 0.80), halo=(0.03, 0.10, 0.62)))  # (dy, desenfoque, alfa) × mayúscula
+        defs, textos = '', ''
+        for i, (linea, base) in enumerate(zip(p['lineas'], g['bases'])):
+            for k, cols in (('b', BLANCO), ('c', p.get('acento', ACENTO))):
+                defs += (f'<linearGradient id="g{i}{k}" gradientUnits="userSpaceOnUse" x1="0" x2="0" '
+                         f'y1="{base - cap:.2f}" y2="{base:.2f}"><stop offset="0" stop-color="{cols[0]}"/>'
+                         f'<stop offset="0.38" stop-color="{cols[0]}"/><stop offset="1" stop-color="{cols[1]}"/>'
+                         f'</linearGradient>')
+            tsp = ''.join(f'<tspan fill="{"#FFFFFF" if modo == "mascara" else f"url(#g{i}{k or "b"})"}">{txt}</tspan>'
+                          for txt, k in linea)
+            textos += (f'<text x="{g["cx"]:.2f}" y="{base:.2f}" text-anchor="middle" font-family="Anton" '
+                       f'font-size="{fs}" style="white-space:pre">{tsp}</text>')
+        if modo == 'final':
+            (d1, s1, a1), (d2, s2, a2) = sm['dura'], sm['halo']
+            defs += (f'<filter id="sombra" x="-20%" y="-30%" width="140%" height="170%" '
+                     f'color-interpolation-filters="sRGB">'
+                     f'<feGaussianBlur in="SourceAlpha" stdDeviation="{s2 * cap:.2f}"/>'
+                     f'<feOffset dy="{d2 * cap:.2f}"/><feComponentTransfer result="h2"><feFuncA type="linear" '
+                     f'slope="{a2}"/></feComponentTransfer>'
+                     f'<feGaussianBlur in="SourceAlpha" stdDeviation="{s1 * cap:.2f}"/>'
+                     f'<feOffset dy="{d1 * cap:.2f}"/><feComponentTransfer result="h1"><feFuncA type="linear" '
+                     f'slope="{a1}"/></feComponentTransfer>'
+                     f'<feMerge><feMergeNode in="h2"/><feMergeNode in="h1"/><feMergeNode in="SourceGraphic"/></feMerge>'
+                     f'</filter>')
+            textos = f'<g filter="url(#sombra)">{textos}</g>'
+        svg = f'<svg width="{W}" height="{H}" viewBox="0 0 {W} {H}"><defs>{defs}</defs>{textos}</svg>'
+    logo = ''
+    if modo in ('final', 'logo'):
+        lx, ly, lw = g['logo_img']
+        borde = ''
+        if modo == 'final' and p.get('logo_borde'):
+            b = p.get('logo_borde_px', 1.5)
+            borde = ('filter:' + ' '.join(f'drop-shadow({x}px {y}px 0 #FFFFFF)'
+                                          for x, y in ((b, 0), (-b, 0), (0, b), (0, -b))) + ';')
+        logo = (f'<img class="logo" src="file://{LOGO_SF}" style="left:{lx:.2f}px;top:{ly:.2f}px;'
+                f'width:{lw:.2f}px;height:{lw:.2f}px;{borde}">')
+    doc = (f'<!doctype html><html><head><meta charset="utf-8"><style>{CSS_ANTON % t}</style></head><body>'
+           f'{capas}{svg}{logo}</body></html>')
+    suf = '' if modo == 'final' else f'_{modo}'
+    out = carpeta / f"{p['id']}{suf}.html"
+    out.write_text(doc, encoding='utf-8')
+    return out
+
+
+def control_anton(pines, carpeta):
+    """Contraste del trazo de la frase contra el mismo pin sin frase (WCAG, mismo método que v04: la sombra no cuenta)
+    y fondo bajo el logo. Devuelve un dict por pin."""
+    import numpy as np
+    cc = carpeta / '_control'; cc.mkdir(exist_ok=True)
+    trabajos = []
+    for p in pines:
+        fpng = carpeta / f"_fondo_{p['id']}.png"
+        for m in ('sin', 'mascara', 'logo'):
+            h = html_anton(p, fpng, cc, m)
+            trabajos.append(dict(html=str(h), out=str(cc / f"{p['id']}_{m}.png"), w=W, h=H))
+    j = cc / '_trabajos.json'; j.write_text(json.dumps(trabajos, indent=1))
+    subprocess.run(['node', str(R / 'scripts' / 'life' / 'render.js'), str(j)], check=True, capture_output=True)
+
+    def lum(a):
+        c = a.astype(np.float64) / 255
+        c = np.where(c <= 0.04045, c / 12.92, ((c + 0.055) / 1.055) ** 2.4)
+        return c @ np.array([0.2126, 0.7152, 0.0722])
+    res = {}
+    for p in pines:
+        fin = np.asarray(Image.open(carpeta / f"{p['nombre']}.png").convert('RGB'))
+        sin = np.asarray(Image.open(cc / f"{p['id']}_sin.png").convert('RGB'))
+        mas = np.asarray(Image.open(cc / f"{p['id']}_mascara.png").convert('L'))
+        lg = np.asarray(Image.open(cc / f"{p['id']}_logo.png").convert('L'))
+        trazo = mas >= 128
+        Lf, Ls = lum(fin), lum(sin)
+        cr = (np.maximum(Lf, Ls) + 0.05) / (np.minimum(Lf, Ls) + 0.05)
+        v = cr[trazo]
+        ys, xs = np.where(trazo)
+        g = geometria(p)
+        x0, y0, x1, y1 = [round(c) for c in g['logo_caja']]
+        dib = lg < 128                                    # píxeles del dibujo del logo (negro) sobre blanco
+        zona = np.zeros_like(trazo); zona[y0:y1, x0:x1] = True
+        fondo_logo = Ls[zona & ~dib]
+        crl = (np.median(fondo_logo) + 0.05) / (Lf[dib & (lg < 60)].mean() + 0.05)
+        res[p['id']] = dict(
+            trazo_px=int(trazo.sum()), contraste_mediana=round(float(np.median(v)), 2),
+            pct_ge_3=round(float((v >= 3).mean() * 100), 2), contraste_p1=round(float(np.percentile(v, 1)), 2),
+            bloque_xyxy=[int(xs.min()), int(ys.min()), int(xs.max()), int(ys.max())],
+            bloque_ancho_pct=round((xs.max() - xs.min() + 1) / W * 100, 1),
+            mayuscula_px=round(g['cap'], 1), mayuscula_pct_ancho=round(g['cap'] / W * 100, 2),
+            bases_px=[round(b, 1) for b in g['bases']], paso_px=round(g['paso'], 1),
+            logo_caja_xyxy=[round(c, 1) for c in g['logo_caja']], logo_alto_pct_ancho=round(p['logo_h'] / W * 100, 1),
+            logo_fondo_lum_mediana=round(float(np.median(fondo_logo)), 3),
+            logo_contraste_negro_vs_fondo=round(float(crl), 2), logo_borde=bool(p.get('logo_borde')))
+    (carpeta / '_control.json').write_text(json.dumps(res, indent=1, ensure_ascii=False))
+    return res
+
+
 def construir(pines, version):
     carpeta = R / 'TRABAJO' / 'life' / 'pines' / version
     carpeta.mkdir(parents=True, exist_ok=True)
     trabajos, registro = [], []
     for p in pines:
         fpng, tam = fondo(p, carpeta)
-        h = html(p, fpng, carpeta)
+        h = html_anton(p, fpng, carpeta) if p.get('estilo') == 'anton' else html(p, fpng, carpeta)
         out = carpeta / f"{p['nombre']}.png"
         trabajos.append(dict(html=str(h), out=str(out), w=W, h=H))
         registro.append(dict(id=p['id'], nombre=p['nombre'], fuente=p['fuente'], tam_fuente=tam,
                              caja_xywh=[*p['caja'], round(p['caja'][2] * 1.5)], frase=p['frase_txt'],
                              neutro=p.get('_neutro'), ajuste=p.get('ajuste')))
+        if p.get('estilo') == 'anton':
+            registro[-1].update(estilo='anton', lineas=[''.join(t for t, _ in l) for l in p['lineas']],
+                                acento=[t for l in p['lineas'] for t, k in l if k == 'c'], fs=p['fs'],
+                                grads=p.get('grads'), logo=str(LOGO_SF.relative_to(R)), logo_h=p['logo_h'],
+                                logo_borde=bool(p.get('logo_borde')), con_remera=p.get('con_remera'),
+                                motivo_foto=p.get('motivo_foto'))
     j = carpeta / '_trabajos.json'
     j.write_text(json.dumps(trabajos, indent=1))
     subprocess.run(['node', str(R / 'scripts' / 'life' / 'render.js'), str(j)], check=True)
@@ -186,6 +340,10 @@ def construir(pines, version):
         mini.paste(im.resize((180, 270), Image.LANCZOS), (12 + i * 192, 12))
     mini.save(carpeta / '_miniaturas_180px.png')
     (carpeta / '_registro.json').write_text(json.dumps(registro, indent=1, ensure_ascii=False))
+    anton = [p for p in pines if p.get('estilo') == 'anton']
+    if anton:
+        for k, v in control_anton(anton, carpeta).items():
+            print(k, v)
     return carpeta
 
 
