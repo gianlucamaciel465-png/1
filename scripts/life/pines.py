@@ -90,6 +90,8 @@ def fondo(p, carpeta):
         return out, (W, H)
     if p['fuente'][0] == 'foto':
         im = srgb(R / 'PRODUCTO' / p['fuente'][1])
+    elif p['fuente'][0] == 'externa':   # foto de banco con licencia (fuera de git: TRABAJO/life2/pines_v06/fotos/)
+        im = srgb(R / p['fuente'][1])
     else:
         im = cuadro(p['fuente'][1], p['fuente'][2], carpeta / f"_cuadro_{p['id']}.png")
     if p.get('neutro'):
@@ -182,7 +184,8 @@ def geometria(p):
     """Renglones: línea de base de cada uno a partir de la altura de mayúscula del primero (p['top']), el cuerpo (fs) y la
     interlínea (paso / mayúscula). Logo: alto del dibujo p['logo_h'], a p['logo_gap'] px debajo de la última base."""
     fs = p['fs']; cap = ANTON_CAP * fs; paso = cap * p.get('inter', 1.14)
-    bases = [p['top'] + cap + i * paso for i in range(len(p['lineas']))]
+    ex = p.get('extra', {})   # px extra encima del renglón i (p. ej. una Ñ cuya virgulilla toca el renglón de arriba)
+    bases = [p['top'] + cap + i * paso + sum(v for k, v in ex.items() if k <= i) for i in range(len(p['lineas']))]
     s = p['logo_h'] / (LOGO_BBOX[3] - LOGO_BBOX[1])
     logo_top = bases[-1] + p['logo_gap']
     cx = W / 2 + p.get('dx', 0)
@@ -219,8 +222,10 @@ def html_anton(p, fondo_png, carpeta, modo='final'):
                          f'</linearGradient>')
             tsp = ''.join(f'<tspan fill="{"#FFFFFF" if modo == "mascara" else f"url(#g{i}{k or "b"})"}">{txt}</tspan>'
                           for txt, k in linea)
+            ob = (f' transform="translate({g["cx"]:.2f} {base:.2f}) skewX({-p["oblicua"]}) '
+                  f'translate({-g["cx"]:.2f} {-base:.2f})"') if p.get('oblicua') else ''
             textos += (f'<text x="{g["cx"]:.2f}" y="{base:.2f}" text-anchor="middle" font-family="Anton" '
-                       f'font-size="{fs}" style="white-space:pre">{tsp}</text>')
+                       f'font-size="{fs}" style="white-space:pre"{ob}>{tsp}</text>')
         if modo == 'final':
             (d1, s1, a1), (d2, s2, a2) = sm['dura'], sm['halo']
             defs += (f'<filter id="sombra" x="-20%" y="-30%" width="140%" height="170%" '

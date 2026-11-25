@@ -127,3 +127,47 @@ PINES['v05'] = [
          motivo_foto='la playa de la ciudad fuera de temporada, nublada: el lugar de enero, todavía gris',
          grads=[dict(lado='top', alto=771, color=_OSC, stops=[(0, 0.74), (71.5, 0.64), (100, 0)])]),
 ]
+
+# v06 (25/11, después del rechazo de v05: «Muy malos, nada que ver a los míos. Podes usar fotos de otras personas y hace
+# frases mas motivadoras y con más sentido. SIEMPRE EL LOGO DE ROCCÉ TAL CUAL ES, sin deformarlo»).
+# Fotos de otras personas, de Burst (Shopify): licencia Burst, uso comercial libre, se puede modificar, sin atribución
+# obligatoria (no se puede vender la foto sola). Bajadas a TRABAJO/life2/pines_v06/fotos/ (fuera de git).
+# Lo que cambia contra v05, medido en sus pines: foto con una persona y luz real (noche, contraluz), sin velo oscuro
+# pesado; frase más grande (renglón más ancho ≈ 82–86 % del pin); una inclinada como «SI VAS A FALLAR»; sombra con
+# relieve (una dura más larga + halo). Logo: el mismo PNG, solo escalado; sobre fondo oscuro, borde blanco fino como
+# en sus pines oscuros («SI VAS A FALLAR», «NO ESTÁS ATRASADO»).
+_SOMBRA6 = dict(dura=(0.06, 0.006, 0.85), halo=(0.02, 0.12, 0.60))
+_CEL = ('#C4E8FD', '#B2E2FD')
+_F6 = 'TRABAJO/life2/pines_v06/fotos/'
+PINES['v06'] = [
+    # P7 · persona sola sentada arriba de una calle en pendiente, la ciudad de noche abajo (San Francisco).
+    # Retoque: se sacaron los cuernos rojos del gorro (disfraz) con scripts/life/retoque_cuernos.py.
+    dict(id='p7', nombre='ROCCE_LIFE_PIN_07_nadie_lo_ve_v06', estilo='anton',
+         fuente=('externa', _F6 + 'hill_sin_cuernos.jpg'), caja=(1, 0, 3844),
+         frase_txt='HOY NADIE LO VE. MAÑANA NADIE VA A PODER IGNORARLO.',
+         lineas=[[('HOY NADIE LO VE.', None)], [('MAÑANA NADIE', None)], [('VA A PODER', None)], [('IGNORARLO.', 'c')]],
+         fs=124, top=100, inter=1.20, extra={1: 18}, logo_h=120, logo_gap=36, con_remera=False, sombra=_SOMBRA6, acento=_CEL,
+         logo_borde=True, logo_borde_px=2,
+         foto='Burst · hooded-figure-sits-on-city-street-hill (licencia Burst)',
+         motivo_foto='una persona sola mirando la ciudad de noche desde arriba: lo que todavía nadie ve',
+         grads=[dict(lado='top', alto=900, color=_OSC, stops=[(0, 0.50), (75, 0.38), (100, 0)])]),
+    # P8 · alguien caminando solo de noche por una vereda mojada, hacia la luz (Berlín). Inclinada.
+    dict(id='p8', nombre='ROCCE_LIFE_PIN_08_cansado_v06', estilo='anton',
+         fuente=('externa', _F6 + 'night-walk-on-city-street.jpg'), caja=(1162, 0, 1650),
+         frase_txt='CANSADO SE PUEDE SEGUIR. RENDIDO, NO.',
+         lineas=[[('CANSADO', None)], [('SE PUEDE SEGUIR.', None)], [('RENDIDO, NO.', 'c')]],
+         fs=124, top=100, logo_h=120, logo_gap=36, con_remera=False, sombra=_SOMBRA6, acento=_CEL, oblicua=9,
+         logo_borde=True, logo_borde_px=2,
+         foto='Burst · night-walk-on-city-street (licencia Burst)',
+         motivo_foto='seguir caminando de noche, solo, con la vereda mojada',
+         grads=[dict(lado='top', alto=760, color=_OSC, stops=[(0, 0.45), (72, 0.40), (100, 0)])]),
+    # P9 · una persona sola en la orilla, el mar entrando, cielo de atardecer.
+    dict(id='p9', nombre='ROCCE_LIFE_PIN_09_caerse_v06', estilo='anton',
+         fuente=('externa', _F6 + 'a-figure-in-a-hoodie-on-a-beach-at-the-shoreline.jpg'), caja=(375, 0, 1492),
+         frase_txt='CAERSE ES PARTE. QUEDARSE EN EL PISO ES UNA DECISIÓN.',
+         lineas=[[('CAERSE ES PARTE.', None)], [('QUEDARSE EN EL PISO', None)], [('ES UNA DECISIÓN.', 'c')]],
+         fs=110, top=116, inter=1.20, extra={2: 8}, logo_h=120, logo_gap=36, con_remera=False, sombra=_SOMBRA6, acento=_CEL,
+         foto='Burst · a-figure-in-a-hoodie-on-a-beach-at-the-shoreline (licencia Burst)',
+         motivo_foto='de pie, sola frente al mar: la decisión de no quedarse en el piso',
+         grads=[dict(lado='top', alto=760, color=_OSC, stops=[(0, 0.58), (62, 0.46), (100, 0)])]),
+]
