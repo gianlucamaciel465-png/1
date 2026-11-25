@@ -1,0 +1,206 @@
+<!doctype html>
+<!-- IGLIB-3 «Ambos permanecen» v01 · seis láminas 1080×1350.
+     Las ventanas de video (.ventana) quedan vacías: construir.py pone adentro los cuadros reales.
+     Modo "arriba" (body.modo-arriba): solo lo que va por encima del video (.arriba), fondo transparente.
+     L6: estadoL6(k) fija el estado de los textos en el cuadro k (capas.js saca una captura por cuadro). -->
+<html lang="es"><head><meta charset="utf-8">
+<style>
+@font-face { font-family: "InterD"; src: url("file:///usr/share/fonts/opentype/inter/InterDisplay-Bold.otf"); font-weight: 700; }
+@font-face { font-family: "InterD"; src: url("file:///usr/share/fonts/opentype/inter/InterDisplay-SemiBold.otf"); font-weight: 600; }
+@font-face { font-family: "InterUI"; src: url("file:///usr/share/fonts/opentype/inter/Inter-Regular.otf"); font-weight: 400; }
+@font-face { font-family: "InterUI"; src: url("file:///usr/share/fonts/opentype/inter/Inter-Medium.otf"); font-weight: 500; }
+@font-face { font-family: "InterUI"; src: url("file:///usr/share/fonts/opentype/inter/Inter-SemiBold.otf"); font-weight: 600; }
+@font-face { font-family: "InterUI"; src: url("file:///usr/share/fonts/opentype/inter/Inter-Bold.otf"); font-weight: 700; }
+@font-face { font-family: "Montse"; src: url("file:///home/user/1/scripts/fuentes/Montserrat-Bold.ttf"); font-weight: 700; }
+:root {
+  --fondo: #0b1014; --hoja: #181c1f; --tarjeta: #2a3036; --borde: #24292e; --gris: #a0a9b5;
+  --boton: #b74a00; --boton-txt: #faf3ef; --punto: #3a4148;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: #555; width: 1080px; }
+section.lamina { position: relative; width: 1080px; height: 1350px; overflow: hidden; background: #000; }
+.abs { position: absolute; }
+.ventana { position: absolute; }
+img.foto { position: absolute; display: block; }
+body.modo-arriba { background: transparent; }
+body.modo-arriba section.lamina { background: transparent !important; }
+body.modo-arriba section.lamina *:not(.arriba):not(.arriba *) { visibility: hidden; }
+body.modo-arriba .arriba, body.modo-arriba .arriba * { visibility: visible; }
+
+/* ---------- L1 · hoja Roccé ---------- */
+#L1 { background: var(--fondo); }
+#L1 .titular { left: 0; width: 1080px; top: 118px; text-align: center; font: 700 72px/86px "Montse"; color: #fff; }
+#L1 .titular .borde { position: absolute; left: 0; top: 0; width: 100%; color: transparent; -webkit-text-stroke: 10px #000; }
+#L1 .titular .relleno { position: relative; }
+#L1 .hoja { left: 0; top: 330px; width: 1080px; height: 1020px; background: var(--hoja); border-radius: 44px 44px 0 0; }
+#L1 .barra { left: 504px; top: 26px; width: 72px; height: 6px; border-radius: 3px; background: var(--gris); }
+#L1 .marca { left: 0; width: 1080px; top: 64px; text-align: center; font: 500 34px/40px "InterUI"; letter-spacing: 3px; color: var(--gris); }
+#L1 .pregunta { left: 0; width: 1080px; top: 116px; text-align: center; font: 700 58px/68px "InterUI"; color: #fff; letter-spacing: -0.5px; }
+#L1 .pista { left: 0; width: 1080px; top: 198px; text-align: center; font: 400 32px/40px "InterUI"; color: var(--gris); letter-spacing: 0.3px; }
+#L1 .tarjeta { top: 266px; width: 470px; height: 500px; background: var(--tarjeta); border: 3px solid var(--borde); border-radius: 40px; }
+#L1 .tarjeta .nombre { left: 0; width: 464px; top: 336px; text-align: center; font: 700 56px/64px "InterUI"; color: #fff; }
+#L1 .puntos { left: 0; width: 1080px; top: 796px; display: flex; justify-content: center; gap: 14px; }
+#L1 .puntos i { display: block; width: 14px; height: 14px; border-radius: 50%; background: var(--punto); }
+#L1 .sep { left: 0; top: 842px; width: 1080px; height: 2px; background: var(--borde); }
+#L1 .boton { left: 44px; top: 868px; width: 992px; height: 112px; border-radius: 28px; background: var(--boton);
+  color: var(--boton-txt); font: 600 40px/112px "InterUI"; text-align: center; }
+
+/* ---------- L2 / L3 · partidas ---------- */
+.titulo-dato { left: 70px; width: 940px; top: 112px; text-align: center; font: 700 56px/66px "InterD"; color: #fff;
+  text-shadow: 0 2px 10px rgba(0,0,0,.45); }
+.degrade-arriba { left: 0; top: 0; width: 1080px; height: 420px;
+  background: linear-gradient(to bottom, rgba(0,0,0,.62) 0%, rgba(0,0,0,.46) 38%, rgba(0,0,0,.18) 72%, rgba(0,0,0,0) 100%); }
+.rotulo { width: 540px; top: 1226px; text-align: center; font: 600 30px/36px "InterD"; letter-spacing: 3px; color: #fff;
+  text-shadow: 0 0 10px rgba(0,0,0,.75), 0 1px 3px rgba(0,0,0,.8); }
+.degrade-abajo { left: 0; top: 1130px; width: 1080px; height: 220px;
+  background: linear-gradient(to top, rgba(0,0,0,.38) 0%, rgba(0,0,0,0) 100%); }
+
+/* ---------- L4 ---------- */
+/* El guion pedía #111111, pero el gris medido del piso arriba es (84,83,77) y (112,111,109): contraste 2,5:1.
+   En blanco con sombra suave sube a 7,6:1 y 4,9:1 (ver hoja de máster). */
+#L4 .pregunta4 { left: 60px; width: 960px; top: 92px; text-align: center; font: 700 58px/68px "InterD"; color: #ffffff; letter-spacing: -0.3px;
+  text-shadow: 0 2px 10px rgba(0,0,0,.35); }
+.etiqueta { width: 540px; text-align: center; font: 600 34px/40px "InterD"; letter-spacing: 2px; }
+
+/* ---------- L5 ---------- */
+#L5 .pastilla { left: 50px; top: 625px; width: 980px; height: 100px; border-radius: 50px; background: #000;
+  color: #fff; font: 600 56px/100px "InterD"; text-align: center; letter-spacing: -0.3px; }
+
+/* ---------- L6 ---------- */
+#L6 .deg6 { left: 0; top: 0; width: 1080px; height: 640px;
+  background: linear-gradient(to bottom, rgba(0,0,0,.55) 0%, rgba(0,0,0,.42) 40%, rgba(0,0,0,.16) 75%, rgba(0,0,0,0) 100%); }
+#L6 .deg6b { left: 0; top: 1060px; width: 1080px; height: 290px;
+  background: linear-gradient(to top, rgba(0,0,0,.55) 0%, rgba(0,0,0,.30) 55%, rgba(0,0,0,0) 100%); }
+#L6 .bloque { left: 0; top: 0; width: 1080px; height: 1350px; }
+#L6 .l1, #L6 .l2 { position: absolute; left: 0; width: 1080px; text-align: center; font-family: "InterD"; font-weight: 700; color: #fff;
+  white-space: nowrap; text-shadow: 0 2px 12px rgba(0,0,0,.45); }
+#L6 .l2 .txt { position: relative; display: inline-block; }
+#L6 .l2 .raya { position: absolute; left: -6px; top: 52%; height: 8px; border-radius: 4px; background: #fff; box-shadow: 0 1px 6px rgba(0,0,0,.35); }
+#L6 .letra { display: inline-block; position: relative; }
+#L6 .letra span { display: inline-block; transform-origin: 50% 80%; }
+#L6 .letra .a { position: absolute; left: 0; top: 0; }
+#L6 .bajada { position: absolute; left: 60px; width: 960px; top: 300px; text-align: center; font: 700 56px/66px "InterD"; color: #fff;
+  text-shadow: 0 2px 12px rgba(0,0,0,.5); }
+#L6 .cta { position: absolute; left: 0; width: 1080px; top: 1218px; text-align: center; font: 700 58px/68px "InterD"; color: #fff;
+  text-shadow: 0 2px 12px rgba(0,0,0,.55); }
+#L6 .ficha { position: absolute; left: 966px; top: 1236px; width: 90px; height: 90px; border-radius: 10px; overflow: hidden; background: #FEFEFE; }
+#L6 .ficha img { width: 90px; height: 90px; display: block; }
+</style></head>
+<body>
+
+<!-- L1 · APUESTA + PISTA -->
+<section class="lamina" id="L1">
+  <div class="abs titular"><div class="borde">Instagram te deja elegir<br>equipo para la final.</div><div class="relleno">Instagram te deja elegir<br>equipo para la final.</div></div>
+  <div class="abs hoja">
+    <div class="abs barra"></div>
+    <div class="abs marca">ROCCÉ</div>
+    <div class="abs pregunta">¿Cuál ponés en tu foto de perfil?</div>
+    <div class="abs pista">Ambos permanecen hasta que finaliza el evento.</div>
+    <div class="abs tarjeta" style="left:50px"><div class="abs nombre">"BLANCA"</div></div>
+    <div class="abs tarjeta" style="left:560px"><div class="abs nombre">"NEGRA"</div></div>
+    <div class="abs puntos"><i></i><i></i></div>
+    <div class="abs sep"></div>
+    <div class="abs boton">Elegir este equipo</div>
+  </div>
+  <div class="ventana" data-v="v1a" style="left:160px;top:646px;width:250px;height:250px"></div>
+  <div class="ventana" data-v="v1b" style="left:670px;top:646px;width:250px;height:250px"></div>
+</section>
+
+<!-- L2 · EVIDENCIA Blanca -->
+<section class="lamina" id="L2">
+  <img class="foto" src="file:///home/user/1/TRABAJO/iglib/carrusel/recursos/L2_puesta.png" style="left:0;top:0;width:540px;height:1350px">
+  <div class="ventana" data-v="v2" style="left:540px;top:0;width:540px;height:1350px"></div>
+  <div class="abs arriba degrade-arriba"></div>
+  <div class="abs arriba degrade-abajo"></div>
+  <div class="abs arriba titulo-dato">La Blanca: ROCCÉ en denim<br>y cursiva celeste.</div>
+  <div class="abs arriba rotulo" style="left:0">PUESTA</div>
+  <div class="abs arriba rotulo" style="left:540px">DE CERCA</div>
+</section>
+
+<!-- L3 · EVIDENCIA Negra -->
+<section class="lamina" id="L3">
+  <div class="ventana" data-v="v3a" style="left:0;top:0;width:540px;height:1350px"></div>
+  <div class="ventana" data-v="v3b" style="left:540px;top:0;width:540px;height:1350px"></div>
+  <div class="abs arriba degrade-arriba"></div>
+  <div class="abs arriba degrade-abajo"></div>
+  <div class="abs arriba titulo-dato">La Negra: ROCCÉ en denim,<br>tono sobre tono.</div>
+  <div class="abs arriba rotulo" style="left:0">PUESTA</div>
+  <div class="abs arriba rotulo" style="left:540px">DE CERCA</div>
+</section>
+
+<!-- L4 · GRAN PREGUNTA -->
+<section class="lamina" id="L4">
+  <img class="foto" src="file:///home/user/1/TRABAJO/iglib/carrusel/recursos/L4_base.png" style="left:0;top:0;width:1080px;height:1350px">
+  <div class="abs pregunta4">¿Que te vean de lejos o que<br>te descubran de cerca?</div>
+  <div class="abs etiqueta" id="et4b" style="left:0;top:952px;color:#111111">"BLANCA"</div>
+  <div class="abs etiqueta" id="et4n" style="left:540px;top:952px;color:#ffffff">"NEGRA"</div>
+</section>
+
+<!-- L5 · PISTA -->
+<section class="lamina" id="L5">
+  <img class="foto" src="file:///home/user/1/TRABAJO/iglib/carrusel/recursos/L5_blanca.png" style="left:0;top:0;width:1080px;height:675px">
+  <img class="foto" src="file:///home/user/1/TRABAJO/iglib/carrusel/recursos/L5_negra.png" style="left:0;top:675px;width:1080px;height:675px">
+  <div class="abs etiqueta" style="left:270px;top:552px;color:#111111">"BLANCA"</div>
+  <div class="abs etiqueta" style="left:270px;top:1236px;color:#ffffff">"NEGRA"</div>
+  <div class="abs pastilla">Adelante, las dos dicen lo mismo.</div>
+</section>
+
+<!-- L6 · GIRO + CTA -->
+<section class="lamina" id="L6">
+  <div class="ventana" data-v="v6" style="left:0;top:0;width:1080px;height:1350px"></div>
+  <div class="abs arriba deg6"></div>
+  <div class="abs arriba deg6b" id="deg6b"></div>
+  <div class="abs arriba bloque">
+    <div class="l1" id="l1"><span>Amb</span><span class="letra"><span class="o" id="lo">o</span><span class="a" id="la">a</span></span><span>s permanecen</span><span id="punto1">.</span></div>
+    <div class="l2" id="l2"><span class="txt" id="t2">hasta que finaliza el evento<span class="raya" id="raya"></span></span><span id="punto2">.</span></div>
+    <div class="bajada" id="bajada">La insignia se va cuando<br>termina el evento.<br>Lo que elegís ponerte, no.</div>
+    <div class="cta" id="cta">Etiquetá al que es de la otra.</div>
+    <div class="ficha" id="ficha"><img src="file:///home/user/1/LOGO/rocce_logo.png"></div>
+  </div>
+</section>
+
+<script>
+// Estado de L6 en el cuadro k (30 fps). Tiempos de proyecto.py → L6_TL.
+const TL = { tachar: [42, 57], desvanecer: [57, 66], letra: [66, 71], bajada: [72, 80], cta: [90, 98] };
+const lerp = (a, b, t) => a + (b - a) * t;
+const tramo = (k, [a, b]) => Math.min(1, Math.max(0, (k - a) / (b - a)));
+const suave = t => t * t * (3 - 2 * t);
+const salida = t => 1 - Math.pow(1 - t, 3);
+function estadoL6(k) {
+  const l1 = document.getElementById("l1"), l2 = document.getElementById("l2"), t2 = document.getElementById("t2");
+  const raya = document.getElementById("raya");
+  // 0–41: dos renglones a 60 px; 42–57: la raya cruza "hasta que finaliza el evento"
+  const fT = salida(tramo(k, TL.tachar));
+  raya.style.width = (fT * (t2.offsetWidth + 6)) + "px";   // de -6 px al final de "evento" (no tacha el punto)
+  raya.style.opacity = k < TL.tachar[0] ? 0 : 1;
+  // 57–66: el renglón tachado se va; "Ambos permanecen." crece de 60 a 96 px y baja al centro del tercio superior
+  const fD = suave(tramo(k, TL.desvanecer));
+  const f2 = suave(tramo(k, [TL.desvanecer[0], TL.desvanecer[0] + 5]));   // el renglón tachado se va en 5 cuadros, hacia abajo
+  l2.style.opacity = 1 - f2;
+  l2.style.top = (196 + 18 * f2) + "px"; l2.style.font = "700 60px/72px InterD";
+  const tam = lerp(60, 96, fD);
+  l1.style.font = `700 ${tam}px/${tam * 1.15}px InterD`;
+  l1.style.top = lerp(124, 168, fD) + "px";
+  l1.style.letterSpacing = lerp(-0.3, -1.2, fD) + "px";
+  document.getElementById("punto1").style.opacity = fD;
+  // 66–71: la "o" de "Ambos" cambia a "a" (un golpe: la o se aplasta 66–68, la a salta 68–71)
+  const lo = document.getElementById("lo"), la = document.getElementById("la");
+  const fo = tramo(k, [TL.letra[0], TL.letra[0] + 2]);
+  const fa = tramo(k, [TL.letra[0] + 1, TL.letra[1]]);   // 66 o · 67 o aplastada · 68–70 la a salta · 71 «Ambas»
+  lo.style.transform = `scaleY(${1 - fo})`; lo.style.opacity = fo >= 1 ? 0 : 1;
+  const pop = fa < 0.6 ? lerp(0, 1.18, fa / 0.6) : lerp(1.18, 1, (fa - 0.6) / 0.4);
+  la.style.transform = `scaleY(${pop})`; la.style.opacity = fa > 0 ? 1 : 0;
+  // al terminar el golpe, la "a" pasa al flujo normal del texto (espaciado propio de "Ambas")
+  if (k >= TL.letra[1]) { lo.style.display = "none"; la.style.position = "static"; la.style.transform = "none"; }
+  else { lo.style.display = ""; la.style.position = "absolute"; }
+  // 72–80: la bajada
+  const fB = suave(tramo(k, TL.bajada));
+  const baj = document.getElementById("bajada"); baj.style.opacity = fB; baj.style.transform = `translateY(${(1 - fB) * 14}px)`;
+  // 90–98: CTA + ficha del logo + degradé de abajo
+  const fC = suave(tramo(k, TL.cta));
+  document.getElementById("cta").style.opacity = fC; document.getElementById("cta").style.transform = `translateY(${(1 - fC) * 14}px)`;
+  document.getElementById("ficha").style.opacity = fC; document.getElementById("deg6b").style.opacity = fC;
+}
+estadoL6(0);
+</script>
+</body></html>
