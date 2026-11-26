@@ -1,14 +1,18 @@
 ---
 name: rocce-voz
-description: Voz de Roccé para reels y locuciones. Usar cuando un encargo pida voz en off, locución, narración o voz de marca de Roccé, o mencione Firme 04, "Royé", el banco vocal o la voz de Gianluca. Indica qué voz usar primero, dónde está el banco privado, cómo recuperarlo y la receta para generar y mezclar la voz.
+description: Voz de Roccé para reels y locuciones. Usar cuando un encargo pida voz en off, locución, narración o voz de marca de Roccé, o mencione la voz dirigida, Firme 04, "Royé", el banco vocal o la voz de Gianluca. Indica qué voz usar primero, dónde está el banco privado, cómo recuperarlo y la receta para generar y mezclar la voz.
 ---
 
 # Voz de Roccé
 
-1. **Qué voz:** primero la voz de marca aprobada **"Roccé — Firme 04"**; como alternativa, la **voz real de Gianluca**. La voz guía de `lo_que_te_frena_v02` no es referencia.
+1. **Qué voz:** la **voz oficial dirigida** (aprobada para siempre por Gianluca el 26/11/2026: la de `ROCCE_FOMO_04_INTENTO_v02`); como alternativa, la **voz real de Gianluca**. **Firme 04 está descartada** desde el 26/11/2026; la voz guía de `lo_que_te_frena_v02` tampoco es referencia.
+   - Generar: guion TSV (`id<TAB>texto`, tramos separados por ` | `, cada uno con `[rapido] [bajo] [lento] [firme] [energico] [grito] [pausa N]`; `^palabra` = quiebre) → `$S/voz-env/bin/python -I scripts/voz/voz_dirigida.py GUION.tsv SALIDA` (edge-tts `es-AR-TomasNeural` + Praat) → `<id>.wav` + `voz.json`.
+   - Dirección: gancho rápido, evidencia en contra baja, **un solo grito en el giro con arranque calmo**, significado lento con pausa antes, afirmación firme, CTA enérgico. Un grito y un quiebre por pieza como máximo. Frases muy cortas, unidas a la anterior.
+   - Muestra de referencia, parámetros y LEEME: `/mnt/project-files/voz_rocce/` (comparar contra la muestra si el servicio cambia).
+   - Mezcla: voz baja +5 dB, grito/CTA +2 dB; el resto como el punto 6. Control con Whisper por ventanas cortas.
 2. **Dónde están las grabaciones:** página privada https://claude.ai/artifact/AQSWzDitj143yjJdqkoXQk (no en el repo: el repo es público). Registro, hashes y recuperación: `scripts/voz/BANCO_VOCAL.md`.
 3. **Recuperar:** instalar entornos (`scripts/instalar_entorno.sh "$S" voz whisper`), bajar con la herramienta Artifact (`read` + `paths`) y comparar sha256 con `REGISTRO_BANCO_VOCAL.json`. Si no se puede leer, pedirle los archivos a Gianluca.
-4. **Generar con Firme 04:**
+4. **(Histórico) Generar con Firme 04** — solo para rehacer piezas viejas que ya la usan:
    - escribir el guion como TSV (`id<TAB>texto`), con "Royé" por Roccé y "fáunders" por founders (en pantalla: Roccé / FOUNDERS);
    - **probar primero una frase corta con Royé**;
    - `VOZ_PY=$S/voz-env/bin/python python3 scripts/proxima/locucion.py GUION.tsv SALIDA` (edge-tts es-AR-ElenaNeural +11 % / −20 Hz + `tratamiento_firme.py`);

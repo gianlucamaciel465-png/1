@@ -4,8 +4,9 @@
 
 **https://claude.ai/artifact/AQSWzDitj143yjJdqkoXQk** — "Banco vocal Roccé" (creada el 28/10/2026)
 
-## Prioridad de uso
-1. **Roccé — Firme 04** (voz sintética de marca aprobada): `originales/Rocce_Voz_Firme.mp3`, sha256 `a39ef18a97fc9a79353c342534233ca96c70d902843542b7f41607ca25cb148e`, 9,384 s.
+## Prioridad de uso (desde el 26/11/2026)
+0. **Voz oficial dirigida** (Gianluca, 26/11/2026 11:28 UTC: «Guárdate para siempre la voz y úsala siempre»): la de `ROCCE_FOMO_04_INTENTO_v02`. edge-tts 7.3.1 `es-AR-TomasNeural` + `scripts/voz/voz_dirigida.py` (dirección por tramo, grito y quiebre con Praat). Guion aprobado: `scripts/fomo/voz_m4_v2.tsv`. Muestra de referencia (`MUESTRA_voz_rocce_04_v02.wav`, sha256 `9882d6e6ecf273f61c3110fdb79835e37203e4d4f3f6adc9ad1e70b86cd02898`), frases sueltas, hashes y LEEME con todos los parámetros en `/mnt/project-files/voz_rocce/` (carpeta privada del proyecto, no en el repo).
+1. **Roccé — Firme 04** (descartada el 26/11/2026: «esta ya no me gusta»; queda registrada para piezas viejas): `originales/Rocce_Voz_Firme.mp3`, sha256 `a39ef18a97fc9a79353c342534233ca96c70d902843542b7f41607ca25cb148e`, 9,384 s.
 2. **Gianluca, voz real** (alternativa autorizada): `originales/ROCCE_Voz_Gianluca_Referencia_Original.wav`, sha256 `42dffea0112160ee6c01ef2f501da3f6aea16654c140ed95225726b43c2617f1`, 24,639 s (dos notas de voz del 23/10/2026 unidas con 0,30 s de pausa, sin procesar).
 - La voz guía de `ROCCE_lo_que_te_frena_v02` (Chatterbox, voz incorporada) **no es referencia** y no se vuelve a usar como voz de marca.
 - Registro completo (procedencia, parámetros, motor, receta, sha256 de cada archivo): `REGISTRO_BANCO_VOCAL.json` en la página. JSON original de Gianluca: `originales/ROCCE_Perfiles_Vocales_Verificados.json` (sha256 `df5cc802…c465`).
