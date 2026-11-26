@@ -171,3 +171,43 @@ PINES['v06'] = [
          motivo_foto='de pie, sola frente al mar: la decisión de no quedarse en el piso',
          grads=[dict(lado='top', alto=760, color=_OSC, stops=[(0, 0.58), (62, 0.46), (100, 0)])]),
 ]
+
+# v07 · tanda 3 (26/11, Gianluca 14:14 UTC: «Te falta las fotos para Pinterest…», con la vara de «marca de ropa profesional,
+# de alto estatus… muy producido»). Misma rama que v06, aprobada el 25/11 20:22 UTC («Perfectas esas frases… Seguí por esa
+# rama»). Dos fotos de otras personas de Burst (licencia comercial, sin atribución obligatoria) y un pin con la placa real
+# (cuadro de IMG_5359 de Gianluca, HLG→SDR con la cadena mobius). Black Friday no va en la imagen: el pin sigue circulando
+# meses después y la oferta tiene fecha. Fotos fuera de git en TRABAJO/life3/pines_t3/fotos/.
+_F7 = 'TRABAJO/life3/pines_t3/fotos/'
+PINES['v07'] = [
+    # P10 · una mujer sola caminando en la niebla, de noche, entre luces naranjas.
+    dict(id='p10', nombre='ROCCE_LIFE_PIN_10_el_medio_v07', estilo='anton',
+         fuente=('externa', _F7 + 'woman-walks-eerie-night-streets.jpg'), caja=(0, 49, 1559),
+         frase_txt='TODOS QUIEREN EL FINAL. POCOS AGUANTAN EL MEDIO.',
+         lineas=[[('TODOS QUIEREN', None)], [('EL FINAL.', None)], [('POCOS AGUANTAN', None)], [('EL MEDIO.', 'c')]],
+         fs=124, top=100, inter=1.16, logo_h=120, logo_gap=36, con_remera=False, sombra=_SOMBRA6, acento=_CEL,
+         logo_borde=True, logo_borde_px=2,
+         foto='Burst · woman-walks-eerie-night-streets (licencia Burst)',
+         motivo_foto='sola en medio de la calle, de noche y con niebla: el tramo que nadie quiere',
+         grads=[dict(lado='top', alto=820, color=_OSC, stops=[(0, 0.45), (70, 0.30), (100, 0)])]),
+    # P11 · la placa real en la mano de Gianluca (IMG_5359, 8,67 s), fondo de madera desenfocado.
+    dict(id='p11', nombre='ROCCE_LIFE_PIN_11_placa_seguiste_v07', estilo='anton',
+         fuente=('externa', _F7 + 'placa_IMG_5359_8p67s.png'), caja=(0, 0, 1080),
+         frase_txt='ESTA PLACA NO DICE QUE FUE FÁCIL. DICE QUE SEGUISTE.',
+         lineas=[[('ESTA PLACA', None)], [('NO DICE QUE', None)], [('FUE FÁCIL.', None)], [('DICE QUE SEGUISTE.', 'c')]],
+         fs=104, top=84, inter=1.16, extra={2: 24}, logo_h=110, logo_gap=30, con_remera=False, sombra=_SOMBRA6, acento=_CEL,
+         logo_borde=True, logo_borde_px=2,
+         foto='Gianluca · IMG_5359 (26/11), cuadro de 8,67 s',
+         motivo_foto='la placa Founders Privée real: lo que significa para él, seguir hasta lograrlo',
+         grads=[dict(lado='top', alto=860, color=_OSC, stops=[(0, 0.62), (70, 0.45), (100, 0)])]),
+    # P12 · una persona sola parada arriba de una loma, de noche, con la luna creciente: los que llegaron arriba.
+    # (La foto de la capucha en la niebla se descartó: el logo caía sobre la capucha y parecía que esa persona lo usaba.)
+    dict(id='p12', nombre='ROCCE_LIFE_PIN_12_largar_todo_v07', estilo='anton',
+         fuente=('externa', _F7 + 'silhouette-of-a-person-below-crescent-moon.jpg'), caja=(0, 0, 2772),
+         frase_txt='LOS QUE LO LOGRARON TAMBIÉN QUISIERON LARGAR TODO.',
+         lineas=[[('LOS QUE LO LOGRARON', None)], [('TAMBIÉN QUISIERON', None)], [('LARGAR TODO.', 'c')]],
+         fs=106, top=150, inter=1.18, extra={1: 10}, logo_h=120, logo_gap=36, con_remera=False, sombra=_SOMBRA6, acento=_CEL,
+         logo_borde=True, logo_borde_px=2,
+         foto='Burst · silhouette-of-a-person-below-crescent-moon (licencia Burst)',
+         motivo_foto='llegó arriba, solo, de noche: el que lo logró también estuvo por largar',
+         grads=[dict(lado='top', alto=700, color=_OSC, stops=[(0, 0.30), (70, 0.15), (100, 0)])]),
+]
