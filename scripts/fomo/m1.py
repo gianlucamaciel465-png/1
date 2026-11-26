@@ -1,9 +1,10 @@
 # M1 «POV: el amigo que tiene la placa» · FOMO social con texto estilo Snapchat + Black Friday.
 # Amigo que estudia (clips de Mixkit, licencia libre) → giro de cabeza (barrido) → la placa real (foto de la web) →
 # «y yo todavía sin la mía» → cierre Black Friday sobre una foto real de las dos remeras.
-# Cuando llegue el video de Gianluca con la placa, reemplaza el plano P4 (ver PLACA_VIDEO).
+# v02 (26/11): el plano de la placa es el video de Gianluca (IMG_5359, su mano con la placa en el deck; HLG → SDR BT.709).
+# Si no está ese video, vuelve a la foto de la web (v01).
 # Uso: python3 scripts/fomo/m1.py SALIDA.mp4
-import sys, os, json
+import sys, os, json, subprocess
 import numpy as np
 from PIL import Image, ImageDraw, ImageFilter, ImageOps
 sys.path.insert(0, os.path.dirname(__file__))
@@ -13,6 +14,19 @@ MX = os.path.join(RAIZ, "TRABAJO/fomo/mixkit")
 PLACA = os.path.join(RAIZ, "TRABAJO/fomo/rcs-placa.jpg")
 FOTO_CTA = os.path.join(RAIZ, "TRABAJO/fomo/f8002.png")  # IMG_8002 a 0,30 s (cuadro real)
 CUARTO = os.path.join(RAIZ, "TRABAJO/fomo/f50126.png")  # 50126 a 6,9 s: el cuarto del amigo, desenfocado
+# IMG_5359 de 6,1 a 9,0 s: placa fuera de foco → foco a los 7,2 s (k=33) → nítida con el reflejo del metal
+ORIG_5359 = "/mnt/project-files/material_gianluca/2026-11-26/IMG_5359.mov"
+PLACA_VIDEO = os.path.join(RAIZ, "TRABAJO/fomo/gl/sdr_5359.mp4")
+T0_PLACA, K_FOCO = 6.1, 33
+TONEMAP = ("zscale=t=linear:npl=203,format=gbrpf32le,zscale=p=bt709,tonemap=tonemap=mobius:desat=0,"
+           "zscale=t=bt709:m=bt709:r=tv,format=yuv420p")
+if not os.path.exists(PLACA_VIDEO) and os.path.exists(ORIG_5359):
+    os.makedirs(os.path.dirname(PLACA_VIDEO), exist_ok=True)
+    subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", ORIG_5359, "-map", "0:v:0", "-vf", TONEMAP + ",scale=1080:1920:flags=lanczos",
+                    "-c:v", "libx264", "-crf", "12", "-preset", "fast", "-pix_fmt", "yuv420p", PLACA_VIDEO], check=True)
+USAR_VIDEO = os.path.exists(PLACA_VIDEO)
+C_CAP2 = 156 if USAR_VIDEO else 168  # con el video, el texto entra con la placa todavía borrosa y el foco la resuelve
+Y_CAP2 = 560 if USAR_VIDEO else 1330  # arriba de la placa (en el video ocupa y≈800–1440)
 salida = sys.argv[1]
 N = 300
 CAP1 = "POV: vas a la casa de ese amigo que se mata estudiando, siempre aprueba y tiene la placa"
@@ -107,13 +121,19 @@ for c in range(N):
         pegar(img, B1, 0, 700, alfa=1.0 if c < 132 else 0)
     elif c < 225:
         k = c - 138
-        img = cuadro_placa(k)
+        if USAR_VIDEO:
+            if k == 0:
+                if lect: lect.cerrar()
+                lect = Lector(PLACA_VIDEO, T0_PLACA, W, H); actual = None
+            img = lect.cuadro().copy()
+        else:
+            img = cuadro_placa(k)
         if k < 5:  # llega del barrido
             img = np.roll(img, int(160 * (5 - k) ** 2 / 5), axis=1)
             img = np.asarray(Image.fromarray(img).filter(ImageFilter.BoxBlur(3 * (5 - k)))).copy()
         img = grano(img, 3, c)
-        if c >= 168:
-            pegar(img, B2, 0, 1330)
+        if c >= C_CAP2:
+            pegar(img, B2, 0, Y_CAP2)
     else:
         k = c - 225
         im = fill_cover(foto, W, H, cx=0.5, cy=0.5, zoom=1.0 + 0.045 * k / 75)
@@ -140,9 +160,9 @@ for t in np.arange(0.4, 3.4, 0.23):  # lápiz/papel
     barrido(x, t + rng.uniform(-0.05, 0.05), 0.12, 0.035, 2500, 7000)
 tic(x, 0.0, 0.22, 1200); tic(x, 0.03, 0.15, 1800)
 barrido(x, 4.25, 0.4, 0.35, 400, 6000)
-brillo(x, 4.6, 0.16)
+brillo(x, 4.6 + (K_FOCO / FPS if USAR_VIDEO else 0), 0.16)  # el brillo del metal cae cuando entra el foco
 colchon(x, 4.6, 7.6, [146.8, 220.0, 277.2], 0.05, ataque=0.5, suelta=0.6)
-tic(x, 168 / FPS, 0.22, 1200); tic(x, 168 / FPS + 0.03, 0.15, 1800)
+tic(x, C_CAP2 / FPS, 0.22, 1200); tic(x, C_CAP2 / FPS + 0.03, 0.15, 1800)
 golpe(x, 7.5, 0.6, f0=58, caida=0.4)
 colchon(x, 7.5, dur, [110.0, 164.8, 220.0, 277.2], 0.07, ataque=0.15, suelta=0.4)
 brillo(x, 7.5, 0.08)
