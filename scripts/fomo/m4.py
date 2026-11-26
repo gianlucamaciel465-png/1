@@ -13,12 +13,12 @@ from comun import *
 
 SK = os.path.join(RAIZ, "TRABAJO/fomo/sk")
 GL = os.path.join(RAIZ, "TRABAJO/fomo/gl")  # tomas de Gianluca del 26/11 pasadas a SDR (ver m1.py, TONEMAP)
-VOZ = os.path.join(RAIZ, "TRABAJO/fomo/voz_m4")
+VOZ = os.path.join(RAIZ, "TRABAJO/fomo/voz_m4_v2")  # voz dirigida (voz_m4_v2.tsv + scripts/voz/voz_dirigida.py)
 VOZ56 = os.path.join(VOZ, "w56.wav")  # «Significa una sola cosa: seguir hasta lograrlo.» («seguir» a 1,66 s)
 PLACA = os.path.join(RAIZ, "TRABAJO/fomo/rcs-placa.jpg")
 FOTO_CTA = os.path.join(RAIZ, "TRABAJO/fomo/f8002.png")
 salida = sys.argv[1]
-N = 736
+N = 726
 
 
 def sk(i):
@@ -238,7 +238,8 @@ for j in range(7):
 
 cod = Codificador(salida + ".tmp.mp4")
 lect = None; actual = None; ultimo = None; control = []
-for c in range(N):
+SOLO_AUDIO = bool(os.environ.get("SOLO_AUDIO"))
+for c in range(0 if SOLO_AUDIO else N):
     if c < 335:
         for a, b, src, t0, cs, esp in PLAN:
             if a <= c < b:
@@ -279,7 +280,7 @@ for c in range(N):
             pegar_esc(img, contador(ev[1], ev[2]), 322, esc=pop(kk, 4, 1.22 if ev[2] else 1.12), dx=sacude)
         if 142 <= c < 199:
             pegar_esc(img, T_RINDE, 1500, esc=pop(c - 146, 4, 1.3), alfa=suave((c - 146) / 3))
-    elif c < 409:  # IMG_5361: acercamiento a la placa junto a las dos remeras
+    elif c < 420:  # IMG_5361: acercamiento a la placa junto a las dos remeras
         if c == 335:
             if lect: lect.cerrar()
             lect = lector_gl("sdr_5361.mp4", 0.0)
@@ -287,45 +288,41 @@ for c in range(N):
         img = oscurecer_arriba(img, 720, 0.55)
         img = grano(img, 3, c)
         if c >= 339:
-            pegar_esc(img, T_POR, 170, esc=pop(c - 339, 4, 1.15), alfa=suave((c - 339) / 3) * (1 - suave((c - 387) / 4)))
-        if c >= 392:
-            pegar(img, T_SIGN, 0, 190, alfa=suave((c - 392) / 3))
-    elif c < 496:  # IMG_5359: la placa en su mano, el foco llega con «seguir»
-        if c == 409:
+            pegar_esc(img, T_POR, 170, esc=pop(c - 339, 4, 1.15), alfa=suave((c - 339) / 3) * (1 - suave((c - 383) / 4)))
+        if c >= 389:
+            pegar(img, T_SIGN, 0, 190, alfa=suave((c - 389) / 3))
+    elif c < 507:  # IMG_5359: la placa en su mano, el foco llega con «seguir» (c453)
+        if c == 420:
             lect.cerrar(); lect = lector_gl("sdr_5359.mp4", 6.1)
         img = lect.cuadro().copy()
         img = grano(img, 3, c)
-        if c < 442:
+        if c < 453:
             pegar(img, T_SIGN, 0, 190)
-        else:
-            pegar_esc(img, T_SEGUIR, 330, esc=pop(c - 442, 5, 1.18), alfa=suave((c - 442) / 3))
-    elif c < 508:  # IMG_5361 final: la placa de cerca
-        if c == 496:
-            lect.cerrar(); lect = lector_gl("sdr_5361.mp4", 74 / 30)
-        img = lect.cuadro().copy()
-        img = oscurecer_arriba(img, 720, 0.6)
-        pegar_esc(img, T_METAL, 200, esc=pop(c - 498, 4, 1.2), alfa=suave((c - 498) / 2))
-    elif c < 586:  # IMG_5325: la Founders blanca
-        if c == 508:
+        elif c < 492:
+            pegar_esc(img, T_SEGUIR, 330, esc=pop(c - 453, 5, 1.18), alfa=suave((c - 453) / 3) * (1 - suave((c - 489) / 3)))
+        if c >= 494:
+            pegar_esc(img, T_METAL, 200, esc=pop(c - 494, 4, 1.2), alfa=suave((c - 494) / 2))
+    elif c < 578:  # IMG_5325: la Founders blanca
+        if c == 507:
             lect.cerrar(); lect = lector_gl("sdr_5325.mp4", 1.2)
         img = lect.cuadro().copy()
         img = oscurecer_arriba(img, 640, 0.45)
         img = grano(img, 3, c)
-        if c < 516:
-            pegar(img, T_METAL, 0, 200, alfa=1 - suave((c - 510) / 5))
-        if c >= 541:
-            pegar_esc(img, T_VIENE, 190, esc=pop(c - 541, 4, 1.2), alfa=suave((c - 541) / 3))
-    elif c < 640:  # vuelve el skater en el piso: «¿Y vos, en qué intento vas?»
-        if c == 586:
+        if c < 513:
+            pegar(img, T_METAL, 0, 200, alfa=1 - suave((c - 508) / 5))
+        if c >= 537:
+            pegar_esc(img, T_VIENE, 190, esc=pop(c - 537, 4, 1.2), alfa=suave((c - 537) / 3))
+    elif c < 644:  # vuelve el skater en el piso: «¿Y vos, en qué intento vas?»
+        if c == 578:
             lect.cerrar(); lect = Lector(sk(6495), 3.0, 1280, 720)
         fr = lect.cuadro()
         img = a916(fr, 476).copy()
         img = grano(bn(img, contraste=1.28), 5, c)
-        if c >= 589:
-            pegar_esc(img, T_VOS, 300, esc=pop(c - 589, 5, 1.2), alfa=suave((c - 589) / 3))
+        if c >= 581:
+            pegar_esc(img, T_VOS, 300, esc=pop(c - 581, 5, 1.2), alfa=suave((c - 581) / 3))
     else:
         if lect: lect.cerrar(); lect = None
-        img = cuadro_cta(c - 640)
+        img = cuadro_cta(c - 644)
     cod.poner(img)
 if lect: lect.cerrar()
 
@@ -338,7 +335,8 @@ x += amb
 # pulso que se acelera durante la evidencia
 t = 0.0
 while t < 199 / FPS:
-    golpe(x, t, 0.32, f0=48, caida=0.16); t += 0.5
+    # el pulso se corre a un segundo plano mientras habla bajo («Cualquiera… ya se iba.»)
+    golpe(x, t, 0.12 if 140 / FPS <= t < 196 / FPS else 0.32, f0=48, caida=0.16); t += 0.5
 for j in range(7):
     tt = (199 + 4 * j) / FPS
     golpe(x, tt, 0.45, f0=52, caida=0.12); tic(x, tt, 0.2, 2400)
@@ -355,26 +353,37 @@ for cc, n, m in CONT:
 # congelado: casi silencio (se apaga el ambiente) y el giro
 i0, i1 = int(275 / FPS * SR), int(302 / FPS * SR)
 x[i0:i1] *= 0.15
-golpe(x, 302 / FPS, 1.0, f0=44, caida=0.9)
-brillo(x, 302 / FPS, 0.14)
-colchon(x, 302 / FPS, 586 / FPS, [146.8, 220.0, 293.7, 370.0], 0.05, ataque=0.25, suelta=0.6)
-for cc in (335, 409, 496, 508, 586):
+golpe(x, 301 / FPS, 0.6, f0=44, caida=0.7)
+brillo(x, 301 / FPS, 0.07)
+colchon(x, 302 / FPS, 578 / FPS, [146.8, 220.0, 293.7, 370.0], 0.05, ataque=0.25, suelta=0.6)
+for cc in (335, 420, 507, 578):
     barrido(x, cc / FPS - 0.12, 0.3, 0.16, 400, 5000)
-brillo(x, 442 / FPS, 0.2)
-golpe(x, 442 / FPS, 0.45, f0=50, caida=0.4)
-golpe(x, 586 / FPS, 0.5, f0=50, caida=0.3)
-golpe(x, 640 / FPS, 0.75, f0=56, caida=0.5)
-brillo(x, 643 / FPS, 0.12)
-colchon(x, 640 / FPS, dur, [110.0, 164.8, 220.0, 277.2], 0.07, ataque=0.15, suelta=0.4)
+brillo(x, 453 / FPS, 0.2)
+golpe(x, 453 / FPS, 0.45, f0=50, caida=0.4)
+golpe(x, 578 / FPS, 0.5, f0=50, caida=0.3)
+golpe(x, 644 / FPS, 0.45, f0=56, caida=0.4)
+brillo(x, 647 / FPS, 0.12)
+colchon(x, 644 / FPS, dur, [110.0, 164.8, 220.0, 277.2], 0.07, ataque=0.15, suelta=0.4)
 
 v = {k: leer_wav(os.path.join(VOZ, f"{k}.wav")) for k in ("w1", "w2", "w3", "w4", "w7", "w8", "w9")}
 v["w56"] = leer_wav(VOZ56)
-voces = [(2 / FPS, v["w1"]), (146 / FPS, v["w2"]), (304 / FPS, v["w3"]), (339 / FPS, v["w4"]), (392 / FPS, v["w56"]),
-         (498 / FPS, v["w7"]), (589 / FPS, v["w8"]), (644 / FPS, v["w9"])]
+for k, db in (("w2", 5.0), ("w3", 2.0), ("w9", 2.0)):  # la voz baja y los gritos por encima de los golpes
+    v[k] = v[k] * 10 ** (db / 20)
+voces = [(2 / FPS, v["w1"]), (146 / FPS, v["w2"]), (286 / FPS, v["w3"]), (339 / FPS, v["w4"]), (389 / FPS, v["w56"]),
+         (493 / FPS, v["w7"]), (581 / FPS, v["w8"]), (648 / FPS, v["w9"])]
 wav = salida + ".wav"
-nivel, _ = mezclar(x, voces, dur, wav)
+nivel, (vv, ff) = mezclar(x, voces, dur, wav)
+# control: voz contra fondo (ya bajado) en cada frase, en dB RMS
+relacion = {}
+for (tv, av), k in zip(voces, ["w1", "w2", "w3", "w4", "w56", "w7", "w8", "w9"]):
+    i0, i1 = int(tv * SR), int(tv * SR) + len(av)
+    rv = np.sqrt((vv[i0:i1] ** 2).mean()) + 1e-12; rf = np.sqrt((ff[i0:i1] ** 2).mean()) + 1e-12
+    relacion[k] = round(20 * np.log10(rv / rf), 1)
+print("voz/fondo dB", relacion)
+if SOLO_AUDIO:
+    os.remove(wav); sys.exit(0)
 cod.cerrar(audio=wav)
 os.replace(salida + ".tmp.mp4", salida); os.remove(wav)
-json.dump(dict(cuadros=cod.n, duracion=dur, sonoridad=nivel, voces=[(round(a, 2), k) for (a, _), k in
+json.dump(dict(cuadros=cod.n, duracion=dur, sonoridad=nivel, voz_fondo_db=relacion, voces=[(round(a, 2), k) for (a, _), k in
           zip(voces, ["w1", "w2", "w3", "w4", "w56", "w7", "w8", "w9"])]), open(salida + ".control.json", "w"), indent=1)
 print(cod.n, nivel)
