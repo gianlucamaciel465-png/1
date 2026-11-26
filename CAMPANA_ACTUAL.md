@@ -407,8 +407,20 @@ Formatos tomados de marcas de ropa (fuentes en `/mnt/project-files/piezas/FMT_ta
 | **Voz de marca v03** (V3 36–33, V4 A, V5) | `…_v03.mp4` (+ SINMUSICA) | video = el de cada v02 | Firme 04 sobre los másteres aprobados (`16_…`, `17_…`); aprobada por Roma sujeta a escucha (`18_roma_dictamen_voz_v03.md`). Receta `scripts/life/life_voz_v03.py` |
 - Nada publicado. Topuria: Gianluca eligió «Clips y voz reales de él» (25/11): versión A v02 aprobada por Roma, B queda como hermana; A tiene descripción en revisión y falta la escucha de «quitarte». Personas de las tomas (7884/7885, dedos de 4530): Gianluca declaró «Siempre hay permiso de todo» (25/11). Pendientes: capturas de gianluccamaciel, escucha, cuentas y autorización por destino.
 
-## Estado del trabajo (actualizado 25/11/2026)
-- **Último encargo (25/11/2026):** Roccé Life tanda 2, 3 pines v04 + 3 videos v02 (tabla arriba), aprobados por Roma y entregados para revisión privada; nada publicado.
+#### Roccé Life · tanda 3 (26/11/2026, pedido de Gianluca: «2… como el de Ilia Topuria. Puede ser de otra persona, de Messi, de varios» + FOMO de la placa y Black Friday)
+- Carpeta `/mnt/project-files/piezas/LIFE_rocce_life/TANDA3/` (brief, hechos de Pepe, inventario de clips, guiones, narración, hojas y dictámenes). Messi fuera (retiro de la Selección el 31/08/2026 y muerte de su padre el 08/08/2026); Gianluca: «Podes usar cualquiera» → Dibu.
+- Desde el 26/11 la **placa se comunica** (viene con la remera, según la web). Oferta de la web: Black Friday −25 %, $48.750 (antes $65.000); fecha de fin sin confirmar. Founders con las palabras de la web: «Va a haber 100 Founders como máximo».
+- Firme 04 fuera desde el 26/11 11:03 UTC («esta ya no me gusta»): la voz nueva, con dinámica, sale del hilo de reels de marca.
+
+| Pieza | Versión | ID (md5 del video) | Notas |
+|---|---|---|---|
+| V6 «¿Le llega?» Dibu (21,0 s) | `V6_dibu/ROCCE_LIFE_V6_DIBU_v01.mp4` (+ SINMUSICA) | 3591e575…3b9b24b | Clips de CONMEBOL y ESPN, voz real de ESPN (sin «jugás con la suerte»); cierre con IMG_5359/5361/5325. Aprobado por Roma para revisión privada, sin narración. Receta `scripts/life/life_t3.py` |
+| V7 «¿Algún día le toca?» Di María (24,0 s) | `V7_dimaria/ROCCE_LIFE_V7_DIMARIA_v01.mp4` (+ SINMUSICA) | 807251a5…df6ff5f17 | Clips de TyC y Copa América, voz real de AFA («Algún día se iba a romper la pared…»). Igual que V6 |
+- v02 (pendiente): narración v1.1 con la voz nueva, Founders +0,5 s, rótulo «…EN LA SELECCIÓN». Nada publicado.
+
+## Estado del trabajo (actualizado 26/11/2026)
+- **Último encargo (26/11/2026):** Roccé Life tanda 3, V6 Dibu y V7 Di María v01 (tabla arriba), aprobados por Roma para revisión privada; v02 con la voz nueva pendiente; nada publicado.
+- **Encargo del 25/11/2026:** Roccé Life tanda 2, 3 pines v04 + 3 videos v02 (tabla arriba), aprobados por Roma y entregados para revisión privada; nada publicado.
 - **Encargo del 24/11/2026:** Roccé Life, 3 pines de Pinterest v02 + 2 videos v01 (tabla arriba), aprobados por Roma y entregados para revisión privada; nada publicado.
 - **Encargo del 18/11/2026:** tanda VIR de 2 videos (tabla arriba), aprobados por Roma y entregados para revisión; VIR-02 «voz» espera el audio de Gianluca; nada publicado.
 - **Encargo del 17/11/2026:** tanda FMT de 5 videos con formatos de marcas top (tabla arriba), aprobados por Roma y entregados para revisión de Gianluca; nada publicado.
