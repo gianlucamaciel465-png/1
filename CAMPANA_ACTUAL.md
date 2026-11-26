@@ -354,3 +354,8 @@ Referencia: `REFERENCIAS/REF_26_referencia_viral_grabacion.mp4` (Neuron Visuals,
   - Instagram sin sesión: no se ve el feed ni el perfil, ni se puede comprobar que la cuenta reciba mensajes;
   - no hay música con uso permitido en el repo; se usa música propia sintetizada;
   - la voz de marca se regenera con un servicio en línea gratuito (edge-tts): si dejara de responder, usar la locución guardada o la voz real de Gianluca.
+
+## Black Friday · FOMO de la placa (26/11/2026)
+- Precio verificado en rocce.shop el 26/11: $48.750 (antes $65.000, −25 %), envío gratis; la placa metálica viene con cada remera («Esta placa significa Seguir hasta lograrlo»).
+- 3 piezas entregadas para revisión, sin publicar: 01 POV del amigo (10 s), 02 ¿Cuál de los tres se rinde? (21,7 s, voz Firme 04), 03 Lo mejor de esta remera no es la remera (carrusel 4:5 de 6 láminas + reel de 13,8 s). Recetas en `scripts/fomo/`. Clips de terceros: Mixkit (licencia libre) 25575, 50112, 50126, 50133, 23938, 23653, 23923, 48541, 23926, 23634, 46416. MP4 fuera del repo (carpeta del proyecto `piezas/FOMO_placa/`).
+- Pendiente: video de Gianluca con la placa (reemplaza 4,6–7,5 s de 01), fecha de fin del −25 %, escucha.
