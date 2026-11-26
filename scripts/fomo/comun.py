@@ -234,7 +234,7 @@ def leer_wav(p):
     return np.frombuffer(raw, np.float64).copy()
 
 
-def mezclar(fondo, voces, dur, salida, lufs=-14.0, duck_db=12.0, gan_voz=1.0):
+def mezclar(fondo, voces, dur, salida, lufs=-14.0, duck_db=12.0, gan_voz=1.0, techo=0.84):
     """fondo: arreglo mono; voces: lista (t, arreglo). Baja el fondo con la voz y nivela a −14 LUFS, pico < −1 dBTP."""
     n = int(dur * SR)
     fondo = fondo[:n].copy()
@@ -261,7 +261,7 @@ def mezclar(fondo, voces, dur, salida, lufs=-14.0, duck_db=12.0, gan_voz=1.0):
     m = medir(tmp)
     gan = lufs - m["I"]
     subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", tmp, "-af",
-                    f"volume={gan:.2f}dB,alimiter=limit=0.84:level=false:attack=1:release=60", "-ar", str(SR),
+                    f"volume={gan:.2f}dB,alimiter=limit={techo}:level=false:attack=1:release=60", "-ar", str(SR),
                     "-c:a", "pcm_s24le", salida], check=True)
     os.remove(tmp)
     return medir(salida), (v, fondo)
