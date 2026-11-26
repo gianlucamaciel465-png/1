@@ -416,10 +416,12 @@ Formatos tomados de marcas de ropa (fuentes en `/mnt/project-files/piezas/FMT_ta
 |---|---|---|---|
 | V6 «¿Le llega?» Dibu (21,0 s) | `V6_dibu/ROCCE_LIFE_V6_DIBU_v01.mp4` (+ SINMUSICA) | 3591e575…3b9b24b | Clips de CONMEBOL y ESPN, voz real de ESPN (sin «jugás con la suerte»); cierre con IMG_5359/5361/5325. Aprobado por Roma para revisión privada, sin narración. Receta `scripts/life/life_t3.py` |
 | V7 «¿Algún día le toca?» Di María (24,0 s) | `V7_dimaria/ROCCE_LIFE_V7_DIMARIA_v01.mp4` (+ SINMUSICA) | 807251a5…df6ff5f17 | Clips de TyC y Copa América, voz real de AFA («Algún día se iba a romper la pared…»). Igual que V6 |
-- v02 (pendiente): narración v1.1 con la voz nueva, Founders +0,5 s, rótulo «…EN LA SELECCIÓN». Nada publicado.
+| V6 Dibu **v02** (21,5 s) | `V6_dibu/ROCCE_LIFE_V6_DIBU_v02.mp4` (+ SINMUSICA) | 05bb392b…c1f582e | Narración con la voz oficial (grito «¡Ciento veintitrés!», quiebre «mundo»), Founders 1,2 s. Aprobado por Roma sujeto a escucha (`10_roma_dictamen_master_v02.md`) |
+| V7 Di María **v02** (24,5 s) | `V7_dimaria/ROCCE_LIFE_V7_DIMARIA_v02.mp4` (+ SINMUSICA) | c8f027b2…a1cc | Narración (quiebre «derrotas», grito «¡Gol!»), rótulo «…EN LA SELECCIÓN». Igual que V6 |
+- Nada publicado. Si la cita suena apretada en la escucha: remezcla solo de audio (−2/−3 dB en las puntas de la voz real).
 
 ## Estado del trabajo (actualizado 26/11/2026)
-- **Último encargo (26/11/2026):** Roccé Life tanda 3, V6 Dibu y V7 Di María v01 (tabla arriba), aprobados por Roma para revisión privada; v02 con la voz nueva pendiente; nada publicado.
+- **Último encargo (26/11/2026):** Roccé Life tanda 3, V6 Dibu y V7 Di María v02 con la voz oficial (tabla arriba), aprobados por Roma sujetos a escucha; nada publicado.
 - **Encargo del 25/11/2026:** Roccé Life tanda 2, 3 pines v04 + 3 videos v02 (tabla arriba), aprobados por Roma y entregados para revisión privada; nada publicado.
 - **Encargo del 24/11/2026:** Roccé Life, 3 pines de Pinterest v02 + 2 videos v01 (tabla arriba), aprobados por Roma y entregados para revisión privada; nada publicado.
 - **Encargo del 18/11/2026:** tanda VIR de 2 videos (tabla arriba), aprobados por Roma y entregados para revisión; VIR-02 «voz» espera el audio de Gianluca; nada publicado.

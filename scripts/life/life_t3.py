@@ -18,6 +18,18 @@ máster con M.master_v4 (H.264 High 4.0, AAC 48 kHz). Firma con L2.CSS_PLACA y l
 Uso (nice -n 10, python de TRABAJO/venv):  life_t3.py v6|v7 <etapa>
   voz → planos → textos → firma → audio → master → control → entregar
 Intermedios en TRABAJO/life3/t3/<pieza>/ (fuera de git). Sin servicios externos ni créditos; nada se publica.
+
+v02 (26/11/2026, pedido de Roma después de aprobar v01):  life_t3.py v6_v02|v7_v02 <etapa>
+  narracion → planos → textos → placa → audio → master → control → entregar_v02
+  - narración con la voz dirigida (es-AR-TomasNeural, edge-tts 7.3.1 + Praat + FFmpeg; copia sin modificar de
+    voz_dirigida.py en TRABAJO/life3/t3/narracion, corrida con voz_proxy.py), texto y dinámica de las capas 07/08 de
+    Fede con los ajustes de Roma: un grito y un quiebre por pieza, tramo calmo antes del grito, golpe un cuadro antes
+    del grito a ×0,6, ≥ 0,4 s de aire contra la voz real y el narrador nunca más fuerte que ella; lo que no entra a
+    ritmo natural sale de la voz y queda escrito;
+  - «Va a haber 100 Founders como máximo» +0,5 s (IMG_5325 desde 11,2 s; la pieza dura 0,5 s más);
+  - V7: «2021», «Solo.» y el rótulo «COPA AMÉRICA 2024 · SU ÚLTIMO PARTIDO EN LA SELECCIÓN».
+  El resto del montaje es el de v01: los planos sin cambios se copian de la base v01 (sin pérdida) y la voz real es el
+  mismo corte. v01 se sigue reproduciendo con `v6|v7`.
 """
 import copy, hashlib, json, math, shutil, subprocess, sys, time
 from pathlib import Path
@@ -194,6 +206,65 @@ PIEZA = {
     ),
 }
 
+
+# ---------------------------------------------------------------------------------------------------------------------
+# v02: misma pieza con narración, Founders +0,5 s y (V7) textos achicados y rótulo nuevo
+# ---------------------------------------------------------------------------------------------------------------------
+NARR = T3 / 'narracion'          # copia sin modificar de voz_dirigida.py, guiones TSV y frases sintetizadas
+VOZ_DIRIGIDA_ORIGINAL = Path('/mnt/project-files/voz/voz_dirigida.py')
+TEXTO_NARR = {   # texto exacto de las capas 07/08 de Fede (lo que se dice; el TSV lleva la grafía para sintetizar)
+    'n01': 'Diez años.', 'n02': '¿Le llega?', 'n03': 'Lo prestan.', 'n04': 'Y otra vez. Y otra.', 'n05': 'Seis veces.',
+    'n06': 'A los veintiocho.', 'n07': '¡Y ataja tres penales!', 'n08': '¡Ciento veintitrés!', 'n09': 'Mano a mano…',
+    'n10': '¡Campeón del mundo!', 'n11': 'Él tiene su minuto.', 'n12': 'Seguir hasta lograrlo.',
+    'n13': 'Black Friday: veinticinco por ciento menos.', 'n14': 'Va a haber cien Founders como máximo.',
+    'n15': 'Conseguí la tuya.',
+    'm01': 'Se pierde la final.', 'm02': '¿Algún día?', 'm03': 'Lesionado.', 'm04': 'Otra vez.', 'm05': 'Tres derrotas.',
+    'm06': 'Otra final.', 'm07': 'En el mismo estadio.', 'm08': 'Queda solo…', 'm09': 'Se la pica…', 'm10': '¡Gol!',
+    'm11': 'Pero le falta una.', 'm12': 'Llega la del Mundial.', 'm13': '¡Otra vez él!', 'm14': 'Él tiene su copa.',
+    'm15': 'Seguir hasta lograrlo.', 'm16': 'Black Friday: veinticinco por ciento menos.',
+    'm17': 'Va a haber cien Founders como máximo.', 'm18': 'Conseguí la tuya.',
+}
+NARRACION = {
+    # (frase, comienzo del habla en el máster, s): duración real de cada frase (medida en su WAV) y su momento en la capa
+    'v6': dict(
+        frases=[('n01', 0.10), ('n02', 1.10), ('n03', 1.70), ('n06', 3.05), ('n08', 5.30), ('n10', 13.46),
+                ('n11', 14.85), ('n12', 16.05), ('n13', 17.42), ('n15', 20.52)],
+        grito='n08', quiebre='n10', grito_cuadro=159, cta='n13',
+        fuera={
+            'n04': 'dura 1,77 s y su lugar en la capa es 0,55 s (1,95–2,50) entre «Lo prestan.» y el golpe de 2,60',
+            'n05': 'con «Seis veces.» (0,84 s) «A los veintiocho.» terminaría en 4,5 s, sobre «Un mes después…»; queda escrito «Seis préstamos.» con su golpe',
+            'n07': 'dura 1,13 s y terminaría en 5,2 s, pegado al grito de 5,30: no deja el tramo calmo antes del grito',
+            'n09': 'dura 0,80 s; entre el final del grito (6,29 s) y 0,4 s antes de la primera palabra de Dibu (7,00 s) quedan 0,31 s',
+            'n14': 'dura 2,21 s; entre el final de «Black Friday…» (19,67 s) y el CTA (20,50 s) quedan 0,83 s; queda escrito 19,30–20,50 s',
+        }),
+    'v7': dict(
+        frases=[('m01', 0.10), ('m02', 1.30), ('m04', 2.15), ('m05', 2.84), ('m06', 3.96), ('m08', 4.62), ('m09', 6.32),
+                ('m10', 215 / FPS), ('m11', 8.20), ('m12', 9.28), ('m13', 10.47), ('m14', 17.85), ('m15', 19.05),
+                ('m16', 20.42), ('m18', 23.52)],
+        grito='m10', quiebre='m05', grito_cuadro=215, cta='m16',
+        fuera={
+            'm03': 'dura 0,49 s; después de «¿Algún día?» (termina en 2,02 s) caería sobre «2016: llega tocado.» (2,10 s), que es el renglón de «Otra vez.»',
+            'm07': 'dura 0,92 s; entre «Tres derrotas.» (termina en 3,85 s) y «Queda solo…» (4,62 s) entra solo «Otra final.» (0,56 s); queda escrito «En el Maracaná, como en 2014.»',
+            'm17': 'dura 2,21 s; entre el final de «Black Friday…» (22,66 s) y el CTA (23,50 s) quedan 0,84 s; queda escrito 22,30–23,50 s',
+        }),
+}
+
+
+def _v02(base, archivos):
+    p = copy.deepcopy(PIEZA[base])
+    p.update(version='v02', pieza=base, reusar=base, NF=p['NF'] + 15, cta_dn=36, pad_cta=2.2, archivos=archivos,
+             narracion=NARRACION[base], golpe_grito=0.6)
+    ult = p['planos'][-1]
+    assert ult['clip'] == P5325 and ult['n0'] == 21 and ult['nf'] == 51
+    ult.update(n0=6, nf=66, muestra='IMG_5325 11,2–13,4 s: espalda de la blanca, bordado «ROCCÉ» y «Founders Privée» '
+                                    '(0,5 s más que v01, sin pasar de 13,4 s, donde la cámara sube)')
+    p['croma'][-1] = (p['NF'] - 1, 1.0)
+    return p
+
+
+PIEZA['v6_v02'] = _v02('v6', {'completa': 'ROCCE_LIFE_V6_DIBU_v02.mp4', 'sinmusica': 'ROCCE_LIFE_V6_DIBU_SINMUSICA_v02.mp4'})
+PIEZA['v7_v02'] = _v02('v7', {'completa': 'ROCCE_LIFE_V7_DIMARIA_v02.mp4', 'sinmusica': 'ROCCE_LIFE_V7_DIMARIA_SINMUSICA_v02.mp4'})
+
 P = None          # pieza activa
 TP = None         # carpeta de intermedios de la pieza
 
@@ -201,6 +272,7 @@ TP = None         # carpeta de intermedios de la pieza
 def activar(clave):
     global P, TP
     P = PIEZA[clave]; P['clave'] = clave
+    P.setdefault('pieza', clave); P.setdefault('version', 'v01')
     TP = T3 / clave
     TP.mkdir(parents=True, exist_ok=True)
     tot = 0
@@ -402,10 +474,40 @@ def etapa_planos():
                                  '-pix_fmt', 'yuv420p', '-colorspace', 'bt709', '-color_primaries', 'bt709', '-color_trc', 'bt709',
                                  '-color_range', 'tv', str(dst)]), stdin=subprocess.PIPE)
     reg, luts, n_tot = [], {}, 0
+    # v02: los planos idénticos a los de v01 (mismo id, cuadros y parámetros) se copian de la base v01, que es sin
+    # pérdida (x264 qp 0): los cuadros son los mismos bytes Y′CbCr. Solo se compone lo que cambió.
+    lector, src_n, src_reg, igual = None, 0, {}, set()
+    if P.get('reusar'):
+        fuente = PIEZA[P['reusar']]
+        sp = {p['id']: p for p in fuente['planos']}
+        igual = {p['id'] for p in P['planos'] if sp.get(p['id']) == p}
+        assert fuente['negro'] == P['negro']
+        src_reg = {r['id']: r for r in json.load(open(T3 / P['reusar'] / 'planos.json'))['planos']}
+        lector = subprocess.Popen(nice(['ffmpeg', '-v', 'error', '-threads', '2', '-i', str(T3 / P['reusar'] / 'base.mp4'),
+                                        '-f', 'rawvideo', '-pix_fmt', 'yuv420p', '-']), stdout=subprocess.PIPE)
+    fsz = W * H + 2 * cs
+
+    def de_fuente():
+        nonlocal src_n
+        assert src_n == n_tot, (src_n, n_tot)
+        b = lector.stdout.read(fsz); assert len(b) == fsz
+        src_n += 1
+        return b
     for p in P['planos']:
         if n_tot == P['negro'][0]:
             for _ in range(P['negro'][1] - P['negro'][0] + 1):
-                enc.stdin.write(bytes([16]) * (W * H)); enc.stdin.write(bytes([128]) * (2 * cs)); n_tot += 1
+                negro = bytes([16]) * (W * H) + bytes([128]) * (2 * cs)
+                if lector and src_n == n_tot:
+                    assert de_fuente() == negro
+                enc.stdin.write(negro); n_tot += 1
+        if p['id'] in igual and lector and src_n == n_tot:
+            for _ in range(p['nf']):
+                enc.stdin.write(de_fuente()); n_tot += 1
+            reg.append(dict(src_reg[p['id']], reutilizado=f"cuadros copiados de la base {P['reusar']} (sin pérdida)"))
+            print(p['id'], p['nf'], 'copiado de', P['reusar'], flush=True)
+            continue
+        if lector:
+            lector.kill(); lector.wait(); lector = None
         ix = indices(p)
         fr, wh = decodificar(p['clip'], ix)
         util0 = UTIL.get(p['clip']) if p['ventana'][0][3] < wh[0] else None
@@ -445,6 +547,8 @@ def etapa_planos():
                         luma_media=round(float(np.mean([s['luma'] for s in st])), 1)))
         print(p['id'], p['nf'], 'g', round(g, 2), reg[-1]['luma_media'], flush=True)
         del fr
+    if lector:
+        lector.kill(); lector.wait()
     enc.stdin.close(); enc.wait()
     assert enc.returncode == 0 and n_tot == P['NF'], n_tot
     jdump(dict(cuadros=n_tot, planos=reg), TP / 'planos.json')
@@ -589,6 +693,134 @@ def cuadro_voz(t):
 
 
 # =====================================================================================================================
+# v02 · narración con la voz oficial de Roccé (voz dirigida: edge-tts es-AR-TomasNeural + Praat + FFmpeg)
+# =====================================================================================================================
+VOZ_OFICIAL = Path('/mnt/project-files/voz_rocce')     # versión oficial (aprobada por Gianluca el 26/11/2026)
+
+
+def sha256_de(p):
+    return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+
+
+def k_pond(x):
+    """ponderación K de BS.1770 a 48 kHz (estante + paso alto)."""
+    from scipy.signal import lfilter
+    y = lfilter([1.53512485958697, -2.69169618940638, 1.19839281085285], [1.0, -1.69065929318241, 0.73248077421585], x)
+    return lfilter([1.0, -2.0, 1.0], [1.0, -1.99004745483398, 0.99007225036621], y)
+
+
+def sonoridad_habla(x):
+    """sonoridad de habla (ponderación K, señal mono centrada = LUFS de la versión estéreo): bloques de 50 ms a menos de
+    20 dB del bloque más fuerte (deja afuera los silencios de la frase)."""
+    y = k_pond(np.asarray(x, np.float64)); w = int(0.05 * SR); nb = len(y) // w
+    ms = (y[:nb * w].reshape(nb, w) ** 2).mean(1)
+    return round(-0.691 + 10 * math.log10(ms[ms > ms.max() * 0.01].mean() + 1e-20), 2)
+
+
+def momentanea_max(x):
+    """sonoridad momentánea máxima (ventana de 400 ms cada 10 ms, ponderación K)."""
+    y = k_pond(np.asarray(x, np.float64)); w = int(0.4 * SR); h = int(0.01 * SR)
+    if len(y) <= w:
+        return round(-0.691 + 10 * math.log10((y ** 2).sum() / w + 1e-20), 2)
+    c = np.concatenate([[0.0], np.cumsum(y ** 2)]); i = np.arange(0, len(y) - w, h)
+    return round(-0.691 + 10 * math.log10(((c[i + w] - c[i]) / w).max() + 1e-20), 2)
+
+
+def extension_habla(x, umbral=-40.0):
+    """primer y último instante (s) con ventanas de 10 ms a menos de |umbral| dB del máximo."""
+    w = int(0.01 * SR); nb = len(x) // w
+    r = np.sqrt((x[:nb * w].reshape(nb, w) ** 2).mean(1)) + 1e-12
+    i = np.nonzero(20 * np.log10(r / r.max()) > umbral)[0]
+    return round(i[0] * w / SR, 3), round((i[-1] + 1) * w / SR, 3)
+
+
+def offset_oficial(f):
+    """mezcla de la voz oficial (LEEME_VOZ_OFICIAL.md): voz baja +5 dB, grito y CTA +2 dB, el resto 0."""
+    if 'bajo' in f['estilos']:
+        return 5.0
+    if 'grito' in f['estilos'] or f['id'] == P['narracion']['cta']:
+        return 2.0
+    return 0.0
+
+
+def comparar_muestra():
+    """control de que el servicio sigue dando la voz aprobada: dos frases de la muestra oficial (w4 [lento], w3 con grito
+    y quiebre) resintetizadas hoy con la misma receta (NARR/control_oficial) contra muestra_04_v02 (LEEME_VOZ_OFICIAL:
+    «si el servicio cambia la voz, comparar contra esta muestra»). Medidas, no escucha."""
+    import soundfile as sf
+    from scipy.signal import correlate, stft
+    out = {}
+    for w in ('w4', 'w3'):
+        a, _ = sf.read(str(NARR / 'control_oficial' / f'{w}.wav')); b, _ = sf.read(str(VOZ_OFICIAL / 'muestra_04_v02' / f'{w}.wav'))
+        lag = int(np.argmax(correlate(a, b, 'full'))) - (len(b) - 1)
+        a2, b2 = (a[lag:], b) if lag >= 0 else (a, b[-lag:])
+        n = min(len(a2), len(b2)); a2, b2 = a2[:n], b2[:n]
+        _, _, SA = stft(a2, SR, nperseg=1024); _, _, SB = stft(b2, SR, nperseg=1024)
+        out[w] = dict(sha256_hoy=sha256_de(NARR / 'control_oficial' / f'{w}.wav'),
+                      sha256_muestra=sha256_de(VOZ_OFICIAL / 'muestra_04_v02' / f'{w}.wav'),
+                      muestras_hoy=len(a), muestras_muestra=len(b), desfase_muestras=lag,
+                      correlacion_forma_de_onda=round(float(np.corrcoef(a2, b2)[0, 1]), 4),
+                      correlacion_espectrograma_log=round(float(np.corrcoef(np.log10(np.abs(SA) + 1e-6).ravel(),
+                                                                           np.log10(np.abs(SB) + 1e-6).ravel())[0, 1]), 4),
+                      rms_db_hoy=round(20 * math.log10(np.sqrt((a ** 2).mean())), 2),
+                      rms_db_muestra=round(20 * math.log10(np.sqrt((b ** 2).mean())), 2))
+    out['f0_mediana_hz'] = 'w4 114,5 / 114,5 · w3 117,9 / 117,9 (Praat, voz-env; medido el 26/11 al recibir la versión oficial)'
+    return out
+
+
+def etapa_narracion():
+    """frases sintetizadas con la copia sin modificar de voz_dirigida.py (sha256 igual a la oficial), medidas y ubicadas
+    por el comienzo de su habla; Whisper de cada frase (sin escucha)."""
+    import soundfile as sf
+    nz, pieza = P['narracion'], P['pieza']
+    d, tsv = NARR / pieza, NARR / f'{pieza}_guion.tsv'
+    hs = dict(copia_usada=sha256_de(NARR / 'voz_dirigida.py'), oficial_voz_rocce=sha256_de(VOZ_OFICIAL / 'voz_dirigida.py'),
+              anterior_voz=sha256_de(VOZ_DIRIGIDA_ORIGINAL))
+    assert hs['copia_usada'] == hs['oficial_voz_rocce'], hs
+    if not (d / 'voz.json').exists():
+        subprocess.run([str(R / 'TRABAJO/voz-env/bin/python'), '-I', str(R / 'scripts/life/voz_proxy.py'), 'voz_dirigida.py',
+                        tsv.name, pieza], cwd=str(NARR), check=True)
+    vj = json.load(open(d / 'voz.json'))
+    guion = dict(l.rstrip('\n').split('\t', 1) for l in open(tsv, encoding='utf-8') if l.strip() and not l.startswith('#'))
+    frases = []
+    for fid, t_on in nz['frases']:
+        x, sr = sf.read(str(d / f'{fid}.wav')); assert sr == SR
+        a, b = extension_habla(x)
+        ini = round(t_on - a, 4)
+        frases.append(dict(id=fid, texto=TEXTO_NARR[fid], guion_tsv=guion[fid],
+                           estilos=[t['estilo'] for t in vj['frases'][fid]['tramos']], wav=str(d / f'{fid}.wav'),
+                           sha256=sha256_de(d / f'{fid}.wav'), duracion_wav=round(len(x) / SR, 3), habla_en_wav=[a, b],
+                           habla_s=round(b - a, 3), wav_entra_s=ini, habla_master_s=[round(t_on, 3), round(t_on + b - a, 3)],
+                           cuadros_habla=[int(math.floor(t_on * FPS + 1e-9)), int(math.floor((t_on + b - a) * FPS - 1e-9))],
+                           sonoridad_habla_cruda=sonoridad_habla(x),
+                           palabras=[[round(ini + o, 3), w] for t in vj['frases'][fid]['tramos'] for o, w in t['palabras']]))
+    for f0, f1 in zip(frases, frases[1:]):
+        assert f1['habla_master_s'][0] - f0['habla_master_s'][1] >= 0.095, (f0['id'], f1['id'])   # ≥ 0,1 s entre frases
+    tr = whisper(TP / 'narracion_whisper_frases.json', [f['wav'] for f in frases])
+    for f in frases:
+        f['whisper_frase_sola'] = ' '.join(s['texto'] for s in tr[f['wav']])
+        print(f"{f['id']} {f['habla_master_s'][0]:6.2f}–{f['habla_master_s'][1]:6.2f}  {f['texto']:<45} Whisper: {f['whisper_frase_sola']}")
+    # aire contra la voz real: habla real medida en su WAV (ventanas de 10 ms a menos de 30 dB del máximo)
+    xr, _ = sf.read(str(T3 / pieza / 'voz' / 'voz_48k.wav'))
+    a, b = extension_habla(xr, -30.0)
+    vz = P['voz']; r0, r1 = round(vz['m0'] + a, 3), round(vz['m0'] + b, 3)
+    c0, c1 = round(vz['m0'], 3), round(vz['m0'] + len(xr) / SR, 3)
+    antes = max(f['habla_master_s'][1] for f in frases if f['habla_master_s'][1] <= r0)
+    despues = min(f['habla_master_s'][0] for f in frases if f['habla_master_s'][0] >= r1)
+    aire = dict(voz_real_habla_s=[r0, r1], voz_real_corte_s=[c0, c1], narracion_termina_antes_s=antes,
+                narracion_vuelve_s=despues, aire_antes_s=round(r0 - antes, 3), aire_despues_s=round(despues - r1, 3),
+                aire_antes_del_corte_s=round(c0 - antes, 3), aire_despues_del_corte_s=round(despues - c1, 3))
+    assert aire['aire_antes_s'] >= 0.4 and aire['aire_despues_s'] >= 0.4, aire
+    print('aire', aire)
+    jdump(dict(voz=dict(proveedor='servicio de lectura en voz alta de Microsoft Edge vía edge-tts 7.3.1',
+                        voz=vj['voz'], motor=vj['motor'], sha256_voz_dirigida=hs,
+                        guion_tsv=str(tsv), sha256_guion=sha256_de(tsv)),
+               frases=frases, fuera_de_la_voz=[dict(id=k, texto=TEXTO_NARR[k], motivo=v) for k, v in nz['fuera'].items()],
+               grito=nz['grito'], quiebre=nz['quiebre'], aire_voz_real=aire, control_muestra_oficial=comparar_muestra()),
+          TP / 'narracion.json')
+
+
+# =====================================================================================================================
 # textos · texto cinético del V4 (M.CSS_TEXTO, M.JS_TEXTO, life_v4_render.js) con tres agregados sobre la cadena:
 # clase extra por frase, interlineado propio (--lh) para citas más chicas y acento celeste dentro de la cita
 # =====================================================================================================================
@@ -607,6 +839,8 @@ def frases_oferta(o):
     y3 = y1 + 160 + 18
     y4 = y3 + 44 + 22
     c = o + 60
+    dn = P.get('cta_dn', 21)                       # v02: Founders 36 c (1,2 s) en vez de 21 (pedido de Roma, +0,5 s)
+    fin = c + P['planos'][-1]['nf'] - 1            # el CTA queda hasta el último cuadro (v01: c + 50)
     return [
         dict(id='bf', tipo='chip', fs=66, n=(o, o + 59), y=300, lineas=[['Black', 'Friday', '·', PCT]], cad=3, golpe='agudo',
              acento=[PCT], guion='Black Friday · −25 %'),
@@ -618,11 +852,11 @@ def frases_oferta(o):
         # control del primer render: con cad 2 el renglón quedaba completo solo 7 c (c+14–c+20) antes del CTA. Ahora entra
         # entero en c (cad 0) y se lee los 0,7 s del guion. Apilado con el CTA hasta el final se probó y se descartó: en
         # c+52–c+59 la cámara sube y el CTA tapa la parte de arriba del bordado «RO».
-        dict(id='founders', tipo='chip', fs=76, n=(c, c + 20), y=396, lineas=[['Va', 'a', 'haber', '100', 'Founders'], ['como', 'máximo']],
+        dict(id='founders', tipo='chip', fs=76, n=(c, c + dn - 1), y=396, lineas=[['Va', 'a', 'haber', '100', 'Founders'], ['como', 'máximo']],
              cad=0, acento=['100'], guion='Va a haber 100 Founders como máximo'),
-        dict(id='cta', tipo='chip', fs=76, n=(c + 21, c + 50), y=396, lineas=[['Conseguí', 'la', 'tuya'], ['en', 'rocce.shop']], cad=3,
+        dict(id='cta', tipo='chip', fs=76, n=(c + dn, fin), y=396, lineas=[['Conseguí', 'la', 'tuya'], ['en', 'rocce.shop']], cad=3,
              golpe='acento', acento=['rocce.shop'], guion='Conseguí la tuya en rocce.shop'),
-        dict(id='bf_cta', tipo='chip', fs=48, n=(c + 21, c + 50), y=396 + 2 * lh_chip(76) + 14, lineas=[['Black', 'Friday', '·', PCT]],
+        dict(id='bf_cta', tipo='chip', fs=48, n=(c + dn, fin), y=396 + 2 * lh_chip(76) + 14, lineas=[['Black', 'Friday', '·', PCT]],
              cad=0, pop=False, acento=[PCT], guion='Black Friday · −25 %'),
     ]
 
@@ -640,7 +874,7 @@ def frases_voz(y, fs, lh, tarjetas=None, atrib=None):
         k = 0
         for nr in tarjetas:
             grupos.append(lineas[k:k + nr]); k += nr
-    fin = P['negro'][0] - 1 if P['clave'] == 'v7' else 395
+    fin = P['negro'][0] - 1 if P['pieza'] == 'v7' else 395
     out = []
     for i, g in enumerate(grupos):
         n0 = g[0][0][1]
@@ -691,7 +925,13 @@ def frases_v6():
                                      (204, 8, 'golpe y color: entra su voz'), (396, 10, 'drop de «Campeón del mundo.»')]
 
 
+# en un renglón no entra en 1080 px con la letra del rótulo (40 px): se cortaba en «…PARTIDO EN LA». Dos renglones con la
+# misma letra; el segundo (y 330–390) queda sobre el pelo, arriba de la cara
+ROTULO2_V02 = [['COPA', 'AMÉRICA', '2024', '·', 'SU', 'ÚLTIMO', 'PARTIDO'], ['EN', 'LA', 'SELECCIÓN']]
+
+
 def frases_v7():
+    v01 = P['version'] == 'v01'
     fr = [
         dict(id='rotulo', tipo='label', n=(0, 41), y=270, lineas=[['ÁNGEL', 'DI', 'MARÍA']], cad=0, pop=False, guion='ÁNGEL DI MARÍA'),
         dict(id='gancho', tipo='chip', fs=92, n=(0, 17), y=338, lineas=[['2014:', 'lesionado,'], ['se', 'pierde', 'la', 'final.']],
@@ -708,10 +948,12 @@ def frases_v7():
         dict(id='e3b', tipo='grande', fs=102, n=(95, 104), y=300 + CHIP + 26, lineas=[['Tres', 'derrotas.']], cad=0, golpe='grave',
              guion='Tres derrotas.'),
         dict(id='p1a', tipo='chip', n=(105, 134), y=300, lineas=[['2021:', 'otra', 'final.']], cad=3, golpe='agudo', acento=['2021:'],
-             guion='2021: otra final.'),
+             guion='2021: otra final.') if v01 else
+        dict(id='p1a', tipo='chip', n=(105, 134), y=300, lineas=[['2021']], cad=0, golpe='agudo', acento=['2021'], guion='2021'),
         dict(id='p1b', tipo='chip', n=(120, 134), y=300 + CHIP + 14, lineas=[['En', 'el', 'Maracaná,'], ['como', 'en', '2014.']],
              cad=2, golpe='agudo', guion='En el Maracaná, como en 2014.'),
-        dict(id='p2', tipo='chip', n=(135, 161), y=300, lineas=[['Queda', 'solo.']], cad=3, golpe='agudo', guion='Queda solo.'),
+        dict(id='p2', tipo='chip', n=(135, 161), y=300, lineas=[['Queda', 'solo.']], cad=3, golpe='agudo', guion='Queda solo.') if v01 else
+        dict(id='p2', tipo='chip', n=(135, 161), y=300, lineas=[['Solo.']], cad=0, golpe='agudo', guion='Solo.'),
         dict(id='gol1', tipo='grande', fs=150, n=(214, 221), y=360, lineas=[['Gol.']], cad=0, golpe='impacto', guion='Gol.'),
         dict(id='r1a', tipo='chip', n=(222, 269), y=300, lineas=[['Campeón', 'de', 'América.']], cad=3, guion='Campeón de América.'),
         dict(id='r1b', tipo='chip', n=(246, 269), y=300 + CHIP + 14, lineas=[['Le', 'faltaba'], ['la', 'del', 'Mundial.']], cad=3,
@@ -722,7 +964,9 @@ def frases_v7():
         dict(id='r2', tipo='chip', n=(327, 350), y=300, lineas=[['Campeón', 'del', 'mundo.']], cad=3, golpe='acento',
              guion='Campeón del mundo.'),
         dict(id='rotulo2', tipo='label', n=(351, 390), y=270, lineas=[['COPA', 'AMÉRICA', '2024', '·', 'SU', 'ÚLTIMO', 'PARTIDO']],
-             cad=0, pop=False, guion='COPA AMÉRICA 2024 · SU ÚLTIMO PARTIDO'),
+             cad=0, pop=False, guion='COPA AMÉRICA 2024 · SU ÚLTIMO PARTIDO') if v01 else
+        dict(id='rotulo2', tipo='label', n=(351, 390), y=270, lineas=ROTULO2_V02, cad=0, pop=False,
+             guion='COPA AMÉRICA 2024 · SU ÚLTIMO PARTIDO EN LA SELECCIÓN'),
     ]
     fr += frases_voz(1150, 88, 100, tarjetas=P['voz']['tarjetas'],
                      atrib=dict(fs=32, y=1466, lineas=[['—', 'Ángel', 'Di', 'María', '·', 'TikTok', '@afaseleccion', '·', '16/07/2024']],
@@ -737,7 +981,7 @@ CSS_EXTRA = """
 
 
 def preparar_textos():
-    fr, extra = frases_v6() if P['clave'] == 'v6' else frases_v7()
+    fr, extra = frases_v6() if P['pieza'] == 'v6' else frases_v7()
     M.FRASES = fr
     M.GOLPES_EXTRA = extra
     return fr
@@ -791,7 +1035,7 @@ def etapa_textos():
 def etapa_placa():
     PL = TP / 'placa'; PL.mkdir(parents=True, exist_ok=True)
     t = dict(F=L2.FUENTES, fs=84, logo=96, radio=round(96 * 0.11), ffs=30)
-    suyo = 'minuto 123' if P['clave'] == 'v6' else 'copa'
+    suyo = 'minuto 123' if P['pieza'] == 'v6' else 'copa'
     L = [f'Él tiene su <em>{suyo}</em>.', 'Esta placa significa lo mismo:',
          f'<span style="color:{CEL}">seguir</span> hasta <em>lograrlo</em>.']
     tops = [300, 410, 520]
@@ -819,7 +1063,9 @@ def etapa_placa():
     ys, xs = np.nonzero((a[..., 3] > 250) & (a[..., :3].min(-1) >= 250))
     rep['ficha_logo'] = [int(xs.min()), int(ys.min()), int(xs.max()), int(ys.max())]
     o = P['negro'][1] + 1
-    rep['cuadros'] = dict(cierre_1=[o, o + 17], cierre_2=[o + 18, o + 41], cierre_3=[o + 42, o + 77], firma=[o + 159, P['NF'] - 1])
+    # la firma entra con el CTA: 78 c de placa + 60 de oferta + cta_dn (v01 21, v02 36: Founders +0,5 s)
+    rep['cuadros'] = dict(cierre_1=[o, o + 17], cierre_2=[o + 18, o + 41], cierre_3=[o + 42, o + 77],
+                          firma=[o + 138 + P.get('cta_dn', 21), P['NF'] - 1])
     rep['texto'] = [re_txt(x) for x in L]
     jdump(rep, PL / 'placa.json')
     print(json.dumps(rep, ensure_ascii=False))
@@ -878,10 +1124,19 @@ def grito(m, t, g=0.11, dur=2.4):
 
 
 def sfx_texto(m):
-    """un sonido por golpe de texto (fuente única: las frases), como B v02."""
+    """un sonido por golpe de texto (fuente única: las frases), como B v02. v02: el golpe que cae un cuadro antes del
+    grito del narrador va a ×0,6 (pedido de Roma: el grito no coincide con un golpe fuerte)."""
     golpes, _ = M.eventos_texto()
+    kg = P.get('golpe_grito')
+    cg = P['narracion']['grito_cuadro'] - 1 if kg else None
     for n, tipo, _id in golpes:
         t = tf(n)
+        if kg and n == cg:
+            if tipo == 'impacto':
+                m.impacto(t, 0.80 * kg); M.golpe_grave(m, t, 0.55 * kg)
+                m.log(t, f'golpe del grito ×{kg} (un cuadro antes del grito)')
+                continue
+            raise SystemExit(f'golpe {tipo} en el cuadro del grito: falta definir su escala')
         if tipo == 'grave':
             M.golpe_grave(m, t)
         elif tipo == 'agudo':
@@ -913,7 +1168,7 @@ def cierre_sonido(m, o, con):
         if i % 2 == 1:
             m.palma(t, 0.22)
         m.ocho08(t, [41, 41, 46, 46, 43, 43, 38][i], 0.5, 0.45)
-    m.pad(tb, [41, 48, 53, 57], 2.0, .05, 1500); m.pad(tf(o + 138), [46, 50, 53, 58], 1.7, .05, 1500)
+    m.pad(tb, [41, 48, 53, 57], 2.0, .05, 1500); m.pad(tf(o + 138), [46, 50, 53, 58], P.get('pad_cta', 1.7), .05, 1500)
     for t in np.arange(tb, tf(P['NF']) - 0.4, 0.3):
         m.charles(round(float(t), 3), .07)
 
@@ -930,16 +1185,21 @@ def mezcla_v6(con):
     m.subida(5.00, 5.67, 0.16)                                    # «Minuto 123. 3-3.»: SUBE
     M.golpe_grave(m, tf(204), 0.75)                               # golpe y color: entra su voz
     m.impacto(tf(396), 0.55)                                      # drop de «Campeón del mundo.»
+    kg = P.get('golpe_grito')
+    t123, k123 = (tf(P['narracion']['grito_cuadro'] - 1), kg) if kg else (5.30, 1.0)
     if con:
         m.pad(1.40, [38, 45, 50, 53], 1.55, .055, 650, a=.05)
         m.pad(3.00, [41, 48, 53, 57, 60], 0.45, .055, 1500, a=.03)
         m.pad(3.50, [38, 45, 50], 0.45, .040, 500, a=.03)
         m.pad(4.00, [46, 53, 58, 62], 0.85, .055, 1500, a=.03)
         m.pad(4.90, [38, 45, 50, 53], 0.40, .050, 650, a=.03)
-        m.pad(5.30, [41, 48, 53, 57, 60, 64], 0.40, .060, 2000, a=.01)
+        m.pad(t123, [41, 48, 53, 57, 60, 64], 0.40, .060 * k123, 2000, a=.01)
         m.pad(5.70, [38, 45, 50], 0.80, .040, 500, a=.03)
-        for t, g in ((1.40, .8), (2.20, .8), (3.00, .75), (3.50, .7), (4.00, .75), (4.90, .8), (5.30, .7), (5.70, .8), (6.10, .85)):
+        for t, g in ((1.40, .8), (2.20, .8), (3.00, .75), (3.50, .7), (4.00, .75), (4.90, .8), (t123, .7 * k123), (5.70, .8),
+                     (6.10, .85)):
             M.latido(m, t, g, doble=(t not in (3.50, 6.10)))
+        if kg:
+            m.log(t123, f'golpe del 123 (latido y acorde de 5,30) un cuadro antes del grito, ×{kg}')
     for p_ in ('mus', 'bombo', 'fx'):
         m.silenciar(p_, 6.50, 6.80, rampa=0.008)                   # la música se corta en 6,50: solo ambiente
     if con:
@@ -979,7 +1239,7 @@ def mezcla_v7(con):
             M.latido(m, t, g, doble=False)
         ch = lambda t0, t1, g=.08: [m.charles(round(float(t), 3), g) for t in np.arange(t0, t1 - 1e-6, 0.3)]
         g1 = tf(214)
-        m.bombo(g1, 1.0); m.ocho08(g1, 38, .55, .55, glide_desde=45); m.pad(g1, [50, 53, 57, 62], 1.1, .06, 1800)
+        m.bombo(g1, 1.0 * P.get('golpe_grito', 1.0)); m.ocho08(g1, 38, .55, .55, glide_desde=45); m.pad(g1, [50, 53, 57, 62], 1.1, .06, 1800)
         m.campana(g1, 74, .06); m.campana(g1 + 0.3, 81, .05)
         for i, t in enumerate(np.arange(g1 + 0.6, 8.99, 0.6)):
             m.bombo(float(t), .85); m.palma(float(t), .25) if i % 2 == 0 else None
@@ -1028,7 +1288,7 @@ def cama_bajo_voz(m, db_):
 
 def voz_al_mix(m, gan_db):
     import soundfile as sf
-    x, sr = sf.read(str(TP / 'voz' / 'voz_48k.wav'))
+    x, sr = sf.read(str(T3 / P['pieza'] / 'voz' / 'voz_48k.wav'))      # v02 usa el mismo corte de v01
     assert sr == SR
     act = [np.sqrt((x[i:i + 2400] ** 2).mean()) for i in range(0, len(x) - 2400, 2400)]
     ref = 20 * math.log10(np.median([a for a in act if a > max(act) * 0.1]) + 1e-12)
@@ -1064,14 +1324,155 @@ def voz_vs_fondo(m, voz, e):
                 dif_max_db=round(max(d), 1), por_ventana=filas)
 
 
+DUCK_NARR = 12.0         # voz oficial: el fondo baja 12 dB con la narración (envolvente)
+
+
+def niveles_narracion(frases, voz_real):
+    """ganancia de cada frase: mezcla oficial (salida de la receta + voz baja +5 / grito y CTA +2) y, encima, la regla de
+    la capa de Fede (±3 dB del resto): lo que queda a más de 3 dB de la mediana va al borde. La frase más fuerte queda
+    1 dB bajo la voz real (sonoridad de habla) y ninguna supera su sonoridad momentánea máxima."""
+    import soundfile as sf
+    real = voz_real[np.abs(voz_real) > 0]
+    L_real, M_real = sonoridad_habla(real), momentanea_max(real)
+    v = {f['id']: f['sonoridad_habla_cruda'] + offset_oficial(f) for f in frases}
+    med = float(np.median(list(v.values())))
+    w = {k: min(max(x, med - 3.0), med + 3.0) for k, x in v.items()}
+    sh = (L_real - 1.0) - max(w.values())
+    g = {f['id']: w[f['id']] + sh - f['sonoridad_habla_cruda'] for f in frases}
+    mom = {f['id']: momentanea_max(sf.read(f['wav'])[0] * 10 ** (g[f['id']] / 20)) for f in frases}
+    exceso = max(mom.values()) - (M_real - 0.5)
+    if exceso > 0:
+        g = {k: x - exceso for k, x in g.items()}; mom = {k: x - exceso for k, x in mom.items()}
+    return dict(voz_real_sonoridad_habla=L_real, voz_real_momentanea_max=M_real, mediana_oficial=round(med, 2),
+                por_frase={f['id']: dict(cruda=f['sonoridad_habla_cruda'], offset_oficial=offset_oficial(f),
+                                         llevada_al_borde_db=round(w[f['id']] - v[f['id']], 2), ganancia_db=round(g[f['id']], 2),
+                                         sonoridad_habla_mezcla=round(f['sonoridad_habla_cruda'] + g[f['id']], 2),
+                                         momentanea_max_mezcla=round(mom[f['id']], 2)) for f in frases})
+
+
+def ventana(N, t0, t1, rampa):
+    """0–1 con rampas lineales: 1 entre t0 y t1."""
+    w = np.zeros(N); i0, i1 = int(t0 * SR), int(t1 * SR); k = max(1, int(rampa * SR))
+    w[max(0, i0):min(N, i1)] = 1.0
+    a = np.linspace(0, 1, k)
+    j = np.arange(i0 - k, i0); ok = (j >= 0) & (j < N); w[j[ok]] = np.maximum(w[j[ok]], a[ok])
+    j = np.arange(i1, i1 + k); ok = (j >= 0) & (j < N); w[j[ok]] = np.maximum(w[j[ok]], a[::-1][ok])
+    return w
+
+
+def narracion_al_mix(m, frases, niv, dips, tope_fx=None):
+    """la narración en la pista de voz (mono al centro); el colchón (ambiente, música, bombo) cede DUCK_NARR por
+    envolvente; los efectos bajan 6 dB mientras habla (los golpes que pisan una palabra, regla de la capa de Fede); y
+    cada frase lleva su ajuste del fondo (dips, dB) para quedar 10–15 dB arriba."""
+    import soundfile as sf
+    narr, e = np.zeros(m.N), np.zeros(m.N)
+    for f in frases:
+        x = sf.read(f['wav'])[0] * 10 ** (niv['por_frase'][f['id']]['ganancia_db'] / 20)
+        i0 = int(round(f['wav_entra_s'] * SR)); i1 = min(m.N, i0 + len(x))
+        narr[i0:i1] += x[:i1 - i0]
+        ee = A.envolvente(x, SR)[:i1 - i0]
+        cola = int(0.25 * SR); j = np.arange(i1, min(m.N, i1 + cola))
+        e[i0:i1] = np.maximum(e[i0:i1], ee); e[j] = np.maximum(e[j], ee[-1] * np.exp(-(j - i1) / (0.08 * SR)))
+    m.pistas['voz'][:, 0] += narr * math.sqrt(0.5); m.pistas['voz'][:, 1] += narr * math.sqrt(0.5)
+    duck = 10 ** (-DUCK_NARR * e / 20)
+    for p_ in ('amb', 'mus', 'bombo'):
+        m.pistas[p_] *= duck[:, None]
+    fx6 = np.ones(m.N)
+    for f in frases:
+        a, b = f['habla_master_s']
+        fx6 = np.minimum(fx6, 1 - (1 - 10 ** (-6 / 20)) * ventana(m.N, a - 0.03, b + 0.03, 0.015))
+    m.pistas['fx'] *= fx6[:, None]
+    # ajuste del fondo por frase. El colchón no vuelve entre frases cercanas (hueco < 1 s): cambia de un ajuste al otro
+    # en la mitad del hueco (sin bombeo). Los efectos solo bajan mientras habla: los golpes entre frases quedan enteros
+    gdb_c, gdb_fx = np.zeros(m.N), np.zeros(m.N)
+    for i, f in enumerate(frases):
+        dv = dips.get(f['id'], 0.0)
+        if not dv:
+            continue
+        a, b = f['habla_master_s']; pre, post = 0.20, 0.30
+        if i > 0 and a - frases[i - 1]['habla_master_s'][1] < 1.0:
+            pre = (a - frases[i - 1]['habla_master_s'][1]) / 2
+        if i + 1 < len(frases) and frases[i + 1]['habla_master_s'][0] - b < 1.0:
+            post = (frases[i + 1]['habla_master_s'][0] - b) / 2
+        w = ventana(m.N, a - pre, b + post, 0.06)
+        gdb_c = gdb_c * (1 - w) + dv * w
+        w = ventana(m.N, a - 0.02, b + 0.03, 0.015)
+        gdb_fx = gdb_fx * (1 - w) + min(dv, (tope_fx or {}).get(f['id'], 0.0)) * w     # efectos: como mucho, su nivel de v01
+    for p_ in ('amb', 'mus', 'bombo'):
+        m.pistas[p_] *= (10 ** (gdb_c / 20))[:, None]
+    m.pistas['fx'] *= (10 ** (gdb_fx / 20))[:, None]
+    m.log(frases[0]['habla_master_s'][0], f'narración: {len(frases)} frases; fondo cede {DUCK_NARR} dB, efectos −6 dB bajo las palabras')
+    return narr, e
+
+
+def narracion_vs_fondo(m, narr, e, frases):
+    """por frase: narración contra todo el fondo (ambiente + efectos + música + bombo, sin la voz real), ventanas de
+    50 ms de habla (envolvente > 0,9 y a menos de 10 dB de la mediana de la frase)."""
+    fondo = (m.pistas['amb'] + m.pistas['fx'] + m.pistas['mus'] + m.pistas['bombo']).mean(1)
+    w = int(0.05 * SR); out = {}
+    for f in frases:
+        a, b = f['habla_master_s']; i0, i1 = int(a * SR), int(b * SR)
+        idx = list(range(i0, i1 - w, w))
+        vs = [20 * math.log10(np.sqrt(((narr[i:i + w] * math.sqrt(0.5)) ** 2).mean()) + 1e-12) for i in idx]
+        med = float(np.median(vs)); filas = []
+        for j, i in enumerate(idx):
+            if e[i:i + w].min() > 0.9 and vs[j] >= med - 10:
+                fd = 20 * math.log10(np.sqrt((fondo[i:i + w] ** 2).mean()) + 1e-12)
+                filas.append((vs[j], fd))
+        d = [v_ - f_ for v_, f_ in filas]
+        out[f['id']] = dict(ventanas=len(filas), dif_mediana_db=round(float(np.median(d)), 1), dif_min_db=round(min(d), 1),
+                            dif_max_db=round(max(d), 1), fondo_mediana_dbfs=round(float(np.median([f_ for _, f_ in filas])), 1))
+    return out
+
+
+def offset_secciones(m, x_antes, x_despues):
+    """v02: el fondo de las partes narradas baja parejo (ambiente, efectos, música y bombo), fuera de la cita: x_antes dB
+    hasta 0,1 s antes del corte de la voz real (rampa de 0,4 s) y x_despues dB desde 0,05 s después del corte (rampa de
+    0,3 s). Dentro de la cita no cambia nada (su colchón es el de v01)."""
+    vz = P['voz']; c0, c1 = vz['m0'], vz['m0'] + (vz['src1'] - vz['src0'])
+    t = np.arange(m.N) / SR
+    g = np.where(t < c0, x_antes * np.clip((c0 - 0.1 - t) / 0.4, 0, 1), 0.0)
+    g = np.where(t > c1, x_despues * np.clip((t - c1 - 0.05) / 0.3, 0, 1), g)
+    for p_ in ('amb', 'fx', 'mus', 'bombo'):
+        m.pistas[p_] *= (10 ** (g / 20))[:, None]
+
+
+def limitar_aac(pre, salida, gan, tmp):
+    """v02: el mismo alimiter (level=false), con un techo que baja 0,5 dB por vuelta hasta que el pico real del AAC (mismo
+    codificador y parámetros que el máster) queda ≤ −1,2 dBTP; la ganancia se corrige en cada vuelta para −14 LUFS."""
+    lim_db, hist = -1.6, []
+    for _ in range(12):
+        V.sh(['ffmpeg', '-v', 'error', '-y', '-i', str(pre), '-af',
+              f'volume={gan:.2f}dB,alimiter=limit={10 ** (lim_db / 20):.4f}:level=false:attack=3:release=60:latency=1',
+              '-c:a', 'pcm_f32le', str(salida)])
+        V.sh(['ffmpeg', '-v', 'error', '-y', '-i', str(salida), '-c:a', 'aac', '-profile:a', 'aac_low', '-b:a', '192k', '-ar', '48000',
+              '-ac', '2', str(tmp)])
+        I, Pk, LRA = L2.medir_ebur(salida); Ia, Pa, _ = L2.medir_ebur(tmp)
+        hist.append(dict(techo_dbfs=round(lim_db, 2), ganancia_db=round(gan, 2), lufs_wav=I, pico_wav=Pk, lufs_aac=Ia, pico_aac=Pa))
+        if -14.5 <= Ia <= -13.5 and Pa <= -1.2:
+            break
+        if Pa > -1.2:
+            lim_db -= 0.5
+        gan += -14.0 - Ia
+    return I, Pk, LRA, hist
+
+
 def etapa_audio():
     preparar_textos()
     AU = TP / 'audio'; AU.mkdir(parents=True, exist_ok=True)
     out = {}
+    if P.get('narracion'):
+        nar = json.load(open(TP / 'narracion.json'))
+        frases = nar['frases']
     for k, con in (('completa', True), ('sinmusica', False)):
         gan_voz, cama = 0.0, 0.0
+        fija = None
+        if P.get('reusar'):
+            # v02: la voz real y el colchón bajo ella quedan con los valores de v01 (el montaje de la cita no cambia; si se
+            # vuelve a iterar, el ruido sintético nuevo lleva a otro punto de convergencia: medido, +2 dB en V6)
+            fija = json.load(open(T3 / P['reusar'] / 'audio' / 'audio.json'))[k]
         for _ in range(6):                                       # voz 10–15 dB sobre el fondo (objetivo 12,5)
-            m, golpes = (mezcla_v6 if P['clave'] == 'v6' else mezcla_v7)(con)
+            m, golpes = (mezcla_v6 if P['pieza'] == 'v6' else mezcla_v7)(con)
             for n, tipo, _id in golpes:
                 if tipo in ('grave', 'impacto', 'sub'):
                     M.agachar(m, tf(n), -4.0, pistas=('amb',))
@@ -1081,30 +1482,88 @@ def etapa_audio():
             for p_ in ('amb', 'mus', 'bombo', 'fx'):
                 m.fundido(p_, fin - 0.40, fin)
             cola_fx_bajo_voz(m)
+            if fija:
+                import soundfile as sf
+                xr, _ = sf.read(str(T3 / P['pieza'] / 'voz' / 'voz_48k.wav'))
+                act = [np.sqrt((xr[i:i + 2400] ** 2).mean()) for i in range(0, len(xr) - 2400, 2400)]
+                ref_ = 20 * math.log10(np.median([a_ for a_ in act if a_ > max(act) * 0.1]) + 1e-12)
+                gan_voz = fija['voz_ganancia_db'] + 20.0 + ref_; cama = fija['colchon_bajo_voz_db']
             voz, e, ref, g_aplicada = voz_al_mix(m, gan_voz)
             cama_bajo_voz(m, cama)
             vf = voz_vs_fondo(m, voz, e)
             lo, hi, obj = OBJ_VOZ[k]
-            if lo <= vf['dif_mediana_db'] <= hi:
+            if fija or lo <= vf['dif_mediana_db'] <= hi:
                 break
             if vf['dif_mediana_db'] < lo:                        # la voz sube; si sobra, sube el colchón (la voz no baja)
                 gan_voz += obj - vf['dif_mediana_db']
             else:
                 cama += vf['dif_mediana_db'] - obj
+        nres = None
+        if P.get('narracion'):
+            # v02: la narración entra sobre la mezcla con la voz real ya resuelta (no se pisan: ≥ 0,4 s de aire). El fondo
+            # se ajusta frase por frase hasta dejar cada una 10–15 dB arriba (la narración no sube: queda bajo la voz real)
+            niv = niveles_narracion(frases, voz)
+            base = {p_: v_.copy() for p_, v_ in m.pistas.items()}
+            lo, hi, obj = OBJ_VOZ[k]
+            antes_ = [f['id'] for f in frases if f['habla_master_s'][1] < P['voz']['m0']]
+
+            def resolver(xa, xd):
+                dips = {f['id']: 0.0 for f in frases}
+                for it in range(14):
+                    m.pistas = {p_: v_.copy() for p_, v_ in base.items()}
+                    offset_secciones(m, xa, xd)
+                    narr, en = narracion_al_mix(m, frases, niv, dips, {f['id']: -(xa if f['id'] in antes_ else xd) for f in frases})
+                    nf_ = narracion_vs_fondo(m, narr, en, frases)
+                    cambio = False
+                    for fid, r in nf_.items():
+                        dm = r['dif_mediana_db']
+                        if dm < lo and dips[fid] > -30.0:
+                            dips[fid] = max(-30.0, dips[fid] - (obj - dm)); cambio = True
+                        elif dm > hi and dips[fid] < DUCK_NARR - (xa if fid in antes_ else xd):
+                            # puede devolver la envolvente y el offset de su sección (el colchón vuelve a su nivel de v01)
+                            dips[fid] = min(DUCK_NARR - (xa if fid in antes_ else xd), dips[fid] + (dm - obj)); cambio = True
+                    if not cambio:
+                        break
+                return dips, narr, en, nf_, it
+            # primera pasada sin offset; el fondo de cada sección baja lo que pide la mediana de sus frases menos 6 dB
+            # (lo que queda lo ajusta cada frase): así no hay saltos de 20–30 dB entre una frase y el hueco que sigue
+            d0 = resolver(0.0, 0.0)[0]
+            med = lambda ids: float(np.median([d0[i] for i in ids])) if ids else 0.0
+            xa = round(min(0.0, med(antes_) + 6.0), 1)
+            xd = round(min(0.0, med([f['id'] for f in frases if f['id'] not in antes_]) + 6.0), 1)
+            dips, narr, en, nf_, it = resolver(xa, xd)
+            golpes_bajo = [dict(cuadro=n, t=round(tf(n), 3), tipo=t_, frase=i, bajo_la_narracion=f['id'])
+                           for n, t_, i in golpes for f in frases
+                           if f['habla_master_s'][0] - 0.03 <= tf(n) <= f['habla_master_s'][1] + 0.03]
+            nres = dict(niveles=niv, fondo_cede_db=DUCK_NARR, offset_seccion_db=dict(antes_de_la_cita=xa, despues_de_la_cita=xd),
+                        ajuste_primera_pasada_db={a_: round(b_, 2) for a_, b_ in d0.items()},
+                        ajuste_fondo_db={a_: round(b_, 2) for a_, b_ in dips.items()},
+                        iteraciones=it + 1, voz_vs_fondo=nf_, golpes_bajo_las_palabras_menos6db=golpes_bajo)
+            vf = voz_vs_fondo(m, voz, e)                          # la voz real, medida otra vez con la narración puesta
+            print(k, 'narración', {a_: (r['dif_mediana_db'], r['dif_min_db'], round(dips[a_], 1)) for a_, r in nf_.items()},
+                  flush=True)
         pre = AU / f'{k}_pre.wav'
         A.pre_mezcla(m, pre)
         I0 = L2.medir_ebur(pre)[0]
         gan = -14.0 - I0
-        for _ in range(5):
-            I, Pk, LRA = A.limitar(pre, AU / f'{k}.wav', gan)
-            if -14.5 <= I <= -13.5 and Pk <= -1.0:
-                break
-            gan += (-14.0 - I) - max(0.0, Pk + 1.2)
+        lim_hist = None
+        if P.get('narracion'):
+            I, Pk, LRA, lim_hist = limitar_aac(pre, AU / f'{k}.wav', gan, AU / f'{k}_prueba_aac.m4a')
+            gan = lim_hist[-1]['ganancia_db']
+        else:
+            for _ in range(5):
+                I, Pk, LRA = A.limitar(pre, AU / f'{k}.wav', gan)
+                if -14.5 <= I <= -13.5 and Pk <= -1.0:
+                    break
+                gan += (-14.0 - I) - max(0.0, Pk + 1.2)
         json.dump({'lufs': I, 'pico_dbtp': Pk, 'ganancia_db': round(gan, 2), 'eventos': m.ev},
                   open(AU / f'{k}_eventos.json', 'w'), ensure_ascii=False, indent=1)
         out[k] = dict(lufs=I, pico_dbtp=Pk, lra=LRA, ganancia_db=round(gan, 2), voz_habla_db_original=ref,
                       voz_ganancia_db=g_aplicada, fondo_cede_db=DUCK_DB, colchon_bajo_voz_db=round(cama, 2), voz_vs_fondo=vf)
-        print(k, {a: b for a, b in out[k].items() if a != 'voz_vs_fondo'},
+        if nres:
+            out[k]['narracion'] = nres
+            out[k]['limitador_con_aac'] = lim_hist
+        print(k, {a: b for a, b in out[k].items() if a not in ('voz_vs_fondo', 'narracion')},
               {a: b for a, b in vf.items() if a != 'por_ventana'}, flush=True)
     out['golpes_texto'] = [dict(cuadro=n, t=round(tf(n), 3), tipo=t_, frase=i) for n, t_, i in M.eventos_texto()[0]]
     jdump(out, AU / 'audio.json')
@@ -1210,7 +1669,27 @@ def etapa_control():
         V.sh(['ffmpeg', '-v', 'error', '-y', '-ss', f'{t0:.3f}', '-t', f'{t1 - t0:.3f}', '-i', str(MA / nombre), '-vn', '-ac', '1',
               '-ar', '16000', '-c:a', 'pcm_s16le', str(w)])
         wavs.append(w)
-    tr = whisper(CO / 'whisper_master.json', wavs)
+    vent = []
+    if P.get('narracion'):
+        # v02: cada frase de la narración en su ventana del máster (±0,15 s), completa y sin música: Whisper en tramos
+        # cortos (en el archivo largo se saltea palabras gritadas, LEEME_VOZ_OFICIAL)
+        NW = CO / 'narracion_ventanas'; NW.mkdir(exist_ok=True)
+        for f in json.load(open(TP / 'narracion.json'))['frases']:
+            a_, b_ = f['habla_master_s']
+            for k, nombre in P['archivos'].items():
+                w = NW / f"{f['id']}_{k}.wav"
+                V.sh(['ffmpeg', '-v', 'error', '-y', '-ss', f'{max(0, a_ - 0.15):.3f}', '-t', f'{b_ - a_ + 0.30:.3f}', '-i', str(MA / nombre),
+                      '-vn', '-ac', '1', '-ar', '16000', '-c:a', 'pcm_s16le', str(w)])
+                vent.append((f['id'], k, round(max(0, a_ - 0.15), 3), w))
+    tr = whisper(CO / 'whisper_master.json', wavs + [x[3] for x in vent])
+    if vent:
+        rep['narracion_en_master'] = [dict(frase=fid, version=k, desde_s=t0_, texto=' '.join(sg['texto'] for sg in tr[str(w)]),
+                                           palabras=[[p_[0], round(t0_ + p_[1], 2), round(t0_ + p_[2], 2), p_[3]]
+                                                     for sg in tr[str(w)] for p_ in sg['palabras']])
+                                      for fid, k, t0_, w in vent]
+        for x in rep['narracion_en_master']:
+            print('narración', x['frase'], x['version'], x['texto'], flush=True)
+    tr = {f: segs for f, segs in tr.items() if f in [str(w) for w in wavs]}
     rep['voz_en_master'] = {Path(f).stem: ' '.join(sg['texto'] for sg in segs) for f, segs in tr.items()}
     rep['voz_en_master_tramo_s'] = [round(t0, 3), round(t1, 3)]
     print('voz', rep['voz_en_master'], flush=True)
@@ -1594,6 +2073,305 @@ def etapa_entregar():
     print(md)
     print(json.dumps({k: dict(md5_flujo_video=t['md5_flujo_video'], sonoridad=t['sonoridad'], sha256=t['sha256'])
                       for k, t in rep['archivos'].items()}, ensure_ascii=False))
+
+
+def f_(x, d=2):
+    s = f'{x:.{d}f}'
+    if float(s) == 0:
+        s = s.lstrip('-')
+    return s.replace('.', ',')
+
+
+NOTAS_HOJA_V02 = {
+    'v6': dict(
+        sintesis='En las frases que quedan en la voz se sintetiza «Blac Fraidei» y los números en palabras («diez», «veintiocho», '
+                 '«ciento veintitrés», «veinticinco»). «Fáunders» y «cien» van en n14, que queda fuera de la voz.',
+        asr='«¿Le llega?» con la ll rioplatense (sh) sale «Le shega» / «le chega»; «Seguir hasta lograrlo» sale «Seguirá…» en la '
+            'completa; Whisper no marca la tilde de «Él»/«él» y escribe las cifras con números. Queda para la escucha.',
+        pendiente='el grito «¡Ciento veintitrés!», el quiebre «¡Campeón del mundo!», «¿Le llega?» (ll rioplatense; ventana corta '
+                  'vacía en la completa), «Seguir hasta lograrlo» (Whisper oye «Seguirá» en la completa), la narración sobre el colchón '
+                  'y la cita con el limitador (6,80–13,05 s)'),
+    'v7': dict(
+        sintesis='En las frases que quedan en la voz se sintetiza «Blac Fraidei» y los números en palabras («tres», «veinticinco»). '
+                 '«Fáunders» y «cien» van en m17, que queda fuera de la voz.',
+        asr='«Se la pica…», en voz baja, sale «C\'est la pica» / «Es la pica»; «Llega la del Mundial» sale «Llegala» / «Llegó a la»; '
+            '«Seguir hasta lograrlo» sale «Seguirá…»; Whisper no marca la tilde de «él» («Otra vez el») y escribe las cifras con '
+            'números. Queda para la escucha.',
+        pendiente='el grito «¡Gol!», el quiebre «Tres derrotas.», «Se la pica…» y «Queda solo…» en voz baja (Whisper oye «C\'est la '
+                  'pica»), «Llega la del Mundial» (ll rioplatense; Whisper oye «Llegala»), «Seguir hasta lograrlo» (Whisper oye «Seguirá»), '
+                  'la narración sobre el colchón y la cita con el limitador (11,89–17,49 s)'),
+}
+
+
+def limitador_en_tramo(k, t0, t1):
+    """reducción del limitador en un tramo: la mezcla previa × ganancia contra la salida limitada, ventanas de 50 ms."""
+    import soundfile as sf
+    g = json.load(open(TP / 'audio' / 'audio.json'))[k]['ganancia_db']
+    pre, sr = sf.read(str(TP / 'audio' / f'{k}_pre.wav')); out, _ = sf.read(str(TP / 'audio' / f'{k}.wav'))
+    pre = pre * 10 ** (g / 20); w = int(0.05 * sr); r = []
+    for i in range(int(t0 * sr), int(t1 * sr) - w, w):
+        e1 = np.sqrt((pre[i:i + w] ** 2).mean())
+        if e1 > 1e-4:
+            r.append(20 * math.log10(np.sqrt((out[i:i + w] ** 2).mean()) / e1 + 1e-12))
+    r = np.array(r)
+    return dict(mediana_db=round(float(np.median(r)), 1), peor_db=round(float(r.min()), 1),
+                ventanas_mas_de_1db_pct=round(float((r < -1).mean() * 100), 1))
+
+
+def etapa_entregar_v02():
+    """copia sin pisar junto a v01 + hoja v02 con SOLO lo que cambió (todo sale de los JSON medidos)."""
+    assert P['version'] == 'v02'
+    CO, MA = TP / 'control', TP / 'master'
+    rep = json.load(open(CO / 'control.json'))
+    nar = json.load(open(TP / 'narracion.json'))
+    pl = json.load(open(TP / 'placa' / 'placa.json'))
+    aud = rep['audio']
+    v01 = json.load(open(T3 / P['pieza'] / 'control' / 'control.json'))
+    D = PIEZAS / P['nombre']; assert D.exists()
+    copias = {}
+    for k, nombre in P['archivos'].items():
+        cp = copiar_sin_pisar(MA / nombre, D / nombre)
+        assert cp['sha256_master'] == rep['archivos'][k]['sha256']
+        assert U.md5_stream(D / nombre, 'v') == rep['archivos'][k]['md5_flujo_video']
+        assert U.md5_stream(D / nombre, 'a') == rep['archivos'][k]['md5_flujo_audio']
+        cuerpo = (D / nombre).read_bytes()
+        cp['marcas_ubicacion'] = [m_.decode() for m_ in (b'ISO6709', b'\xa9xyz', b'com.apple.quicktime.location', b'location')
+                                  if m_ in cuerpo]
+        cp['decodifica'] = subprocess.run(['ffmpeg', '-v', 'error', '-i', str(D / nombre), '-f', 'null', '-'],
+                                          capture_output=True, text=True).stderr.strip() == ''
+        copias[k] = cp
+    hoja_img = D / '02_pedro_hoja_0,5s_v02.jpg'
+    copiar_sin_pisar(CO / 'hoja_0,5s.jpg', hoja_img)
+    jdump(copias, CO / 'entrega.json')
+    rv = rangos_visibles(); tc, ts = rep['archivos']['completa'], rep['archivos']['sinmusica']
+    nz = P['narracion']; fr = nar['frases']; n_ = {f['id']: f for f in fr}
+    L = []; w = L.append
+    w(f"# LIFE T3 · {P['titulo']} · máster v02 · hoja de Pedro · 26/11/2026\n")
+    w('Solo lo que cambió desde v01. Para todo lo demás (clips, recortes, separación, marcas, cita, negro, logo) vale '
+      '`01_pedro_hoja_master_v01.md`. **No se publicó nada, no hubo commit ni push y se usaron 0 créditos.** **El audio no '
+      'se escuchó:** se midió con ebur128, niveles, voz contra fondo y Whisper (faster-whisper `small`, sin texto de '
+      'contexto). La imagen se revisó por fotogramas, sin reproducir el video en tiempo real.\n')
+    w('## Qué cambió\n')
+    ult = P['planos'][-1]; o_pl = P['negro'][1] + 1; c_ = o_pl + 138; dn = P['cta_dn']
+    w(f"1. **Narración con la voz oficial de Roccé** (voz dirigida): {len(fr)} frases de la capa "
+      f"{'07' if P['pieza'] == 'v6' else '08'} de Fede, con los ajustes de Roma. Las demás frases salen de la voz y quedan escritas (abajo, con el motivo).")
+    w(f"2. **«Va a haber 100 Founders como máximo» +0,5 s:** c{c_}–c{c_ + dn - 1} ({s_(c_)}–{s_(c_ + dn)} s, 1,20 s; en v01 0,70 s). "
+      f"El CTA y la firma van desde c{c_ + dn} ({s_(c_ + dn)} s) hasta el final. Plano {ult['id']}: IMG_5325 de 11,2 a 13,4 s "
+      f"(en v01 11,7–13,4). La pieza dura {s_(P['NF'])} s ({P['NF']} cuadros; v01: {s_(P['NF'] - 15)} s).")
+    if P['pieza'] == 'v7':
+        w('3. **Textos:** «2021: otra final.» → «2021» y «Queda solo.» → «Solo.» (la voz los dice). Rótulo de c351–390: '
+          '«COPA AMÉRICA 2024 · SU ÚLTIMO PARTIDO EN LA SELECCIÓN».')
+    pj = json.load(open(TP / 'planos.json'))
+    cop = [p['id'] for p in pj['planos'] if p.get('reutilizado')]
+    w(f"\nLo demás es el montaje de v01. En la base sin pérdida, los planos {cop[0]} a {cop[-1]} (c0–c{c_ - 1}) son los mismos cuadros Y′CbCr de "
+      f"la base v01 (copiados y comprobados en la receta; el negro, byte a byte); solo se compuso {ult['id']}. La voz real es el mismo corte.\n")
+    # --- archivos
+    w('## Archivos\n')
+    w('| versión | archivo entregado | bytes | sha256 del archivo entregado | sha256 del máster (sin C2PA) | md5 del flujo de video | md5 del flujo de audio |')
+    w('|---|---|---|---|---|---|---|')
+    for k, nombre in P['archivos'].items():
+        t, cp = rep['archivos'][k], copias[k]
+        w(f"| {k} v02 | `{D / nombre}` | {cp['bytes_entregado']} | `{cp['sha256_entregado']}` | `{t['sha256']}` | "
+          f"`{t['md5_flujo_video']}` | `{t['md5_flujo_audio']}` |")
+    w('\n**ID inmutable del máster: el md5 de los flujos.** Como en v01, el almacenamiento agrega al guardar una caja C2PA '
+      '(«Anthropic Files»). Sin esa caja y el corrimiento que deja en `stco`, cada archivo entregado es idéntico byte a byte '
+      f"al máster, y los md5 de los flujos son los del control. Decodificación del entregado: completa "
+      f"{'sin errores' if copias['completa']['decodifica'] else 'CON ERRORES'}, sin música "
+      f"{'sin errores' if copias['sinmusica']['decodifica'] else 'CON ERRORES'}. Marcas de ubicación: "
+      f"{copias['completa']['marcas_ubicacion'] or 'ninguna'} / {copias['sinmusica']['marcas_ubicacion'] or 'ninguna'}. "
+      f"Las dos versiones comparten el flujo de video. Los v01 siguen en la misma carpeta, sin tocar.\n")
+    # --- formato y sonoridad
+    w('## Formato (ffprobe), sonoridad (ebur128 sobre el MP4) y duración\n')
+    w('| | completa | sin música |')
+    w('|---|---|---|')
+    v1, v2 = tc['video'], ts['video']
+    fila = lambda n, x, y: w(f'| {n} | {x} | {y} |')
+    fila('video', f"{v1['codec']} {v1['perfil']} {v1['nivel']}, {v1['pix_fmt']}, {v1['ancho']}×{v1['alto']}, {v1['fps']}, "
+                  f"{v1['rango']}/{v1['matriz']}/{v1['transferencia']}/{v1['primarios']}",
+         f"{v2['codec']} {v2['perfil']} {v2['nivel']}, {v2['pix_fmt']}, {v2['ancho']}×{v2['alto']}, {v2['fps']}, "
+         f"{v2['rango']}/{v2['matriz']}/{v2['transferencia']}/{v2['primarios']}")
+    fila('audio', f"{tc['audio']['codec']} {tc['audio']['perfil']}, {tc['audio']['hz']} Hz, {tc['audio']['canales']} canales",
+         f"{ts['audio']['codec']} {ts['audio']['perfil']}, {ts['audio']['hz']} Hz, {ts['audio']['canales']} canales")
+    fila('duración video / audio (s) · cuadros', f"{v1['duracion']:.4f} / {tc['audio']['duracion']:.4f} · {tc['cuadros_decodificados']}",
+         f"{v2['duracion']:.4f} / {ts['audio']['duracion']:.4f} · {ts['cuadros_decodificados']}")
+    fila('audio = video', 'sí' if tc['audio_igual_video'] else '**no**', 'sí' if ts['audio_igual_video'] else '**no**')
+    fila('decodificación completa · faststart', f"{'sin errores' if tc['decodifica_completo'] else tc['errores_decodificacion']} · {tc['faststart']}",
+         f"{'sin errores' if ts['decodifica_completo'] else ts['errores_decodificacion']} · {ts['faststart']}")
+    so1, so2 = tc['sonoridad'], ts['sonoridad']
+    cum = lambda so: 'cumple' if -15 <= so['lufs_integrado'] <= -13 and so['pico_real_dbtp'] <= -1 else '**NO cumple**'
+    fila('LUFS integrado · pico real · LRA', f"{so1['lufs_integrado']} LUFS · {so1['pico_real_dbtp']} dBTP · {so1['lra']} LU ({cum(so1)})",
+         f"{so2['lufs_integrado']} LUFS · {so2['pico_real_dbtp']} dBTP · {so2['lra']} LU ({cum(so2)})")
+    fila('silencio al final', f"{tc['silencio_final_s']} s", f"{ts['silencio_final_s']} s")
+    lh = lambda k: aud[k]['limitador_con_aac'][-1]
+    fila('limitador (alimiter level=false): techo · pico real del AAC de prueba', f"{f_(lh('completa')['techo_dbfs'], 1)} dBFS · {f_(lh('completa')['pico_aac'], 1)} dBTP",
+         f"{f_(lh('sinmusica')['techo_dbfs'], 1)} dBFS · {f_(lh('sinmusica')['pico_aac'], 1)} dBTP")
+    w('\nEl techo del limitador baja hasta que el pico real medido después del AAC queda ≤ −1,2 dBTP. En el primer render de V6, el '
+      'AAC subía 2 dB el golpe agudo de 4,50 s (+0,2 / +1,0 dBTP).' if P['pieza'] == 'v6' else '')
+    # --- voz oficial
+    vo = nar['voz']; hs = vo['sha256_voz_dirigida']; cm = nar['control_muestra_oficial']
+    w('\n## Voz oficial (`/mnt/project-files/voz_rocce/`)\n')
+    w(f"- `voz_dirigida.py`: sha256 `{hs['oficial_voz_rocce']}` en `voz_rocce/`, el mismo de `/mnt/project-files/voz/` y el de la "
+      f"copia usada (`{NARR / 'voz_dirigida.py'}`, sin modificar). LEEME_VOZ_OFICIAL no trae el hash del script (SHA256.txt trae los de la "
+      "muestra); la comparación es contra el archivo oficial. Los parámetros de cada marca de la tabla del LEEME son los de "
+      "`ESTILOS` del script. Voz `" + vo['voz'] + "`, edge-tts 7.3.1 y parselmouth 0.4.7 (voz-env). **Son idénticos: no se volvió a "
+      "sintetizar.** Las frases salieron de la corrida de hoy con esa misma receta.")
+    w(f"- Control de que el servicio da la misma voz: w4 y w3 de la muestra, resintetizadas hoy con la receta, contra "
+      f"`muestra_04_v02/`. w4: forma de onda {f_(cm['w4']['correlacion_forma_de_onda'], 4)}, espectrograma "
+      f"{f_(cm['w4']['correlacion_espectrograma_log'], 4)}, RMS {f_(cm['w4']['rms_db_hoy'])} / {f_(cm['w4']['rms_db_muestra'])} dB. "
+      f"w3 (grito y quiebre): espectrograma {f_(cm['w3']['correlacion_espectrograma_log'], 4)}, RMS {f_(cm['w3']['rms_db_hoy'])} / "
+      f"{f_(cm['w3']['rms_db_muestra'])} dB. F0 mediana: {cm['f0_mediana_hz']}. No son idénticas byte a byte "
+      f"({cm['w4']['muestras_hoy']} contra {cm['w4']['muestras_muestra']} muestras en w4): el servicio no devuelve el mismo MP3 en cada llamada.")
+    w(f"- {NOTAS_HOJA_V02[P['pieza']]['sintesis']} En pantalla quedan la grafía real y las cifras.\n")
+    # --- narración
+    w('## Narración: frases, tiempos y Whisper sobre el máster\n')
+    w(f"Whisper corre sobre la ventana de cada frase en el MP4 (±0,15 s), completa y sin música. Grito: "
+      f"{nz['grito']} «{TEXTO_NARR[nz['grito']]}». Quiebre: {nz['quiebre']} «{TEXTO_NARR[nz['quiebre']]}» (^ en "
+      f"`{n_[nz['quiebre']]['guion_tsv']}`).\n")
+    w('| frase | dice (capa de Fede) | marca | habla en el máster (s) | cuadros | Whisper · completa | Whisper · sin música |')
+    w('|---|---|---|---|---|---|---|')
+    wm = {(x['frase'], x['version']): x for x in rep['narracion_en_master']}
+    for f in fr:
+        a, b = f['habla_master_s']
+        w(f"| {f['id']} | {f['texto']} | {' · '.join(f['estilos'])} | {f_(a)}–{f_(b)} | c{f['cuadros_habla'][0]}–c{f['cuadros_habla'][1]} | "
+          f"«{wm[(f['id'], 'completa')]['texto']}» | «{wm[(f['id'], 'sinmusica')]['texto']}» |")
+    w(f"\nLa primera frase entra en {f_(fr[0]['habla_master_s'][0])} s, no en 0,05 s como en la capa: así el ataque del impacto de c0 (el gancho) "
+      "suena entero antes de la voz.")
+    an = CO / 'whisper_n02_ventanas_anchas.json'
+    if an.exists():
+        r_ = {Path(a_).name: ' '.join(x['texto'] for x in b_) for a_, b_ in json.load(open(an)).items()}
+        w(f"\nn02 en la completa: la ventana de ±0,15 s sale vacía. Con más contexto se lee: 0,80–1,90 s «{r_.get('n02_ancha.wav')}» y "
+          f"0,00–2,40 s «{r_.get('n01_n03.wav')}» (`{an}`).")
+    w(f"\nLecturas de Whisper que no son la frase, anotadas tal cual: {NOTAS_HOJA_V02[P['pieza']]['asr']}\n")
+    w('**Frases que salen de la voz y quedan escritas** (no entran a ritmo natural):\n')
+    for x in nar['fuera_de_la_voz']:
+        w(f"- {x['id']} «{x['texto']}»: {x['motivo']}.")
+    # --- grito, golpe, aire, niveles
+    gc = nz['grito_cuadro']
+    w('\n## Grito, golpe y aire contra la voz real\n')
+    if P['pieza'] == 'v6':
+        w(f"- El grito entra en c{gc} ({s_(gc)} s), con el renglón «Minuto 123. 3-3.». El golpe que caía ahí (latido y acorde de "
+          f"5,30 s de la música TEMP) pasa a c{gc - 1} a ×0,6. En la sin música no hay golpe en ese momento. Antes del grito hay un tramo "
+          f"calmo: la última frase termina en {f_(n_['n06']['habla_master_s'][1])} s.")
+    else:
+        w(f"- El grito «¡Gol!» entra en c{gc} ({s_(gc)} s). El golpe del gol (impacto + golpe grave del texto «Gol.», el bombo de la "
+          f"música) queda en c{gc - 1}, el cuadro en que la pelota cruza y entra el color, a ×0,6. Antes, «Queda solo…» y «Se la pica…» "
+          f"en voz baja, con silencio entre {f_(n_['m08']['habla_master_s'][1])} y {f_(n_['m09']['habla_master_s'][0])} s. "
+          "«¡Otra vez él!» va en enérgico, sin grito.")
+    ai = nar['aire_voz_real']
+    w(f"- Aire contra la voz real (habla medida en su WAV, ventanas de 10 ms a menos de 30 dB del máximo: "
+      f"{f_(ai['voz_real_habla_s'][0])}–{f_(ai['voz_real_habla_s'][1])} s): la narración termina en {f_(ai['narracion_termina_antes_s'])} s "
+      f"(**{f_(ai['aire_antes_s'])} s antes**) y vuelve en {f_(ai['narracion_vuelve_s'])} s (**{f_(ai['aire_despues_s'])} s después**). "
+      f"Contra los bordes del corte ({f_(ai['voz_real_corte_s'][0])}–{f_(ai['voz_real_corte_s'][1])} s, con el aire de la toma): "
+      f"{f_(ai['aire_antes_del_corte_s'])} s y {f_(ai['aire_despues_del_corte_s'])} s.")
+    nv = aud['completa']['narracion']['niveles']
+    pf = nv['por_frase']
+    hm = [x['sonoridad_habla_mezcla'] for x in pf.values()]; mm = [x['momentanea_max_mezcla'] for x in pf.values()]
+    w(f"- Nivel (ponderación K, antes del limitador; el limitador afecta igual a las dos voces): voz real "
+      f"{f_(nv['voz_real_sonoridad_habla'], 1)} LUFS de habla y {f_(nv['voz_real_momentanea_max'], 1)} de momentánea máxima. "
+      f"Narración: {f_(min(hm), 1)} a {f_(max(hm), 1)} de habla (rango {f_(max(hm) - min(hm), 1)} dB) y {f_(max(mm), 1)} de momentánea máxima. "
+      f"**El narrador nunca está más fuerte que la voz real.**")
+    bj = [fid for fid in pf if 'bajo' in n_[fid]['estilos']]
+    al_borde = {fid: x['llevada_al_borde_db'] for fid, x in pf.items() if x['llevada_al_borde_db']}
+    w(f"- Mezcla de la voz oficial: la salida de la receta, con la voz baja +5 dB y el grito y el CTA +2 dB. Encima va la regla de Fede "
+      f"(±3 dB del resto): lo que quedaba a más de 3 dB de la mediana se llevó al borde "
+      f"({', '.join(f'{k} {v:+.1f} dB'.replace('.', ',') for k, v in al_borde.items()) or 'ninguna'}). "
+      + (f"[bajo] ({', '.join(bj)}): " + ', '.join(f"{k} {pf[k]['offset_oficial'] + pf[k]['llevada_al_borde_db']:+.1f} dB".replace('.', ',') for k in bj)
+         + ' sobre la salida de la receta.' if bj else '[bajo]: ninguna frase [bajo] quedó en la voz (n09 «Mano a mano…», la única, quedó fuera).'))
+    w('\n## Narración contra el fondo, frase por frase\n')
+    w(f"El fondo (ambiente, efectos, música y bombo) cede {f_(DUCK_NARR, 0)} dB por envolvente con la narración (voz oficial), y además se "
+      'ajusta frase por frase. Los efectos bajan 6 dB mientras habla, para los golpes que pisan una palabra. Se mide en ventanas de 50 ms '
+      'de habla, antes del limitador. Objetivo: 10–15 dB (completa 11–14, sin música 13–15).\n')
+    w('| frase | completa: voz − fondo (mediana · mín–máx) | ajuste del fondo | sin música: voz − fondo | ajuste del fondo |')
+    w('|---|---|---|---|---|')
+    nc, ns = aud['completa']['narracion'], aud['sinmusica']['narracion']
+    for f in fr:
+        a1, a2 = nc['voz_vs_fondo'][f['id']], ns['voz_vs_fondo'][f['id']]
+        nota = lambda r: '' if 10 <= r['dif_mediana_db'] <= 15 else (f" (fondo {f_(r['fondo_mediana_dbfs'], 1)} dBFS)" if r['fondo_mediana_dbfs'] > -200 else ' (fondo: silencio digital)')
+        w(f"| {f['id']} | {f_(a1['dif_mediana_db'], 1)} · {f_(a1['dif_min_db'], 1)}–{f_(a1['dif_max_db'], 1)}{nota(a1)} | "
+          f"{nc['ajuste_fondo_db'][f['id']]:+.1f} dB | {f_(a2['dif_mediana_db'], 1)} · {f_(a2['dif_min_db'], 1)}–{f_(a2['dif_max_db'], 1)}{nota(a2)} | "
+          f"{ns['ajuste_fondo_db'][f['id']]:+.1f} dB |".replace('+-', '−'))
+    oc, os_ = nc['offset_seccion_db'], ns['offset_seccion_db']
+    aj = [v_ for v_ in nc['ajuste_fondo_db'].values()]
+    w(f"\nEl colchón de v01 se hizo sin narración (latidos, bombo y golpes al frente). La narración no sube: tiene que quedar bajo la voz real. "
+      f"Por eso el fondo de las partes narradas baja parejo. Completa: {f_(oc['antes_de_la_cita'], 1)} dB antes de la cita y "
+      f"{f_(oc['despues_de_la_cita'], 1)} dB después. Sin música: {f_(os_['antes_de_la_cita'], 1)} y {f_(os_['despues_de_la_cita'], 1)} dB. "
+      "Es la mediana de lo que pedían sus frases en la primera pasada, con 6 dB menos de recorte (nunca positivo), y entra con rampas. Dentro de la cita no cambia nada: el colchón es el de v01. "
+      f"Encima, cada frase ajusta el resto (completa: de {f_(min(aj), 1)} a {f_(max(aj), 1)} dB) y el fondo cede 12 dB por envolvente. "
+      "Entre frases separadas por menos de 1 s el colchón no vuelve (sin bombeo). Los golpes entre frases quedan enteros; los que pisan "
+      "una palabra suenan 6 dB más bajos.")
+    fuera = [(k, f['id']) for k, nn in (('completa', nc), ('sinmusica', ns)) for f in fr
+             if not (10 <= nn['voz_vs_fondo'][f['id']]['dif_mediana_db'] <= 15)]
+    if fuera:
+        w(f"\nFuera de 10–15 dB: {', '.join(f'{b} ({a})' for a, b in fuera)}. "
+          + ('Todas por arriba y en la sin música, donde el fondo bajo esas frases es solo el murmullo sintético (−46 a −50 dBFS) o nada (después '
+             'del negro solo quedan los barridos y el sub-golpe del cierre). Ahí el ajuste ya devolvió todo lo que había bajado: no hay colchón que '
+             'subir sin agregar sonido, y la narración no sube porque tiene que quedar bajo la voz real.'
+             if all(a == 'sinmusica' and nn_['voz_vs_fondo'][b]['dif_mediana_db'] > 15 for a, b in fuera for nn_ in [ns]) else '**Revisar.**'))
+    gb = nc['golpes_bajo_las_palabras_menos6db']
+    lista = sorted({f"c{g['cuadro']} {g['tipo']} ({g['frase']}) bajo {g['bajo_la_narracion']}" for g in gb})
+    w(f"\nGolpes de texto que caen dentro de una frase y suenan 6 dB más bajos: {', '.join(lista) or 'ninguno'}.\n")
+    # --- voz real
+    w('## Voz real contra fondo (sin cambios de método)\n')
+    w('| versión | v01: mediana · mín–máx | v02: mediana · mín–máx |')
+    w('|---|---|---|')
+    for k in ('completa', 'sinmusica'):
+        a1, a2 = v01['audio'][k]['voz_vs_fondo'], aud[k]['voz_vs_fondo']
+        w(f"| {k} | {f_(a1['dif_mediana_db'], 1)} · {f_(a1['dif_min_db'], 1)}–{f_(a1['dif_max_db'], 1)} dB | "
+          f"{f_(a2['dif_mediana_db'], 1)} · {f_(a2['dif_min_db'], 1)}–{f_(a2['dif_max_db'], 1)} dB |")
+    w(f"\nWhisper sobre la cita en el máster v02: completa «{rep['voz_en_master'].get('voz_en_master_completa', '')}» · sin música "
+      f"«{rep['voz_en_master'].get('voz_en_master_sinmusica', '')}». En v01: completa «{v01['voz_en_master'].get('voz_en_master_completa', '')}» · "
+      f"sin música «{v01['voz_en_master'].get('voz_en_master_sinmusica', '')}».\n")
+    # --- para la escucha: el limitador en la cita
+    vz = P['voz']; c0, c1 = vz['m0'], vz['m0'] + vz['src1'] - vz['src0']
+    lc = {k: limitador_en_tramo(k, c0, c1) for k in P['archivos']}
+    lr = {k: limitador_en_tramo(k, 0.0, c0 - 0.3) for k in P['archivos']}
+    jdump(dict(cita=lc, antes_de_la_cita=lr), CO / 'limitador_por_tramo.json')
+    ga = {k: aud[k]['ganancia_db'] for k in P['archivos']}; g1 = {k: v01['audio'][k]['ganancia_db'] for k in P['archivos']}
+    w('## Para Roma: el limitador en la cita (segundo exacto y propuesta)\n')
+    w(f"Para cumplir a la vez −14 LUFS, la narración 10–15 dB sobre su fondo y el narrador nunca más fuerte que la voz real, la cita "
+      f"queda como el tramo más fuerte de la pieza. La ganancia final de la mezcla pasa de {f_(g1['completa'], 1)} dB (v01) a "
+      f"{f_(ga['completa'], 1)} dB (completa); sin música, de {f_(g1['sinmusica'], 1)} a {f_(ga['sinmusica'], 1)}. Por eso el limitador "
+      f"(alimiter, level=false) ahora trabaja en la cita, {f_(c0)}–{f_(c1)} s. Completa: mediana {f_(lc['completa']['mediana_db'], 1)} dB, "
+      f"{f_(lc['completa']['ventanas_mas_de_1db_pct'], 1)} % de las ventanas de 50 ms con más de 1 dB y la peor "
+      f"{f_(lc['completa']['peor_db'], 1)} dB. Sin música: {f_(lc['sinmusica']['ventanas_mas_de_1db_pct'], 1)} % y "
+      f"{f_(lc['sinmusica']['peor_db'], 1)} dB. Antes de la cita: peor {f_(lr['completa']['peor_db'], 1)} / {f_(lr['sinmusica']['peor_db'], 1)} dB. "
+      "Son las puntas de la voz real (y del colchón que va con ella). No se escuchó.\n")
+    w(f"**Propuesta**, si en la escucha la cita suena apretada en {f_(c0)}–{f_(c1)} s: (a) entregar a −14,8 LUFS (dentro de ±1): el "
+      "limitador recibe 0,8 dB menos. (b) Bajar 2–3 dB solo las puntas de la voz real antes de la mezcla, para que el limitador general "
+      "no apriete también el colchón: no cambia lo que dice, sí su dinámica, y por eso lo decide Roma.\n")
+    # --- textos que cambiaron
+    w('## Textos e imagen que cambiaron\n')
+    w('| id | en pantalla | guion | igual | cuadros visibles |')
+    w('|---|---|---|---|---|')
+    ids = ['founders', 'cta', 'bf_cta'] + (['p1a', 'p2', 'rotulo2'] if P['pieza'] == 'v7' else [])
+    for k in ids:
+        x = rep['textos_vs_guion'][k]; r = rv.get(k)
+        w(f"| {k} | {x['visible']} | {x['guion']} | {'sí' if x['igual'] else '**no**'} | c{r[0]}–c{r[1]} |")
+    w(f"| firma | logo + «ROCCÉ LIFE» | firma | sí | c{pl['cuadros']['firma'][0]}–c{pl['cuadros']['firma'][1]} |")
+    mal = [k for k, x in rep['textos_vs_guion'].items() if not x['igual'] and k != 'atrib_voz']
+    w(f"\nEl resto de los textos es igual a v01 (control carácter por carácter: distintos del guion, además de la atribución "
+      f"ya explicada en v01: {mal or 'ninguno'}). Sin subtítulos automáticos. El primer cuadro con oferta es "
+      f"c{rep['separacion']['primer_cuadro_con_oferta']}, después del negro (c{P['negro'][0]}–c{P['negro'][1]}). NCC del logo entre c0 y el "
+      f"negro: máximo {rep['logo']['ncc_max_c0_hasta_negro']}, contra {rep['logo']['ncc_firma_min']}–{rep['logo']['ncc_firma_max']} en la firma.\n")
+    w('## Hoja de fotogramas\n')
+    w(f"`{hoja_img}`: un cuadro cada 15 (0,5 s) del máster completo v02, de c0 a c{P['NF'] - 1}.\n")
+    w('## Verificado / revisado a ojo / pendiente\n')
+    w('- **Verificado técnicamente:** sha256 de la receta de voz contra la oficial, frases y tiempos medidos en sus WAV, aire contra la '
+      'voz real, sonoridad de narrador contra voz real, voz contra fondo por frase, Whisper por ventana en los dos MP4, ffprobe, '
+      'ebur128, md5 de los flujos, decodificación, duración de audio igual a la de video, textos carácter por carácter, oferta después '
+      'del negro y NCC del logo.')
+    w('- **Revisado a ojo (fotogramas):** el plano del CTA desde 11,2 s (bordado entero, sin la subida de cámara), Founders y CTA sin tapar '
+      'el bordado' + (', «2021», «Solo.» y el rótulo largo dentro del ancho' if P['pieza'] == 'v7' else '') + '.')
+    w(f"- **Pendiente de revisión humana:** escuchar las dos versiones enteras. En especial {NOTAS_HOJA_V02[P['pieza']]['pendiente']}. "
+      'También mirarlo en un teléfono. Nadie del equipo puede escuchar: la escucha final es de Gianluca.')
+    md = D / '02_pedro_hoja_master_v02.md'
+    texto = '\n'.join(L) + '\n'
+    if md.exists() and md.read_text(encoding='utf-8') != texto:
+        raise SystemExit(f'{md} ya existe con otro contenido: no se pisa')
+    md.write_text(texto, encoding='utf-8')
+    print(md)
+    print(json.dumps({k: dict(md5_flujo_video=t['md5_flujo_video'], md5_flujo_audio=t['md5_flujo_audio'], sonoridad=t['sonoridad'],
+                              sha256=t['sha256']) for k, t in rep['archivos'].items()}, ensure_ascii=False))
 
 
 if __name__ == '__main__':
