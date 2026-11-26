@@ -14,7 +14,7 @@ from comun import *
 SK = os.path.join(RAIZ, "TRABAJO/fomo/sk")
 GL = os.path.join(RAIZ, "TRABAJO/fomo/gl")  # tomas de Gianluca del 26/11 pasadas a SDR (ver m1.py, TONEMAP)
 VOZ = os.path.join(RAIZ, "TRABAJO/fomo/voz_m4")
-VOZ56 = os.path.join(RAIZ, "TRABAJO/fomo/voz_m4b/w56.wav")  # «Significa una sola cosa: seguir hasta lograrlo.» («seguir» a 1,66 s)
+VOZ56 = os.path.join(VOZ, "w56.wav")  # «Significa una sola cosa: seguir hasta lograrlo.» («seguir» a 1,66 s)
 PLACA = os.path.join(RAIZ, "TRABAJO/fomo/rcs-placa.jpg")
 FOTO_CTA = os.path.join(RAIZ, "TRABAJO/fomo/f8002.png")
 salida = sys.argv[1]
