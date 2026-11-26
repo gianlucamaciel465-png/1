@@ -1,0 +1,10 @@
+x1	[rapido] ¿Llega a doscientos con cincuenta pelotas?
+x2	[bajo] No llega. | [pausa 0.15] | [bajo] Tampoco.
+x3	[lento] Última pelota…
+x4	[firme] Y vuelve a llenar la canasta.
+x5	[lento] Primera pelota… | [grito] ¡^Doscientos uno!
+x6	[lento] No llegó en la última. | [pausa 0.15] | [bajo] Llegó porque volvió a llenar la canasta.
+x7	[firme] Eso significa esta placa: seguir hasta lograrlo.
+x8	[normal] Viene con cada remera Fáunders Privé.
+x9	[bajo] ¿Cuántas veces volviste a llenar la tuya?
+x10	[energico] ¡Blac Fraidei! | [pausa 0.08] | [rapido] Veinticinco por ciento menos.
