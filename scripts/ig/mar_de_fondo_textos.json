@@ -1,0 +1,39 @@
+{
+ "01": {
+  "arriba": "ROCCÉ",
+  "titulo": "Mar",
+  "titulo_cursiva": "de fondo",
+  "abajo": "CAPÍTULO 01"
+ },
+ "04": {
+  "titulo": [
+   "Lo que se mueve",
+   "antes de que se vea."
+  ],
+  "cursiva_ultima": true
+ },
+ "05": {
+  "titulo": [
+   "Cada remera viene",
+   "con su placa."
+  ],
+  "chico": "Significa seguir hasta lograrlo."
+ },
+ "06": {
+  "rotulo": "FOUNDERS PRIVÉE",
+  "titulo": [
+   "Antes de que se vea,",
+   "los primeros 100."
+  ],
+  "cursiva_ultima": true,
+  "cuerpo": [
+   "Founders del 001 al 100.",
+   "Un grupo privado de WhatsApp con Gianluca.",
+   "El Founder 001 diseña una prenda y recibe un porcentaje de la ganancia."
+  ]
+ },
+ "07": {
+  "lema": "GIVE HISTORY YOUR NAME.",
+  "web": "rocce.shop"
+ }
+}
