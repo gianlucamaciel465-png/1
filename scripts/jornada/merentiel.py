@@ -6,6 +6,7 @@
 # v02 (auditoría de Roma): el plano general del penal dura 1,05 s y pasa a Merentiel de rodillas (reel 4,48 s, después del
 # fundido de 4,27–4,47); descargo en dos renglones de 40 px entre el CTA y la placa (abajo tapaba el «2026» de la placa o
 # quedaba bajo la interfaz de Reels).
+# v03 (Gianluca 27/11 15:38 UTC): voz natural, sin subidas de tono en el grito ni en el quiebre (voz_m_nat/).
 # «FINAL · 2-0» se mantiene: la final terminó 2-0 con goles de Ascacíbar y Merentiel (TUDN, en 01_pepe_informe.md).
 # Uso: python3 scripts/jornada/merentiel.py SALIDA.mp4
 import sys, os
@@ -14,7 +15,7 @@ from reel import *
 
 MR = os.path.join(RAIZ, "TRABAJO/merentiel")
 FEED = os.path.join(RAIZ, "TRABAJO/feed")
-VOZ = os.path.join(RAIZ, "TRABAJO/jornada/voz_m")
+VOZ = os.path.join(RAIZ, "TRABAJO/jornada/voz_m_nat")   # v03: voz natural (mismo tono; énfasis por volumen)
 REEL = os.path.join(MR, "ig_DfP4jptTOP_.mp4")
 TRAV = os.path.join(MR, "tt_7710790012186447124.mp4")
 GOL = os.path.join(MR, "tt_7710819635519589650.mp4")
@@ -25,8 +26,8 @@ salida = sys.argv[1]
 
 TV = dict(m1=0.05, m2=3.75, m3=5.75, m4=8.18, m5=10.10, m6=12.95, m7=16.15)
 N = cs(19.9)
-C_TRAV = cs(TV["m4"] + 0.988)     # «travesaño» = la pelota en el travesaño (3,90 s de la fuente)
-C_GOL = cs(TV["m5"] + 1.375)      # «¡Gol…!»
+C_TRAV = cs(TV["m4"] + 0.95)     # «travesaño» = la pelota en el travesaño (3,90 s de la fuente)
+C_GOL = cs(TV["m5"] + 1.323)      # «¡Gol…!»
 estado = {}
 
 

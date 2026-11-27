@@ -28,7 +28,21 @@ VOZ = sys.argv[3] if len(sys.argv) > 3 else "es-AR-TomasNeural"
 os.makedirs(out, exist_ok=True)
 
 # estilo: (rate, pitch, ganancia dB, filtros FFmpeg)
-ESTILOS = {
+# NATURAL (por defecto desde el 27/11/2026, Gianluca 15:38 UTC: «cuando cambiás la voz me pone una voz aguda que nada que ver…
+# la misma voz que habla, que a veces desafina, a veces es más calma, a veces se altera»): el tono no se toca nunca (0 Hz, sin
+# Praat, sin saturación ni sala). Lo que cambia por tramo es el ritmo, el volumen y la intensidad (compresión). «^palabra» ya no
+# quiebra el tono: sube 3 dB esa palabra. Fede marca qué se destaca; Pedro sube o baja la voz en la mezcla según el cuerpo.
+# VOZ_ESTILO=dirigida_v1 reproduce la versión del 26/11 (Colapinto 27/11, FOMO_04 v02).
+NATURAL = {
+    "normal": ("+4%", "+0Hz", 0.0, ""),
+    "rapido": ("+11%", "+0Hz", 0.0, ""),
+    "lento": ("-9%", "+0Hz", -1.0, ""),
+    "bajo": ("-7%", "+0Hz", -3.0, "bass=g=1.5:f=180"),
+    "firme": ("-3%", "+0Hz", 1.0, "acompressor=threshold=0.12:ratio=3:attack=5:release=80"),
+    "energico": ("+7%", "+0Hz", 2.0, "acompressor=threshold=0.1:ratio=3:attack=5:release=80"),
+    "grito": ("+5%", "+0Hz", 3.5, "acompressor=threshold=0.08:ratio=4:attack=3:release=90"),
+}
+CLASICA = {
     "normal": ("+4%", "+0Hz", 0.0, ""),
     "rapido": ("+13%", "+2Hz", 0.0, ""),
     "lento": ("-14%", "-4Hz", -0.5, ""),
@@ -37,6 +51,8 @@ ESTILOS = {
     "energico": ("+9%", "+16Hz", 1.0, ""),
     "grito": ("+10%", "+30Hz", 0.0, ""),
 }
+MODO = os.environ.get("VOZ_ESTILO", "natural")
+ESTILOS = CLASICA if MODO == "dirigida_v1" else NATURAL
 
 
 async def sintetizar(texto, rate, pitch, mp3):
@@ -130,6 +146,19 @@ def tramo(est, texto, tmp):
     pal = asyncio.run(sintetizar(texto, rate, pitch, tmp))
     x = leer(tmp)
     x, pal = recortar(x, pal)
+    if MODO != "dirigida_v1":
+        x = filtrar(x, "highpass=f=80" + ("," + af if af else ""))
+        x = normalizar(x) * 10 ** (gan / 20)
+        if quiebre:                                       # énfasis por volumen en esa palabra, sin tocar el tono
+            cand = [p for p in pal if quiebre.lower() in p[2].lower().replace("¡", "").replace("!", "")] or pal[-1:]
+            o, d, _ = cand[0]
+            i0, i1 = int(max(0, o - 0.03) * SR), int((o + d + 0.05) * SR)
+            env = np.ones(len(x)); n = int(0.03 * SR)
+            env[i0:i1] = 10 ** (3 / 20)
+            env = np.convolve(env, np.ones(n) / n, "same")
+            x = x * env
+            x = x / max(1.0, np.abs(x).max() / 10 ** (-1 / 20))
+        return x, pal
     if est == "grito":
         x = praat(x, lambda s: subir_tono(s, 2.5, 1.35))
     if quiebre:
@@ -166,5 +195,5 @@ for ln in open(guion, encoding="utf-8"):
     escribir(os.path.join(out, f"{fid}.wav"), y)
     frases[fid] = dict(texto=txt, duracion=round(len(y) / SR, 3), tramos=tramos)
     print(f"{fid}: {len(y) / SR:5.2f} s  {txt}")
-json.dump(dict(voz=VOZ, motor="edge-tts + Praat (parselmouth) + FFmpeg · scripts/voz/voz_dirigida.py", frases=frases),
+json.dump(dict(voz=VOZ, modo=MODO, motor="edge-tts + Praat (parselmouth) + FFmpeg · scripts/voz/voz_dirigida.py", frases=frases),
           open(os.path.join(out, "voz.json"), "w"), ensure_ascii=False, indent=1)
