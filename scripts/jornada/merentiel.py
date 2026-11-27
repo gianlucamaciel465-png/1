@@ -3,6 +3,10 @@
 # del 02/11, que trae la transmisión de ESPN). Pista plantada: «“Siempre tenés revancha.” · 02/11/2026». La final de la misma
 # copa (21/11/2026): travesaño (otro «no») → tramo calmo → giro: el gol (clips oficiales de @sudamericana) → reenganche: la frase
 # se la dijimos el 02/11, 19 días antes → CTA con la placa real (IMG_5361).
+# v02 (auditoría de Roma): el plano general del penal dura 1,05 s y pasa a Merentiel de rodillas (reel 4,48 s, después del
+# fundido de 4,27–4,47); descargo en dos renglones de 40 px entre el CTA y la placa (abajo tapaba el «2026» de la placa o
+# quedaba bajo la interfaz de Reels).
+# «FINAL · 2-0» se mantiene: la final terminó 2-0 con goles de Ascacíbar y Merentiel (TUDN, en 01_pepe_informe.md).
 # Uso: python3 scripts/jornada/merentiel.py SALIDA.mp4
 import sys, os
 sys.path.insert(0, os.path.dirname(__file__))
@@ -65,8 +69,8 @@ def humo(c, k):
 
 
 SEG = [
-    dict(c0=0, c1=cs(2.55), fuente=ventana("r1", 1.65), cerrar=cerrar("r1")),
-    dict(c0=cs(2.55), c1=cs(3.72), fuente=ventana("r2", 4.2), cerrar=cerrar("r2")),
+    dict(c0=0, c1=cs(1.05), fuente=ventana("r1", 1.65), cerrar=cerrar("r1")),
+    dict(c0=cs(1.05), c1=cs(3.72), fuente=ventana("r2", 4.48), cerrar=cerrar("r2")),
     dict(c0=cs(3.72), c1=cs(5.72), fuente=humo),
     dict(c0=cs(5.72), c1=cs(10.05), fuente=clip("tr", TRAV, 3.90 - (C_TRAV / FPS - 5.72), osc=(760, 0.4)), cerrar=cerrar("tr")),
     dict(c0=cs(10.05), c1=cs(11.75), fuente=clip("go", GOL, 12.0 - (11.45 - 10.05), osc=(760, 0.35)), cerrar=cerrar("go")),
@@ -98,8 +102,8 @@ T.append(dict(c0=cs(13.25), c1=cs(16.1), capa=capa_texto(["Se lo dijimos el 02/1
 T.append(dict(c0=cs(17.2), c1=N, capa=capa_texto(["SEGUIR HASTA", "LOGRARLO."], "disp_xb", 120), y=250, pop=1.15))
 T.append(dict(c0=cs(17.5), c1=N, capa=capa_texto(["Tampoco es tu final: Founders Privée."], "disp_b", 52, sombra=0.8), y=545,
               pop=1))
-T.append(dict(c0=cs(17.5), c1=N, capa=capa_texto(["Roccé no tiene relación con Miguel Merentiel ni con Boca Juniors."],
-                                                 "inter_m", 28, color=(225, 225, 225), sombra=0.7), y=1640, pop=1))
+T.append(dict(c0=cs(17.5), c1=N, capa=capa_texto(["Roccé no tiene relación con", "Miguel Merentiel ni con Boca Juniors."],
+                                                 "inter_m", 40, color=(232, 232, 232), sombra=0.8), y=780, pop=1))
 
 
 def sonido(x, dur):

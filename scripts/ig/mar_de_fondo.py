@@ -17,7 +17,7 @@ HUMO = (214, 225, 233)        # papel celeste humo
 NOCHE = (16, 28, 48)          # azul noche
 M = 84                         # margen (la grilla 3:4 recorta ~34 px por lado)
 FEED = os.path.join(RAIZ, "TRABAJO/feed")
-V = "v01"
+V = "v02"
 
 TX = json.load(open(os.path.join(os.path.dirname(__file__), "mar_de_fondo_textos.json")))
 
@@ -94,6 +94,9 @@ def parrafo(img, x, y, s, fk, size, color, ancho_max, inter=1.32, al="l", sombra
         else:
             ln = prueba
     lineas.append(ln)
+    if len(lineas) > 1 and len(lineas[-1].split()) == 1:          # sin viudas: baja la última palabra del renglón anterior
+        a, _, b = lineas[-2].rpartition(" ")
+        if a: lineas[-2], lineas[-1] = a, b + " " + lineas[-1]
     for i, l in enumerate(lineas):
         escribir(img, x, y + i * size * inter, l, fk, size, color, al=al, sombra=sombra)
     return y + len(lineas) * size * inter
@@ -176,7 +179,7 @@ fr = [degrade(f, 0, 520, 0.5) for f in frames(os.path.join(FEED, "sdr_5361.mp4")
 c = capa()
 for i, ln in enumerate(t["titulo"]):
     escribir(c, M, 110 + i * 92, ln, "serif", 84, BLANCO, sombra=0.5)
-escribir(c, M, 110 + len(t["titulo"]) * 92 + 24, t["chico"], "inter_m", 38, BLANCO, sombra=0.5)
+escribir(c, M, 110 + len(t["titulo"]) * 92 + 24, t["chico"], "inter_m", 42, BLANCO, sombra=0.5)
 lamina_video(5, fr, c)
 
 # 06 · papel celeste humo: la revelación
@@ -191,7 +194,7 @@ for i, ln in enumerate(t["titulo"]):
 ImageDraw.Draw(c).line([(M, y + 70), (M + 64, y + 70)], fill=NOCHE + (255,), width=2)
 y = y + 120
 for p in t["cuerpo"]:
-    y = parrafo(c, M, y, p, "inter_m", 38, NOCHE, PW - 2 * M - 40) + 26
+    y = parrafo(c, M, y, p, "inter_m", 42, NOCHE, PW - 2 * M - 20) + 28
 guardar_png(grano(compo(a, c), 1.0, 6), nom(6, "png"))
 
 # 07 · cierre: las dos espaldas en la arena + logo original (ficha #FEFEFE) + lema
@@ -199,8 +202,10 @@ t = TX["07"]
 a = foto("blanca_negra_espalda_playa_2.jpg", cy=0.58)
 a = degrade(a, PH - 470, PH, 0.6, arriba=False)
 c = capa()
-escribir(c, PW / 2, PH - 240, t["lema"], "inter_sb", 30, BLANCO, track=10, al="c", sombra=0.5)
-escribir(c, PW / 2, PH - 170, t["web"], "serif_i", 50, BLANCO, al="c", sombra=0.45)
+_s = 72                                    # lema grande (guion de Fede): serif, ajustado al ancho seguro de la grilla
+while ancho(t["lema"], fuente("serif", _s)) > PW - 2 * M - 40: _s -= 2
+escribir(c, PW / 2, PH - 276, t["lema"], "serif", _s, BLANCO, al="c", sombra=0.5, radio=18)
+escribir(c, PW / 2, PH - 168, t["web"], "serif_i", 48, BLANCO, al="c", sombra=0.45)
 b = Image.fromarray(compo(a, c)).convert("RGBA")
 lg = 210
 logo = Image.open(os.path.join(RAIZ, "LOGO/rocce_logo.png")).convert("RGB").resize((lg, lg), Image.LANCZOS)
