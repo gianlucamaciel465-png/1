@@ -88,8 +88,8 @@ SEG = [
     dict(c0=C_GIRO, c1=cs(14.2), fuente=clip("habla", PRESENTA, 12.0, zoom=1.4, cy=0.35, osc=(560, 0.4)), cerrar=cerrar("habla")),
     dict(c0=cs(14.2), c1=cs(15.8), fuente=clip("vest", VESTUARIO, 0.7, osc=(700, 0.4)), cerrar=cerrar("vest")),
     dict(c0=cs(15.8), c1=cs(18.1), fuente=tarjeta),
-    dict(c0=cs(18.1), c1=N, fuente=clip("cta", os.path.join(GL, "sdr_5333.mp4"), 1.4, osc=(640, 0.55, 1120, 0.62),
-                                      congelar_en=cs(1.6)), cerrar=cerrar("cta")),
+    dict(c0=cs(18.1), c1=N, fuente=clip("cta", os.path.join(GL, "sdr_5333.mp4"), 2.5, osc=(640, 0.55, 1120, 0.62),
+                                      congelar_en=cs(0.5)), cerrar=cerrar("cta")),
 ]
 
 

@@ -124,8 +124,8 @@ T.append(dict(c0=cs(19.95), c1=N, capa=capa_texto(["QUEDATE", "EN EL ARCO."], "d
 T.append(dict(c0=cs(20.3), c1=N, capa=capa_texto(["Lo que importa es la próxima:", "Founders Privée."], "disp_b", 50,
                                                  sombra=0.85), y=390, pop=1))
 T.append(dict(c0=cs(20.3), c1=N, capa=capa_texto(["Roccé no tiene relación con Fernando Muslera,",
-                                                  "Estudiantes, Flamengo, Palmeiras ni la CONMEBOL."],
-                                                 "inter_m", 38, color=(236, 236, 236), sombra=0.85), y=1290, pop=1))
+                                                  "Estudiantes, Flamengo, Palmeiras", "ni la CONMEBOL."],
+                                                 "inter_m", 40, color=(236, 236, 236), sombra=0.85), y=1250, pop=1))   # Roma: 3 renglones de 40 px, termina antes de y=1400
 
 
 def sonido(x, dur):

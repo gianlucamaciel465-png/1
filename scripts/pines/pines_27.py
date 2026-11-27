@@ -13,13 +13,13 @@ PW, PH = 1000, 1500
 ANTON = os.path.join(RAIZ, "scripts/fuentes/Anton-Regular.ttf")
 CEL = (170, 208, 240)
 MX = os.path.join(RAIZ, "TRABAJO/pines/mixkit")
-V = "v02"
+V = "v03"
 ANCHO = {13: 0.72}   # P13: frase más chica para que no toque al jugador (la cabeza queda a y≈600)
 
 PINES = [
     # (n, slug, video, t, centro x (0–1), líneas, oscurecer arriba)
     (13, "el_segundo", "44448", 0.575, 0.36, ["EL PRIMER TIRO", "CASI NUNCA ENTRA.", "POR ESO EXISTE", "EL SEGUNDO."], 0.55),
-    (14, "el_gol", "43494", 0.15, 0.47, ["TE VAN A RECORDAR", "POR EL PENAL ERRADO", "HASTA QUE", "HAGAS EL GOL."], 0.35),
+    (14, "el_gol", "43494", 0.15, 0.52, ["TE VAN A RECORDAR", "POR EL PENAL ERRADO", "HASTA QUE", "HAGAS EL GOL."], 0.35),
     (15, "cuenta_doble", "44448", 0.944, 0.361, ["A LAS 6 AM", "NO APLAUDE NADIE.", "POR ESO", "CUENTA DOBLE."], 0.55),
 ]
 

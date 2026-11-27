@@ -17,7 +17,7 @@ for d in ("historias", "guia"):
 SW, SH = 1080, 1920
 BLANCO = (255, 255, 255)
 CEL = (170, 208, 240)
-V = "v01"
+V = "v02"
 MESSI = os.path.join(RAIZ, "TRABAJO/jornada2/messi/tt_7710039332676996365.mp4")   # @intermiamicf, primer plano 5,8–9,7 s
 S5325 = os.path.join(RAIZ, "TRABAJO/fomo/gl/sdr_5325_full.mp4")
 S5361 = os.path.join(RAIZ, "TRABAJO/feed/sdr_5361.mp4")
@@ -117,11 +117,14 @@ for a in frames(MESSI, 5.5, 60):
     fr.append(degrade(grado(n), 0, 760, 0.5))
 fr = fr + fr[::-1][1:]                         # ida y vuelta dentro del mismo plano: 4 s sin salto
 c = capa()
-escribir(c, SW / 2, 250, "MESSI · HOY 22:00 · JUEGO 2", "inter_sb", 26, BLANCO, track=8, sombra=0.6)
+escribir(c, SW / 2, 236, "MESSI · HOY 22:00 · JUEGO 2", "inter_sb", 40, BLANCO, track=6, sombra=0.6)
 escribir(c, SW / 2, 290, "¿Lo da vuelta?", "serif", 132, BLANCO, sombra=0.5, radio=18)
-escribir(c, SW / 2, 448, "Perdió 3-0 el primero.", "inter_m", 36, BLANCO, sombra=0.7)
-escribir(c, SW / 2, 494, "Si pierde hoy, queda afuera.", "inter_m", 36, CEL, sombra=0.7)
-escribir(c, 64, SH - 330, "Video: Inter Miami CF", "inter_m", 24, (225, 225, 225), al="l", sombra=0.8)
+escribir(c, SW / 2, 452, "Perdió 3-0 el primero.", "inter_m", 42, BLANCO, sombra=0.7)
+escribir(c, SW / 2, 504, "Si pierde hoy, queda afuera.", "inter_m", 42, CEL, sombra=0.7)
+# descargo (Roma): entre los datos y la cabeza (que arranca en y≈800)
+escribir(c, SW / 2, 586, "Roccé no tiene relación con", "inter_m", 40, (232, 232, 232), sombra=0.8)
+escribir(c, SW / 2, 634, "Lionel Messi ni con Inter Miami.", "inter_m", 40, (232, 232, 232), sombra=0.8)
+escribir(c, 64, 1330, "Video: Inter Miami CF", "inter_m", 26, (225, 225, 225), al="l", sombra=0.8)
 historia(f"ROCCE_IG_27_HISTORIA_1_ENCUESTA_{V}", fr, [(0, c, 0)],
          [((150, 1390, 930, 1600), "ENCUESTA: «SÍ, LO DA VUELTA» / «NO, SE VA»")])
 
@@ -148,13 +151,13 @@ ult = Image.fromarray(f[-1])
 f += [np.asarray(fill_cover(ult, SW, SH, cy=0.7, zoom=1.0 + 0.04 * suave(k / 90))) for k in range(90)]
 fr = [degrade(grado(x), 0, 960, 0.62) for x in f]
 c1 = capa()
-escribir(c1, SW / 2, 250, "ÚLTIMO DÍA · HASTA LAS 23:59", "inter_sb", 26, BLANCO, track=8, sombra=0.6)
-escribir(c1, SW / 2, 296, "Termina", "serif", 138, BLANCO, sombra=0.5, radio=18)
-escribir(c1, SW / 2, 432, "hoy.", "serif_i", 138, BLANCO, sombra=0.5, radio=18)
+escribir(c1, SW / 2, 236, "ÚLTIMO DÍA · HASTA LAS 23:59", "inter_sb", 40, BLANCO, track=5, sombra=0.6)
+escribir(c1, SW / 2, 288, "Termina", "serif", 130, BLANCO, sombra=0.5, radio=18)
+escribir(c1, SW / 2, 416, "hoy.", "serif_i", 130, BLANCO, sombra=0.5, radio=18)
 c2 = capa()
-escribir(c2, SW / 2, 606, "Black Friday · −25 %", "serif", 64, BLANCO, sombra=0.6)
-escribir(c2, SW / 2, 690, "$48.750 · antes $65.000", "inter_sb", 38, BLANCO, sombra=0.7)
-escribir(c2, SW / 2, 740, "Envío gratis · placa incluida", "inter_m", 34, BLANCO, sombra=0.7)
+escribir(c2, SW / 2, 576, "Black Friday · −25 %", "serif", 64, BLANCO, sombra=0.6)
+escribir(c2, SW / 2, 656, "$48.750 · antes $65.000", "inter_sb", 44, BLANCO, sombra=0.7)
+escribir(c2, SW / 2, 714, "Envío gratis · placa incluida", "inter_m", 42, BLANCO, sombra=0.7)
 historia(f"ROCCE_IG_27_HISTORIA_3_REVELACION_{V}", fr, [(0, c1, 0), (45, c2, 8)],
          [((290, 810, 790, 900), "LINK: rocce.shop")])
 

@@ -15,7 +15,7 @@ from reel import *
 MX = os.path.join(RAIZ, "TRABAJO/jornada2/messi")
 FEED = os.path.join(RAIZ, "TRABAJO/feed")
 VOZ = os.path.join(RAIZ, "TRABAJO/jornada2/voz_x")
-VOZ_R = os.path.join(RAIZ, "TRABAJO/jornada2/voz_x_rap")   # x1 ×1,08 · x2–x5 ×1,15 · x8–x10 ×1,1 (ffmpeg atempo)
+VOZ_R = os.path.join(RAIZ, "TRABAJO/jornada2/voz_x_rap")   # x1 ×1,08 · x2, x4, x5 ×1,15 · x3 ×1,2 (cola recortada) · x8–x10 ×1,1 (atempo)
 RAP = ("x1", "x2", "x3", "x4", "x5", "x8", "x9", "x10")
 CARA = os.path.join(MX, "tt_7710039332676996365.mp4")      # @intermiamicf, primer plano (plano único 5,47–7,87 s)
 ATAJA = os.path.join(MX, "tt_7710827690126855454.mp4")     # @mls, atajada a Messi en el juego 1
@@ -88,8 +88,8 @@ SEG = [
     dict(c0=cs(12.2), c1=cs(14.0), fuente=clip("bota", BOTA, 6.3, osc=(700, 0.45)), cerrar=cerrar("bota")),
     dict(c0=cs(14.0), c1=cs(16.72), fuente=clip("entreno", ENTRENO, 7.0, osc=(720, 0.4)), cerrar=cerrar("entreno")),
     dict(c0=cs(16.72), c1=cs(18.9), fuente=tarjeta),
-    dict(c0=cs(18.9), c1=N, fuente=clip("cta", os.path.join(FEED, "sdr_5327.mp4"), 3.7, osc=(640, 0.6, 1120, 0.62),
-                                      congelar_en=cs(1.2)), cerrar=cerrar("cta")),
+    dict(c0=cs(18.9), c1=N, fuente=clip("cta", os.path.join(FEED, "sdr_5327.mp4"), 4.3, osc=(640, 0.6, 1120, 0.62),
+                                      congelar_en=cs(0.6)), cerrar=cerrar("cta")),
 ]
 
 
@@ -121,7 +121,7 @@ T.append(dict(c0=cs(2.35), c1=cs(3.95), capa=caja(["JUEGO 1:", "COLUMBUS 3, MIAM
                                                 size_chico=46), y=1060, entra=0))   # tapa «How it ended…» (filas 1250–1309)
 credito(2.35, 3.95, "Video: @mls", y=150)
 
-for (a, b, g, ch) in [(3.95, 5.45, ["COLUMBUS GANÓ", "8 DE SUS ÚLTIMOS 9."], "Los últimos 6, seguidos."),
+for (a, b, g, ch) in [(3.95, 5.45, ["COLUMBUS LLEGÓ CON", "8 DE SUS ÚLTIMOS 9."], "Y ganó el juego 1."),
                       (5.45, 7.0, ["MESSI LE TIRÓ", "LA PELOTA A LA", "CARA A TAPIA."], "Al de los dos goles.")]:
     cg, cc, s = tarj(g, ch)
     lh = int(s * 1.08)
