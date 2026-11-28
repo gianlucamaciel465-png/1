@@ -170,7 +170,7 @@ def render(salida, N, segmentos, textos, sonido, voces, techo=0.8, extra_audio=N
     cod.cerrar(audio=wav)
     os.replace(salida + ".tmp.mp4", salida); os.remove(wav)
     ctrl = dict(cuadros=cod.n, duracion=round(dur, 3), sonoridad=nivel, voz_fondo_db=rel,
-                fin_voz=round(max(t + len(a) / SR for t, a in voces), 2))
+                fin_voz=round(max([t + len(a) / SR for t, a in voces] or [0.0]), 2))
     json.dump(ctrl, open(salida + ".control.json", "w"), indent=1)
     print(json.dumps(ctrl))
     return ctrl

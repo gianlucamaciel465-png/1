@@ -171,3 +171,15 @@ def placa_firma(frase=None, serif=True):
     for ch in s:
         d.text((x, y + 30), ch, font=fr, fill=CEL + (255,)); x += fr.getlength(ch) + 10
     return img
+
+
+def fondo_suave(capa, alfa=0.42, pad=18, radio=24):
+    """placa oscura difusa detrás de una capa de texto (descargo sobre fondos claros): mismo tamaño que la capa."""
+    a = np.array(capa)[..., 3]
+    ys, xs = np.nonzero(a > 30)
+    if len(ys) == 0: return capa
+    x0, y0, x1, y1 = max(0, xs.min() - pad), max(0, ys.min() - pad), min(capa.size[0], xs.max() + pad), min(capa.size[1], ys.max() + pad)
+    pl = Image.new("RGBA", capa.size, (0, 0, 0, 0))
+    ImageDraw.Draw(pl).rounded_rectangle([x0, y0, x1, y1], radius=radio, fill=(0, 0, 0, int(255 * alfa)))
+    pl = pl.filter(ImageFilter.GaussianBlur(10))
+    return Image.alpha_composite(pl, capa)
