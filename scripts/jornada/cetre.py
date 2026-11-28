@@ -83,9 +83,9 @@ PW, R_PW = recorte(1.2, 90, 320)     # plano abierto de A (árbitro, arquero y C
 
 C_NOVALE = cs(T0["r5"] + 0.05 + 1.05)
 
-# pelota de la repetición, detectada por diferencia de cuadros en A (x, y de la fuente; 23,70 y 23,733 extrapolados)
+# pelota de la repetición, detectada por diferencia de cuadros en A (x, y de la fuente; todas medidas, sin extrapolar)
 BOLA = [(23.533, 559, 980), (23.567, 630, 944), (23.600, 705, 905), (23.633, 786, 865), (23.667, 870, 823),
-        (23.700, 950, 783), (23.733, 1030, 743)]
+        (23.700, 974, 774), (23.733, 1066, 736)]   # v02: 23,700 y 23,733 medidos (estela sobre el borde superior del arco); en 23,767 ya salió del cuadro
 
 
 def con_aro(fuente_, t_fuente0, lento, rc):
@@ -115,7 +115,7 @@ SEG = [
     seg(T0["r8"], T0["r9"], clip("r8", A, 21.45, **P2), "r8"),
     seg(T0["r9"], T0["r10"], con_aro(clip("r9", A, 23.35, lento=2.0, **P3), 23.35, 2.0, R_P3), "r9"),
     seg(T0["r10"], T0["r11"], clip("r10", B, 13.3), "r10"),
-    seg(T0["r11"], T0["r12"], clip("r11", B, 15.15), "r11"),
+    seg(T0["r11"], T0["r12"], clip("r11", B, 15.05), "r11"),   # v02: continuo con r10 (sin salto de 3 cuadros)
     seg(T0["r12"], T0["r13"], clip("r12", B, 32.4), "r12"),
     seg(T0["r13"], T0["r14"], clip("r13", C, 9.7), "r13"),
     seg(T0["r14"], T0["r15"], clip("r14", A, 26.5, congelar_en=cs(4.15), **PC), "r14"),
@@ -146,27 +146,27 @@ txt(0, T0["r15"], CRED, y=252, x=60, sale=False)
 
 # 1 · apuesta: Cetré y su nombre
 txt(0, T0["r2"], chico("SEMIFINAL DE LIBERTADORES · MARACANÁ"), y=300)
-txt(0, T0["r2"], caja_rotulo(["PATEA CETRÉ."], R_PC, 84))
+txt(0, T0["r2"], caja_rotulo(["PATEA CETRÉ."], R_PC, 84), sale=False)
 # 2 · Muslera ya atajó uno
 txt(T0["r2"], T0["r3"], etiqueta("ATAJADA 1"), y=300)
 txt(T0["r2"], T0["r3"], caja(["MUSLERA YA", "ATAJÓ UNO."], 84), y=380, pop=1.1, entra=2)
 # 3 · ¿adentro?
-txt(T0["r3"], T0["r4"], caja_rotulo(["¿ADENTRO?"], R_P1, 96))
+txt(T0["r3"], T0["r4"], caja_rotulo(["¿ADENTRO?"], R_P1, 96), sale=False)
 # 4 · adentro
-txt(T0["r4"], T0["r5"], caja_rotulo(["ADENTRO."], R_P1, 96))
+txt(T0["r4"], T0["r5"], caja_rotulo(["ADENTRO."], R_P1, 96), sale=False)
 # 5 · el arquero reclama → no vale
-txt(T0["r5"], C_NOVALE, caja_rotulo(["EL ARQUERO RECLAMA."], R_PK, 70))
-txt(C_NOVALE, T0["r6"], caja_rotulo(["NO VALE."], R_PK, 110), pop=1.15)
+txt(T0["r5"], C_NOVALE, caja_rotulo(["EL ARQUERO RECLAMA."], R_PK, 70), sale=False)
+txt(C_NOVALE, T0["r6"], caja_rotulo(["NO VALE."], R_PK, 110), pop=1.15, sale=False)
 # 6 · se resbala y la toca dos veces (cámara lenta)
-txt(T0["r6"], T0["r7"], caja_rotulo(["SE RESBALA Y", "LA TOCA DOS VECES."], R_P1, 70))
+txt(T0["r6"], T0["r7"], caja_rotulo(["SE RESBALA Y", "LA TOCA DOS VECES."], R_P1, 70), sale=False)
 txt(T0["r6"], T0["r7"], chico("CÁMARA LENTA", (235, 235, 235), 34), y=300)
 # 7 · se repite
 txt(T0["r7"], T0["r8"], etiqueta("INTENTO 2"), y=300)
-txt(T0["r7"], T0["r8"], caja_rotulo(["SE REPITE."], R_PW, 96))
+txt(T0["r7"], T0["r8"], caja_rotulo(["SE REPITE."], R_PW, 96), sale=False)
 # 8 · ¿otra vez adentro?
-txt(T0["r8"], T0["r9"], caja_rotulo(["¿OTRA VEZ ADENTRO?"], R_P2, 80))
+txt(T0["r8"], T0["r9"], caja_rotulo(["¿OTRA VEZ ADENTRO?"], R_P2, 80), sale=False)
 # 9 · arriba del travesaño
-txt(T0["r9"], T0["r10"], caja_rotulo(["ARRIBA DEL TRAVESAÑO."], R_P3, 76), pop=1.1)
+txt(T0["r9"], T0["r10"], caja_rotulo(["ARRIBA DEL TRAVESAÑO."], R_P3, 76), pop=1.1, sale=False)
 txt(T0["r9"], T0["r10"], chico("CÁMARA LENTA", (235, 235, 235), 34), y=300)
 # 10 · ¿quedan afuera por él?
 txt(T0["r10"], T0["r11"], caja(["¿QUEDAN AFUERA", "POR ÉL?"], 88), y=330, pop=1.1)
@@ -177,7 +177,7 @@ txt(T0["r12"], T0["r13"], etiqueta("ATAJADA 3"), y=330)
 txt(T0["r13"], T0["r14"], caja(["ESTUDIANTES,", "A LA FINAL."], 92), y=330, pop=1.12)
 # 14 · reenganche
 txt(T0["r14"], T0["r15"], chico("HOY 17:00 · FINAL VS. PALMEIRAS · CENTENARIO"), y=300)
-txt(T0["r14"] + 2.30, T0["r15"], caja_rotulo(["SI HAY PENALES,", "¿LE DAS LA PELOTA?"], R_PC, 72), pop=1.08)
+txt(T0["r14"] + 2.30, T0["r15"], caja_rotulo(["SI HAY PENALES,", "¿LE DAS LA PELOTA?"], R_PC, 72), pop=1.08, sale=False)
 txt(T0["r14"], T0["r14"] + 2.30, caja_rotulo(["HOY, LA FINAL."], R_PC, 84), sale=False)
 # 15 · placa
 PL = placa_firma("so f★cking close.")
@@ -186,6 +186,7 @@ fc = fuente("disp_b", 44)
 s_ = "Comentá: sí o no."
 d_.text(((W - fc.getlength(s_)) / 2, 1080), s_, font=fc, fill=(255, 255, 255, 255))
 txt(T0["r15"], N, PL, y=0, x=0, sale=False, entra=2)
+txt(T0["r15"], N, DESC, y=1244, x=52, sale=False)      # el descargo sigue sobre la placa (control 5 de Roma)
 
 
 def sonido(x, dur):
@@ -197,15 +198,15 @@ def sonido(x, dur):
     golpe(x, T0["r4"] + 0.35, 0.25, f0=60, caida=0.2)                      # adentro
     g = C_NOVALE / FPS
     i0, i1 = int((g - 0.25) * SR), int((g - 0.02) * SR); x[i0:i1] *= 0.12   # casi silencio antes del giro
-    golpe(x, g, 0.45, f0=40, caida=0.6); brillo(x, g + 0.02, 0.06)
+    golpe(x, g, float(os.environ.get("G_NOVALE", 0.18)), f0=40, caida=0.6); brillo(x, g + 0.02, 0.03)   # v02: más bajo bajo «¡No vale!»
     barrido(x, T0["r6"], 0.5, 0.1, 3000, 300)
     for t in np.arange(T0["r7"], T0["r8"], 0.5): golpe(x, t, 0.14, f0=50, caida=0.15)
     for t in np.arange(T0["r8"], T0["r9"], 0.25): golpe(x, t, 0.1 + 0.08 * (t - T0["r8"]) / 1.9, f0=54, caida=0.12)
     i0, i1 = int((T0["r9"] - 0.2) * SR), int((T0["r9"] - 0.01) * SR); x[i0:i1] *= 0.15
-    golpe(x, T0["r9"] + 0.55, 0.4, f0=44, caida=0.5)                       # la pelota se va
+    golpe(x, T0["r9"] + 0.55, float(os.environ.get("G_TRAV", 0.25)), f0=44, caida=0.5)   # la pelota se va (v02: más bajo)
     dron(x, T0["r9"], T0["r13"], f=46, g=0.04)
     for t in np.arange(T0["r10"], T0["r11"], 0.5): golpe(x, t, 0.14, f0=50, caida=0.15)
-    golpe(x, T0["r11"] + 1.35, 0.4, f0=48, caida=0.4); golpe(x, T0["r12"] + 1.75, 0.45, f0=46, caida=0.45)
+    golpe(x, T0["r11"] + 1.45, 0.4, f0=48, caida=0.4); golpe(x, T0["r12"] + 1.75, 0.45, f0=46, caida=0.45)
     colchon(x, T0["r13"], T0["r14"] + 0.6, [146.8, 220.0, 293.7, 370.0], 0.05, ataque=0.15, suelta=0.6)
     for t in np.arange(T0["r14"], T0["r15"], 0.5): golpe(x, t, 0.12, f0=50, caida=0.15)
     golpe(x, T0["r15"], 0.4, f0=46, caida=0.5); brillo(x, T0["r15"] + 0.05, 0.07)
@@ -229,4 +230,12 @@ voces = [(T0[k] + o, leer_wav(os.path.join(VOZ, f"{v}.wav"))) for k, _, v, o in 
 for (a, va), (b, _) in zip(voces, voces[1:]):
     assert a + len(va) / SR <= b + 1e-3, f"voces superpuestas en {a:.2f}–{b:.2f}"
 print("duración", DUR, {k: T0[k] for k in T0})
+if os.environ.get("SOLO_AUDIO"):            # medición rápida de la mezcla sin renderizar el video
+    dur = N / FPS; x = lienzo(dur); sonido(x, dur)
+    for t_, a_ in amb:
+        i = int(t_ * SR); m = min(len(a_), len(x) - i); x[i:i + m] += a_[:m]
+    nivel, (vv, ff) = mezclar(x, voces, dur, salida, techo=0.8)
+    rel = [round(20 * np.log10((np.sqrt((vv[int(t_ * SR):int(t_ * SR) + len(a_)] ** 2).mean()) + 1e-12) /
+                               (np.sqrt((ff[int(t_ * SR):int(t_ * SR) + len(a_)] ** 2).mean()) + 1e-12)), 1) for t_, a_ in voces]
+    print("SOLO_AUDIO", nivel, rel); sys.exit()
 render(salida, N, SEG, T, sonido, voces, techo=0.8, extra_audio=amb)
